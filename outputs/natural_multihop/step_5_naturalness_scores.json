@@ -1,0 +1,241 @@
+[
+  {
+    "question": "Chase card extra charge after missed payment",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This reads like a natural search-bar query someone would type after missing a Chase credit card payment and wondering about late fees or penalty APR. It's concise, focused on a single concern, and phrased the way people commonly search for such info, though slightly telegraphic/keyword-like rather than a full sentence."
+    }
+  },
+  {
+    "question": "When choosing between a cash back and travel credit card, should I factor in 3% cash back card annual fees and category restrictions?",
+    "naturalness_overall": 0.85,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.85,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.9,
+      "overall": 0.85,
+      "reasoning": "This reads as a single coherent question about factoring in fees and category restrictions when comparing cash back vs travel cards. It's concise, phrased naturally like something a person would ask a financial forum or advisor, and has a plausible real-world motivation (deciding between two credit card types)."
+    }
+  },
+  {
+    "question": "What can I book with the points I earn from a travel credit card?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent, concise question that sounds exactly like something a real person would type into a search engine or ask a bank representative when considering a travel credit card."
+    }
+  },
+  {
+    "question": "If I open a joint high-yield savings account, can the other person withdraw money on their own?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about joint account access rights, phrased concisely and naturally, exactly as someone considering opening a joint savings account would ask."
+    }
+  },
+  {
+    "question": "If I\u2019m traveling far from home and either I or a close family member gets sick or injured, how much can I get paid back for care costs, and is there any amount I have to pay myself first?",
+    "naturalness_overall": 0.7,
+    "naturalness_scores": {
+      "single_intent": 0.85,
+      "conciseness": 0.7,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.9,
+      "overall": 0.7,
+      "reasoning": "This reads as one coherent question about travel insurance reimbursement (coverage amount and deductible) for medical emergencies affecting the traveler or a family member. It's a bit long with embedded clauses ('either I or a close family member'), but this is realistic phrasing someone might use when asking about travel insurance policy details covering both scenarios. It sounds like a natural question to an insurance agent or support chat, not a manufactured stitch of unrelated topics."
+    }
+  },
+  {
+    "question": "Should I pay my entire current balance before my statement closing date to help my credit utilization ratio?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-topic question about credit card payment timing and utilization ratio, phrased concisely and naturally as someone would ask on a finance forum or to a support agent. It reflects a common, realistic personal finance concern."
+    }
+  },
+  {
+    "question": "Which is easier to manage: a rotating bonus category card or a flat-rate cash back card?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-topic comparison question about credit card reward structures, phrased concisely and naturally, exactly as someone comparing card options might ask."
+    }
+  },
+  {
+    "question": "If I'm trying to plan my spending to earn the highest extra return on this card, how often do the bonus spending areas change and what kinds of purchases are they usually for?",
+    "naturalness_overall": 0.7,
+    "naturalness_scores": {
+      "single_intent": 0.8,
+      "conciseness": 0.7,
+      "natural_phrasing": 0.75,
+      "plausible_intent": 0.9,
+      "overall": 0.7,
+      "reasoning": "This reads as one coherent goal (maximizing rewards from a card's rotating bonus categories) with two closely related sub-questions (frequency of change, typical categories) that naturally go together. It's a bit long with an embedded clause ('If I'm trying to plan...'), but this phrasing is plausible for someone asking a support agent or forum about a rewards credit card. It's realistic and not artificially stitched together."
+    }
+  },
+  {
+    "question": "Chase Freedom trip cancellation reimbursement limits",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This is a clear, concise search-style query about a single topic: the reimbursement limits for trip cancellation coverage on a Chase Freedom card. It reads naturally like something typed into a search engine or asked to a support agent, and it's a plausible thing a cardholder would want to know before booking travel or filing a claim."
+    }
+  },
+  {
+    "question": "For someone who is new to borrowing and wants a way to pay over time without having to put down money upfront, what school-focused option is described, who is it generally intended for, and does Chase provide that exact option or a different beginner choice?",
+    "naturalness_overall": 0.2,
+    "naturalness_scores": {
+      "single_intent": 0.3,
+      "conciseness": 0.3,
+      "natural_phrasing": 0.2,
+      "plausible_intent": 0.3,
+      "overall": 0.2,
+      "reasoning": "This question stitches together multiple sub-questions (what is the school-focused option, who is it for, does Chase offer it or an alternative) using convoluted paraphrasing instead of naming the product directly (likely a student credit card with no upfront deposit). The phrasing is unnatural and roundabout ('for someone new to borrowing who wants to pay over time without putting down money upfront' instead of just 'student credit card'), reading like a constructed test question rather than a real user query. While a real person might ask about student credit cards and whether Chase offers one, the indirect, riddle-like description reduces naturalness significantly."
+    }
+  },
+  {
+    "question": "How much of my student credit card limit should I use to help build credit?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, concise, single-intent question about credit utilization on a student credit card. It reads exactly like something a real person would type into a search engine or ask a financial advisor, and it reflects a common, realistic concern for someone building credit."
+    }
+  },
+  {
+    "question": "How do rewards credit card sign-up bonuses work for cash back cards?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-topic, concise question that sounds exactly like something a person would type into a search engine when researching credit cards. Natural phrasing, plausible everyday intent."
+    }
+  },
+  {
+    "question": "Chase paused loan payments approval required",
+    "naturalness_overall": 0.4,
+    "naturalness_scores": {
+      "single_intent": 0.6,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.4,
+      "plausible_intent": 0.6,
+      "overall": 0.4,
+      "reasoning": "This reads like a fragment of keywords rather than a natural question - likely a search query stub. It's short and plausible as a topic (Chase loan payment pause requiring approval), but it's missing verb structure and clear phrasing a person would type as a full question or even a typical search query. It's ambiguous whether it's asking 'does Chase require approval to pause loan payments' or something else."
+    }
+  },
+  {
+    "question": "What should I look at to get the most value from a card that gives me something back on the purchases I was already planning to make?",
+    "naturalness_overall": 0.75,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.75,
+      "natural_phrasing": 0.75,
+      "plausible_intent": 0.9,
+      "overall": 0.75,
+      "reasoning": "This reads as one coherent question about maximizing cash-back/rewards credit card value based on existing spending habits. It's a bit wordy with the 'something back on purchases I was already planning to make' phrasing, which is slightly indirect compared to just saying 'cash back' or 'rewards,' but it's still plausible as a real person's phrasing, perhaps avoiding jargon. It's a realistic question someone shopping for a rewards card might ask."
+    }
+  },
+  {
+    "question": "I'm comparing cards that temporarily boost my return only for certain types of purchases. Can you explain the kind where the eligible spending areas may either stay the same or change every few months, there may be a quarterly earning limit, and purchases after that threshold drop to a lower ongoing return?",
+    "naturalness_overall": 0.5,
+    "naturalness_scores": {
+      "single_intent": 0.8,
+      "conciseness": 0.5,
+      "natural_phrasing": 0.5,
+      "plausible_intent": 0.8,
+      "overall": 0.5,
+      "reasoning": "This is a single coherent question about rotating category credit cards with quarterly caps, and it's plausible someone comparing cards would ask this. However, it's phrased in an overly formal, descriptive way ('the kind where the eligible spending areas may either stay the same or change every few months') rather than how a person would naturally ask - most people would just say 'what are rotating category cards with quarterly caps' or similar. The convoluted circumlocution to avoid naming the concept directly makes it read like a constructed quiz question rather than organic speech."
+    }
+  },
+  {
+    "question": "Does Chase offer secured credit cards for people trying to build credit?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about whether Chase offers secured credit cards, phrased concisely and naturally as a typical search or support query. It's very plausible someone building credit would ask this exact question."
+    }
+  },
+  {
+    "question": "I want to use the rewards from my card account to pay for a vehicle hire. What are the available ways to do that, and if I complete it through the bank\u2019s travel booking site, what steps do I follow to choose the vehicle type?",
+    "naturalness_overall": 0.0,
+    "naturalness_scores": {
+      "single_intent": 0.6,
+      "conciseness": 0.6,
+      "natural_phrasing": 0.6,
+      "plausible_intent": 0.8,
+      "reasoning": "The question combines two related but distinct sub-questions: general redemption methods for card rewards toward car rental, and then a specific procedural question about selecting vehicle type on the bank's travel site. This is a plausible real-world scenario (someone genuinely wants to redeem points for a rental car and navigate the booking tool), but the phrasing is a bit clunky and stitched together with 'and if I complete it through...' which reads as two merged questions rather than a single natural query. It's moderately concise but not tight, and phrasing is slightly formal/awkward rather than conversational."
+    }
+  },
+  {
+    "question": "college funding options use first borrow best",
+    "naturalness_overall": 0.1,
+    "naturalness_scores": {
+      "single_intent": 0.3,
+      "conciseness": 0.6,
+      "natural_phrasing": 0.1,
+      "plausible_intent": 0.3,
+      "overall": 0.1,
+      "reasoning": "This reads like a fragmented keyword string rather than a real question - missing grammar, unclear structure ('use first borrow best' doesn't parse as coherent phrasing). It seems to mash together search terms about college funding order (e.g., 'what to use first' and 'best borrowing options') without forming a natural sentence a person would type or speak."
+    }
+  },
+  {
+    "question": "What can I do to avoid spur-of-the-moment spending when I'm trying to stay on a very limited budget?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-topic question about controlling impulse spending on a tight budget. It's concise, phrased naturally like something someone would type into a search engine or ask a financial advice forum, and reflects a very common, realistic concern."
+    }
+  },
+  {
+    "question": "Which Chase card products let me use Shop and Earn and redeem points in Ultimate Rewards?",
+    "naturalness_overall": 0.75,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.75,
+      "plausible_intent": 0.85,
+      "overall": 0.75,
+      "reasoning": "This reads as a single, focused question about which Chase card products support both Shop and Earn and Ultimate Rewards redemption. It's concise and plausible\u2014someone comparing Chase cards for these features could reasonably ask this. Phrasing is slightly awkward ('let me use... and redeem points in') but still resembles a real customer service or forum query."
+    }
+  }
+]

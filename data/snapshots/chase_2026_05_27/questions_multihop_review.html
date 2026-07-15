@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Multi-hop Questions — Pilot Review</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1a1a;padding:24px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin-bottom:6px}
+.subtitle{color:#666;font-size:14px;margin-bottom:20px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filters button{padding:5px 14px;border:1px solid #ccc;border-radius:16px;background:#f8f8f8;cursor:pointer;font-size:13px;transition:all .15s}
+.filters button:hover{background:#e8e8e8}
+.filters button.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.stats{font-size:13px;color:#888;margin-bottom:16px}
+.card{border:1px solid #ddd;border-radius:8px;margin-bottom:14px;overflow:hidden;transition:all .15s}
+.card.ablation-fail{border-left:4px solid #e74c3c}
+.card.ablation-pass{border-left:4px solid #27ae60}
+.card-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;cursor:pointer;background:#fafafa;user-select:none}
+.card-header:hover{background:#f0f0f0}
+.card-header h3{font-size:14px;font-weight:600;flex:1;margin-right:12px}
+.badges{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;white-space:nowrap}
+.badge-stratum{background:#e8f4fd;color:#1a73e8}
+.badge-hops{background:#fce8e6;color:#c5221f}
+.badge-source{background:#e6f4ea;color:#137333}
+.badge-pass{background:#e6f4ea;color:#137333}
+.badge-fail{background:#fce8e6;color:#c5221f}
+.badge-na{background:#f1f1f1;color:#666}
+.card-body{display:none;padding:16px;border-top:1px solid #eee}
+.card.open .card-body{display:block}
+.field{margin-bottom:12px}
+.field-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.field-value{font-size:14px;line-height:1.5}
+.question-text{font-size:15px;font-weight:500;color:#1a1a1a;line-height:1.5}
+.answer-text{font-size:14px;line-height:1.6;color:#333;white-space:pre-wrap}
+.chunk-box{background:#f7f7f7;border:1px solid #e5e5e5;border-radius:6px;padding:10px 12px;margin-bottom:8px;font-size:13px;line-height:1.5}
+.chunk-box.removable{border-color:#e74c3c;background:#fff5f5}
+.chunk-id{font-weight:600;color:#555;font-size:12px}
+.chunk-page{color:#888;font-size:12px;margin-bottom:4px}
+.chunk-text{color:#444;max-height:150px;overflow-y:auto}
+.bridge-info{font-size:13px;color:#555;margin-bottom:8px;padding:6px 10px;background:#f0f0f0;border-radius:4px}
+.toggle-arrow{font-size:16px;color:#999;transition:transform .2s}
+.card.open .toggle-arrow{transform:rotate(90deg)}
+</style></head><body>
+<h1>Multi-hop Questions — Pilot Review</h1>
+<div class="subtitle">26 multi-hop items (2+ chunks) — 11 sampling-plan, 15 chain-seeded</div>
+<div class="filters">  <button class="active" onclick="filterCards('all')">All (26)</button>
+  <button onclick="filterCards('chain')">Chain-seeded (15)</button>
+  <button onclick="filterCards('sampling')">Sampling-plan (11)</button>
+  <button onclick="filterCards('pass')">Ablation PASS (10)</button>
+  <button onclick="filterCards('fail')">Ablation FAIL (5)</button>
+  <button onclick="filterCards('auto')">auto (1)</button>
+  <button onclick="filterCards('credit_cards')">credit_cards (3)</button>
+  <button onclick="filterCards('cross_domain')">cross_domain (5)</button>
+  <button onclick="filterCards('customer_service')">customer_service (1)</button>
+  <button onclick="filterCards('education_center')">education_center (10)</button>
+  <button onclick="filterCards('investing')">investing (1)</button>
+  <button onclick="filterCards('mortgage')">mortgage (3)</button>
+  <button onclick="filterCards('multi')">multi (1)</button>
+  <button onclick="filterCards('personal_banking')">personal_banking (1)</button>
+</div>
+<div class="stats" id="stats"></div>
+<div id="cards">
+<div class="card " data-source="sampling-plan" data-stratum="personal_banking">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00003 — I’m deciding whether to use Chase Pay in 4 for a debit card purchase or rely on Chase Priv…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">personal_banking</span>
+    <span class="badge badge-hops">2 chunks · multi_concept</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">I’m deciding whether to use Chase Pay in 4 for a debit card purchase or rely on Chase Private Client account protection—how do these two features differ in what they do for me after a debit card purchase?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">They serve different purposes after a debit card purchase. Chase Pay in 4 is a loan product for eligible Chase debit card purchases: after you set up a plan, Chase puts the full purchase amount back into your Chase checking account, usually within 24 hours, and then you repay it every 2 weeks starting 2 weeks after setup, with a maximum of $400 total across active Pay in 4 plans. By contrast, Chase Private Client account protection is about security, not financing: Chase monitors for unusual debit card purchases, provides 24/7 support for fraud and scams, and offers secure digital tools like customized Account Alerts to help identify unusual debit card purchases.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 is needed for what Chase Pay in 4 does after a purchase: refunding the full purchase amount back to checking, repayment timing, and the $400 active-plan limit. Chunk 2 is needed for how Chase Private Client account protection differs: fraud monitoring, round-the-clock support, and Account Alerts for unusual debit card purchases. The question requires comparing these two distinct features.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00083_02</div>
+  <div class="chunk-page">Chase Pay In 4℠ FAQs | Quick Guide to Pay in 4</div>
+  <div class="chunk-text">## General FAQs about Pay in 4
+### What is Chase Pay in 4℠?
+Chase Pay in 4℠ is a loan product that lets customers split eligible Chase debit card purchases
+After you set up a plan, we&#x27;ll put the full purchase amount back into your Chase checking account—in most cases, within 24 hours. Your first payment is due 2 weeks after the plan is set up. Then, you&#x27;ll make payments every 2 weeks until the balance is paid in full.
+Keep in mind: You’ll have a maximum of $400.00 to use across all active Pay in 4 plans.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00090_03</div>
+  <div class="chunk-page">Chase Private Client | Chase</div>
+  <div class="chunk-text">### Account protection
+We help protect your account from fraud by monitoring for unusual debit card purchases and provide round-the-clock support to help you deal with fraud and scams. You can also use our secure digital tools, including customized Account Alerts, to help identify unusual debit card purchases.</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="credit_cards">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00004 — If I use my Chase card to pay my monthly cell phone bill and then order takeout from a res…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">credit_cards</span>
+    <span class="badge badge-hops">2 chunks · multi_concept</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">If I use my Chase card to pay my monthly cell phone bill and then order takeout from a restaurant, which card gives me both up to $1,000 in cell phone protection with a $100 deductible and 3% cash back on that takeout purchase?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">The provided chunks do not identify any single card that offers both benefits. One chunk says the Sapphire Reserve for Business Credit Card includes up to $1,000 per claim in cell phone protection with a $100 deductible when you pay your monthly cell phone bill with the eligible card, and the other says Chase Freedom Flex gives 3% cash back on restaurant takeout and eligible delivery services. The chunks do not say that one card has both features.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the cell phone protection benefit details for Sapphire Reserve for Business. Chunk 2 provides the 3% cash back on restaurant takeout for Chase Freedom Flex. Answering the question requires combining both chunks and noticing that no chunk states a single card includes both benefits, so the answer is that this cannot be determined from the provided content.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00005_41</div>
+  <div class="chunk-page">Sapphire Reserve for Business Credit Card | Chase.com</div>
+  <div class="chunk-text">Cell Phone Protection
+Get up to $1,000 per claim in cell phone protection against covered theft or damage for cell phones listed on your monthly cell phone bill when you pay it with your eligible credit card. Maximum of 3 claims in a 12-month period with a $100 deductible per claim.Δ Same page link to disclaimer Δ</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00270_13</div>
+  <div class="chunk-page">Chase Freedom: Cash Back Credit Card | Chase.com</div>
+  <div class="chunk-text">### Earning your 3% cash back on Dining and Drugstore purchases
+Yes. You’ll get 3% cash back on dining at restaurants and at drugstores every day with Chase Freedom Flex.
+This category’s merchants’ primary business is sit-down or eat-in dining, including fast food restaurants and fine dining establishments. Merchants that sell food and drinks located within facilities such as sports stadiums, hotels and casinos, theme parks, grocery and department stores will not be included in this category unless the merchant has set up such purchases to be classified in a restaurant category. Bakeries, cate…</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="investing">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00010 — On Chase pages, what is the monthly withdrawal limit mentioned for some banks on money mar…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">investing</span>
+    <span class="badge badge-hops">2 chunks · cross_section_same_product</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">On Chase pages, what is the monthly withdrawal limit mentioned for some banks on money market and savings accounts, and which platform does J.P. Morgan Wealth Management say to follow for updates?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Six per month; LinkedIn.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the withdrawal limit some banks may set for money market and savings accounts: six per month. Chunk 2 provides the platform to follow for J.P. Morgan Wealth Management updates: LinkedIn. Both chunks are needed to answer both parts of the question.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00286_10</div>
+  <div class="chunk-page">Money Market Accounts vs. Savings Accounts: What’s the Difference? | Chase</div>
+  <div class="chunk-text">Withdrawal limits | |
+No federal limit, but banks may still restrict certain withdrawals to six per month. | Similar restrictions may apply, with some banks setting a limit of six per month. |</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00284_10</div>
+  <div class="chunk-page">Athlete Center of Excellence: Take Control of Your Financial Game | Chase</div>
+  <div class="chunk-text">### Follow us on LinkedIn
+Get the latest J.P. Morgan Wealth Management updates right in your feed.</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="credit_cards">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00011 — I have both a Chase Freedom Flex and a Marriott Bonvoy Boundless card. What should I do to…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">credit_cards</span>
+    <span class="badge badge-hops">2 chunks · multi_concept</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">I have both a Chase Freedom Flex and a Marriott Bonvoy Boundless card. What should I do to make sure I get the Freedom Flex quarterly bonus on Chase Travel purchases this quarter, and what spending steps do I need to complete to earn all of the current Marriott Bonvoy Boundless new cardmember rewards, including the airline credit?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">1. On your Chase Freedom Flex, activate the 5% cash back categories by June 14, 2026.
+2. Make your eligible purchases between April 1, 2026 and June 30, 2026.
+3. Keep your total combined spending in the bonus categories at or below $1,500 if you want the full quarterly bonus rate on those purchases.
+4. If you use Freedom Flex for Chase Travel purchases during that period, you will earn a total of 9% cash back on Chase Travel purchases until you reach the $1,500 spend cap. After that, Chase Travel purchases go back to the standard 5% cash back.
+5. On your Marriott Bonvoy Boundless card, spend $3,000 on eligible purchases within 3 months of account opening to earn 3 Free Night Awards.
+6. Then increase your total eligible spending to $4,000 within 4 months of account opening to earn 1 additional Free Night Award.
+7. To get the 2026 airline credit, spend $500 on eligible airline purchases to receive up to $50 in statement credits semi-annually, for up to $100 total.
+8. When you redeem the Free Night Awards, use them for one-night stays at properties with a redemption level up to 50,000 points per night; the 4 awards have a total value of up to 200,000 points.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 is needed for the Freedom Flex instructions: activation deadline, qualifying quarter dates, $1,500 combined cap, and 9% total cash back on Chase Travel until the cap is reached. Chunk 2 is needed for the Marriott Bonvoy Boundless steps: spending $3,000 in 3 months for 3 Free Night Awards, $4,000 total in 4 months for the additional award, and $500 in eligible airline purchases for up to $100 in semi-annual statement credits.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00270_16</div>
+  <div class="chunk-page">Chase Freedom: Cash Back Credit Card | Chase.com</div>
+  <div class="chunk-text">## Merchant List
+Activate by June 14th, 2026 and earn a total of 5% cash back from April 1st, 2026 through June 30th, 2026 on up to $1,500 in total combined purchases on Amazon, Chase Travel℠, and donations to Feeding America®, then earn 1% cash back in these categories.
+Freedom Flex cardmembers will earn a total of 9% cash back on Chase Travel purchases (5% Chase Travel cash back plus 4% bonus category cash back) until they reach the $1,500 spend cap. After the cap is met, they will continue to earn the standard 5% cash back on Chase Travel purchases.
+Activate 5% cash back every 3 months when…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00007_25</div>
+  <div class="chunk-page">Compare Personal Credit Cards | Chase</div>
+  <div class="chunk-text">### New Cardmember Offer
+## Marriott Bonvoy Boundless® Credit Card
+Earn up to 4 Free Night Awards + a $100 Airline Credit
+Earn 3 Free Night Awards after spending $3,000 on eligible purchases within 3 months of account opening with the Marriott Bonvoy Boundless® Credit Card. Plus, earn 1 additional Free Night Award after spending $4,000 total on eligible purchases within 4 months of account opening. Redeem your Free Night Awards for a one-night stay at properties with a redemption level up to 50,000 points per night, a total value of up to 200,000 points. Certain hotels have resort fees.
+2026 E…</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="customer_service">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00013 — If I’m setting up Chase and want to send an international wire from mobile banking, what a…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">customer_service</span>
+    <span class="badge badge-hops">2 chunks · cross_section_same_product</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">If I’m setting up Chase and want to send an international wire from mobile banking, what are the steps, and how do I also turn on an alert so I know when my direct deposit is availble to use?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">To send an international wire transfer in mobile banking:
+1. After signing in, tap &quot;Pay &amp; Transfer.&quot;
+2. Tap &quot;Wires &amp; global transfers.&quot;
+3. Tap the arrow to expand the foreign exchange rate calculator.
+4. Tell Chase if your recipient is an individual or business.
+5. Choose the Pay from account and Country.
+6. Enter the amount of your wire transfer in U.S. dollars (USD) and tap &quot;Send money.&quot;
+7. Choose or add your wire transfer recipient number and the date you’d like to send your wire.
+8. Enter any additional information and tap &quot;Next.&quot;
+9. Review the details and tap &quot;Schedule Wire&quot; to complete it.
+
+To know when your direct deposit is available to use:
+10. Set up an Account Alert to get notified when your direct deposit is available to use.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the step-by-step instructions for sending an international wire transfer with mobile banking. Chunk 2 provides the needed instruction to set up an Account Alert so the user knows when their direct deposit is available to use. Both chunks are required because the question asks for both processes together.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00018_02</div>
+  <div class="chunk-page">How To Send a Wire Transfer With Mobile Banking  | Chase</div>
+  <div class="chunk-text">### Here’s how to send an international wire transfer:
+- After signing in, tap &quot;Pay &amp; Transfer &quot;
+- Tap &quot;Wires &amp; global transfers&quot;
+- Tap the arrow to expand the foreign exchange rate calculator
+- Tell us if your recipient is an individual or business
+- Choose the Pay from account and Country
+- Enter the amount of your wire transfer in U.S. dollars (USD) and tap &quot;Send money&quot;
+- Choose or add your wire transfer recipient number and the date you’d like to send your wire
+- Enter any additional information and tap &quot;Next&quot;
+- To complete, review the details tap &quot;Schedule Wire&quot;</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00305_07</div>
+  <div class="chunk-page">Secure Banking Benefits and Tools | Chase</div>
+  <div class="chunk-text">### Know when your money hits your account
+Set up an Account Alert to get notified when your direct deposit is available to use.</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="multi">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00021 — If I use Chase Pay in 4 from a joint checking account and I also have the Sapphire Reserve…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">multi</span>
+    <span class="badge badge-hops">2 chunks · cross_domain</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">If I use Chase Pay in 4 from a joint checking account and I also have the Sapphire Reserve for Business card, can the other joint account holder view my Pay in 4 plan details in the Chase Mobile app, and does the card earn 4x points on social media and search engine advertising booked direct?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">No. Only the customer who sets up the Pay in 4 plan can see the plan details and activity on their Pay in 4 dashboard in the Chase Mobile app. And no, the Sapphire Reserve for Business card earns 4x points on flights and hotels booked direct, while social media and search engine advertising earns 3x points.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 is needed to determine who can view Pay in 4 plan details for a joint checking account and where those details appear in the Chase Mobile app. Chunk 2 is needed to determine the Sapphire Reserve for Business earning rates, specifically that 4x applies to flights and hotels booked direct, not to social media and search engine advertising, which earns 3x.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00082_06</div>
+  <div class="chunk-page">Chase Pay In 4℠ FAQs | Quick Guide to Pay in 4</div>
+  <div class="chunk-text">### Where can I find my active and completed Chase Pay in 4 plan details?
+Access your active and completed Chase Pay in 4 plans from your account overview dashboard and your account activity section on the Chase Mobile® app
+Keep in mind: If you have a joint checking account, only the customer who sets up the Pay in 4 plan will be able to see the plan details and activity on their Pay in 4 dashboard.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00005_05</div>
+  <div class="chunk-page">Sapphire Reserve for Business Credit Card | Chase.com</div>
+  <div class="chunk-text">4x points
+on flights &amp; hotels booked direct
+3x points
+on social media &amp; search engine advertising
+1x points</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="auto">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00028 — hey so if i wanna refinance my car with chase and im doing the app online but keep getting…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">auto</span>
+    <span class="badge badge-hops">2 chunks · multi_concept</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">hey so if i wanna refinance my car with chase and im doing the app online but keep getting an error ALSO my joint account owners info keeps auto filling... can i still apply as just me and what browser should i use and like does chase say anything about whether refinancing has to be through a dealer in their network too??</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">The chunks say you may be able to refinance with Chase if your car and current financing meet all requirements. For online application issues, they say to refresh your browser first, and if the error continues, try a different browser such as Firefox or Chrome. If your joint account owner&#x27;s information pre-fills, choose &quot;No&quot; when asked if you&#x27;re a Chase customer so you can enter only your own information. However, the provided chunks do not say whether refinancing specifically has to be through a dealer in the Chase network. The dealer-network requirement shown applies to financing a new or used car with your dealer through Chase, not explicitly to refinancing.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 is needed for the fact that Chase does allow refinancing if requirements are met. Chunk 2 is needed for the steps about online errors, trying a different browser, and removing a joint account owner&#x27;s pre-filled information. The question also asks whether the dealer-network requirement applies to refinancing; the chunks do not provide that, so the answer must note that this is not stated in the provided content.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00001_07</div>
+  <div class="chunk-page">Chase Auto | Shop for a car | dealer inventory | Chase.com</div>
+  <div class="chunk-text">Go to calculator
+## Answers to your financing questions
+Can I refinance my vehicle with Chase?
+Yes, if your car and current financing meet all requirements, you can submit an application to refinance.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00001_15</div>
+  <div class="chunk-page">Chase Auto | Shop for a car | dealer inventory | Chase.com</div>
+  <div class="chunk-text">What should I do if I receive an error when applying online?
+If you receive an error message, first refresh your browser and try again. If it continues, use a different browser (i.e. Firefox, Chrome).
+When I apply online, my joint account owner&#x27;s personal information pre-fills. How can I remove their info?
+To apply with only your information, choose &quot;No&quot; when asked if you&#x27;re a Chase customer during the application. Then, you&#x27;ll be able to enter your info.
+1 To finance a new or used car with your dealer through JPMorgan Chase Bank, N.A. (&quot;Chase&quot;), you must purchase your car from a dealer in the…</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="mortgage">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00036 — If I’m a first-time homebuyer looking at homes for sale near me on Chase and I’m also cons…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">mortgage</span>
+    <span class="badge badge-hops">2 chunks · cross_section_same_product</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">If I’m a first-time homebuyer looking at homes for sale near me on Chase and I’m also considering a DreaMaker loan, does Chase say whether the homebuyer education has to be completed before I start searching for homes or only before closing?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">The provided chunks do not say whether homebuyer education must be completed before you start searching for homes. They only say that you can search for homes for sale by price, location and more, and that for a DreaMaker loan, if all occupying borrowers are first-time homebuyers, at least one occupying borrower must complete homebuyer education before closing.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the home-search context: Chase says you can search for homes for sale by price, location, and more. Chunk 2 provides the DreaMaker loan education requirement and timing: if all occupying borrowers are first-time homebuyers, at least one must complete homebuyer education before closing. Combining them shows the chunks do not state that education is required before beginning a home search, so the question has no fully supported positive answer.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00289_06</div>
+  <div class="chunk-page">Mortgage Calculator | Chase</div>
+  <div class="chunk-text">## Explore houses for sale
+Search by price, location and more to find homes for sale near you.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00288_13</div>
+  <div class="chunk-page">Affordable low down payment mortgage options | Chase.com</div>
+  <div class="chunk-text">### Am I required to take Homebuyer Education?
+Homebuyer education is required for the DreaMaker loan if all occupying borrowers on the application are first-time homebuyers. At least one of the occupying borrowers must complete the education before closing.</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="credit_cards">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00043 — hey, quick qestion—if I use Chase Pay Over Time for an Amazon purchase after checkout, do …</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">credit_cards</span>
+    <span class="badge badge-hops">2 chunks · cross_section_same_product</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">hey, quick qestion—if I use Chase Pay Over Time for an Amazon purchase after checkout, do I still get my usual rewards, and where do I actually check which Amazon charges got added to the plan?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Yes—on the original purchase amount; check the Chase Pay Over Time dashboard on chase.com or the Chase Mobile app, or look for “See plan details” next to the transaction.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 is needed to answer whether rewards are still earned: it says you still earn rewards as usual on the original purchase amount. Chunk 2 is needed to answer where to check plan status and which Amazon transactions were added: the Chase Pay Over Time dashboard on chase.com or the Chase Mobile app, and “See plan details” next to applicable transactions.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00095_11</div>
+  <div class="chunk-page">Chase Pay Over Time After Purchase FAQs | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### Will I still earn rewards for my purchase?
+You’ll still earn rewards as you usually would on the original purchase amount.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00096_12</div>
+  <div class="chunk-page">Chase Pay Over Time At Checkout FAQs | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### Where can I find the status of my Chase Pay Over Time plan or see which transactions on Amazon were added to the plan?
+Sign into your credit card account on chase.com or the Chase Mobile® app and navigate to the Chase Pay Over Time dashboard to access your plan status (e.g., Active, Pending, Completed). You can also track the status on your credit card monthly billing statements or through any emails you receive from Chase about your Chase Pay Over Time plans.
+To see which specific transactions on Amazon are included in your Chase Pay Over Time plan, you can either go to your account activ…</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="mortgage">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00045 — Hey, so I’m new to all this mortgage stuff — if I’ve built up equity in my home, what does…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">mortgage</span>
+    <span class="badge badge-hops">2 chunks · multi_concept</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">Hey, so I’m new to all this mortgage stuff — if I’ve built up equity in my home, what does that actually mean, what kinds of things could I use that money for, and what options does Chase say I have to tap into it?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">It means the equity in your home is the difference between your home’s current value and the amount you still owe on your mortgage. Chase says you may be able to use that equity to secure funds for large expenses or major purchases. Examples they give include paying off debt, making home improvements, paying for college expenses, and buying a car. To tap into that equity, Chase offers two options: a home equity line of credit (HELOC) and a cash-out refinance.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 2 is needed for the definition of home equity and the two Chase options for accessing it (HELOC and cash-out refinance). Chunk 1 is needed for the specific example uses of equity: paying off debt, home improvements, college expenses, and buying a car. The question asks for all of these together, so both chunks are required.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00301_04</div>
+  <div class="chunk-page">Home Equity Line of Credit (HELOC) &amp; Cash-Out Refinance | Chase</div>
+  <div class="chunk-text">## Consider the ways you can use your equity
+- Pay off debt
+- Make home improvements
+- Pay for college expenses
+- Buy a car</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00301_00</div>
+  <div class="chunk-page">Home Equity Line of Credit (HELOC) &amp; Cash-Out Refinance | Chase</div>
+  <div class="chunk-text"># Explore what&#x27;s possible using your home&#x27;s equity
+## Chase gives you options to tap into your equity
+You can use the equity you’ve built up in your home — the difference between your home’s current value and the amount still owed on the mortgage — to secure funds for other large expenses, such as home improvements or a major purchase. Chase offers a home equity line of credit (HELOC) and a cash-out refinance., See which option works best for you.</div>
+</div>
+</div>
+</div></div>
+<div class="card " data-source="sampling-plan" data-stratum="mortgage">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00048 — Hey, I&#x27;m brand new to this and trying to compare my next steps. If I want to tap my h…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">mortgage</span>
+    <span class="badge badge-hops">2 chunks · multi_concept</span>
+    <span class="badge badge-source">sampling-plan</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">Hey, I&#x27;m brand new to this and trying to compare my next steps. If I want to tap my home&#x27;s equity with a cash-out refinance, how does that compare with just starting with preapproval on Chase&#x27;s low down payment mortgage options? Like, what does Chase say about the first step for those mortgage options, and how much of my home&#x27;s value could I refinance in a cash-out refi if I&#x27;m a regular borrower versus an eligible veteran?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">For Chase&#x27;s affordable low down payment mortgage options, the page says the first step is preapproval. For a cash-out refinance, lenders may require at least 20% home equity, which means many borrowers can refinance up to 80% of their home&#x27;s value. An exception is eligible veterans using a VA loan, who may be able to refinance up to 100% of their home&#x27;s value.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 2 is needed for the comparison point about Chase&#x27;s low down payment mortgage options, specifically that the first step is preapproval. Chunk 1 is needed for the cash-out refinance details: many lenders require 20% equity so borrowers can refinance up to 80% of the home&#x27;s value, while eligible veterans with VA loans may refinance up to 100%.</div></div>
+<div class="field"><div class="field-label">Chunks (2)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00301_12</div>
+  <div class="chunk-page">Home Equity Line of Credit (HELOC) &amp; Cash-Out Refinance | Chase</div>
+  <div class="chunk-text">Lenders are mindful of how much a person owes, so many limit the amount you can borrow on a cash-out refinance. A cash-out refinance may require a minimum of 20% home equity for some lenders, which means you can only refinance up to 80% of the value of your home. Veterans Affairs (VA) loans are an exception to the rule. The VA allows eligible veterans to refinance up to 100% of the value of their homes on a cash-out refinance.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00288_08</div>
+  <div class="chunk-page">Affordable low down payment mortgage options | Chase.com</div>
+  <div class="chunk-text">## Take the first step of preapproval
+## Frequently asked questions
+### Ready to apply?
+### Come in</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-fail" data-source="chain-seeded" data-stratum="education_center" data-ablation="fail">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00051 — pay utilty bill with chase card use cash back as statment credit avoid intrst delinquency …</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-fail">Ablation: FAIL</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → CC → CC</strong> &nbsp;|&nbsp; Chain: seed_57415474</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">pay utilty bill with chase card use cash back as statment credit avoid intrst delinquency default credit score impact</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Yes — based on the Chase content, you may be able to redeem cash back as a statement credit to reduce your credit card balance. When using a credit card for utility payments, you should watch your card’s APR if you carry a balance, and know your grace period so paying in full and on time can help you avoid interest charges. You should also keep credit utilization at or below 30% when possible, since high utility bills and high balances can hurt your credit score, while regular on-time payments can help it. Missing a payment can make a loan delinquent even after just 1 day, though your lender agreement may allow a short grace period. If missed payments continue, the account can stay delinquent for a long time before going into default. Both delinquency and default can significantly damage your credit because missed payments hurt payment history, but making proactive changes and repaying sooner may reduce the damage compared with waiting until default or collections.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 4 provides the banking task outcome: cash back rewards can be redeemed as a statement credit that reduces the credit card balance. Chunk 3 provides the utility-payment credit card guidance needed to answer how to avoid extra cost and score damage: APR matters if carrying a balance, grace periods can help avoid interest by paying in full and on time, high utility bills can raise credit utilization, keeping utilization at or below 30% is recommended, and on-time payments help credit score while high balances hurt it. Chunk 2 explains the timing and progression of missed payments: delinquency can happen when a payment is missed by even 1 day, there may be a few days&#x27; grace period depending on the lender agreement, and delinquency can continue for a long period before default. Chunk 1 adds the comparative credit-impact conclusion required for the answer: both delinquency and default significantly hurt credit because missed payments damage payment history, and repaying proactively sooner can mean less score damage than waiting until default or collections.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00162_08 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Default vs Delinquency: What&#x27;s the Difference? | Chase</div>
+  <div class="chunk-text">## How defaults and delinquency impact your credit
+As you can see, both defaults and delinquencies can have significant impacts to your credit score. This is due to the fact that you&#x27;ve missed payments, which hurts your payment history and impacts your credit score. The impact will vary depending on your current credit score as well as how quickly you make repayments after facing delinquency or default. For example, if you can make proactive changes and begin repaying your debts, your score may not be as low as if you were to wait until the loan goes into default or you face collections.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00162_02</div>
+  <div class="chunk-page">Default vs Delinquency: What&#x27;s the Difference? | Chase</div>
+  <div class="chunk-text">## Loan delinquency
+Loan delinquency happens when you miss your payments by even just 1 day. However, depending on your agreement with your lender, it&#x27;s possible that you could have a grace period of a few days to make your payment.
+If you continue to miss your payments for an extended period of time, your loan could face delinquency. Similar to defaults, getting to this point means you have harmed your payment history, thus negatively impacting your credit score.
+Put simply, delinquency is the stage you are in when you&#x27;ve begun to miss payments. You could remain in a state of delinquency for …</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00112_06</div>
+  <div class="chunk-page">Earning Cash Back when using a Credit Card for Utility Payments | Chase</div>
+  <div class="chunk-text">## Understanding credit card terms related to utility payments
+There are some key terms that can help make credit cards a bit easier to understand and navigate. Here are five that are relevant when using credit cards for utility payments:
+- Interest rates: Your card’s interest rate, typically referred to its annual percentage rate (APR), is important to consider if you carry a balance, as the interest can negate any rewards earned.
+- Grace periods: Knowing your card&#x27;s grace period can help avoid interest charges by paying the balance in full and on time.
+- Credit utilization: High utility bill…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00233_06</div>
+  <div class="chunk-page">How to know when to redeem credit card rewards | Chase</div>
+  <div class="chunk-text">### Redeeming cash back rewards
+Cash back rewards can typically be redeemed in a few ways. One common method is to apply the cash back as a statement credit, which reduces your credit card balance. Alternatively, you may be able to request a check or deposit the cash back amount you choose directly into your bank account. Some credit card issuers also allow you to redeem your cash back rewards for gift cards or purchases at specific retailers.</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00052 — freedom rise applcation pending + amazon pay over time refund neg bal, pay more thn minimu…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_83328579</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">freedom rise applcation pending + amazon pay over time refund neg bal, pay more thn minimum help limit increase?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Yes. If your Freedom Rise application is still pending, Chase says that’s usually not cause for concern, and you can check the status online or by phone; if it stays pending, calling customer service may give more specific updates. If you later get the card and use Chase Pay Over Time on Amazon, each plan payment is added to your minimum amount due each month. If you only pay the minimum, you’ll typically pay the plan on time. But for a Freedom Rise credit limit increase after six months, Chase says responsible use includes paying more than the minimum on time and paying down balances, which may help you qualify. If an Amazon return posts after you already paid your full card balance, the refund can show as a negative balance, meaning the issuer owes you that amount; you can keep using the card so future purchases are reduced by the credit, or request the credit back as a check or statement credit.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 explains how a refund appears if the card was already paid off: it becomes a negative balance, and the customer can either use that credit toward future purchases or request a check or statement credit. Chunk 2 explains how Chase Pay Over Time on Amazon affects billing: each installment is added to the minimum amount due, and paying only the minimum will typically pay the plan on time. Chunk 3 adds the key condition for a Freedom Rise credit limit increase: paying more than the minimum on time and paying down balances may help qualify after six months. Chunk 4 provides what to do while the Freedom Rise application is pending: pending is usually not a problem, status can be checked online or by phone, and customer service may provide more specific updates.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00123_04</div>
+  <div class="chunk-page">Understand how refunds and returns impact your credit cards| Chase</div>
+  <div class="chunk-text">## How does a refund show up on a credit card?
+If you were carrying a balance on your credit card before your return, the return will likely appear as a credit on your account, and will reduce your total unpaid balance.
+On the other hand, if you paid off your entire credit card balance before you made the return, the statement will appear on your credit card as a negative balance. This means that the credit issuer owes you this amount since you already paid for the balance. In this case, you can continue to use the card and have payments toward future purchases reduced by the credit. Or, alter…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00098_04</div>
+  <div class="chunk-page">A Guide to Chase Pay Over Time® on Amazon | Chase</div>
+  <div class="chunk-text">## How payments work for Pay Over Time on Amazon
+Once a Pay Over Time plan is confirmed, your payment toward it will be added to the minimum amount due on your credit card each month. If you pay at least your minimum payment when it’s due, you’ll typically pay off your plan balance on time. Or, you might choose to pay off the plan by paying your interest saving balance each month and avoid interest on new credit card purchases.
+When paying your credit card bill, here’s how each option affects your Pay Over Time plan:
+- Interest saving balance: If you normally pay your credit card balance in fu…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00182_03</div>
+  <div class="chunk-page">Freedom Rise℠ | Chase Starter Credit Card</div>
+  <div class="chunk-text">### Potential for a Freedom Rise credit limit increase after just six months
+Using your Freedom Rise card responsibly by paying more than the minimum payment on time and paying down balances may help you qualify for an increase to your credit limit. It can also potentially boost your credit score in just six months.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00124_00</div>
+  <div class="chunk-page">How to Check Your Credit Card Application Status | Chase</div>
+  <div class="chunk-text"># How to check your credit card application status
+## Quick insights
+- Most major credit card issuers allow you to check the status of your credit card application online or by phone.
+- You may need to provide personal information like your Social Security number, ZIP code or application reference number.
+- If your credit card application is still pending, calling the card issuer’s customer service line may provide more specific updates.
+Not receiving a quick decision on your credit card application is usually not cause for concern. The time it takes can vary greatly, even if applying seemed t…</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00053 — hey im trying to get ready to apply for my first mortgage and dont wanna mess up my credit…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_51646714</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">hey im trying to get ready to apply for my first mortgage and dont wanna mess up my credit... if i upgrade my chase card to sapphire reserve, do they usually do a hard pull or only if i ask for a higher limit, and what limit do i need for that card? also if i accidentally pay my credit card a few days late, when would that actually show up on my credit report, would paying the full amount right away maybe keep it off, and why does being on time matter so much for getting approved / better terms on a mortgage??</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">For a Chase Sapphire Reserve upgrade, Chase says a product change with the same issuer generally does not result in a hard credit inquiry. But if you request a credit limit increase, Chase may perform a hard inquiry. The Sapphire Reserve also has a minimum credit limit of $10,000.
+
+On the late-payment side, paying on time matters a lot because payment history is a major part of your credit score—about 40% of VantageScore 3.0 and 35% of FICO. Chase also says on-time payments help build and maintain a positive credit history, while missed payments can hurt your credit score and creditworthiness. Consistent on-time payments may improve your chances of being approved for things like a mortgage and may help you get better borrowing terms.
+
+If you miss a payment by just a few days but then pay it in full immediately, it’s possible the issuer won’t report it to the credit bureaus as a late payment. But if you can only make a partial payment, that will get reported as a late payment. The usual time period for a late payment to show up on your credit report is 30 days, and that late payment could hurt your score and even lead to higher APRs depending on your card terms.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the Sapphire Reserve upgrade details: a same-issuer product change generally does not cause a hard inquiry, but requesting a credit limit increase may cause one, and Sapphire Reserve requires a minimum $10,000 credit limit. Chunk 2 explains why paying on time matters for a first-time mortgage applicant: on-time payments build positive credit history, missed payments can hurt creditworthiness, and consistent payments may improve chances of mortgage approval and better borrowing terms. Chunk 3 adds the specific credit-score significance of payment history, including that it makes up about 40% of VantageScore 3.0 and 35% of FICO, which supports why lateness matters so much. Chunk 4 provides the timing and conditional reporting details for a payment missed by a few days: paying in full immediately may mean it is not reported, partial payment will be reported, and the usual reporting timeframe is 30 days, with possible score harm and higher APRs.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00184_07</div>
+  <div class="chunk-page">A Guide to Upgrading to Sapphire Reserve® | Chase</div>
+  <div class="chunk-text">## How to request a Chase Sapphire Reserve card upgrade
+To upgrade, cardmembers can call the number on the back of their Chase card and request a product change to Sapphire Reserve. They will need to verify their identity—including the card‘s last four digits and their ZIP code—and may be asked to confirm their credit limit. The Sapphire Reserve has a minimum credit limit of $10,000.
+Upgrading to a different product from the same card issuer generally does not result in a hard credit inquiry (which can impact your credit score). If you request a credit limit increase, though, Chase may perform…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00129_01</div>
+  <div class="chunk-page">How to Pay a Credit Card Bill | Chase</div>
+  <div class="chunk-text">## Why you should pay your credit card bill on time
+Each credit card has a billing cycle that lasts about one month. Once this billing cycle ends, your credit card issuer will send you a monthly statement. This statement includes your account activity, your minimum payment due and a due date. This due date does not change from month to month, so you’ll always know when it’s coming up.
+It’s important to pay at least your minimum payment on time every month. On-time payments are one important aspect of building and maintaining a positive credit history. Missing payments can tarnish your credit s…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00176_03</div>
+  <div class="chunk-page">When Late Payments Appear on Credit Report | Chase</div>
+  <div class="chunk-text">## How late payments affect credit score
+A major factor that goes into calculating your credit score is payment history. It makes up about 40% of your VantageScore3.0® and 35% of your FICO® score. Your payment history essentially captures your ability to pay the amount you owe on your bills on time and how frequently you make your payments without missing them.
+A late payment demonstrates to current and potential lenders that you may not be fully reliable when it comes to paying your debts on time. Late payments can affect your payment history, which could negatively impact your credit score.
+…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00176_04</div>
+  <div class="chunk-page">When Late Payments Appear on Credit Report | Chase</div>
+  <div class="chunk-text">## Missing a payment by a few days
+When you&#x27;re under a lot of pressure from work or caught up with all kinds of responsibilities, it can be easy to miss a payment, even if you consider yourself responsible and you have a good credit score and solid credit history. If you miss a payment by a few days but make the payment in full immediately, it&#x27;s possible that your issuer won&#x27;t report this activity to the credit bureaus as a late payment. However, if you&#x27;re only able to make a partial payment, then this will get reported and appear on your credit report as a late payment. The usual time period …</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-fail" data-source="chain-seeded" data-stratum="education_center" data-ablation="fail">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00054 — 1st mortgagw app utility bill on card late few days min ok grace/score fee?</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-fail">Ablation: FAIL</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_55645312</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">1st mortgagw app utility bill on card late few days min ok grace/score fee?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">If you’re putting utility bills on a credit card while preparing for your first mortgage, there are a few risks to watch. Some utility companies may charge a convenience fee for paying by credit card. If your payment is a few days late, you should pay the balance or at least the minimum payment right away, because the minimum payment is the lowest amount needed to keep the account in good standing. If you don’t pay at least that amount on time, the issuer may charge a late fee and add more interest. Even if you do make only the minimum, that can still lead to interest charges and may not lower your credit utilization ratio, and utilization over 30% could hurt your credit score. A poor payment history can also harm your credit score. After paying, contact your card issuer to ask if they’ll waive the late fee, and check your terms to see whether your card has a grace period. Missing the grace-period payment date by even one day can trigger interest charges and a late fee, but if you lost the grace period because of a one-time late payment, paying your balance on time and in full can often restore it.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 contributes that paying utility bills by credit card can involve convenience fees from the utility company, and that poor payment history can harm your credit score. Chunk 2 contributes what the minimum payment is, that paying at least the minimum keeps the account in good standing, that missing it can cause a late fee and more interest, and that paying only the minimum may still cause interest and may not reduce utilization, with utilization over 30% potentially hurting credit score. Chunk 3 contributes the specific action for a payment that is only a few days late: pay the balance or minimum payment right away, then contact the issuer to ask about waiving the late fee, and check whether the card has a grace period. Chunk 4 contributes what happens with the grace period: missing the grace-period payment date by even one day can cause interest charges and a late fee, and a one-off late payment may not permanently end the grace period because paying on time and in full can often restore it.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00112_04</div>
+  <div class="chunk-page">Earning Cash Back when using a Credit Card for Utility Payments | Chase</div>
+  <div class="chunk-text">### Cons
+- Potential fees: Some utility companies charge convenience fees for credit card payments.
+- Debt risk: If not budgeted properly, mismanagement can lead to high interest charges if balances aren&#x27;t paid in full.
+- Credit score: While using a credit card to help you establish a good payment history could potentially help improve your credit score, a poor payment history could similarly harm your credit score.</div>
+</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00143_02 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Statement Balance vs Minimum Payment | Chase</div>
+  <div class="chunk-text">## Minimum payments on your credit card bill
+A minimum payment is the lowest amount you must pay on your credit card bill by the due date to keep your account in good standing. If you don’t pay at least this amount on time, your card issuer may charge you a late fee and add more interest to your balance.
+It’s recommended to at least pay your minimum payment on time every month. Paying this amount could help maintain your credit score and positive payment history, but it might result in interest charges and might not help to lower your credit utilization ratio. A credit utilization ratio over 3…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00176_10</div>
+  <div class="chunk-page">When Late Payments Appear on Credit Report | Chase</div>
+  <div class="chunk-text">## Contact your issuer
+We all make mistakes—if you accidentally forgot to pay your bill, you might get a late fee and added interest. However, if it&#x27;s late by just a few days, try to pay off the balance or minimum payment right away and then contact your credit card issuer, typically a bank or other financial institution, to see if they&#x27;ll waive your late fee. If you&#x27;re normally a responsible and loyal customer, it&#x27;s possible they&#x27;ll let this one slide. You may also want to check with your terms and conditions to see if your credit card has a grace period.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00155_02</div>
+  <div class="chunk-page">What is a Grace Period on a Credit Card | Chase</div>
+  <div class="chunk-text">## Can you lose your credit card grace period?
+It’s important to familiarize yourself with the rules governing grace periods. For example, missing your grace period payment date by even one day can result in interest charges, plus you could get a late fee. Carrying balances transferred from other cards that are not paid off before the promotional APR ends on your credit card can also cause you to lose the grace period for that card.
+If you have lost your grace period due to a one-off payment that was late by a day, this doesn’t have to be a permanent state—paying off your balance on time and i…</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00055 — Hey, I used Chase Pay Over Time on a recent purchase on my Chase card, and I think I misse…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_124507554</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">Hey, I used Chase Pay Over Time on a recent purchase on my Chase card, and I think I missed one of the monthly payments. I&#x27;m trying to understand what that actually means for me: since this is the Chase BNPL feature and not one of those separate pay-in-4 companies, what kind of plan length does Chase usually offer for these purchases, when would a late fee be decided and what affects how much it is, how long could that late payment stay on my credit report, and would turning on automatic payments for at least the minimum help me avoid this happening again?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Chase Pay Over Time is the BNPL feature tied to certain Chase credit cards, not a separate traditional BNPL company account. With a participating Chase credit card, you can split eligible purchases you&#x27;ve already made of $100 or more into equal monthly payments, and plans on recently made purchases can range from 3 to 24 months depending on the purchase amount, your creditworthiness, and your account history.
+
+If you miss a payment, the timing and amount of any late fee can vary by issuer. It&#x27;s usually assessed a certain number of days after the due date, and the days may be counted as business days or calendar days, including weekends and holidays. The amount of the late fee can also vary, and it may depend on factors like your card balance, your payment history, and any limits your bank or card issuer sets on fees.
+
+As for your credit report, a late payment can remain on it for 7 years, although a single late payment is not likely to hurt your creditworthiness permanently if you usually pay on time, and your score may recover over time with good credit behavior.
+
+To help prevent this in the future, setting up automatic payments can help make sure at least part of your balance gets paid, even if it&#x27;s only the minimum payment, which can help you build a reliable payment history over time. But you should only do that if you have enough funds in the account, because insufficient funds could lead to overdraft fees, and it may also be harder to dispute an overpayment after the money has already been withdrawn.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides that Chase Pay Over Time is a BNPL feature associated with certain Chase credit cards rather than a traditional separate BNPL company, that it applies to eligible purchases already made of $100 or more, and that plan durations range from 3 to 24 months based on purchase amount, creditworthiness, and account history. Chunk 2 provides that a late payment can stay on a credit report for 7 years, while also noting the impact may lessen over time with otherwise good payment behavior. Chunk 3 provides how late fees are determined: usually a certain number of days after the due date, counted in business or calendar days, and that the fee amount may depend on balance, payment history, and issuer fee limits. Chunk 4 provides the preventive step of setting up automatic payments for at least the minimum payment, plus the cautions that insufficient funds could trigger overdraft fees and overpayments may be harder to dispute once withdrawn.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00156_02</div>
+  <div class="chunk-page">What is Buy Now, Pay Later? | Chase</div>
+  <div class="chunk-text">## What are the types of BNPL? The concept of BNPL is nothing farfetched: Buy something today in agreement that you will pay the entire cost over time. However, there&#x27;s been a surge in companies providing BNPL in the last several years. You may have seen some when shopping online, and your credit card might offer a BNPL feature. There are two primary types you’re likely to find on the market:
+- A traditional BNPL company provides a payment option that splits a purchase into multiple payments, with or without interest, at the time of payment. An account is needed to be able to use the pay over …</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00190_04</div>
+  <div class="chunk-page">Remove a late payment off credit report | Chase</div>
+  <div class="chunk-text">## How long late payments stay on your credit report
+Late payments can remain on your credit report for 7 years. Still, one late payment isn&#x27;t likely to reflect poorly on your creditworthiness permanently, as long as you generally make payments on time. And assuming good credit behavior, your credit score should rebound from a single late payment over time.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00108_03</div>
+  <div class="chunk-page">Credit Card Late Fees Explained | Chase</div>
+  <div class="chunk-text">## What are examples of credit card late fees?
+Issuers may use different time frames to determine when they assess a late fee, but it’s usually a certain number of days after the due date. Days may be counted in business days or in calendar days, including weekends and holidays.
+The late fee itself can vary, too, and it’s often determined by your bank or credit card issuer for each late payment. Sometimes the credit card’s balance is used to determine the late fee. Sometimes the payment history is a factor in determining if and how much of a late fee is charged. Banks may also set limits on th…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00176_11</div>
+  <div class="chunk-page">When Late Payments Appear on Credit Report | Chase</div>
+  <div class="chunk-text">## Set up automatic payments
+Even if you aren&#x27;t able to pay off your debt right away, taking small steps towards paying it off can benefit you in the long run. It can help establish a reliable payment history, which can boost your credit score over time. Consider setting up automatic payments so that, no matter what, you&#x27;ll have paid at least a portion of your balance, even if it&#x27;s just your minimum payment.
+It&#x27;s essential that you have the funds to do so, however, because you could face overdraft fees if you try to make a payment with insufficient funds. Additionally, it may be more difficult…</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00056 — if i upgrade my chase card to sapphire reserve after a year and with at least a $10,000 li…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_75066350</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">if i upgrade my chase card to sapphire reserve after a year and with at least a $10,000 limit, can i avoid a hard pull, earn 3x when i eat at restaurants or order in, and use the lounge benefit for me plus 2 guests just by showing the digital priority pass with a same day boarding pass and id</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Yes. Based on the Chase information provided, you may be able to upgrade to Sapphire Reserve if you’ve had your Chase card for at least a year and have at least a $10,000 credit limit, and upgrading generally does not result in a hard pull because it is treated as a product change rather than a new application. Once you have Sapphire Reserve, eligible dining purchases can earn 3x points, including eating out or ordering in. For lounge access, Sapphire Reserve cardmembers receive complimentary Priority Pass Select membership, which gives access to over 1,300 lounges in more than 600 cities worldwide, and the primary cardmember or an authorized user can bring up to two guests; additional guests are charged a per-guest, per-visit fee. To enter a lounge, you need to present your valid Priority Pass Select membership card, a same-day boarding pass, and any necessary identification, and most lounges accept a digital membership card stored on your smartphone. Your Sapphire Reserve account also must be open and not in default to maintain a valid Priority Pass Select membership.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the dining benefit details: Sapphire Reserve earns 3x points on eligible dining purchases, including eating out and ordering in. Chunk 2 provides the upgrade eligibility and application-impact details: cardmembers may be able to upgrade after at least a year with at least a $10,000 credit limit, and upgrading generally does not cause a hard pull. Chunk 3 provides the lounge entry requirements: present a valid Priority Pass Select membership card, same-day boarding pass, and identification; most lounges accept a digital membership card; the account must be open and not in default. Chunk 4 provides the scope of the lounge membership and guest policy: complimentary Priority Pass Select membership comes with Sapphire Reserve, access includes over 1,300 lounges in more than 600 cities, and the primary cardmember or an authorized user may bring up to two guests before extra guest fees apply.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00228_04</div>
+  <div class="chunk-page">How to Earn 3x on Dining with Chase Sapphire Reserve® | Chase</div>
+  <div class="chunk-text">## In summary
+Whether you like eating out or ordering in, the Chase Sapphire Reserve card’s dining benefits can help you earn points. Eligible dining purchases can qualify for 3x points when you use your Sapphire Reserve card. This can include sit-down restaurants, fast food, cafes, coffee shops and many other places that primarily make and serve food.
+Other dining benefits—like access to Sapphire Reserve Exclusive Tables—may be appealing to foodies and non-foodies alike. The perks and benefits included with the Sapphire Reserve card, which does come with an annual fee, extend beyond dining.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00184_00</div>
+  <div class="chunk-page">A Guide to Upgrading to Sapphire Reserve® | Chase</div>
+  <div class="chunk-text"># A guide to upgrading to Sapphire Reserve®
+## Quick insights
+- Chase cardmembers may be able to upgrade to the Sapphire Reserve card if they have had their card for at least a year and at least a $10,000 credit limit.
+- The Sapphire Reserve credit card is a luxury travel credit card that includes a variety of travel and dining statement credits, complimentary airport lounge access and travel and purchase protections.
+- Upgrading a Chase credit card generally doesn’t result in a hard pull of your credit, as it is a considered product change as opposed to a new credit application.
+The Chase Sap…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00197_02</div>
+  <div class="chunk-page">Chase Sapphire Reserve Lounge Access Explained | Chase</div>
+  <div class="chunk-text">## How to access airport lounges
+To access a lounge, present your valid Priority Pass Select membership card, same-day boarding pass and any necessary identification. Most lounges now accept a digital membership card you can store on your smart phone. However, a lounge that reaches capacity may deny access.
+If you&#x27;re a Chase Sapphire Reserve cardmember, your account must be open and not in default to maintain a valid Priority Pass Select membership.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00197_01</div>
+  <div class="chunk-page">Chase Sapphire Reserve Lounge Access Explained | Chase</div>
+  <div class="chunk-text">## Lounge access with Chase Sapphire Reserve
+As a cardmember, you&#x27;ll receive complimentary Priority Pass™ Select membership. Membership gives you access to over 1,300 lounges in more than 600 cities worldwide.
+Primary cardmembers and authorized users are allowed a maximum of two guests. For any additional guests, your card will be charged a fee per guest, per visit.</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00057 — hey so I’m looking at getting a Chase card and wanna make sure I understand the tradeoffs …</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → CC → CC</strong> &nbsp;|&nbsp; Chain: seed_118025206</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">hey so I’m looking at getting a Chase card and wanna make sure I understand the tradeoffs before I sign up. If I use the new card for big utility bills to help hit a welcome bonus, what should I know about the grace period timing, which charges dont get that grace period, how those utility balances could affect my credit utilzation/score, and how opening the card plus ever being late on a payment might impact my credit score?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">If you get a new Chase card and use it for large utility payments to help earn a welcome bonus, there are a few connected things to watch:
+
+- Grace period timing: A typical credit card grace period is about 21 to 25 days, though some promotional grace periods can be as long as 55 days when you first receive the card. If a card offers a grace period, it must be at least 21 days.
+- Charges that usually do not get a grace period: Cash advances and balance transfers usually do not qualify. Interest starts accruing the same day for a cash advance and also the same day a balance transfer is completed.
+- Utility bills and credit utilization: Large utility bills can raise your credit utilization ratio, which is the percentage of your total credit limit currently being used by debt. It is generally recommended to keep utilization at or below 30%. High balances can negatively affect your credit score, while regular on-time payments can help improve it.
+- Effect of opening the new card: Applying for the card will likely trigger a hard inquiry, which can cause a temporary dip in your score. But opening a new card can also help by increasing your total available credit, which may improve utilization if you keep balances low. It can also help your credit mix, and using the card responsibly with timely payments may have a positive long-term effect through payment history.
+- Effect of late payments: Payment history is a major part of your credit score. It makes up about 40% of VantageScore 3.0 and 35% of FICO. A late payment can hurt your score because it shows lenders you may be less reliable about paying on time, and the more overdue the payment is, the worse the impact can be.
+
+So in practical terms: using the card for utilities could help you reach a sign-up bonus, but you’d want to pay on time and keep balances manageable. The new card might briefly lower your score from the hard inquiry, but it could also help your utilization and credit mix over time if managed well. And you should not assume the grace period applies to cash advances or balance transfers.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the grace period length (typically 21–25 days, sometimes up to 55 days initially, and at least 21 days if offered) and the key exception that grace periods usually do not apply to cash advances or balance transfers, with interest accruing the same day. Chunk 2 provides the utility-payment-specific concepts: that carrying a balance can let interest negate rewards, that grace periods help avoid interest by paying in full and on time, and especially that high utility bills can increase credit utilization, which is recommended to stay at or below 30%, with high balances hurting score and on-time payments helping it. Chunk 3 provides the welcome-bonus/new-card angle: opening the card for a sign-up bonus usually means a hard inquiry that can temporarily lower the score, but the new line can improve utilization by increasing available credit, can help credit mix, and can help payment history if used responsibly. Chunk 4 provides the late-payment consequences and why they matter: payment history is a major scoring factor (about 40% of VantageScore 3.0 and 35% of FICO), late payments can negatively affect score, and worse lateness generally means worse impact.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00155_01</div>
+  <div class="chunk-page">What is a Grace Period on a Credit Card | Chase</div>
+  <div class="chunk-text">## How long is a typical grace period for a credit card?
+The average grace period for credit cads ranges from 21 to 25 days, though some promotional grace periods can extend up to 55 days when you initially receive your card. While federal law does not mandate that grace periods be offered to customers, many financial institutions choose to provide the service. If they do offer a grace period, it must be at least 21 days.
+Remember that grace periods usually do not apply to cash advances or balance transfers. So, if you take a cash advance from your credit card at an ATM or in person at a bank …</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00112_06</div>
+  <div class="chunk-page">Earning Cash Back when using a Credit Card for Utility Payments | Chase</div>
+  <div class="chunk-text">## Understanding credit card terms related to utility payments
+There are some key terms that can help make credit cards a bit easier to understand and navigate. Here are five that are relevant when using credit cards for utility payments:
+- Interest rates: Your card’s interest rate, typically referred to its annual percentage rate (APR), is important to consider if you carry a balance, as the interest can negate any rewards earned.
+- Grace periods: Knowing your card&#x27;s grace period can help avoid interest charges by paying the balance in full and on time.
+- Credit utilization: High utility bill…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00134_04</div>
+  <div class="chunk-page">Deciding How to Use Your Credit Card Welcome Bonus Offer | Chase</div>
+  <div class="chunk-text">## How a new card can impact your credit score
+Earning a new cardmember welcome bonus offer typically means that you’re opening a new credit card, which can impact on your credit score. When you apply for a new credit card, the issuer will likely run a hard inquiry on your credit. This inquiry can cause a temporary dip in your score.
+But there are also potential advantages of opening a new line of credit, including:
+- Improved credit utilization: Opening a new card increases your total available credit. If you maintain low balances, your credit utilization ratio may improve, which can positive…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00176_03</div>
+  <div class="chunk-page">When Late Payments Appear on Credit Report | Chase</div>
+  <div class="chunk-text">## How late payments affect credit score
+A major factor that goes into calculating your credit score is payment history. It makes up about 40% of your VantageScore3.0® and 35% of your FICO® score. Your payment history essentially captures your ability to pay the amount you owe on your bills on time and how frequently you make your payments without missing them.
+A late payment demonstrates to current and potential lenders that you may not be fully reliable when it comes to paying your debts on time. Late payments can affect your payment history, which could negatively impact your credit score.
+…</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00058 — late pay maxed util bill cash back statement credit upgrade ready?? annual fee too</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_123050756</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">late pay maxed util bill cash back statement credit upgrade ready?? annual fee too</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Based on the Chase content, you may be ready to upgrade your starter card if you’re making payments on time and keeping your credit utilization low. In your situation, late payments can cause late fees, hurt your credit score and possibly raise your interest rate, and maxing out your limit raises your utilization and can lower your score. Chase also says it’s generally recommended to keep credit utilization at or below 30%, and high balances from things like utility bills can hurt your score while on-time payments can help it. If you have cash back rewards, one redemption option is to apply them as a statement credit, which reduces your credit card balance. Also, if your card has an annual fee, that fee can still be charged even if you stop using the card, and annual fees can offset rewards unless you earn enough to cover the cost.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the upgrade-readiness criteria: making payments on time and keeping credit utilization low are signs you may be ready to upgrade a starter credit card. Chunk 2 provides the consequences of the customer’s current problems: late payments can lead to late fees, credit score damage, and higher interest rates; maxing out the card increases utilization and lowers credit score; and annual fees may still be charged even if the card is no longer used. Chunk 3 adds the specific utilization guidance and payment effects needed to assess the situation: utilization is generally recommended at or below 30%, high utility-bill balances can raise utilization and hurt credit score, on-time payments can help credit score, and annual fees can offset rewards. Chunk 4 provides the rewards action the customer is asking about: cash back can be redeemed as a statement credit, which reduces the credit card balance.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00158_01</div>
+  <div class="chunk-page">When to Upgrade Your Starter Credit Card | Chase</div>
+  <div class="chunk-text">## Signs that you may be ready to upgrade your credit card
+There are several signs that can suggest you’re ready to upgrade your credit card. For example, making payments on time and keeping your credit utilization low can be indicators of your readiness.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00106_01</div>
+  <div class="chunk-page">Common Credit Card Problems to Avoid | Chase</div>
+  <div class="chunk-text">## Unpacking common credit card mistakes
+Let’s start with a quick review of some of the most common credit card mistakes:
+- Making late payments: Failing to pay your credit card bill on time can result in late fees, negative credit score impact, and potentially even higher interest rates.
+- Paying the minimum balance: While paying the minimum balance keeps your account in good standing, it can lead to significant interest charges over time as the remaining balance continues to accrue interest.
+- Maxing out your credit limit: Maxing out your credit card by using all your available credit leaves…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00112_06</div>
+  <div class="chunk-page">Earning Cash Back when using a Credit Card for Utility Payments | Chase</div>
+  <div class="chunk-text">## Understanding credit card terms related to utility payments
+There are some key terms that can help make credit cards a bit easier to understand and navigate. Here are five that are relevant when using credit cards for utility payments:
+- Interest rates: Your card’s interest rate, typically referred to its annual percentage rate (APR), is important to consider if you carry a balance, as the interest can negate any rewards earned.
+- Grace periods: Knowing your card&#x27;s grace period can help avoid interest charges by paying the balance in full and on time.
+- Credit utilization: High utility bill…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00233_06</div>
+  <div class="chunk-page">How to know when to redeem credit card rewards | Chase</div>
+  <div class="chunk-text">### Redeeming cash back rewards
+Cash back rewards can typically be redeemed in a few ways. One common method is to apply the cash back as a statement credit, which reduces your credit card balance. Alternatively, you may be able to request a check or deposit the cash back amount you choose directly into your bank account. Some credit card issuers also allow you to redeem your cash back rewards for gift cards or purchases at specific retailers.</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00059 — business card teen authorized user few days late not on score inaccurate late mark dispute…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_99912324</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">business card teen authorized user few days late not on score inaccurate late mark dispute defaulted student loans impact</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">If you want to let someone under 18 use a card, they could do so as an authorized user on another person’s account, getting their own card while the primary cardmember remains responsible for the spending. If a payment is only a few days late, the issuer may still charge interest and possibly fees, but it typically would not be reported to the credit bureaus unless it is 30 days or more overdue, so the credit score is unlikely to be affected from that slight lateness alone. If a late-payment mark showing on the credit report is inaccurate, it may be removed by disputing it with the credit bureaus or the card issuer/bank, or by writing a goodwill letter to the creditor; removing inaccurate negative information can help the score. By contrast, defaulting on student loans is much more serious: federal student loans go into default 270 days after the first missed payment, and default can significantly damage credit and remain on the credit report for up to seven years.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides that someone under 18 can access a card only as an authorized user, receives their own card, and the primary cardmember is responsible. Chunk 2 provides that a payment a few days late can trigger interest and possibly fees but usually is not reported to credit bureaus unless it is 30+ days overdue, so the score likely is not impacted. Chunk 3 provides the remedies for an inaccurate late-payment mark: dispute with the credit bureaus, dispute with the issuer/bank, or send a goodwill letter, and explains that removing inaccurate negative information can improve the score. Chunk 4 provides the contrast with student loan default, including that federal loans default 270 days after the first missed payment and that default severely harms credit and can stay on the report for up to seven years.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00166_03</div>
+  <div class="chunk-page">What age do you need to be to get a credit card? | Chase</div>
+  <div class="chunk-text">### Authorized user
+If you want a card and you&#x27;re under 18, you can have access to a card by becoming an authorized user on someone else&#x27;s card (typically a parent or legal guardian). Some issuers have minimum age requirements for becoming an authorized user. As an authorized user you&#x27;ll get your own card, but the primary cardmember is responsible for your credit card spending. Being an authorized user can help you begin to build a positive credit history, assuming the credit card issuer reports authorized user activity to the credit bureaus and the cardmember is paying balances on time.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00190_02</div>
+  <div class="chunk-page">Remove a late payment off credit report | Chase</div>
+  <div class="chunk-text">## Why a slightly late payment may not influence your credit score
+To your card issuer, a payment made even a single day after the due date is &quot;late.&quot; The company will begin charging interest, and possibly fees, on any and all payments made after the due date.
+However, your card issuer will typically only report late payments to the credit bureaus when they are 30 days or more overdue. In other words, if you pay one credit card bill a few days late, your credit score is unlikely to be impacted.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00175_09</div>
+  <div class="chunk-page">What is Credit Counseling | Chase</div>
+  <div class="chunk-text">## How can credit restoration help me rebuild my credit?
+When you remove inaccurate negative information from your credit report, your credit score can be positively impacted. Negative remarks on your report can indicate that you have trouble managing your money or struggle to make payments on time. If they are inaccuracies, removing them sets the record straight and will help credit bureaus see you in the proper light—free from errors and other false information.
+If your report has inaccurate information, it could falsely represent your financial behavior, so you could have trouble landing go…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00163_02</div>
+  <div class="chunk-page">Can paying student loans boost your credit score? | Chase</div>
+  <div class="chunk-text">### Failing to make student loan payments may harm your credit
+The influence of payment history on your credit score cuts both ways. While making regular debt and credit card payments may help boost your credit score, failing to make your scheduled payments can substantially lower your score.
+Defaulting on your student loans has a major negative credit impact.
+From a credit score perspective, the only thing worse than missing a loan payment is defaulting on the loan entirely.
+Federal student loans move into default 270 days after the first missed payment. Other types of loans may even go into …</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="education_center" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00060 — business credit card app bad credit from late card pymts + old mortgage default foreclosur…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">education_center</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_121054355</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">business credit card app bad credit from late card pymts + old mortgage default foreclosure + student loan on-time help build credit under 600 good score tool chsae</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Yes—these factors point to damaged credit, but also some ways to rebuild it. Late credit card payments can be reported to Experian, Equifax and TransUnion as past-due, and over multiple billing cycles can lead to delinquency, penalty APRs, late fees, charge-offs, and significant credit score harm. A mortgage default is even more serious: missed mortgage payments hurt payment history, and a foreclosure is a derogatory mark that can stay on your credit report for up to 7 years. On the positive side, a student loan can help build credit if you consistently make payments on time, because payment history has a large impact on your VantageScore 3.0 credit score, and the loan can add a different type of credit to your report. As a reference point, according to VantageScore, anything below 600 is considered a poor or bad credit score. If you want to monitor and work on improving your score, Chase Credit Journey is a free tool that helps monitor your credit score and includes features to help you improve your credit.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 contributes that on-time student loan payments can help build credit, that payment history strongly affects VantageScore 3.0, and that a student loan can add credit mix. Chunk 2 contributes that defaulting on a mortgage can lead to foreclosure, that foreclosure is a derogatory mark, and that it can remain on a credit report for up to 7 years while harming payment history and score. Chunk 3 contributes that late credit card payments can be reported to the three major bureaus as past-due and can escalate to delinquency, penalty APRs, late fees, charge-offs, and significant score damage. Chunk 4 contributes the benchmark that a score below 600 is considered poor/bad according to VantageScore and identifies Chase Credit Journey as a free tool for monitoring and improving credit.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00193_03</div>
+  <div class="chunk-page">Student Loans and What They Could Mean for Your Credit | Chase</div>
+  <div class="chunk-text">## Student loans and credit
+A student loans may help you build credit, as long as you are consistently making payments on time. Keep in mind that your payment history can have a large impact on your VantageScore® 3.0 credit score. If you already have credit cards or an auto loan, a student loan can add a different type of credit to your report, which can also improve your credit health.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00162_05</div>
+  <div class="chunk-page">Default vs Delinquency: What&#x27;s the Difference? | Chase</div>
+  <div class="chunk-text">### Defaulting on a mortgage loan
+A mortgage is a type of loan you take out when you are looking to buy a home. It is a type of secured loan, meaning that there are assets involved. If you&#x27;ve taken out a mortgage and miss your payments for an extensive period of time, you could face some unfortunate consequences. Your home could be foreclosed, meaning the lender can repossess your home.
+Defaulting on a mortgage can result in some serious damage to your credit score. In addition to the late payments harming your payment history, which is a major factor in determining your score, having a forecl…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00129_02</div>
+  <div class="chunk-page">How to Pay a Credit Card Bill | Chase</div>
+  <div class="chunk-text">## What happens when you pay your credit bill late?
+If you don’t pay at least the minimum amount due each month, your credit issuer could report your account to one or all of the three major credit bureaus—Experian™, Equifax® and TransUnion®—as past-due. Your issuer will typically contact you and send overdue notices about your missing payments.
+Failing to pay your credit card debt over multiple billing cycles can result in serious consequences, including the potential for delinquency, higher penalty APRs, late fees and ultimately, charge-offs.
+In addition, your credit score may suffer. Credit…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00188_05</div>
+  <div class="chunk-page">Credit Score | Chase</div>
+  <div class="chunk-text">## Understanding the importance of your credit history
+credit scores
+738 credit score: A guide to credit scoresA 738 is considered good or prime depending on the scoring model. Learn more about credit score factors and tips for increasing your score.credit scores
+How Buy Now, Pay Later can affect your credit score: What consumers need to knowFind out how Buy Now, Pay Later (BNPL) services can influence your credit score. Learn about the recent changes that may see BNPL appearing in your credit report.credit scores
+Do utility payments affect credit scores?Utility payments usually do not affect …</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="cross_domain" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00061 — chase pay over time eligiblity review factors plus on-time min payment benfits vs student …</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">cross_domain</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_120290509</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">chase pay over time eligiblity review factors plus on-time min payment benfits vs student card downsides and whether interest-only pyaments in school stop capitalization</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Chase Pay Over Time access is not guaranteed even if you have a participating card; eligibility can depend on factors like your creditworthiness, credit limit and account behavior, and accounts are periodically reviewed. For eligible purchases, after purchase you can set up a plan for purchases of $100 or more that show &quot;Pay over time eligible&quot; in account activity, while at Amazon checkout eligible items must total at least $50 and plan options can vary. Paying at least the minimum payment on time each month helps you avoid late fees or penalty APRs, supports a positive payment history and credit score, and can help with better future borrowing terms like credit line increases or more favorable APRs. That matters because student credit cards can have higher interest rates, lower credit limits and possible late payment penalties. Separately, for private student loans, making interest-only payments while in school may prevent accrued interest from capitalizing onto the principal, which can reduce the total loan cost, though it does not necessarily make payoff faster.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 provides the Chase Pay Over Time eligibility details: access is not guaranteed, depends on creditworthiness, credit limit and account behavior, is periodically reviewed, and gives the purchase thresholds and setup paths ($100+ after purchase with a marked transaction, $50+ eligible items at Amazon checkout). Chunk 2 provides why paying a credit card bill on time matters: pay at least the minimum on time to avoid late fees or penalty APRs, build positive payment history/credit score, and potentially get better borrowing terms. Chunk 3 adds the specific downsides of student credit cards that make those on-time payment benefits relevant: higher interest rates, lower credit limits, and possible late payment penalties. Chunk 4 supplies the student-loan piece: for private student loans, interest accrues in school and making interest-only payments during school may prevent capitalization and reduce total loan cost.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00093_07</div>
+  <div class="chunk-page">Chase Pay Over Time | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### Who is eligible for Chase Pay Over Time?
+Keep in mind: Even though you may have a participating card, access to Chase Pay Over Time is not guaranteed. Your ability to create a Chase Pay Over Time plan is based on a variety of factors, such as creditworthiness, credit limit and account behavior, and may change from time to time. Email marketing doesn&#x27;t guarantee eligibility for Chase Pay Over Time due to eligibility being contingent on your account activity. You should continue to check back as accounts are periodically reviewed for eligibility.
+- After purchase: You can start a plan from a…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00129_01</div>
+  <div class="chunk-page">How to Pay a Credit Card Bill | Chase</div>
+  <div class="chunk-text">## Why you should pay your credit card bill on time
+Each credit card has a billing cycle that lasts about one month. Once this billing cycle ends, your credit card issuer will send you a monthly statement. This statement includes your account activity, your minimum payment due and a due date. This due date does not change from month to month, so you’ll always know when it’s coming up.
+It’s important to pay at least your minimum payment on time every month. On-time payments are one important aspect of building and maintaining a positive credit history. Missing payments can tarnish your credit s…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00172_03</div>
+  <div class="chunk-page">Student Credit Card Benefits: What to Know | Chase</div>
+  <div class="chunk-text">## Cons of student credit cards
+Depending on your student credit card, potential cons may be:
+- Higher interest rates: Student credit cards may carry higher interest rates than regular credit cards. This could make it especially important to routinely pay off your card on or before the due date and avoid carrying a balance that would accrue interest.
+- Lower credit limits: Student credit cards typically have lower credit limits, putting a cap on how much you can spend. This may make them less advantageous in certain emergency settings if you need to put more on the card than your limit allows.…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00073_04</div>
+  <div class="chunk-page">Tips For Managing &amp; Paying Off Student Loan Debt | Chase</div>
+  <div class="chunk-text">### Make interest-only payments during school
+Private student loans offered by banks or credit unions—different from federal student loans—may have variable interest rates and less flexible repayment terms. Additionally, interest usually accrues while you’re in school. Once repayment begins, this interest capitalizes, meaning it is added to the principal balance of the loan. This can potentially increase the total cost of the loan.
+Making interest-only payments while in school may prevent this capitalization, potentially reducing the total loan cost. Alternatively, you can make a lump sum inte…</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-fail" data-source="chain-seeded" data-stratum="cross_domain" data-ablation="fail">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00062 — pay over time made min due go up paid 1 day late.. fee + credit score hit? how stop this a…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">cross_domain</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-fail">Ablation: FAIL</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_49400187</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">pay over time made min due go up paid 1 day late.. fee + credit score hit? how stop this again??</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Yes, creating a Chase Pay Over Time plan can make your minimum payment due go up, because the plan’s monthly payment — including monthly principal and the monthly plan fee — is automatically added to your card’s minimum payment due each month, and additional plans can increase it more. If you then pay even 1 day after the due date, that is considered late, so you may be charged interest and possibly a late fee/late payment penalty charge. But a payment that is only a day or a few days late typically is not reported to the credit bureaus unless it becomes 30 days or more past due, so your credit score is unlikely to be impacted from being just slightly late. To help prevent this from happening again, Chase content suggests setting up automatic payments, and specifically notes you can usually avoid late fees by setting up automatic payments for at least the minimum amount due each month.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 4 explains why the customer’s minimum payment due increased after creating a Chase Pay Over Time plan: the monthly principal and monthly plan fee are added to the card’s minimum payment due, and extra plans can raise it further. Chunk 2 establishes that even a payment made 1 day after the due date is considered late by the issuer and may trigger interest and possibly fees, while also saying late payments are typically only reported to credit bureaus at 30+ days overdue, so a few days late is unlikely to affect the credit score. Chunk 1 reinforces the consequence of paying late by a day or more as a possible late fee or late payment penalty charge, confirms reporting usually starts at 30 days past due when credit score effects may begin, and suggests setting up autopay to avoid forgetting payments. Chunk 3 adds that late fees are usually charged when payment is received after the due date and specifically says you can usually avoid late fees by setting up automatic payments for at least the minimum amount due each month.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00138_08 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Recovering from a Late Credit Card Payment |Chase</div>
+  <div class="chunk-text">## In conclusion
+Late credit card payments happen, but it’s important to understand the potential consequences and how it may impact your credit—and your wallet. If you pay late by a day or more, you may be assessed a late fee or late payment penalty charge, but late payments typically don’t get reported to the credit bureaus until they are 30 days or more past due. At that point, you might start to see some effects to your credit score.
+If you’re having a hard time remembering to pay your bills on time, consider setting up autopay. If the issue is a lack of funds or income, you might want to …</div>
+</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00190_02 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Remove a late payment off credit report | Chase</div>
+  <div class="chunk-text">## Why a slightly late payment may not influence your credit score
+To your card issuer, a payment made even a single day after the due date is &quot;late.&quot; The company will begin charging interest, and possibly fees, on any and all payments made after the due date.
+However, your card issuer will typically only report late payments to the credit bureaus when they are 30 days or more overdue. In other words, if you pay one credit card bill a few days late, your credit score is unlikely to be impacted.</div>
+</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00108_00 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Credit Card Late Fees Explained | Chase</div>
+  <div class="chunk-text"># Credit card late fees explained
+## Highlights
+- A late fee is usually charged if a bank receives a payment after the due date.
+- Your credit card’s terms and conditions has information about late fees, including when they’re charged and how much they may be.
+- You can usually avoid late fees by setting up automatic payments for at least the minimum amount due on your credit card each month.
+Your cardmember agreement is a good resource for how late fees work on your credit card because banks may handle late payments differently.
+In this article, we’ll offer some general answers to several com…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00095_25</div>
+  <div class="chunk-page">Chase Pay Over Time After Purchase FAQs | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### Why did my monthly Minimum Payment Due increase after I created a Chase Pay Over Time plan?
+Your plan&#x27;s monthly payment which includes the monthly principal and monthly plan fee will be automatically added to your card&#x27;s minimum payment due each month.
+Keep in mind: Additional plans may result in an increase to your minimum payment due.</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-pass" data-source="chain-seeded" data-stratum="cross_domain" data-ablation="pass">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00063 — I’m trying to maximize rewards for a future free hotel stay, but if I have no credit histo…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">cross_domain</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-pass">Ablation: PASS</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_74904632</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">I’m trying to maximize rewards for a future free hotel stay, but if I have no credit history and start with a secured card, can I use Chase Pay Over Time at Amazon to meet a new card’s intro spending req and still stay within budget—like do I need separate payments, and are there any eligibility limits I should know abotu?</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">Based on the Chase content provided, a few limits and budgeting points apply. First, Chase does not offer secured credit cards, although secured cards in general are an option for people with no credit history; they require a cash deposit, the deposit usually sets the credit limit, and with good payment history you may later get the deposit back and upgrade to a regular card. Second, for earning a hotel award night while staying within budget, Chase says to make sure any new card’s spending requirement matches your budget, compare annual fees, and when using your card to earn points, pay your balance by the due date whenever you can, or at least make the minimum payment each month to avoid interest charges or late fees. Third, if you are eligible to use Chase Pay Over Time at checkout on Amazon.com, you do not need to make separate payments, because the plan amount is added to your card’s minimum payment due each month; paying at least the minimum payment by the due date will pay the plan balance on time. Fourth, eligibility is limited: Chase Pay Over Time at checkout is only rolling out to select eligible Chase cardholders with participating Chase credit cards in their Amazon wallet, it appears only when offered at Amazon checkout, small business cards, Amazon cobrand cards, and Chase Mastercards are not eligible, eligibility is not guaranteed and depends on factors like creditworthiness, credit limit, and account behavior, and only the primary cardmember can create a plan.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 contributes the budget-focused guidance tied to earning a hotel award night: make sure a new card’s spending requirement fits your budget, compare annual fees, and pay by the due date or at least the minimum to avoid interest/late fees. Chunk 2 contributes the payment mechanics for Chase Pay Over Time: no separate payment is needed because the plan amount is added to the minimum payment due each month. Chunk 3 contributes the eligibility restrictions for using Chase Pay Over Time at Amazon: only select eligible Chase cardholders with participating cards in their Amazon wallet may see it, some card types are excluded, eligibility is not guaranteed, and only the primary cardmember can create a plan. Chunk 4 contributes the no-credit-history angle: Chase does not offer secured credit cards, though secured cards generally require a deposit that usually sets the credit limit and may later be upgraded after good payment history.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00232_11</div>
+  <div class="chunk-page">How to Get a Free Hotel Stay | Chase</div>
+  <div class="chunk-text">## How to get a hotel award night while staying within your budget
+All these options might sound great, but you may not want to throw away your budget trying to earn a hotel award night. Here are a few things that could be worth remembering:
+- When using your credit card to earn points, pay your balance by the due date whenever you can, otherwise try to make at least the minimum payment due each month to avoid interest charges or late fees.
+- If you&#x27;re signing up for a new credit card to take advantage of its introductory offer, it can be helpful to make sure the spending requirements match yo…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00096_15</div>
+  <div class="chunk-page">Chase Pay Over Time At Checkout FAQs | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### Do I need to make separate payments for my Chase Pay Over Time plans?
+No. The Chase Pay Over Time plan amount will be added to your credit card&#x27;s minimum payment due each month. Pay at least your minimum payment when it’s due, and you’ll pay off your plan balance on time.</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00096_02</div>
+  <div class="chunk-page">Chase Pay Over Time At Checkout FAQs | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### Who is eligible to use Chase Pay Over Time at checkout?
+With Chase Pay Over Time at checkout, eligible Chase credit cardmembers with participating Chase credit cards in their Amazon wallet may have the option to create a payment plan with a fixed annual percentage rate (APR), that&#x27;s the same or lower than your standard variable purchase APR, at checkout on Amazon.com.
+Chase Pay Over Time at checkout is rolling out in phases and is currently only available on Amazon.com for select Chase cardholders. When available, you&#x27;ll see the “Chase Pay Over Time” option during checkout on Amazon.com. S…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00110_03</div>
+  <div class="chunk-page">How to Get a Credit Card with No Credit History | Chase</div>
+  <div class="chunk-text">### Secured credit cards
+Although Chase does not offer secure credit cards, they are one option for individuals without a credit history. These require a cash deposit when you apply. The amount deposited usually determines your credit limit and will act as collateral to reduce risk to the issuer.
+With secured credit cards, you may be able to get your deposit back and upgrade to a regular credit card after a period of good payment history. Getting an unsecured credit card with no credit history is generally more difficult.</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-fail" data-source="chain-seeded" data-stratum="cross_domain" data-ablation="fail">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00064 — pay over time minimum only cash advance secured card credit score</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">cross_domain</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-fail">Ablation: FAIL</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → CC → CC</strong> &nbsp;|&nbsp; Chain: seed_117365177</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">pay over time minimum only cash advance secured card credit score</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">If you have Chase Pay Over Time, you do not make a separate payment for the plan because its monthly plan amount is automatically added to your minimum payment due each billing cycle. Paying at least that minimum keeps the plan on time, but paying only the minimum can still lead to significant interest charges over time on remaining balances. A cash advance would not directly show up as a separate item affecting your credit score, but it can raise your credit utilization ratio, and if that goes above 30% it may hurt your score. If this is a secured credit card you opened to build credit, you should also keep in mind that secured cards can have interest rates and annual fees, so those costs may still apply while you are trying to establish credit.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 contributes that Pay Over Time does not require a separate payment; the monthly plan payment is automatically added to the minimum payment due each billing cycle, and paying at least the minimum pays the plan on time. Chunk 2 contributes that cash advances do not directly affect or appear on the credit report, but they do affect credit utilization, and going above 30% can negatively impact the credit score. Chunk 3 contributes that paying only the minimum keeps the account in good standing but can lead to significant interest charges over time, which is necessary to explain the consequence of making only the minimum payment. Chunk 4 contributes that secured credit cards used to build credit may still charge interest rates and annual fees, which is necessary because the question is about a secured card and the customer&#x27;s effort to build credit.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00093_10</div>
+  <div class="chunk-page">Chase Pay Over Time | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### How do I make payments for Chase Pay Over Time?
+There&#x27;s no need to make any separate payments for your active Pay Over Time plans. We&#x27;ll automatically add the monthly plan payment to your minimum payment due each billing cycle. Pay at least your minimum payment when it&#x27;s due each billing cycle, and you&#x27;ll pay off your plan balance on time.
+You can also set up automatic payments for your credit card monthly payment.
+- After purchase: Once you set up a plan, you&#x27;ll see a payment amount option called &quot;Interest saving balance.&quot; When you choose this option, you won&#x27;t pay off your entire plan ba…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00146_08</div>
+  <div class="chunk-page">Transfer Money From Credit Card to Bank Account | Chase</div>
+  <div class="chunk-text">## Do cash advances affect your credit score?
+Cash advances don&#x27;t directly affect your credit score and they won&#x27;t appear on your credit report. They do affect your credit utilization ratio though, and this ratio is an important factor in determining your credit score.
+If the cash advance transaction causes your credit utilization ratio to go above 30%, that may have a negative impact on your credit score. Plan for this by paying off your balance by the end of the billing cycle if you can, which will bring utilization back down.</div>
+</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00106_01 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Common Credit Card Problems to Avoid | Chase</div>
+  <div class="chunk-text">## Unpacking common credit card mistakes
+Let’s start with a quick review of some of the most common credit card mistakes:
+- Making late payments: Failing to pay your credit card bill on time can result in late fees, negative credit score impact, and potentially even higher interest rates.
+- Paying the minimum balance: While paying the minimum balance keeps your account in good standing, it can lead to significant interest charges over time as the remaining balance continues to accrue interest.
+- Maxing out your credit limit: Maxing out your credit card by using all your available credit leaves…</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00168_09</div>
+  <div class="chunk-page">What to Do to Establish Credit for the First Time  | Chase</div>
+  <div class="chunk-text">### Use secured loans or secured credit cards
+For borrowers with low or no credit, secured loans or secured credit cards allow you to minimize the lender&#x27;s risk by providing money up front as a deposit. This deposit will usually match your credit limit, although in some cases, your credit limit may be lower than your initial deposit. If you&#x27;re looking to go the secured credit card route to establish your credit score, you should double-check that the secured credit card you&#x27;re applying to reports to the three credit reporting bureaus, Equifax®, TransUnion® and Experian™. You should also consid…</div>
+</div>
+</div>
+</div></div>
+<div class="card ablation-fail" data-source="chain-seeded" data-stratum="cross_domain" data-ablation="fail">
+<div class="card-header" onclick="this.parentElement.classList.toggle('open')">
+  <h3>s_00065 — hey quick sanity check... for my business card if i already missed a payment by like a day…</h3>
+  <div class="badges">
+    <span class="badge badge-stratum">cross_domain</span>
+    <span class="badge badge-hops">4 chunks · cross_domain</span>
+    <span class="badge badge-source">chain-seeded</span>
+    <span class="badge badge-fail">Ablation: FAIL</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+</div>
+<div class="card-body">
+<div class="bridge-info">Bridge pattern: <strong>CC → DU → CC</strong> &nbsp;|&nbsp; Chain: seed_53957662</div>
+<div class="field"><div class="field-label">Question</div><div class="field-value question-text">hey quick sanity check... for my business card if i already missed a payment by like a day or more and im worried im in that delinquent stage / hurting my credit, whats the smartest autopay choice if i set up Chase Pay Over Time on a purchase? i do NOT want to accidentally pay the whole plan off early, but i also want to make sure the required plan payment gets covered and still avoid interest on new purchases. also should i close an older business card i barely use to simplify stuff or can that backfire on my score</div></div>
+<div class="field"><div class="field-label">Answer</div><div class="field-value answer-text">If you’ve missed a payment by even 1 day, that can put you in delinquency, although your lender agreement may allow a short grace period. Delinquency means you’ve begun missing payments, it can hurt your payment history and credit score, and if it continues it can lead to more problems like less access to credit.
+
+For Chase Pay Over Time, you need to pay at least your credit card’s minimum payment by the due date each billing cycle, and Chase automatically adds the monthly Pay Over Time plan payment to that minimum payment due. If you’re choosing an autopay option and you do not want to pay off the whole plan early, the best fit is the “Interest saving balance” option. That option will not pay off your entire Pay Over Time balance earlier than intended, and you’ll still avoid interest on new purchases from the current billing cycle.
+
+By contrast, choosing “Statement balance” while you have an active Pay Over Time plan would pay off the entire plan amount earlier than intended. “Minimum payment due” would include the monthly Pay Over Time payment, and “Fixed amount” might need to be adjusted so it fully covers the new minimum payment due that includes the plan payment.
+
+As for closing an older card you barely use, that can backfire on your credit score because closing old cards can reduce your available credit, increase your credit utilization rate, and lower your average age of accounts. If the card doesn’t carry an annual fee, it may be better to keep it open unless keeping it open tempts you to run up debt.</div></div>
+<div class="field"><div class="field-label">Reasoning Trace</div><div class="field-value answer-text" style="font-size:13px;color:#666">Chunk 1 contributes the definition and consequences of delinquency: missing a payment by even 1 day can mean delinquency, possibly after any grace period, and it harms payment history/credit score. Chunk 2 contributes the guidance about closing old cards: closing them can reduce available credit, raise utilization, and lower average age of accounts, so keeping them open may be better if there is no annual fee. Chunk 3 contributes the detailed comparison of autopay options for Pay Over Time: Statement balance pays the whole plan off early, Interest saving balance avoids that and still avoids interest on new purchases, Minimum payment due includes the monthly plan payment, and Fixed amount may need adjustment. Chunk 4 contributes that to pay the plan on time you must pay at least the card’s minimum payment each cycle, that Chase automatically adds the monthly Pay Over Time payment to the minimum due, and that Interest saving balance lets you avoid interest on new purchases without paying the whole plan off early.</div></div>
+<div class="field"><div class="field-label">Chunks (4)</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00162_02</div>
+  <div class="chunk-page">Default vs Delinquency: What&#x27;s the Difference? | Chase</div>
+  <div class="chunk-text">## Loan delinquency
+Loan delinquency happens when you miss your payments by even just 1 day. However, depending on your agreement with your lender, it&#x27;s possible that you could have a grace period of a few days to make your payment.
+If you continue to miss your payments for an extended period of time, your loan could face delinquency. Similar to defaults, getting to this point means you have harmed your payment history, thus negatively impacting your credit score.
+Put simply, delinquency is the stage you are in when you&#x27;ve begun to miss payments. You could remain in a state of delinquency for …</div>
+</div>
+<div class="chunk-box">
+  <div class="chunk-id">c_00106_02</div>
+  <div class="chunk-page">Common Credit Card Problems to Avoid | Chase</div>
+  <div class="chunk-text">- Closing old cards: Closing old or unused credit cards may seem like a logical choice, but it can have unexpected negative side effects. Closing accounts can decrease your available credit, increase your credit utilization rate, and decrease your average age of accounts, which can negatively impact your credit score. If they don’t carry an annual fee, it may be better to keep old credit cards open, even if you don&#x27;t use them frequently. It can be important to weigh your options because if you’re tempted to use old credit cards to a point where you may accrue debt, then closing old ones could …</div>
+</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00095_18 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Chase Pay Over Time After Purchase FAQs | Credit Cards | Chase.com</div>
+  <div class="chunk-text">Keep in mind:
+- If you choose the “Statement balance” option while you have an active Pay Over Time plan on your account, it would pay off your entire plan amount earlier than intended.
+- If you choose the “Interest saving balance” option, you won’t pay off your entire Pay Over Time plan balance earlier than intended, and you’ll still avoid interest on new purchases.
+- If you choose the “Minimum payment due” option, it will include the monthly payment for Pay Over Time.
+- If you choose the &quot;Fixed amount&quot; option, you might need to adjust the amount to cover your minimum payment due, which now i…</div>
+</div>
+<div class="chunk-box removable">
+  <div class="chunk-id">c_00095_15 <span style="color:#e74c3c;font-weight:600">[REMOVABLE]</span></div>
+  <div class="chunk-page">Chase Pay Over Time After Purchase FAQs | Credit Cards | Chase.com</div>
+  <div class="chunk-text">### How do I make payments for Chase Pay Over Time?
+Pay at least your credit card&#x27;s minimum payment when it&#x27;s due each billing cycle, and you&#x27;ll pay off your plan balance on time. We&#x27;ll automatically add the monthly Pay Over Time plan payment to your minimum payment due each billing cycle.
+Keep in mind: Once you set up a plan, you&#x27;ll see a payment amount option called &quot;Interest saving balance.&quot; When you choose this option, you&#x27;ll still avoid interest on new purchases from your current billing cycle and you won&#x27;t pay off your entire Pay Over Time plan balance earlier than intended.</div>
+</div>
+</div>
+</div></div>
+</div>
+<script>
+function filterCards(type) {
+  document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  let cards = document.querySelectorAll('.card');
+  let shown = 0;
+  cards.forEach(c => {
+    let show = false;
+    if (type === 'all') show = true;
+    else if (type === 'chain') show = c.dataset.source === 'chain-seeded';
+    else if (type === 'sampling') show = c.dataset.source === 'sampling-plan';
+    else if (type === 'pass') show = c.dataset.ablation === 'pass';
+    else if (type === 'fail') show = c.dataset.ablation === 'fail';
+    else show = c.dataset.stratum === type;
+    c.style.display = show ? '' : 'none';
+    if (show) shown++;
+  });
+  document.getElementById('stats').textContent = shown + ' of ' + cards.length + ' shown';
+}
+document.getElementById('stats').textContent = '26 of 26 shown';
+</script>
+</body></html>

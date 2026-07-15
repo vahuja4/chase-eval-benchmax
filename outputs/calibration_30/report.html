@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chase RAG Eval — 30 Sample Calibration</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1a2e;
+    padding: 40px 24px;
+    line-height: 1.6;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #6b7280; font-size: 14px; margin-bottom: 28px; }
+  .summary-bar {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    padding: 14px 18px; background: #f8fafc;
+    border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 28px;
+  }
+  .summary-stat { display: flex; flex-direction: column; }
+  .summary-stat .sv { font-size: 22px; font-weight: 700; color: #1e293b; }
+  .summary-stat .sl { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card {
+    border: 1px solid #e2e8f0; border-radius: 10px;
+    margin-bottom: 20px; overflow: hidden;
+  }
+  .card-header {
+    background: #f8fafc; padding: 14px 18px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .sample-num { font-size: 17px; font-weight: 700; color: #334155; }
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; color: white;
+    text-transform: uppercase; letter-spacing: 0.3px;
+  }
+  .scores-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .score-pill {
+    display: flex; align-items: center; gap: 5px;
+    background: white; border: 1px solid #e2e8f0;
+    border-radius: 6px; padding: 3px 9px;
+  }
+  .score-label { font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.3px; }
+  .score-value { font-size: 12px; font-weight: 600; color: #1e293b; }
+  .card-body { padding: 18px; }
+  .qa-section { margin-bottom: 16px; }
+  .qa-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: #94a3b8; margin-bottom: 5px;
+  }
+  .qa-text { font-size: 14px; color: #334155; line-height: 1.7; }
+  .qa-text.answer {
+    background: #f0fdf4; border-left: 3px solid #22c55e;
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+  }
+  .chunk {
+    background: #fafafa; border: 1px solid #e5e7eb;
+    border-radius: 8px; padding: 12px 14px; margin-top: 8px;
+  }
+  .chunk-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .chunk-label { font-size: 10px; font-weight: 700; color: #6366f1; text-transform: uppercase; }
+  .chunk-meta { font-size: 13px; font-weight: 600; color: #475569; }
+  .chunk-details {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    font-size: 11px; color: #64748b; margin-bottom: 4px;
+  }
+  .chunk-heading-path { font-size: 11px; color: #818cf8; margin-bottom: 8px; font-style: italic; }
+  .chunk-content {
+    font-size: 12px; color: #475569; white-space: pre-wrap; word-wrap: break-word;
+    line-height: 1.6; max-height: 250px; overflow-y: auto;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Chase RAG Eval Dataset</h1>
+  <p class="subtitle">30-sample calibration &mdash; 28 passed &mdash; Sonnet 4.6 rollout / GPT-5.4 judges</p>
+  <div class="summary-bar">
+    <div class="summary-stat"><span class="sv">28</span><span class="sl">Passed</span></div>
+    <div class="summary-stat"><span class="sv">9</span><span class="sl">Rejected</span></div>
+    <div class="summary-stat"><span class="sv">24</span><span class="sl">Regenerations</span></div>
+    <div class="summary-stat"><span class="sv">21</span><span class="sl">Lookup</span></div>
+    <div class="summary-stat"><span class="sv">7</span><span class="sl">Multi-hop</span></div>
+    <div class="summary-stat"><span class="sv">0.842</span><span class="sl">Min Composite</span></div>
+    <div class="summary-stat"><span class="sv">1.000</span><span class="sl">Max Composite</span></div>
+  </div>
+  
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#1</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">How long is a paper payment from someone usually still valid before the bank may decide not to accept it, and what should I do if it’s already pretty old?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">It’s typical for personal checks to expire after six months. This time frame is laid out in the Uniform Commercial Code (UCC), a set of laws that govern commercial transactions in the United States. After six months, it’s generally at the bank’s discretion whether a personal check is considered expired. If you’re cashing older checks, it may make sense to contact the issuer first. Perhaps they could re-issue the check or confirm they can still honor it.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Do Checks Expire? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00042</span>
+            <span><b>ID:</b> c_00042_01</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Do checks expire? &gt; Do personal checks expire?</div>
+          <pre class="chunk-content">## Do personal checks expire?
+It’s typical for personal checks to expire after six months. This time frame is laid out in the Uniform Commercial Code (UCC), a set of laws that govern commercial transactions in the United States. After six months, it’s generally at the bank’s discretion whether a personal check is considered expired.
+This expiration date makes sense when you consider that people often use checking accounts for smaller, day-to-day expenses. By not cashing a check in a timely manner, it may cause the account to be out of balance.
+If you’re cashing older checks, it may make sense to contact the issuer first. Perhaps they could re-issue the check or confirm they can still honor it.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#2</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">1.000</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I’m advising someone who is new to borrowing and wants an entry-level option to begin building a financial track record. What kind of card is typically aimed at that situation, and can it require money upfront as a safeguard?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">A starter credit card is often tailored to individuals with limited or no credit history. This could be a recent college graduate or young adult looking to build their credit. Starter credit cards usually have lower credit limits compared to other credit cards but may be slightly higher than student credit cards.
+Some starter credit cards may require a security deposit but not all. The security deposit is usually the same as the credit limit on the card or could be a bit more. The deposit is used as a backup in case you’re unable to repay any outstanding balances on the card.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Student vs Starter Cards: What’s the Difference | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00144</span>
+            <span><b>ID:</b> c_00144_02</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Student vs starter credit cards: What’s the difference? &gt; What is a starter credit card?</div>
+          <pre class="chunk-content">## What is a starter credit card?
+A starter credit card is often tailored to individuals with limited or no credit history. This could be a recent college graduate or young adult looking to build their credit. Starter credit cards usually have lower credit limits compared to other credit cards but may be slightly higher than student credit cards.
+Some starter credit cards may require a security deposit but not all. The security deposit is usually the same as the credit limit on the card or could be a bit more. The deposit is used as a backup in case you’re unable to repay any outstanding balances on the card.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#3</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">Why might it be a good idea to put my recurring household service charges on my card instead of paying them another way?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Credit card payments can allow you to earn points, miles or cash back that can be used towards travel, products or statement credits. You can automate payments and consolidate all utility expenses into one bill. Automating utilities payments with your credit card could prevent you from missing payments and establish a good payment history, which can potentially help improve your credit score.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Earning Cash Back when using a Credit Card for Utility Payments | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00112</span>
+            <span><b>ID:</b> c_00112_03</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Earning cash back on utilities &gt; Pros and cons of paying utility bills with a credit card &gt; Pros</div>
+          <pre class="chunk-content">### Pros
+- Reward accumulation: Credit card payments can allow you to earn points, miles or cash back that can be used towards travel, products or statement credits.
+- Convenience: You can automate payments and consolidate all utility expenses into one bill.
+- Credit score: Automating utilities payments with your credit card could prevent you from missing payments and establish a good payment history, which can potentially help improve your credit score.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#4</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What kinds of benefits might a bank account designed for someone in school offer if I want to avoid extra costs, keep up with my money while I&#x27;m busy, and easily share expenses with other people?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Student checking accounts are designed to cater to your specific needs as a student. Opting for a college checking account may provide valuable tools for staying on top of your money. Here’s how:
+- Lower balance requirements: Many college checking accounts often keep low or no minimum balance requirements.
+- No or low fees: Some college checking accounts may waive certain fees for an introductory period, possibly even the first few years or more.
+- Digital tools: Your college checking account will likely come with a variety of tools to help you manage your finances and help automate saving — something that could prove especially useful when on the go!
+- P2P payment apps: Nowadays, many college checking accounts can connect with certain peer-to-peer (P2P) payment platforms, helping you split bills and make quick payments.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">10 Tips on How to Save Money as a College Student | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00079</span>
+            <span><b>ID:</b> c_00079_06</span>
+            <span><b>Stratum:</b> education_center / student</span>
+          </div>
+          <div class="chunk-heading-path">10 tips on how to save money as a college student &gt; Use a student checking account</div>
+          <pre class="chunk-content">## Use a student checking account
+Student checking accounts are designed to cater to your specific needs as a student. Opting for a college checking account may provide valuable tools for staying on top of your money. Here’s how:
+- Lower balance requirements: Many college checking accounts often keep low or no minimum balance requirements.
+- No or low fees: Some college checking accounts may waive certain fees for an introductory period, possibly even the first few years or more.
+- Digital tools: Your college checking account will likely come with a variety of tools to help you manage your finances and help automate saving — something that could prove especially useful when on the go!
+- P2P payment apps: Nowadays, many college checking accounts can connect with certain peer-to-peer (P2P) payment platforms, helping you split bills and make quick payments.
+Note that the specific benefits and features of a particular student checking account vary by institution, so it may help to thoroughly review the terms and conditions of any account you’re considering opening.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#5</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What guidance is given for choosing between the two options if I’m trying to match my spending habits and decide whether richer trip-related value is worth a higher yearly cost or if I should stick with the less expensive choice?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">When deciding which Chase Sapphire card is right for you, you may want to compare the benefits and annual fees. The best card will often be the one that best matches your spending habits and meets your needs.
+Those who prioritize travel may find that the Sapphire Reserve&#x27;s benefits outweigh the cost of the card’s annual fee. Those who want a lower annual fee but still prioritize travel perks and rewards potential may find that the Sapphire Preferred card suits their needs.
+For a side-by-side comparison, you can see the cards’ fees, offers, rewards, benefits and more by using Chase’s Card Comparison Tool.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Sapphire Preferred® vs. Sapphire Reserve® Credit Cards | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00223</span>
+            <span><b>ID:</b> c_00223_17</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">Chase Sapphire Preferred® vs. Sapphire Reserve® &gt; In summary</div>
+          <pre class="chunk-content">## In summary
+When deciding which Chase Sapphire card is right for you, you may want to compare the benefits and annual fees. The best card will often be the one that best matches your spending habits and meets your needs.
+Those who prioritize travel may find that the Sapphire Reserve&#x27;s benefits outweigh the cost of the card’s annual fee. Those who want a lower annual fee but still prioritize travel perks and rewards potential may find that the Sapphire Preferred card suits their needs.
+For a side-by-side comparison, you can see the cards’ fees, offers, rewards, benefits and more by using Chase’s Card Comparison Tool.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#6</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What are the usual ways I can turn the rewards from my card spending into something I can use directly or to lower what I owe?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">There are usually at least two options. The dollar value could be issued directly to a linked checking account, for example. You may also be able to redeem points or miles for a statement credit to your card&#x27;s balance.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Should You Get a Travel Card That Earns Points or Miles? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00214</span>
+            <span><b>ID:</b> c_00214_06</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">Should you get a travel credit card that earns points or miles? &gt; How do you redeem your points and miles? &gt; Redeem rewards for cash back</div>
+          <pre class="chunk-content">### Redeem rewards for cash back
+A credit card that earns cash back on your purchases usually offers rewards in the form of points. You may earn points at different rates, and cards can have different rules around redeeming rewards for cash back. There are usually at least two options. The dollar value could be issued directly to a linked checking account, for example. You may also be able to redeem points or miles for a statement credit to your card&#x27;s balance.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#7</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What should I look for in a card if I want extra value when booking trips, help when things go wrong on a trip, and better usefulness when spending in other countries or with brands I use for flights and places to stay?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Some travel card features to consider include:
+- Accelerated earn rates for travel bookings, including flights, hotels, car rentals, rideshare services and more
+- Benefits like airport lounge access, travel statement credits, priority boarding or hotel upgrades may be available with some travel cards
+- Low foreign transaction fees for spending abroad
+- Travel protection benefits which can include insurance coverage for car rentals, reimbursement for trip delays, insurance for travel accidents and more
+
+Some travel credit cards also may let you transfer or pool points with airline and hotel partners. You may be able to transfer your rewards to these partner brands, or sometimes your rewards can be worth more at a partner brand. However, factor in time when transferring points. Timing varies depending on the program, but the process could take a week or more.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Credit card combinations: Travel &amp; Dining | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00215</span>
+            <span><b>ID:</b> c_00215_04</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">Credit card combinations: Travel and dining &gt; Choosing a travel credit card</div>
+          <pre class="chunk-content">## Choosing a travel credit card
+Those who enjoy traveling may find value in credit cards that offer travel-related benefits and accelerated rewards on travel purchases. Some travel card features to consider include:
+- Accelerated earn rates for travel bookings, including flights, hotels, car rentals, rideshare services and more
+- Benefits like airport lounge access, travel statement credits, priority boarding or hotel upgrades may be available with some travel cards
+- Low foreign transaction fees for spending abroad
+- Travel protection benefits which can include insurance coverage for car rentals, reimbursement for trip delays, insurance for travel accidents and more
+Some travel credit cards also may let you transfer or pool points with airline and hotel partners. You may be able to transfer your rewards to these partner brands, or sometimes your rewards can be worth more at a partner brand. However, factor in time when transferring points. Timing varies depending on the program, but the process could take a week or more.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#8</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">Why might it make sense to open a separate place to set money aside in addition to my everyday spending account?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">One of the first steps to building a strong financial foundation may be opening a savings account. Whether you’re saving up for a long-term milestone, building an emergency fund or simply trying to incorporate sound financial habits into your life, a savings account may be a useful tool for reaching your financial goals. In addition, some savings accounts may offer overdraft protection with a checking account if the accounts are with the same financial institution.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Opening a Bank Account as an International Student | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00029</span>
+            <span><b>ID:</b> c_00029_13</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Opening a bank account as an international student: What to know &gt; Frequently asked questions: A guide for international students &gt; What should I consider when deciding to open a savings account alongside my checking account?</div>
+          <pre class="chunk-content">### What should I consider when deciding to open a savings account alongside my checking account?
+One of the first steps to building a strong financial foundation may be opening a savings account. Whether you’re saving up for a long-term milestone, building an emergency fund or simply trying to incorporate sound financial habits into your life, a savings account may be a useful tool for reaching your financial goals. In addition, some savings accounts may offer overdraft protection with a checking account if the accounts are with the same financial institution.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#9</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">After my card statement closes, how much time do I usually have before payment is required, and if I’ve lost that interest-free window, what do I need to do to get it back?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">The grace period on Chase credit cards may vary but it is at least 21 days from the end of the monthly billing cycle until your due date. Note: some Chase business credit cards may have a slightly shorter grace period of 20 days.
+Chase will reinstate a grace period if you pay your balance in full for two consecutive billing cycles.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">What is a Grace Period on a Credit Card | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00155</span>
+            <span><b>ID:</b> c_00155_05</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">What is a credit card grace period? &gt; What are the grace periods on Chase credit cards?</div>
+          <pre class="chunk-content">## What are the grace periods on Chase credit cards?
+The grace period on Chase credit cards may vary but it is at least 21 days from the end of the monthly billing cycle until your due date. Note: some Chase business credit cards may have a slightly shorter grace period of 20 days.
+Chase will reinstate a grace period if you pay your balance in full for two consecutive billing cycles.
+Chase offers balance transfers for select cardmembers with good credit up to 18 months—these can be useful for paying off higher interest balances on non-Chase credit cards or for important life event purchases, such as furniture for a new baby’s room or a honeymoon. One of the best ways to enhance your eligibility for credit cards with lower APR and more perks is to raise your credit score.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#10</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I’m trying to send an extra payment on my card to one particular split-up purchase charge instead of the rest of what I owe. Is that possible, and if not, what order does the bank use to apply what I pay?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Unfortunately, you cannot direct payments to specific balances (e.g. Non-Plan balances, specific Chase Pay Over Time plan balances). Payments will apply based on Payment Allocation Rules noted in the Card Member Agreement applying to the highest APR balances first and then to lowest APR balances above your minimum payment due. When you make a payment, generally, we first apply your minimum payment to the balance on your monthly statement with the lowest annual percentage rate (APR). Any payment above your minimum payment would generally then be applied to the balance on your monthly statement with the highest APR first. If you do not pay your balance in full each month, you may not be able to avoid interest charges on new purchases.
+Keep in mind: We generally apply payments to balances as they appear on your monthly statement before being applied to new transactions. An example of a new transaction is a recent purchase you made that has not yet been included in the New Balance as shown on your statement.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Pay Over Time After Purchase FAQs | Credit Cards | Chase.com</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00095</span>
+            <span><b>ID:</b> c_00095_24</span>
+            <span><b>Stratum:</b> credit_cards / general</span>
+          </div>
+          <div class="chunk-heading-path">Get to know Chase Pay Over Time® &gt; FAQs about using Pay Over Time after you’ve made a purchase &gt; Can you direct payments to a specific Chase Pay Over Time plan balance?</div>
+          <pre class="chunk-content">### Can you direct payments to a specific Chase Pay Over Time plan balance?
+Unfortunately, you cannot direct payments to specific balances (e.g. Non-Plan balances, specific Chase Pay Over Time plan balances). Payments will apply based on Payment Allocation Rules noted in the Card Member Agreement applying to the highest APR balances first and then to lowest APR balances above your minimum payment due. When you make a payment, generally, we first apply your minimum payment to the balance on your monthly statement with the lowest annual percentage rate (APR). Any payment above your minimum payment would generally then be applied to the balance on your monthly statement with the highest APR first. If you do not pay your balance in full each month, you may not be able to avoid interest charges on new purchases.
+Keep in mind: We generally apply payments to balances as they appear on your monthly statement before being applied to new transactions. An example of a new transaction is a recent purchase you made that has not yet been included in the New Balance as shown on your statement.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#11</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.996</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What should a cardholder do to make the rewards they’ve built up really worth it if they want to avoid finance charges, and when they’re ready to use those rewards, what are the ways they can apply the value toward what they owe, move it into their bank, use it for trip-related purchases, or even send it to outside travel programs?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">To make your cash back points earnings worthwhile, you should aim to pay off your entire credit card balance each month to avoid interest charges. When you&#x27;re ready to redeem your points through Ultimate Rewards, you&#x27;ll be able to view the dollar equivalent of your points and redeem them for cash back if you prefer. With Ultimate Rewards, for example, you can redeem points for a statement credit or deposit to a Chase bank account, gift cards, travel, select retail shopping and more. With eligible cards, Ultimate Rewards can also be transferred to certain travel partners.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (2)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">What are Cash Back Reward Credit Cards &amp; How Do They Work? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00262</span>
+            <span><b>ID:</b> c_00262_03</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">What are cash back reward credit cards &amp; how do they work? &gt; Is it worth getting cash from my credit card?</div>
+          <pre class="chunk-content">## Is it worth getting cash from my credit card?
+Cash back points can be earned at your own flexibility. Your spending habits (in addition to your ability to minimize interest) may greatly influence how lucrative your reward earnings may be. To make your cash back points earnings worthwhile, you should aim to pay off your entire credit card balance each month to avoid interest charges.
+When it comes time to redeem your cash back points, you may find redemption options that include gift cards to retailers and restaurants. You may also be able to redeem cash back reward points for discounts on hotel rooms and airfare.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">Cash Back vs. Points Credit Cards | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00207</span>
+            <span><b>ID:</b> c_00207_04</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">Cash back vs. points &gt; Credit card reward redemption options</div>
+          <pre class="chunk-content">## Credit card reward redemption options
+Credit card rewards programs that use points often have a variety of redemption options. This flexibility is one upside to earning rewards points with your credit card, even if your goal is to earn cash back.
+Points are a common form of rewards even for cash back cards, because, as explained, cash back can be posted in the form of points. With Ultimate Rewards, for example, you can redeem points for a statement credit or deposit to a Chase bank account, gift cards, travel, select retail shopping and more. With eligible cards, Ultimate Rewards can also be transferred to certain travel partners.
+When you&#x27;re ready to redeem your points through Ultimate Rewards, you&#x27;ll be able to view the dollar equivalent of your points and redeem them for cash back if you prefer.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#12</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">Chase card perks earning rate basics</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Chase Ultimate Rewards® is the rewards points program for Chase credit cardmembers, offering a selection of exciting ways to use the points you earn when using your card. You can earn Ultimate Rewards® points on most purchases made with an eligible Chase credit card, typically at a rate of a single point per dollar spent (though, as you’ll see further down, there are ways to earn added points per dollar).</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Ultimate Rewards® in the Chase Mobile® app | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00128</span>
+            <span><b>ID:</b> c_00128_01</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">How to maximize Chase Ultimate Rewards® in the Chase Mobile® app &gt; What is Chase Ultimate Rewards®?</div>
+          <pre class="chunk-content">## What is Chase Ultimate Rewards®?
+Chase Ultimate Rewards® is the rewards points program for Chase credit cardmembers, offering a selection of exciting ways to use the points you earn when using your card.
+You can earn Ultimate Rewards® points on most purchases made with an eligible Chase credit card, typically at a rate of a single point per dollar spent (though, as you’ll see further down, there are ways to earn added points per dollar).</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#13</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.98</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.992</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">If I want a basic everyday account that won’t charge extra when purchases exceed my balance, and I plan to put cash into it using the bank’s self-service machine, do I need any money upfront to open it, and what limitation might I run into when feeding in paper money?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Chase Secure Banking &quot;requires no minimum deposit to get started.&quot; For cash deposits, &quot;there may be a limit on the number of bills you can insert at one time into the ATM while making a deposit.&quot;</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (2)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">How to Use an ATM: A Guide | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00052</span>
+            <span><b>ID:</b> c_00052_04</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">How to use an ATM: A Guide &gt; How much money can you deposit at an ATM?</div>
+          <pre class="chunk-content">## How much money can you deposit at an ATM?
+Banks sometimes limit how much money you can deposit into your account, including ATM deposits. However, there may be a limit on the number of bills you can insert at one time into the ATM while making a deposit. Policies and individual machines vary, so check with your financial institution for more details about how much cash you can deposit at an ATM.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">Chase Secure Banking | Checking Account With No Overdraft Fees | Chase.com</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00013</span>
+            <span><b>ID:</b> c_00013_18</span>
+            <span><b>Stratum:</b> personal_banking / checking</span>
+          </div>
+          <div class="chunk-heading-path">Chase Secure BankingSMA simple checking account with no overdraft fees2 &gt; What is a Chase Secure Banking account? Expand content</div>
+          <pre class="chunk-content">## What is a Chase Secure Banking account? Expand content
+Chase Secure Banking is a simple, convenient checking account with no overdraft fees and requires no minimum deposit to get started. Moreover, there are no fees on most everyday transactions like money orders, cashier’s checks, when you cash checks, send money using Zelle® or use a Chase ATM.
+- You can download the Chase Mobile app and manage your money, deposit checks and pay bills or people from virtually anywhere.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#14</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.98</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.992</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I’m advising a first-time borrower who wants to improve their chances before applying for an entry-level card from this bank. They’re willing to open the bank’s everyday money-management account first and keep some funds there right around the application date. Based on the bank’s guidance, what specific balance-and-timing condition could help for that beginner card, what ongoing purchase reward would that card earn, what kind of new-customer reward from the bank’s general card offers could be paid into that deposit account, and what type of screening might they receive beforehand that would not affect their credit?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">You may be able to increase your chances of approval when you have a Chase checking account with a balance of $250 or more. The money has to be deposited into the account within 96 hours of applying for the card, according to the disclosure. You’ll get 1.5 percent cash back on every purchase. A new cardmember bonus offer may be Cash back, and depending on the card issuer, the reward is generally credited to your account, deposited into a checking account or issued as a check. If you have a checking account, you may be more likely to receive prequalified offers for credit cards. A prequalified offer is based on a simple review of your information, called a soft inquiry, and therefore doesn&#x27;t affect your credit.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (3)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">How to Increase Your Approval Odds for a Credit Card | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00136</span>
+            <span><b>ID:</b> c_00136_04</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">How to boost your credit card approval odds &gt; How to increase approval odds for a Chase credit card &gt; Open a checking account</div>
+          <pre class="chunk-content">### Open a checking account
+There are several reasons why opening a checking account is a beneficial step to take before applying for a credit card. Not only does it make paying your bills much easier, but the account statements provide a record of activity during a certain time prior, so you can review your spending.
+Furthermore, because a checking account is often required to make credit card payments, having an account before you apply may help your odds of approval. If you have a checking account, you may be more likely to receive prequalified offers for credit cards. A prequalified offer is based on a simple review of your information, called a soft inquiry, and therefore doesn&#x27;t affect your credit. Keep in mind that having a prequalified offer does not mean you&#x27;ll be automatically approved.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">A Guide to Chase Freedom Credit Cards | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00180</span>
+            <span><b>ID:</b> c_00180_05</span>
+            <span><b>Stratum:</b> education_center / chase_cards</span>
+          </div>
+          <div class="chunk-heading-path">A Guide to Chase Freedom Credit Cards &gt; What are the differences between Chase Freedom cards? &gt; Chase Freedom Rise</div>
+          <pre class="chunk-content">### Chase Freedom Rise
+Ready for your first credit card? Chase Freedom Rise could be it. The card is designed for those who are looking to build credit.
+You may be able to increase your chances of approval when you have a Chase checking account with a balance of $250 or more. The money has to be deposited into the account within 96 hours of applying for the card, according to the disclosure. Visit the Chase Freedom Rise webpage for more details.
+You’ll get 1.5 percent cash back on every purchase. If you’re new to credit card rewards, you can check out this guide on how to get cash back from credit cards.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 3</span>
+            <span class="chunk-meta">Deciding How to Use Your Credit Card Welcome Bonus Offer | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00134</span>
+            <span><b>ID:</b> c_00134_01</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Deciding how to use your credit card sign-up bonus offer &gt; Common credit card sign-up bonus offers</div>
+          <pre class="chunk-content">## Common credit card sign-up bonus offers
+A new cardmember bonus offer will typically include one of the following:
+- Cash back: Cards may offer a cash reward after you meet a designated spending threshold. Depending on the card issuer, the reward is generally credited to your account, deposited into a checking account or issued as a check.
+- Rewards points: Cards often provide a bulk of rewards points when the cardmembers meets the pre-determined spending threshold.
+- Miles: Some credit cards cater to frequent travelers by offering miles that can be redeemed for flights, hotel stays or other travel-related expenses.
+- Travel or statement credits: In addition to points or miles, certain cards provide travel credits (e.g., airline fee credits) or broad statement credits.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#15</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.98</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.842</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">If I’m advising someone with no prior card history, and they want the option that’s better to start with now but may later move into the version that pays a higher everyday rate after meeting the issuer’s yearly review criteria, what should I tell them they earn on purchases at the beginning, what later card they could be moved to, and which built-in safeguards would apply along the way for a prepaid trip cut short by a covered event, a newly bought item that gets damaged or stolen, getting help locating legal or medical services while away from home, and an item whose maker coverage is ending soon?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Starting with Chase Freedom Rise® may be a more helpful option for a first-time applicant. Freedom Rise cardmembers can earn 1.5% cash back on all purchases and are automatically evaluated each year for an upgrade to Chase Freedom Unlimited when they meet certain criteria.
+
+Like other cards in the Chase Freedom family, Freedom Rise comes with the benefits of trip cancellation/interruption insurance for qualified events that prevent travel when booked using your card. You also receive purchase protection against damage and theft for qualified purchases made using the card.
+
+Some purchase and travel protections come with all Freedom Flex, Freedom Unlimited and Freedom Rise credit cards:
+- Trip Cancellation and Interruption Insurance: You can be reimbursed up to $1,500 per covered traveler and $6,000 per trip for your pre-paid, non-refundable passenger fares, if your trip is canceled or cut short by sickness, severe weather or other covered situations.
+- Purchase Protection: Covers your eligible new purchases for 120 days from the date of purchase against damage or theft up to $500 per item.
+- Travel and Emergency Assistance: If you run into a problem while traveling away from home, this benefit provides legal and medical referrals and access to other travel and emergency services. (You will be responsible for the cost of any goods or services obtained.)
+- Extended Warranty Protection: Extends the time period of the manufacturer’s U.S. warranty by an additional year, on eligible warranties of three years or less, up to four years from the date of purchase.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (2)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Freedom Benefits Guide | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00179</span>
+            <span><b>ID:</b> c_00179_01</span>
+            <span><b>Stratum:</b> education_center / chase_cards</span>
+          </div>
+          <div class="chunk-heading-path">Chase Freedom benefits guide &gt; Chase Freedom credit card benefits explained</div>
+          <pre class="chunk-content">## Chase Freedom credit card benefits explained
+Some purchase and travel protections come with all Freedom Flex, Freedom Unlimited and Freedom Rise credit cards:
+- Purchase Protection: Covers your eligible new purchases for 120 days from the date of purchase against damage or theft up to $500 per item.,
+- Extended Warranty Protection: Extends the time period of the manufacturer’s U.S. warranty by an additional year, on eligible warranties of three years or less, up to four years from the date of purchase.
+- Trip Cancellation and Interruption Insurance: You can be reimbursed up to $1,500 per covered traveler and $6,000 per trip for your pre-paid, non-refundable passenger fares, if your trip is canceled or cut short by sickness, severe weather or other covered situations.
+- Auto Rental Coverage: Decline the rental company’s collision insurance and charge the entire rental cost to your card. Coverage provides reimbursement for theft and collision damage for most rental vehicles. In the U.S., coverage is secondary to your personal insurance.
+- Travel and Emergency Assistance: If you run into a problem while traveling away from home, this benefit provides legal and medical referrals and access to other travel and emergency services. (You will be responsible for the cost of any goods or services obtained.)
+Refer to the Guide to Benefits that you received with your credit card for complete details of coverage.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">Is Chase Freedom Unlimited® a Good First Credit Card? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00185</span>
+            <span><b>ID:</b> c_00185_00</span>
+            <span><b>Stratum:</b> education_center / chase_cards</span>
+          </div>
+          <div class="chunk-heading-path">Is Chase Freedom Unlimited® a good first credit card?</div>
+          <pre class="chunk-content"># Is Chase Freedom Unlimited® a good first credit card?
+## Quick Insights
+- While Chase Freedom Unlimited® offers a variety of rewards, you may find that starting with Chase Freedom Rise® is a way to begin building your credit foundation.
+- Chase Freedom Unlimited cardmembers can earn tiered rewards including 5% cash back on travel through Chase Travel℠, 3% on dining and drugstores and a steady 1.5% on all other eligible purchases.
+- Freedom Rise cardmembers can earn 1.5% cash back on all purchases and are automatically evaluated each year for an upgrade to Chase Freedom Unlimited when they meet certain criteria.
+The Chase Freedom Unlimited® credit card has great features, benefits and perks—however, it may not be ideal for first-time credit card users. Instead, Chase Freedom Rise® may be a more helpful option for a first-time applicant.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#16</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">Chase card for frequent trips rewards perks</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Frequent travelers might benefit more from travel cards, which can offer such perks as added rewards for travel purchases, no foreign transaction fee, airport lounge access and more.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Cash Back vs. Travel Credit Card: Which to Choose | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00102</span>
+            <span><b>ID:</b> c_00102_03</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Choosing between cash back and travel credit cards &gt; How to decide which type of card is right for you &gt; Lifestyle</div>
+          <pre class="chunk-content">### Lifestyle
+Assess your lifestyle and spending habits to determine if travel or everyday purchases would provide the greater rewards benefit.
+- Frequent travelers might benefit more from travel cards, which can offer such perks as added rewards for travel purchases, no foreign transaction fee, airport lounge access and more. For example, a travel card might offer 5x points on airfare and hotel purchases, while a cash back card might be less likely to emphasize these travel-related spending categories.
+- Some everyday spenders might prefer cash back cards that offer a flat earning rate, while others might benefit more from rotating category rewards credit cards. Flat-rate cards typically offer the same set rewards rates from month to month, while revolving or rotating rewards categories change every month or quarter, allowing you to strategically maximize spending and earning in certain categories.
+For example, a flat-rate card might offer a set 3% cash back earning rate at grocery stores and a 2% cash back earning rate on every other purchase, while a rotating bonus card might offer 5% earnings at gas stations in the first quarter of the year before switching to 5% at select online retailers the next quarter.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#17</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">When I&#x27;m comparing the advertised starting prices on this car-buying page, which examples already have the shipping-to-dealer cost built in, and what special note applies to the listed prices for the other brand mentioned?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">The Maserati Grecale Folgore starting MSRP includes the destination fee. The McLaren Artura Spider starting MSRP includes the destination fee. All Subaru MSRPs do not include destination and delivery charges, tax, title, and registration fees. Destination and delivery includes handling and inland freight fees and may vary in some states.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Auto EV Financing | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00002</span>
+            <span><b>ID:</b> c_00002_19</span>
+            <span><b>Stratum:</b> auto / electric</span>
+          </div>
+          <div class="chunk-heading-path">EV tools &amp; resources</div>
+          <pre class="chunk-content">## EV tools &amp; resources
+The auto manufacturer tradenames and logos shown in this material are owned by their respective companies or their affiliates and are licensed to JPMorgan Chase Bank, N.A. (Chase). These companies are solely responsible for their products and services and for promotional statements about them, and are not affiliated with Chase or its affiliates. Auto finance accounts are owned by Chase and are subject to credit approval, terms and conditions.
+Same page link returns to footnote reference 1 All Subaru MSRPs do not include destination and delivery charges, tax, title, and registration fees. Destination and delivery includes handling and inland freight fees and may vary in some states. Prices, specifications, options, features, and models subject to change without notice. Select colors may be subject to an additional charge. See your retailer for more information.
+Same page link returns to footnote reference 2 The Maserati Grecale Folgore starting MSRP includes the destination fee.
+Same page link returns to footnote reference 3 The McLaren Artura Spider starting MSRP includes the destination fee.
+This content is for educational purposes only and provides general auto information. The material is not intended to provide legal, tax, or financial advice or to indicate the availability or suitability of any JPMorgan Chase Bank, N.A. product or service. Outlooks and past performance are not guarantees of future results. Chase is not responsible for, and does not provide or endorse third party products, services or other content. For specific advice about your circumstances, you may wish to consult a qualified professional.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#18</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">How much of my travel rewards balance do I need before I can use it toward booking a flight or lowering the cost of one?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">While the shortest flights will cost you about 10,000 miles for a free ticket, you can redeem any amount of miles you have in your account to find reduced fares on participating airlines.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">How to redeem credit card miles | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00237</span>
+            <span><b>ID:</b> c_00237_01</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">How to redeem credit card miles on travel and airline credit cards &gt; How many credit card miles do you need before you redeem?</div>
+          <pre class="chunk-content">## How many credit card miles do you need before you redeem?
+While the shortest flights will cost you about 10,000 miles for a free ticket, you can redeem any amount of miles you have in your account to find reduced fares on participating airlines. If your credit card is not partnered with a specific airline, you can shop around to find a flight that meets your needs and check to see if a miles transfer is available.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#19</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.996</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I&#x27;m helping my younger sibling pick a payment card for a special weekend plan. They&#x27;ll probably buy some items through the issuer&#x27;s online mall before the trip, then spend on things like a night out and maybe movie tickets, and they&#x27;re also curious whether a trip-oriented product would matter more than a money-back one. Between the two entry-level options discussed in one comparison, which one is presented as better for someone brand new to credit and which one is described as giving higher return rates in a few everyday categories plus bookings made through the issuer&#x27;s travel site? Also, what does the bank say about the extra earning opportunity from its online mall, what kinds of VIP-style outing perks can some cardholders get for big-name happenings and certain sponsored locations, and what broader perk examples are associated with the trip-focused type of card?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">The Chase Freedom Rise card caters to new credit card users. The Chase Freedom Unlimited card offers more rewards points for dining, drugstore purchases and travel purchases through Chase Travel℠. In the Chase shopping portal, called Shop and Earn, you can shop over a thousand retailers and earn points in addition to those you already earn on Chase credit card purchases. Some Chase credit cards may offer entertainment and events available only to cardmembers. Within the Chase rewards system, Chase Experiences® can provide cardmembers access and discounts to sponsored events, like the US Open and Lollapalooza, and Chase sponsored venues like Madison Square Garden and Chase Field, home of the Arizona Diamondbacks. Travel credit cards usually also provide benefits like airport lounge access, travel statement credits or elite status with airlines or hotels.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (4)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">How to Maximize Rewards on Entertainment Purchases | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00236</span>
+            <span><b>ID:</b> c_00236_06</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">Guide to maximizing rewards on entertainment purchases &gt; Entertainment perks with credit cards</div>
+          <pre class="chunk-content">## Entertainment perks with credit cards
+Some credit cards may offer entertainment and events available only to cardmembers. For example, some Chase credit cards earn rewards through Chase Ultimate Rewards®. Within the Chase rewards system, Chase Experiences® can provide cardmembers access and discounts to sponsored events, like the US Open and Lollapalooza, and Chase sponsored venues like Madison Square Garden and Chase Field, home of the Arizona Diamondbacks.
+In addition, some cards like Chase Freedom Flex® card offer rotating bonus categories, with entertainment purchases like live entertainment and movie tickets among the categories that can sometimes earn as much as 5% cash back.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">Benefits of Using the Chase Shopping Portal | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00202</span>
+            <span><b>ID:</b> c_00202_00</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">Benefits of using the Chase shopping portal</div>
+          <pre class="chunk-content"># Benefits of using the Chase shopping portal
+## Quick insights
+- Chase cardmembers can earn additional Chase Ultimate Rewards® points when using their credit card to make purchases through the Chase shopping portal.
+- The portal is called Shop and Earn and it features over a thousand retailers.
+- Rewards earned in Shop and Earn are in addition to points earned on Chase credit card transactions.
+Earning rewards points with a Chase credit card is often as easy as making a purchase. Many Chase credit cards offer 1x points on most purchases with 3x and 5x points in some specific spending categories like travel, gas station or grocery store purchases.
+Yet, there’s a way cardmembers can earn even more points. In the Chase shopping portal, called Shop and Earn, you can shop over a thousand retailers and earn points in addition to those you already earn on credit card purchases.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 3</span>
+            <span class="chunk-meta">Can I Have a Chase Travel Credit Card &amp; Cash Back Card? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00120</span>
+            <span><b>ID:</b> c_00120_02</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Can you have a Chase travel credit card and cash back card? &gt; Pairing a travel credit card and cash back credit card</div>
+          <pre class="chunk-content">## Pairing a travel credit card and cash back credit card
+Though they have the same card issuer, Chase travel credit cards and cash back credit cards may earn rewards differently. Most Chase credit cards earn rewards as points, miles or cash back. Travel cards typically earn points, or miles when co-branded with an airline.
+Travel credit cards usually also provide benefits like airport lounge access, travel statement credits or elite status with airlines or hotels.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 4</span>
+            <span class="chunk-meta">Chase Freedom Unlimited ® vs. Chase Freedom Rise ® | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00222</span>
+            <span><b>ID:</b> c_00222_00</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">How Chase Freedom Unlimited® and Chase Freedom Rise® are different</div>
+          <pre class="chunk-content"># How Chase Freedom Unlimited® and Chase Freedom Rise® are different
+## Quick insights
+- The Chase Freedom Rise and Freedom Unlimited cards both offer cash back rewards on most purchases and have low annual fees.
+- The Chase Freedom Rise card caters to new credit card users.
+- The Chase Freedom Unlimited card offers more rewards points for dining, drugstore purchases and travel purchases through Chase Travel℠.
+Chase Freedom credit cards are designed for those who want a rewards credit card that provides cash back on most purchases. From those who are new to credit to those who are just looking for a low annual fee card with a range of rewards, Chase Freedom has cards that may fit your needs.
+In this article, we’ll compare two Chase Freedom cards: Freedom Rise and Freedom Unlimited. Learn more about these cards and if they might be right for you.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#20</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">Freedom Unlimited eligible trip booking types</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Purchases are eligible for rewards when you make them through Chase Travel. You can also access the travel portal from the Chase Ultimate Rewards site. Here are some of the purchases you can make at Chase Travel: Flights, Hotels, Car rentals, Cruises, Tours.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Can I Use Chase Freedom Unlimited® Rewards for Travel? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00187</span>
+            <span><b>ID:</b> c_00187_03</span>
+            <span><b>Stratum:</b> education_center / chase_cards</span>
+          </div>
+          <div class="chunk-heading-path">Can I use Chase Freedom Unlimited® rewards for travel? &gt; How Chase Freedom Unlimited Rewards work for travel &gt; What are considered travel purchases for Freedom Unlimited?</div>
+          <pre class="chunk-content">### What are considered travel purchases for Freedom Unlimited?
+If you want to take advantage of the generous reward of 5% on travel, you may wonder what counts as an eligible purchase. Purchases are eligible for rewards when you make them through Chase Travel. You can also access the travel portal from the Chase Ultimate Rewards site. Here are some of the purchases you can make at Chase Travel:
+- Flights
+- Hotels
+- Car rentals
+- Cruises
+- Tours
+You’ll find many travel options through the portal—all with no booking fees.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#21</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What official sources should I check if I need to confirm exactly where my yard or land boundary is before starting something like a fence project?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Official methods to identify property lines include deeds, plat maps, surveys and online government resources.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Home Lending Education and Resources | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00290</span>
+            <span><b>ID:</b> c_00290_05</span>
+            <span><b>Stratum:</b> education_center / general</span>
+          </div>
+          <div class="chunk-heading-path">Mortgage &gt; Learn more about home ownership &gt; How to find your property lines</div>
+          <pre class="chunk-content">How to find your property lines
+Property lines can change for various reasons, and official methods to identify property lines include deeds, plat maps, surveys and online government resources.Mortgage
+Escrow refund: What is it and how does it workEscrow refunds occur when your mortgage lender collects more than was needed for property taxes and insurance. Learn more with Chase.Mortgage
+What is a mortgage: A guide for new homebuyersWhat is a mortgage and what do you need to know before taking one on? Learn how they work and why they’re key to homeownership.Mortgage
+The pros and cons of paying property taxes through escrow vs. direct paymentPaying property taxes separately from escrow may give you more financial control, but it also means you’ll be responsible for making timely payments.Mortgage
+How to add, change or remove a name on a mortgageLooking to update the name on your mortgage? Check out Chase&#x27;s guide on how to add, change, or remove a name from your mortgage in a few quick and easy steps.Mortgage
+Understanding amortized loans and how to calculate mortgage paymentsLoan amortization refers to the repayment schedule for a loan, including a breakdown of interest and principal payments.Mortgage
+How to request PMI removal with ChasePMI removal for a Chase-owned loan is typically based on an automatic termination date, but there are situations when removal can be requested. Learn more.Mortgage</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#22</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">If I’m evaluating whether a phone-based stored payment method is secure enough for purchases, what protections are described that keep my actual card details from being exposed, and what user behaviors still create risk?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Digital wallets use tokenization to help keep your information safe during transactions. Tokenization means that your 16-digit card number is converted into a token of randomly generated numbers which is unique to that transaction.
+
+Many digital wallets carry extra safety features such as data encryption and a PIN, password or biometric verification. Some digital wallets also create virtual card numbers for any linked credit or debit card. This helps to make your actual card information invisible to others.
+
+In addition to the security measures that digital wallets have, it’s important to remain an astute and alert customer. While biometric verification is required to make purchases using your digital wallet, sharing sign-in information or leaving devices unlocked in public presents a general security risk to you. Exercising caution with your personal information is generally considered the best practice online.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">What is a Digital Wallet? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00041</span>
+            <span><b>ID:</b> c_00041_05</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">What is a digital wallet? &gt; Are digital wallets safe?</div>
+          <pre class="chunk-content">## Are digital wallets safe?
+The advent of new technology is almost always accompanied by some concerns. Security is always important, but even more so when it comes to sensitive financial information.
+Digital wallets use tokenization to help keep your information safe during transactions. Tokenization means that your 16-digit card number is converted into a token of randomly generated numbers which is unique to that transaction.
+Many digital wallets carry extra safety features such as data encryption and a PIN, password or biometric verification. Some digital wallets also create virtual card numbers for any linked credit or debit card. This helps to make your actual card information invisible to others.
+In addition to the security measures that digital wallets have, it’s important to remain an astute and alert customer. While biometric verification is required to make purchases using your digital wallet, sharing sign-in information or leaving devices unlocked in public presents a general security risk to you. Exercising caution with your personal information is generally considered the best practice online.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#23</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.98</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.842</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">If someone used the same account in two different ways during one statement period—first for everyday buying, and second to pull out borrowed cash into a checking account—and then realized they might miss the date printed for sending money back, what should they understand about which activity still gets the usual interest-free window, when the penalty for missing that date applies, the typical length of that window, and what setup could help prevent that penalty in future months?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">A grace period is the time between the conclusion of your credit card’s billing cycle and the payment due date, during which you can pay off the balance without incurring interest or late fees. It is usually between 21 and 25 days. A late fee is the dollar amount that may be charged to your account if the card issuer doesn’t receive the minimum credit card payment by the due date. A cash advance has no grace period: the same day you withdraw a cash advance, the interest clock starts ticking. You can usually avoid late fees by setting up automatic payments for at least the minimum amount due on your credit card each month.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (3)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">What is a Grace Period on a Credit Card | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00155</span>
+            <span><b>ID:</b> c_00155_00</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">What is a credit card grace period?</div>
+          <pre class="chunk-content"># What is a credit card grace period?
+## Quick insights
+- A grace period is the time after a due date when your payment can still be applied without being considered late.
+- Credit card grace periods are usually between 21 and 25 days.
+- To understand the grace period on a particular credit card, check the terms and conditions or contact your credit card issuer.
+A grace period is the time between the conclusion of your credit card’s billing cycle and the payment due date, during which you can pay off the balance without incurring interest or late fees. It is typically calculated using your daily APR and is usually between 21 and 25 days.
+Grace periods allow you to put major purchases on a credit card while receiving an extended window of time to make payments. However, this doesn&#x27;t mean you should put off paying your balance; the grace period expires if the monthly balance is not paid in full by the due date.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">Transfer Money From Credit Card to Bank Account | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00146</span>
+            <span><b>ID:</b> c_00146_06</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">How to transfer money from your credit card to a bank account &gt; What to consider before getting a cash advance</div>
+          <pre class="chunk-content">## What to consider before getting a cash advance
+Before you commit to taking out a cash advance, there are several things you may want to consider:
+- Higher annual percentage rate (APR) than regular purchases: The APR on the cash advance can be significantly higher than everyday credit card purchases.
+- No grace period: The same day you withdraw a cash advance, the interest clock starts ticking. You won&#x27;t have the grace period that you get with credit card purchases — which is an interest-free period of approximately 21 days — starting from the day your monthly statement is generated, to the day your payment is due.
+- High fees: You&#x27;ll find the associated fees listed in the terms and conditions when you sign up for a card. Most of the time, these fees are equal to around 5% of the withdrawal amount.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 3</span>
+            <span class="chunk-meta">Credit Card Late Fees Explained | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00108</span>
+            <span><b>ID:</b> c_00108_00</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">Credit card late fees explained</div>
+          <pre class="chunk-content"># Credit card late fees explained
+## Highlights
+- A late fee is usually charged if a bank receives a payment after the due date.
+- Your credit card’s terms and conditions has information about late fees, including when they’re charged and how much they may be.
+- You can usually avoid late fees by setting up automatic payments for at least the minimum amount due on your credit card each month.
+Your cardmember agreement is a good resource for how late fees work on your credit card because banks may handle late payments differently.
+In this article, we’ll offer some general answers to several common questions about credit card late fees:
+- What are credit card late fees?
+- How do late fees work?
+- What are examples of credit card late fees?
+- How could you avoid a credit card late fee?
+- Can you get charged a late fee on a late fee?</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#24</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">keyword</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">travel purchases points hotel flights rental cars</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">When you make eligible everyday purchases, you can earn points or miles that can then be used toward plane tickets, hotel stays, rental cars and more, depending on the issuer.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Guide to Maximizing Rewards on Travel Purchases | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00251</span>
+            <span><b>ID:</b> c_00251_00</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">Guide to maximizing rewards on travel purchases</div>
+          <pre class="chunk-content"># Guide to maximizing rewards on travel purchases
+## Quick insights
+- Travel credit cards can earn rewards that can help you save money.
+- When you make eligible everyday purchases, you can earn points or miles that can then be used toward plane tickets, hotel stays, rental cars and more, depending on the issuer.
+- Many travel cards offer higher points for travel-related purchases and offer travel-specific perks.
+Most people don&#x27;t associate filling up their gas tank with sipping a cocktail on a beach. But if you have a travel credit card, every eligible purchase you make may be putting you closer to taking the vacation of your dreams. From complimentary upgrades to first class seats, airport lounge access to free meals, travel credit cards may offer a bounty of benefits and rewards that you may be able to leverage depending on your spending habits.
+Let’s look at how you can leverage your spending and credit card points to help you book and potentially save on travel.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#25</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What extra money should I plan to have ready on the day I finalize buying a house with a lender, and which of those last-minute charges might be negotiable or possibly paid by the other side?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">You’ll also want to consider bringing additional funds to closing to cover costs such as homeowners insurance, property taxes and mortgage insurance. You may have to pay mortgage insurance depending on your loan type and how much you put down. Take time to understand which costs you can negotiate and when to ask the seller or lender to pay them.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Closing Costs: How Much Should I Expect to Pay? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00295</span>
+            <span><b>ID:</b> c_00295_12</span>
+            <span><b>Stratum:</b> education_center / mortgage_education</span>
+          </div>
+          <div class="chunk-heading-path">What are closing costs and how much are they? &gt; In summary</div>
+          <pre class="chunk-content">## In summary
+Home loans are likely to have at least some closing costs. You’ll also want to consider bringing additional funds to closing to cover costs such as homeowners insurance, property taxes and mortgage insurance. You may have to pay mortgage insurance depending on your loan type and how much you put down. Take time to understand which costs you can negotiate and when to ask the seller or lender to pay them. Speak to a Home Lending Advisor to learn more about closing costs.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#26</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I&#x27;m evaluating an entry-level bank account for someone in school with limited income and want to know what everyday transaction capabilities and cost advantages it may include, along with whether it can work with person-to-person payment apps. What does the guidance say?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Student checking accounts can offer basic check-writing and debit card services, which sometimes includes a zero monthly service fee. You also may have the ability to utilize payment apps like Zelle®.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Checking Account Guide | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00037</span>
+            <span><b>ID:</b> c_00037_08</span>
+            <span><b>Stratum:</b> education_center / basics</span>
+          </div>
+          <div class="chunk-heading-path">How to choose a checking account &gt; Different types of checking accounts &gt; Student checking accounts</div>
+          <pre class="chunk-content">### Student checking accounts
+Banks create checking accounts tailored specifically for students. Students don’t always have a lot of income or savings, so a student checking account can come in handy. Student checking accounts can offer basic check-writing and debit card services, which sometimes includes a zero monthly service fee. You also may have the ability to utilize payment apps like Zelle®.
+Now that you know some of the checking account options available, you can move forward and confidently choose the right type of account for your lifestyle.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#27</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.996</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">A first-time borrower is deciding between two no-annual-fee rewards options from the same bank. They want something suitable for someone just starting out, but they also care whether the other option would do more for a future vacation if they book through the bank’s own trip-booking website and want to use what they earn toward that trip. Which card matches the beginner-focused need, and what extra trip-related advantages does the other card provide?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">The Freedom Rise card can be a great option for those who are new to credit. The Freedom Unlimited card allows you to earn 1.5% cash back on most purchases, and includes select categories where you can earn rewards at an accelerated rate. Points earned with Chase Freedom Unlimited® credit card can be redeemed for travel through the Chase Travel portal, and Chase Freedom Unlimited cardmembers can earn 5% cash back rewards on travel purchases made through Chase Travel.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (2)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Freedom Unlimited ® vs. Chase Freedom Rise ® | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00222</span>
+            <span><b>ID:</b> c_00222_08</span>
+            <span><b>Stratum:</b> education_center / rewards_benefits</span>
+          </div>
+          <div class="chunk-heading-path">How Chase Freedom Unlimited® and Chase Freedom Rise® are different &gt; In summary</div>
+          <pre class="chunk-content">## In summary
+The Chase Freedom Rise and Freedom Unlimited cards are both cash back credit cards with low annual fees that earn rewards on purchases. With the Freedom Rise card, you can earn 1.5% cash back on all purchases. The Freedom Unlimited card allows you to earn 1.5% cash back on most purchases, and includes select categories where you can earn rewards at an accelerated rate (such as dining, drug store purchases and Chase Travel).
+The Freedom Rise card can be a great option for those who are new to credit.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">Can I Use Chase Freedom Unlimited® Rewards for Travel? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00187</span>
+            <span><b>ID:</b> c_00187_00</span>
+            <span><b>Stratum:</b> education_center / chase_cards</span>
+          </div>
+          <div class="chunk-heading-path">Can I use Chase Freedom Unlimited® rewards for travel?</div>
+          <pre class="chunk-content"># Can I use Chase Freedom Unlimited® rewards for travel?
+## Quick insights
+- Points earned with Chase Freedom Unlimited® credit card can be redeemed for travel through the Chase Travel portal.
+- The easy-to-use portal offers competitive rates on flights, hotels, car rentals and more and doesn’t have blackout dates.
+- Chase Freedom Unlimited cardmembers can earn 5% cash back rewards on travel purchases made through Chase Travel.
+Can I use Chase Freedom Unlimited rewards for travel? Yes, this rewards credit card earns points when you book travel that you can redeem to help pay for trips. Read on to learn how to use your Chase Freedom points for travel.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#28</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill"><span class="score-label">Grounding</span><span class="score-value">0.99</span></div>
+          <div class="score-pill"><span class="score-label">Retrieval Diff</span><span class="score-value">1.0</span></div>
+          <div class="score-pill"><span class="score-label">Composite</span><span class="score-value">0.994</span></div>
+          <div class="score-pill"><span class="score-label">Style</span><span class="score-value">natural</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">If I share my bank account with another person, can both of us use this split-purchase option and both make payments on the same arrangement?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">When a Chase Pay in 4 plan is set up, you’re provided a list of eligible Chase accounts from which payments can be made. Only the customer who sets up the Pay in 4 plan will be able to see the plan details and make payments on that plan. Using this account benefit is subject to individual eligibility, so it’s possible that not all joint account owners will be eligible to set up a Chase Pay in 4 plan.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Pay In 4℠ FAQs | Quick Guide to Pay in 4</span>
+          </div>
+          <div class="chunk-details">
+            <span><b>File:</b> p_00081</span>
+            <span><b>ID:</b> c_00081_09</span>
+            <span><b>Stratum:</b> personal_banking / checking</span>
+          </div>
+          <div class="chunk-heading-path">Chase Pay In 4℠ FAQs &gt; FAQs about purchases that are eligible for Pay in 4 &gt; I have a joint owner on my checking account — are we both eligible for Chase Pay in 4 and are we both eligible to make payments on my plan?</div>
+          <pre class="chunk-content">### I have a joint owner on my checking account — are we both eligible for Chase Pay in 4 and are we both eligible to make payments on my plan?
+When a Chase Pay in 4 plan is set up, you’re provided a list of eligible Chase accounts from which payments can be made. Only the customer who sets up the Pay in 4 plan will be able to see the plan details and make payments on that plan. Using this account benefit is subject to individual eligibility, so it’s possible that not all joint account owners will be eligible to set up a Chase Pay in 4 plan.
+Don&#x27;t forget! You can be notified when you make an eligible Pay in 4 purchase. Sign in to learn more.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

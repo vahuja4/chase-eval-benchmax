@@ -1,0 +1,313 @@
+# Entity Consolidation Report (Step 3.1.4b)
+
+## Counts
+- Candidates before prune: 4304
+- Pruned: 344
+- Registry entries: 3615
+
+## Merges
+
+- **account_anniversary** <- account_anniversary_date, account_anniversary_year
+- **account_opening** <- account_opening_process
+- **adverse_action_letter** <- adverse_action_notice
+- **air_france_klm_flying_blue** <- flying_blue_air_france_klm
+- **airline_and_hotel_partner** <- hotel_and_airline_partner
+- **airline_credit_card** <- airline_branded_credit_card, airline_credit
+- **airline_loyalty_program** <- airline_specific_loyalty_program
+- **airline_or_hotel_program** <- eligible_airline_or_hotel_program
+- **airport_lounge_access** <- access_to_airport_lounge, lounge_access
+- **amazon_pay** <- amazon_payment
+- **auto_loan** <- car_loan
+- **auto_rental_collision_damage_waiver** <- rental_car_collision_damage_waiver
+- **automatic_bill_payment** <- automatic_online_bill_pay
+- **automatic_payment** <- automatic_payment_setting
+- **autopay** <- auto_pay
+- **available_credit** <- total_available_credit
+- **average_account_age** <- average_age_of_account
+- **bad_credit_score** <- low_credit_score, poor_credit_score
+- **bonus_reward** <- additional_reward, extra_reward
+- **building_credit** <- build_credit
+- **buy_now_pay_later** <- buy_now_pay_later_option
+- **car_rental** <- rental_car
+- **cardmember_agreement** <- card_member_agreement, card_membership_agreement
+- **cardmember_bonus** <- cardmember_bonus_offer
+- **cash_back_category** <- eligible_cash_back_category
+- **cash_back_credit_card** <- cash_back_card, cash_back_reward_card, cash_back_reward_credit_card, cashback_card
+- **cash_back_point** <- cash_back_or_point
+- **cash_back_rate** <- cash_back_percentage, cash_back_reward_rate, cashback_rate
+- **cash_back_redemption** <- cash_back_reward_redemption
+- **cash_back_reward** <- cash_back_credit_card_reward, cash_back_reward_program
+- **cash_bonuse** <- cash_bonus
+- **charge_off** <- chargeoff
+- **chase_branded_card** <- chase_brand_and_partner_card, chase_branded_reward_credit_card, chase_co_branded_card
+- **chase_checking_account** <- chase_bank_account
+- **chase_credit_card** <- chase_branded_credit_card, chase_business_credit_card, chase_mastercard, chase_reward_credit_card, chase_travel_credit_card
+- **chase_freedom** <- chase_freedom_card, chase_freedom_family
+- **chase_freedom_account** <- chase_freedom_flex_card_account
+- **chase_freedom_flex** <- chase_freedom_flex_card, chase_freedom_flex_credit_card
+- **chase_freedom_reward** <- chase_freedom_unlimited_reward
+- **chase_freedom_rise** <- chase_freedom_rise_card, chase_freedom_rise_credit_card
+- **chase_freedom_unlimited** <- chase_freedom_unlimited_card, chase_freedom_unlimited_credit_card
+- **chase_ink_business_credit_card** <- chase_ink_business_cash_credit_card, chase_ink_credit_card
+- **chase_pay_over_time_plan** <- chase_pay_over_time_plan_balance
+- **chase_refer_a_friend** <- chase_refer_a_friend_promotion
+- **chase_sapphire_lounge_by_the_club** <- chase_sapphire_lounge_by_the_club_network
+- **chase_sapphire_preferred** <- chase_sapphire_preferred_card, chase_sapphire_preferred_credit_card
+- **chase_sapphire_reserve** <- chase_sapphire, chase_sapphire_card, chase_sapphire_reserve_card, chase_sapphire_reserve_credit_card
+- **chase_sapphire_reserve_for_business** <- sapphire_reserve_for_business
+- **chase_select_travel_partner** <- chase_travel_partner
+- **chase_shopping_portal** <- chase_online_shopping_portal, chase_shop_and_earn_portal
+- **chase_slate** <- chase_slate_edge
+- **chase_travel** <- chase_travelsm
+- **chase_travel_portal** <- chase_travelsm_portal
+- **chase_ultimate_reward** <- chase_ultimate_reward_point, chase_ultimate_reward_program, chase_ultimate_reward_site, chase_ultimate_rewards
+- **checking_account_balance** <- checking_your_account_balance
+- **checking_account_bonus_offer** <- checking_account_bonuse
+- **chexsystem_profile** <- chexsystem_report
+- **co_branded_airline_credit_card** <- co_branded_airline_reward_card, co_branded_airline_reward_credit_card
+- **co_branded_card** <- co_branded_credit_card, cobranded_card
+- **co_branded_hotel_credit_card** <- co_branded_hotel_card, co_branded_hotel_reward_credit_card, hotel_co_branded_credit_card
+- **co_signer** <- cosigner
+- **complimentary_hotel_night** <- complimentary_hotel_stay, complimentary_night, complimentary_or_discounted_night
+- **conventional_loan** <- conventional_mortgage_loan
+- **coupon_code** <- discount_code
+- **credit_card_account_activity** <- credit_card_activity
+- **credit_card_accountability_responsibility_and_disclosure_act** <- credit_card_accountability_responsibility_and_disclosure_act_of_2009, credit_card_accountability_responsibility_and_disclosure_card_act_of_2009
+- **credit_card_approval** <- credit_card_approval_process
+- **credit_card_concierge_service** <- credit_card_concierge
+- **credit_card_issuer** <- card_issuer
+- **credit_card_shopping_portal** <- credit_card_specific_shopping_portal
+- **credit_counseling** <- credit_counseling_agency, credit_counseling_service, credit_counselor
+- **credit_limit_increase** <- credit_line_increase
+- **credit_monitoring** <- credit_monitoring_service
+- **credit_restoration** <- credit_restoration_service
+- **credit_score_range** <- credit_scoring_range
+- **credit_utilization_ratio** <- credit_card_utilization_ratio, credit_utilization, credit_utilization_rate
+- **current_balance** <- current_balance_available
+- **dashpass** <- dashpass_member
+- **dashpass_membership** <- dashpass_membership_benefit
+- **debt_to_income_ratio** <- debt_to_income_dti_ratio
+- **defer_your_payment** <- deferring_your_payment
+- **deferring_loan** <- deferring_your_loan
+- **department_of_education** <- us_department_of_education
+- **digital_banking** <- digital_banking_service
+- **digital_gift_card** <- virtual_gift_card
+- **dining_reward** <- dining_related_reward, dining_reward_point
+- **disney_inspire_visa_card** <- disney_visa_card
+- **drugstore** <- drug_store
+- **drugstore_purchase** <- drug_store_purchase
+- **edit_by_chase_travel** <- edit_by_chase_travelsm
+- **eligible_amazon_purchase** <- eligible_amazoncom_purchase
+- **eligible_chase_credit_card** <- eligible_chase_card, eligible_chase_reward_credit_card
+- **eligible_loyalty_program** <- other_loyalty_program
+- **enhanced_earn_rate** <- enhanced_earning_rate
+- **enhanced_reward** <- increased_reward
+- **excellent_credit_score** <- good_or_excellent_credit_score, good_to_excellent_credit_score
+- **exclusive_airport_lounge** <- select_airport_lounge
+- **expedited_shipping** <- expedited_delivery
+- **extended_warranty_protection** <- extended_warranty
+- **fdic_insurance** <- fdic_insured
+- **federal_student_loan** <- federal_loan
+- **fico_score** <- fico_credit_score
+- **financial_hardship** <- economic_hardship
+- **first_three_month** <- first_3_month
+- **fixed_cash_back_rate** <- fixed_rate_of_cash_back
+- **flat_15_cash_back** <- flat_15_cash_back_rate
+- **fraud_protection** <- fraud_protection_feature
+- **free_checked_bag** <- free_checked_baggage
+- **freedom_rise_credit_card** <- freedom_rise_credit_card_account
+- **freedom_rise_credit_card_limit_increase** <- freedom_rise_credit_limit_increase
+- **freedom_unlimited_credit_card** <- freedom_unlimited_card
+- **frequent_flier_number** <- frequent_flyer_number
+- **full_service_bank** <- full_service_banking
+- **general_travel_card** <- general_travel_credit_card
+- **given_time_frame** <- specific_time_frame
+- **good_payment_history** <- positive_payment_history
+- **government_backed_loan** <- government_backed_mortgage_loan
+- **half_cent_and_two_cent_per_mile** <- two_cent_per_mile
+- **hard_credit_check** <- hard_credit_inquiry
+- **hertz_gold_plus_reward** <- hertz_gold_plus_reward_bonus_point
+- **high_interest_debt** <- higher_interest_debt
+- **high_yield_saving_account** <- high_yielding_saving_account, joint_high_yield_saving_account
+- **higher_cash_back_percentage** <- higher_cash_back_rate, higher_rate_of_cash_back
+- **higher_credit_limit** <- increased_credit_limit
+- **higher_interest_rate** <- high_interest_rate, higher_interest
+- **higher_reward** <- bigger_reward
+- **hotel_loyalty_program** <- hotel_reward_program
+- **hotel_or_airline_credit_card** <- airline_or_hotel_credit_card, hotel_or_airline_specific_credit_card, travel_airline_or_hotel_credit_card
+- **hotel_or_airline_loyalty_program** <- airline_and_hotel_loyalty_program, airline_or_hotel_loyalty_program, hotel_and_airline_loyalty_program
+- **ihg_hotel_and_resort** <- ihg_hotel_resort
+- **ihg_one_reward_platinum_elite_status** <- ihg_one_reward_diamond_elite_status
+- **ihg_one_reward_point** <- ihg_one_reward
+- **ihg_one_reward_premier_business_credit_card** <- ihg_one_reward_premier_credit_card
+- **impulse_buying** <- impulse_buy
+- **impulse_spending** <- impulsive_spending
+- **income_based_repayment_plan** <- income_based_repayment
+- **initial_cash_deposit** <- initial_deposit
+- **ink_business_cash** <- ink_business_cash_credit_card
+- **ink_business_premier_credit_card** <- ink_business_preferred_credit_card
+- **interest_only_loan** <- interest_only_mortgage, interest_only_mortgage_loan
+- **international_money_transfer** <- international_money_transfer_service
+- **jp_morgan_advisor** <- jp_morgan_private_client_advisor
+- **jumbo_loan** <- jumbo_mortgage, jumbo_mortgage_loan
+- **jumbo_loan_limit** <- jumbo_mortgage_limit
+- **late_payment_penalty** <- late_payment_penalty_and_fee, late_payment_penalty_charge
+- **length_of_credit_history** <- length_of_your_credit_history
+- **loan_limit** <- loan_limit_cap
+- **low_annual_fee** <- lower_annual_fee
+- **low_interest_account** <- low_interest_saving_account
+- **lower_down_payment** <- higher_down_payment
+- **lower_interest_rate** <- low_interest_rate
+- **marriott_bonvoy_boundless_credit_card** <- marriott_bonvoy_boundless
+- **marriott_bonvoy_business_credit_card_from_chase** <- marriott_bonvoy_premier_plus_business_credit_card_from_chase
+- **membership_level** <- membership_status
+- **minimum_balance** <- minimum_account_balance
+- **minimum_balance_requirement** <- minimum_account_balance_requirement
+- **minimum_credit_score** <- minimum_credit_score_requirement
+- **minimum_deposit** <- minimum_initial_deposit
+- **minimum_monthly_payment** <- monthly_minimum_payment
+- **minimum_opening_deposit_requirement** <- minimum_opening_deposit
+- **minimum_payment** <- minimum_payment_amount, minimum_required_payment
+- **minimum_payment_due** <- minimum_amount_due, minimum_payment_amount_due
+- **minimum_redemption_amount** <- minimum_redemption_threshold
+- **minimum_requirement** <- minimal_requirement
+- **minimum_spending_requirement** <- minimum_spend_requirement, minimum_spending_limit
+- **missed_payment** <- missed_or_late_payment
+- **mobile_banking** <- mobile_bank
+- **monthly_amount_due** <- monthly_balance_due
+- **monthly_billing_cycle** <- monthly_billing_period
+- **monthly_billing_statement** <- monthly_card_billing_statement
+- **monthly_payment** <- monthly_payment_amount
+- **monthly_service_fee** <- monthly_service_or_maintenance_fee
+- **mortgage_calculator** <- mortgage_loan_calculator
+- **mortgage_rate** <- mortgage_interest_rate
+- **new_card_member_bonus_promotion** <- new_cardmember_bonuse
+- **new_cardmember_offer** <- new_cardmember_bonus, new_cardmember_welcome_bonus_offer
+- **new_credit_application** <- recent_credit_application
+- **on_time_payment** <- payment_on_time, timely_payment
+- **online_reward_portal** <- online_reward_program_portal
+- **out_of_network_atm_fee** <- out_of_network_atm
+- **overdraft_protection** <- overdraft_protection_service
+- **participating_chase_credit_card** <- participating_chase_freedom_credit_card, participating_chase_sapphire_credit_card
+- **partner_loyalty_program** <- partner_loyalty_program_account
+- **partner_specific_card** <- partner_specific_credit_card
+- **pay_over_time_plan** <- pay_over_time_option, pay_over_time_plan_balance, pay_over_time_plan_payment
+- **payment_plan** <- payment_plan_option
+- **peer_to_peer_p2p_payment_platform** <- peer_to_peer_p2p_payment_system
+- **per_mile_value** <- value_per_mile
+- **point_and_mile** <- point_or_mile
+- **point_per_dollar** <- point_per_dollar_spent
+- **point_redemption** <- point_redemption_system, point_redemption_value
+- **preapproved** <- pre_approved
+- **prepaid_card** <- prepaid_debit_card
+- **primary_cardmember** <- primary_cardholder, primary_cardmember_account
+- **prime_member** <- prime_membership
+- **priority_pass_select_membership** <- priority_pass_select, priority_pass_select_membership_card
+- **priority_passtm** <- priority_passtm_select
+- **q3_2025_reward_category** <- q4_2025_reward_category
+- **quarterly_bonus** <- quarterly_bonus_reward
+- **quarterly_bonus_category** <- quarterly_rotating_bonus_category
+- **recurring_payment** <- recurring_payment_option
+- **redeem_point** <- redeem_point_and_reward
+- **redeem_reward** <- redeem_your_reward, redeeming_reward
+- **refer_a_friend** <- refer_a_friend_offer, refer_a_friend_program, refer_friend
+- **refer_a_friend_bonus** <- refer_a_friend_bonuse
+- **refinancing** <- refinance
+- **regular_reward** <- usual_reward
+- **remaining_entitlement** <- available_entitlement
+- **repayment_term** <- term_of_repayment
+- **retail_card** <- retailer_card
+- **retail_discount** <- retailer_discount
+- **reward_portal** <- reward_portal_platform
+- **rotating_bonus_category** <- rotating_bonus_category_credit_card, rotating_quarterly_bonus_category
+- **sapphire_preferred** <- sapphire_preferred_card, sapphire_preferred_cardmember
+- **sapphire_reserve** <- sapphire_reserve_card, sapphire_reserve_credit_card
+- **sapphire_reserve_exclusive_table** <- chase_sapphire_reserve_exclusive_table, sapphire_reserve_exclusive_table_program
+- **sapphire_reserve_for_businesssm_card** <- sapphire_reserve_for_businesssm_credit_card
+- **saving_withdrawal_limit_fee** <- withdrawal_limit_fee
+- **second_chance_bank_account** <- second_chance_checking_account
+- **shared_account_holder** <- shared_account_holder_requirement
+- **shop_at_chase** <- shop_at_chase_credit, shop_at_chase_portal
+- **sign_on_bonus_offer** <- sign_on_bonus
+- **sign_up_bonuse** <- sign_up_bonus, signup_bonuse
+- **single_point_per_dollar_spent** <- one_point_per_dollar
+- **single_unit_home** <- single_unit_house
+- **slate_credit_card** <- slate_card
+- **southwest_airline_rapid_reward** <- southwest_rapid_reward_point, southwest_rapid_reward_program
+- **southwest_rapid_reward_performance_business_credit_card** <- southwest_rapid_reward_plus_business_credit_card, southwest_rapid_reward_premier_business_credit_card
+- **southwest_rapid_reward_plus_credit_card** <- southwest_rapid_reward_premier_credit_card, southwest_rapid_reward_priority_credit_card
+- **specific_time_period** <- specific_period
+- **spending_cap** <- spend_cap
+- **spending_category** <- specific_spending_category
+- **spending_limit** <- higher_spending_limit
+- **spending_requirement** <- spend_requirement
+- **spending_threshold** <- spend_threshold
+- **spouse_income** <- spouse_or_partner_income
+- **starter_or_student_credit_card** <- student_or_starter_credit_card
+- **statement_closing_date** <- statement_close_date
+- **student_discount** <- student_discount_program
+- **tax_and_fee** <- tax_or_fee
+- **term_and_condition** <- specific_term_and_condition
+- **theft_and_damage** <- theft_or_damage
+- **three_point_per_dollar** <- three_point_per_dollar_spent
+- **tiered_reward** <- tiered_reward_option, tiered_reward_structure
+- **total_purchase** <- total_purchase_amount
+- **total_unpaid_balance** <- unpaid_balance
+- **traditional_credit_card** <- regular_credit_card
+- **traditional_saving_account** <- regular_saving_account
+- **transferred_point** <- transferring_point
+- **travel_and_purchase_protection** <- travel_and_purchase_protection_coverage
+- **travel_protection_benefit** <- travel_protection_coverage
+- **travel_purchased_through_chase** <- travel_purchased_through_chase_travel
+- **travel_reward_credit_card** <- travel_reward_card
+- **trip_cancellation_and_interruption_insurance** <- travel_cancellation_and_interruption_insurance, trip_cancellation_and_trip_interruption_insurance, trip_cancellationinterruption_insurance
+- **united_business_card** <- united_club_business_card
+- **unitedsm_explorer_card** <- united_explorer_card, united_explorer_credit_card
+- **unsecured_credit_card** <- unsecured_card
+- **upfront_mortgage_insurance_fee** <- upfront_mortgage_insurance_premium
+- **us_department_of_veteran_affair** <- department_of_veteran_affair
+- **visa_infinite_concierge** <- visa_infinite_concierge_service
+- **welcome_bonus_offer** <- welcome_bonus
+- **world_of_hyatt_business_credit_card** <- world_of_hyatt_credit_card
+- **zero_based_budgeting** <- zero_based_budgeting_method
+
+## Prune Summary
+
+- digit_start_value: 280
+- bare_numeral: 28
+- generic_stoplist: 21
+- standalone_adjective: 11
+- too_short: 4
+
+## Top 30 Pruned Entities
+
+- `point` (freq=251, reason=generic_stoplist)
+- `reward` (freq=225, reason=generic_stoplist)
+- `fee` (freq=83, reason=generic_stoplist)
+- `credit_card` (freq=48, reason=generic_stoplist)
+- `5_cash_back` (freq=35, reason=digit_start_value)
+- `credit` (freq=31, reason=generic_stoplist)
+- `15_cash_back` (freq=29, reason=digit_start_value)
+- `loan` (freq=26, reason=generic_stoplist)
+- `15_year_mortgage` (freq=20, reason=digit_start_value)
+- `check` (freq=17, reason=generic_stoplist)
+- `cash` (freq=17, reason=generic_stoplist)
+- `benefit` (freq=17, reason=generic_stoplist)
+- `rate` (freq=16, reason=generic_stoplist)
+- `purchase` (freq=15, reason=generic_stoplist)
+- `term` (freq=14, reason=generic_stoplist)
+- `30_year_mortgage` (freq=14, reason=digit_start_value)
+- `3` (freq=13, reason=too_short)
+- `1_cash_back` (freq=13, reason=digit_start_value)
+- `3x_point` (freq=12, reason=digit_start_value)
+- `payment` (freq=11, reason=generic_stoplist)
+- `category` (freq=10, reason=generic_stoplist)
+- `offer` (freq=10, reason=generic_stoplist)
+- `5` (freq=9, reason=too_short)
+- `promotion` (freq=9, reason=generic_stoplist)
+- `score` (freq=8, reason=generic_stoplist)
+- `15` (freq=8, reason=bare_numeral)
+- `11_ratio` (freq=8, reason=digit_start_value)
+- `4x_point` (freq=7, reason=digit_start_value)
+- `30` (freq=7, reason=bare_numeral)
+- `3_cash_back` (freq=7, reason=digit_start_value)

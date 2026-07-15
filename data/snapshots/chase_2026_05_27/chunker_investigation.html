@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chunker Investigation &mdash; Three Issues</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #fff; color: #1a1a1a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65; padding: 40px 20px; max-width: 880px; margin: 0 auto;
+  }
+  h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #6b7280; font-size: 0.92rem; margin-bottom: 36px; }
+  h2 {
+    font-size: 1.2rem; font-weight: 700; margin-top: 44px; margin-bottom: 14px;
+    padding-bottom: 5px; border-bottom: 2px solid #e5e7eb;
+  }
+  h3 { font-size: 1.02rem; font-weight: 600; margin-top: 22px; margin-bottom: 8px; }
+  p, li { font-size: 0.92rem; }
+  ul, ol { margin: 8px 0 12px 22px; }
+  li { margin-bottom: 4px; }
+
+  .box {
+    border-radius: 8px; padding: 16px 18px; margin: 14px 0; font-size: 0.88rem;
+  }
+  .box-finding { background: #fef2f2; border-left: 4px solid #ef4444; }
+  .box-ok      { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .box-info    { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .box-warn    { background: #fffbeb; border-left: 4px solid #f59e0b; }
+  .box strong  { display: block; margin-bottom: 4px; font-size: 0.9rem; }
+
+  code {
+    background: #f3f4f6; padding: 1px 5px; border-radius: 3px;
+    font-family: "SF Mono", "Fira Code", Consolas, monospace; font-size: 0.84rem;
+  }
+  pre {
+    background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 6px;
+    padding: 14px 16px; overflow-x: auto; margin: 10px 0 14px;
+    font-family: "SF Mono", "Fira Code", Consolas, monospace;
+    font-size: 0.82rem; line-height: 1.55; white-space: pre-wrap; word-break: break-word;
+  }
+  .hl { background: #fef08a; padding: 0 2px; border-radius: 2px; font-weight: 600; }
+
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 16px; font-size: 0.86rem; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #e5e7eb; }
+  th { font-weight: 600; background: #f9fafb; color: #374151; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.mono { font-family: "SF Mono", Consolas, monospace; font-size: 0.82rem; }
+
+  .tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px; letter-spacing: 0.02em; margin-right: 4px;
+  }
+  .tag-factual  { background: #d1fae5; color: #065f46; }
+  .tag-thin     { background: #fef3c7; color: #92400e; }
+  .tag-mktg     { background: #fecaca; color: #991b1b; }
+  .tag-data     { background: #dbeafe; color: #1d4ed8; }
+
+  .chunk-row { margin: 8px 0; padding: 10px 14px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; }
+  .chunk-row .meta { font-size: 0.78rem; color: #6b7280; margin-bottom: 4px; }
+  .chunk-row .text {
+    font-family: "SF Mono", Consolas, monospace; font-size: 0.8rem;
+    color: #374151; white-space: pre-wrap; word-break: break-word;
+  }
+
+  .verdict {
+    font-size: 1rem; font-weight: 700; margin: 16px 0 8px;
+    padding: 10px 16px; border-radius: 6px;
+  }
+  .verdict-fix   { background: #fef2f2; color: #991b1b; }
+  .verdict-noop  { background: #f0fdf4; color: #166534; }
+  .verdict-maybe { background: #fffbeb; color: #92400e; }
+
+  .toc { margin: 20px 0 30px; padding: 16px 20px; background: #f9fafb; border-radius: 8px; }
+  .toc ol { margin: 6px 0 0 20px; }
+  .toc li { margin-bottom: 2px; }
+  .toc a { color: #2563eb; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .split-view { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 700px) { .split-view { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<h1>Chunker Investigation</h1>
+<p class="subtitle">Three issues in priority order &middot; 2026-06-03</p>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#issue1">Issue 1: p_00087 first chunk absorbs full FAQ answer</a></li>
+    <li><a href="#issue2">Issue 2: Heading detector for noun-phrase titles</a></li>
+    <li><a href="#issue3">Issue 3: 20&ndash;49 token bucket &mdash; raise merge threshold?</a></li>
+  </ol>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="issue1">Issue 1: Why p_00087's first chunk absorbed the full first FAQ answer</h2>
+
+<h3>The raw text (first 3 lines)</h3>
+<pre>line 0  [3 words]:  Chase Overdraft Services
+line 1  [69 words]: <span class="hl">Frequently Asked QuestionsWith</span> Chase Overdraft Assist&#8480;, we won't
+                    charge an Overdraft Fee if you're overdrawn by $50 or less ...
+line 2  [46 words]: Chase Overdraft Assist does not require enrollment and comes
+                    with all Chase checking accounts except ...</pre>
+
+<div class="box box-finding">
+  <strong>Root cause: extraction concatenation</strong>
+  Trafilatura glued <code>"Frequently Asked Questions"</code> directly to <code>"With Chase Overdraft Assist..."</code> with no whitespace or newline between them. The result is a single 69-word line. The heading detector operates line-by-line, so it never sees <code>"Frequently Asked Questions"</code> as a separate line &mdash; it sees one long line starting with <code>"Frequently Asked QuestionsWith..."</code> which fails the &le;8-word check.
+</div>
+
+<h3>What the chunker does with it</h3>
+<ol>
+  <li><code>"Chase Overdraft Services"</code> (3 words, ~4 tokens) &rarr; <code>is_heading = True</code>, but <code>current_tokens = 0 &lt; MIN_TOKENS (20)</code> &rarr; no break, starts accumulating.</li>
+  <li><code>"Frequently Asked QuestionsWith..."</code> (69 words, ~95 tokens) &rarr; <code>is_heading = False</code> (too many words). <code>current_tokens = 4</code>, adding 95 doesn't exceed 400 &rarr; appended.</li>
+  <li>Lines keep appending until the 400-token cap forces a hard break at 369 tokens.</li>
+</ol>
+
+<h3>Comparison with other FAQ pages</h3>
+<table>
+  <thead><tr><th>Page</th><th>Line 1</th><th>Heading separated?</th></tr></thead>
+  <tbody>
+    <tr><td>p_00081</td><td class="mono">Chase Pay In 4&#8480; FAQs</td><td>Yes &mdash; own line</td></tr>
+    <tr><td>p_00094</td><td class="mono">Frequently asked questions</td><td>Yes &mdash; own line</td></tr>
+    <tr><td>p_00095</td><td class="mono">FAQs about using Pay Over Time...</td><td>Yes &mdash; own line</td></tr>
+    <tr><td class="hl">p_00087</td><td class="mono">Frequently Asked QuestionsWith...</td><td style="color:#dc2626; font-weight:600;">No &mdash; concatenated</td></tr>
+  </tbody>
+</table>
+
+<div class="box box-info">
+  <strong>Fix options</strong>
+  <ol>
+    <li><strong>Extraction-level fix</strong> (preferred): In <code>src/extract.py</code>, post-process the text to split lines where a short title-case prefix is immediately followed by a capital letter starting a new sentence (e.g., split on the regex boundary <code>(?&lt;=[a-z])(?=[A-Z][a-z])</code> when preceded by &le;5 title-case words). This fixes p_00087 and catches similar glued headings elsewhere.</li>
+    <li><strong>Chunker-level fix</strong>: In <code>chunk_page()</code>, before the main loop, pre-split long lines that match a "heading prefix + sentence start" pattern. One-line addition but pushes extraction concerns into the chunker.</li>
+  </ol>
+  <p style="margin-top:8px;">This is a <strong>one-page issue</strong> &mdash; the other 6 FAQ pages have correct line breaks. The extraction fix is still worthwhile because the broader scan found ~69 lines with similar concatenation across the corpus (though most are brand-name compounds like <code>DashPass</code>, not heading+content gluing).</p>
+</div>
+
+
+<!-- ================================================================ -->
+<h2 id="issue2">Issue 2: Heading detector for short noun-phrase titles</h2>
+
+<h3>Current behavior</h3>
+<pre>def is_heading(line):
+    words = line.split()
+    if line.startswith("- ") or line.startswith("* "):
+        return False
+    if stripped.endswith("?") and len(words) &lt;= 15:
+        return True            # questions are headings
+    if len(words) &gt; 8:
+        return False           # too long
+    if stripped.endswith((".", "!")) and len(words) &gt; 4:
+        return False           # declarative sentences
+    return True                # short line = heading</pre>
+
+<h3>Test cases</h3>
+<table>
+  <thead><tr><th>Title</th><th>Words</th><th>is_heading?</th><th>Breaks chunk?</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">Quick insights</td><td class="num">2</td><td>Yes</td><td>Only if current &ge; 20t</td></tr>
+    <tr><td class="mono">The bottom line</td><td class="num">3</td><td>Yes</td><td>Only if current &ge; 20t</td></tr>
+    <tr><td class="mono">Frequently asked questions</td><td class="num">3</td><td>Yes</td><td>Only if current &ge; 20t</td></tr>
+    <tr><td class="mono">In summary</td><td class="num">2</td><td>Yes</td><td>Only if current &ge; 20t</td></tr>
+    <tr><td class="mono">Fees and charges</td><td class="num">3</td><td>Yes</td><td>Only if current &ge; 20t</td></tr>
+    <tr><td class="mono">How to open a joint bank account</td><td class="num">7</td><td>Yes</td><td>Only if current &ge; 20t</td></tr>
+  </tbody>
+</table>
+
+<div class="box box-ok">
+  <strong>The detector already catches these correctly</strong>
+  All short noun-phrase titles (1&ndash;8 words, not ending in <code>.</code> or <code>!</code>) are detected as headings. They trigger a chunk break whenever <code>current_tokens &ge; MIN_TOKENS (20)</code>.
+</div>
+
+<h3>Where it fails</h3>
+<p>The heading detector itself is fine. The failures come from two other causes:</p>
+<ol>
+  <li><strong>Concatenation</strong> (Issue 1): The heading is glued to the next paragraph on the same line, so the detector never sees it. Fix belongs in extraction.</li>
+  <li><strong>Low accumulation</strong>: When a heading follows only ~4&ndash;15 tokens of prior content (e.g., a page title), <code>current_tokens &lt; 20</code> prevents a break. The heading merges into the growing chunk. This is by design &mdash; preventing fragments &mdash; but it means a chunk can start with a page title + section heading + content all merged together.</li>
+</ol>
+
+<div class="box box-info">
+  <strong>Possible tweak for (2)</strong>
+  Lower the break threshold from 20 to, say, 10 tokens specifically when the incoming line matches a strong heading pattern (all-title-case, &le;4 words). This would let page titles like <code>"Chase Overdraft Services"</code> (4 tokens) stand as their own chunk-start, with the section heading breaking right after. However, this risks creating more sub-20-token fragments. The merge pass would catch most of them, but it's a tradeoff. <strong>Verdict: not clearly worth it.</strong> The 20-token threshold is doing its job for the majority of cases.
+</div>
+
+
+<!-- ================================================================ -->
+<h2 id="issue3">Issue 3: 20&ndash;49 token bucket &mdash; raise merge threshold?</h2>
+
+<p>684 chunks (24.6%) fall in the 20&ndash;49 token range. Below are 30 random samples, each classified into one of four categories:</p>
+
+<table>
+  <thead><tr><th>Category</th><th>Count</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag tag-factual">FACTUAL</span></td><td class="num">9 / 30</td><td>Short but contains a specific fact &mdash; APR, fee amount, eligibility rule, concrete tip. Good for QA.</td></tr>
+    <tr><td><span class="tag tag-data">DATA</span></td><td class="num">3 / 30</td><td>Structured data fragments (feature tables, fee tables). Useful reference material.</td></tr>
+    <tr><td><span class="tag tag-thin">THIN</span></td><td class="num">8 / 30</td><td>Heading + one vague topic sentence, no specific fact to ask about. Poor QA material.</td></tr>
+    <tr><td><span class="tag tag-mktg">MARKETING</span></td><td class="num">10 / 30</td><td>Taglines, CTAs, promotional copy, exec quotes. No informational value.</td></tr>
+  </tbody>
+</table>
+
+<h3>All 30 samples</h3>
+
+<!-- FACTUAL -->
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00007_48 &middot; 23t &middot; credit_cards/general</div>
+  <div class="text">APR
+19.74%&ndash;28.24% variable APR.&dagger;
+Annual Fee
+$95&dagger;</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00007_05 &middot; 23t &middot; credit_cards/general</div>
+  <div class="text">APR
+19.24%&ndash;27.49% variable APR.&dagger;
+Annual Fee
+$95&dagger;</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00009_29 &middot; 49t &middot; credit_cards/sapphire</div>
+  <div class="text">Return Protection
+You can be reimbursed for eligible items that the store won't accept within 90 days of purchase, up to $500 per item, $1,000 per 12-month period.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00239_18 &middot; 41t &middot; education_center/rewards_benefits</div>
+  <div class="text">Ignoring added fees
+Rewards points don't always cover extra charges such as resort fees, which could get tacked onto each night of your trip. Be sure to ask your hotel about these added charges.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00042_06 &middot; 39t &middot; education_center/basics</div>
+  <div class="text">State and local government checks
+Checks from federal agencies are normally valid for approximately a year, but expiration dates for checks from state and local governments may vary.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00044_04 &middot; 47t &middot; education_center/basics</div>
+  <div class="text">Secure your digital wallet
+Next, you should create a strong, unique password or PIN to protect your digital wallet. Depending on the wallet, you might also have the option to enable biometric authentication.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00160_04 &middot; 46t &middot; education_center/credit_building</div>
+  <div class="text">Credit builder loans: What are they?
+Credit builder loans are loans where your payments are reported to credit bureaus, helping you build or improve your credit score. You receive the funds after repaying the loan in full.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00007_52 &middot; 40t &middot; credit_cards/general</div>
+  <div class="text">New Cardmember Offer
+Earn 75,000 Bonus Avios
+Earn 75,000 Avios after you spend $5,000 on purchases within the first 3 months of account opening.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-factual">FACTUAL</span> c_00269_02 &middot; 28t &middot; credit_cards/freedom</div>
+  <div class="text">3%
+ON DINING, IN OR OUT
+No matter your preference, you'll earn cash back at restaurants and with eligible delivery services.</div>
+</div>
+
+<!-- DATA -->
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-data">DATA</span> c_00014_14 &middot; 31t &middot; personal_banking/checking</div>
+  <div class="text">Available
+Paper checks &middot; Paper checks
+Not Available &middot; Available
+Incoming wire transfers15 &middot; Available &middot; Available
+Outgoing wire transfers</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-data">DATA</span> c_00276_02 &middot; 22t &middot; personal_banking/fees</div>
+  <div class="text">Account fees
+$0 with ONE of the following each monthly statement period:
+$250+ in qualifying electronic deposits</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-data">DATA</span> c_00091_00 &middot; 40t &middot; personal_banking/checking</div>
+  <div class="text">Our most popular checking account, chosen by millions
+Monthly Service Fee
+$15 or $0 fee with qualifying electronic deposits totaling $500 or more, or a minimum average daily balance each statement period.</div>
+</div>
+
+<!-- THIN -->
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00050_10 &middot; 41t &middot; education_center/basics</div>
+  <div class="text">Additional savings account options
+After picking the best bank to open a savings account with, it may be worth taking a closer look at two other types of savings accounts to choose from beyond your traditional savings account.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00292_11 &middot; 34t &middot; education_center/mortgage_education</div>
+  <div class="text">What are the cons of a 15-year mortgage?
+Of course, 15-year mortgages come with some challenges for homebuyers when compared to 30-year mortgages.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00077_06 &middot; 36t &middot; education_center/budgeting_saving</div>
+  <div class="text">Savings account interest calculator
+Using interest rates, deposits and compounding frequencies, the Chase savings account interest calculator tells you how much interest you'll earn over a set time period.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00299_11 &middot; 44t &middot; mortgage/buying</div>
+  <div class="text">Terms to know
+As you move through closing, you'll come across some financial terms related to your loan. This video breaks down those terms to give you a better understanding of how your loan and mortgage payments will work.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00014_05 &middot; 27t &middot; personal_banking/checking</div>
+  <div class="text">Zero Liability Protection.11
+Manage your spending with Spending Planner12 and get daily spending insights with Snapshot in the Chase Mobile&reg; app.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00018_00 &middot; 30t &middot; customer_service/tips</div>
+  <div class="text">How to send a wire transfer with mobile banking
+Send a Wire Transfer
+Learn how to send wire transfers using the Chase Mobile&reg; app on your phone</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00068_02 &middot; 31t &middot; education_center/general</div>
+  <div class="text">Personal Banking &mdash; Teaching children how to budget
+Learn the importance of teaching kids and teens about budgeting and how it can help them develop lifelong financial habits.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-thin">THIN</span> c_00001_02 &middot; 30t &middot; auto/loans</div>
+  <div class="text">3. Drive off the lot
+Choose your car preferences with the dealer, Chase is available if any financing changes are needed, drive off with confidence.</div>
+</div>
+
+<!-- MARKETING -->
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00089_04 &middot; 32t &middot; personal_banking/checking</div>
+  <div class="text">More for your money
+No Chase fees on ATMs across the globe, no foreign exchange rate adjustment fees and no fees on money orders or cashier's checks.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00017_00 &middot; 31t &middot; personal_banking/checking</div>
+  <div class="text">Chase Pay In 4&#8480;
+Flexible payment options &mdash; Chase Pay In 4&#8480;
+Buy now, pay later with your Chase debit card</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00284_09 &middot; 24t &middot; investing/athlete</div>
+  <div class="text">Get in The Know with J.P. Morgan
+Receive the latest investing and market commentary straight to your inbox for free.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00305_09 &middot; 28t &middot; customer_service/help</div>
+  <div class="text">No fees for money orders or cashier's checks
+Why pay fees when you don't have to? Just stop by any Chase branch instead.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00268_04 &middot; 48t &middot; credit_cards/freedom</div>
+  <div class="text">Freedom Flex&reg;
+For the strategic shopper
+Earn 1% on everything you buy, then earn even more with 5% cash back on quarterly rotating bonus categories like gas stations and grocery stores, and on quarterly partnerships with major retailers.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00268_00 &middot; 45t &middot; credit_cards/freedom</div>
+  <div class="text">THE CASHBACK CARDS THAT WORK FOR YOU
+With Chase Freedom, you'll earn cash back rewards on every purchase and enjoy the freedom to redeem your rewards however you like. Why would you cashback any other way?</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00003_07 &middot; 47t &middot; credit_cards/general</div>
+  <div class="text">CREDIT HEALTH
+Keep tabs on your credit score for free
+Get your credit score, customized score improvement plans provided by Experian&trade;, and identity monitoring &mdash; all for free with Chase Credit Journey&reg;*</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00284_07 &middot; 49t &middot; investing/athlete</div>
+  <div class="text">Adam Frank
+Head of Wealth Planning and Advice
+"The J.P. Morgan Athlete Center of Excellence is intended to provide educational resources created for athletes by athletes. We strive to help athletes plan throughout their career from NIL opportunities to life after sport."</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00013_07 &middot; 35t &middot; personal_banking/checking</div>
+  <div class="text">Chase Savings&#8480;
+Automatically set money aside, earn interest and track your savings on the go. Plus, no Monthly Service Fee for 17&ndash;24 year olds.</div>
+</div>
+<div class="chunk-row">
+  <div class="meta"><span class="tag tag-mktg">MARKETING</span> c_00089_00 &middot; 34t &middot; personal_banking/checking</div>
+  <div class="text">Chase Premier Plus Checking&#8480;
+Keep more for your goals with no Chase fees on ATMs across the globe, no foreign exchange rate adjustment fees, and more.</div>
+</div>
+
+<!-- VERDICT -->
+<h3>Verdict</h3>
+
+<div class="verdict verdict-noop">No-op &mdash; do not raise the merge threshold.</div>
+
+<p>Raising <code>MIN_TOKENS</code> would force the 23-token APR/fee chunks to merge into adjacent content, destroying their usefulness as standalone factual units. The breakdown:</p>
+
+<ul>
+  <li><strong>40% (12/30) are factual or structured data</strong> &mdash; short because the fact IS short (an APR, a fee waiver rule, a benefit limit). These are the best QA material in the whole corpus. Merging them would dilute them.</li>
+  <li><strong>27% (8/30) are thin</strong> &mdash; heading + topic sentence with no specific fact. These are low-value but harmless. The info-density classifier in Step 1.7 should flag most of them as low-info.</li>
+  <li><strong>33% (10/30) are marketing</strong> &mdash; taglines, CTAs, promotional copy. These should be caught by the info-density classifier and/or boilerplate dedup. Raising the merge threshold wouldn't help &mdash; it would just create 60-token marketing chunks instead of 30-token ones.</li>
+</ul>
+
+<div class="box box-ok">
+  <strong>The right filter is downstream, not here.</strong> The info-density classifier (Step 1.7) is designed to flag the marketing and thin chunks. Raising the merge threshold would sacrifice the good short factual chunks to eliminate bad ones that are better handled by the classifier. Leave <code>MIN_TOKENS = 20</code>.
+</div>
+
+<!-- ================================================================ -->
+<h2>Summary of Recommendations</h2>
+
+<table>
+  <thead><tr><th>#</th><th>Issue</th><th>Action</th><th>Scope</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td>p_00087 first chunk absorbs FAQ answer</td>
+      <td>Fix in <code>src/extract.py</code>: split lines where a short title-case heading is concatenated with the next sentence (no separator). One regex post-processing step.</td>
+      <td>1 confirmed page, ~69 candidate lines corpus-wide (most are false positives from brand-name compounds)</td>
+    </tr>
+    <tr>
+      <td class="num">2</td>
+      <td>Heading detector for noun-phrase titles</td>
+      <td><strong>No change needed.</strong> The detector already catches all tested noun-phrase titles correctly. The failures are caused by Issue 1 (concatenation), not by the heading heuristic itself.</td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td class="num">3</td>
+      <td>20&ndash;49 token bucket too large</td>
+      <td><strong>No change.</strong> 40% of the bucket is good factual content (APRs, fees, benefit limits). The marketing/thin chunks are better handled by the Step 1.7 info-density classifier.</td>
+      <td>&mdash;</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Consolidation Entity Registry</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1a1a1a;
+    padding: 40px 48px;
+    line-height: 1.5;
+  }
+
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #666; margin-bottom: 36px; }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: #555;
+  }
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── Entity card ── */
+  .entity-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    background: #fafafa;
+  }
+  .entity-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .entity-name {
+    font-size: 17px;
+    font-weight: 700;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    color: #111;
+  }
+  .entity-type {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #e8e8e8;
+    color: #555;
+  }
+  .entity-type.fee_types { background: #fde8e8; color: #a33; }
+  .entity-type.defined_concepts { background: #e8eef8; color: #336; }
+  .entity-type.account_types { background: #e8f5e8; color: #363; }
+  .entity-type.rates_terms { background: #f5f0e8; color: #653; }
+  .entity-type.products { background: #f0e8f5; color: #536; }
+  .entity-type.programs { background: #e8f5f5; color: #355; }
+
+  .aliases {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .stats {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 18px;
+  }
+  .stat-val { font-weight: 700; color: #333; }
+
+  /* ── Role rows ── */
+  .role-section {
+    margin-bottom: 14px;
+  }
+  .role-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .role-label .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .role-defines .dot { background: #2d7d46; }
+  .role-uses .dot { background: #7dba93; }
+  .role-condition .dot { background: #b8560f; }
+  .role-consequence .dot { background: #e8a84c; }
+  .role-defines { color: #2d7d46; }
+  .role-uses { color: #7dba93; }
+  .role-condition { color: #b8560f; }
+  .role-consequence { color: #e8a84c; }
+
+  .chunk-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .chunk-pill {
+    font-size: 11px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: default;
+    position: relative;
+    border: 1px solid transparent;
+  }
+  .chunk-pill.defines { background: #d4edda; color: #1b5e2f; border-color: #b7dfca; }
+  .chunk-pill.uses { background: #e8f5ec; color: #4a8c5e; border-color: #cce8d6; }
+  .chunk-pill.condition { background: #fde4cc; color: #8c4a0a; border-color: #f5ceaa; }
+  .chunk-pill.consequence { background: #fef3dd; color: #9a6e1a; border-color: #f5e3aa; }
+
+  .chunk-pill.junction {
+    outline: 2px solid #4a6cf7;
+    outline-offset: 1px;
+    font-weight: 600;
+  }
+
+  .chunk-pill .tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #eee;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: -apple-system, sans-serif;
+    white-space: normal;
+    width: 320px;
+    line-height: 1.45;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    pointer-events: none;
+  }
+  .chunk-pill .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #222;
+  }
+  .chunk-pill:hover .tooltip { display: block; }
+
+  /* ── Edge diagram ── */
+  .edge-section {
+    margin-top: 44px;
+    margin-bottom: 24px;
+  }
+  .edge-section h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .edge-subtitle {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 24px;
+  }
+
+  .edge-diagram {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fafafa;
+    padding: 32px;
+    overflow-x: auto;
+  }
+
+  svg text { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
+
+  /* ── Summary stats ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .summary-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    background: #fafafa;
+  }
+  .summary-box .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .summary-box .value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #222;
+  }
+  .summary-box .detail {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  /* ── Chain walkthrough ── */
+  .chain-section {
+    margin-top: 44px;
+  }
+  .chain-section h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .chain-subtitle {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+
+  .chain-step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0;
+    margin-bottom: 0;
+  }
+  .chain-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .chain-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid;
+    background: #fff;
+    flex-shrink: 0;
+    margin-top: 14px;
+  }
+  .chain-line {
+    width: 2px;
+    flex: 1;
+    min-height: 20px;
+  }
+  .chain-dot.defines { border-color: #2d7d46; }
+  .chain-dot.uses { border-color: #7dba93; }
+  .chain-dot.condition { border-color: #b8560f; }
+  .chain-dot.consequence { border-color: #e8a84c; }
+  .chain-line.du { background: linear-gradient(to bottom, #2d7d46, #7dba93); }
+  .chain-line.cc { background: linear-gradient(to bottom, #b8560f, #e8a84c); }
+  .chain-line.bridge { background: #4a6cf7; }
+
+  .chain-content {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 4px;
+    background: #fff;
+  }
+  .chain-chunk-id {
+    font-size: 12px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 4px;
+  }
+  .chain-text {
+    font-size: 12.5px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .chain-edge-label {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    margin: 8px 0 8px 18px;
+  }
+  .chain-edge-label.du { background: #d4edda; color: #1b5e2f; }
+  .chain-edge-label.cc { background: #fde4cc; color: #8c4a0a; }
+  .chain-edge-label.bridge-label { background: #e0e7ff; color: #3451b2; }
+</style>
+</head>
+<body>
+
+<h1>Post-Consolidation Entity Registry</h1>
+<p class="subtitle">Snapshot: chase_2026_05_27 &mdash; Showing 5 connected entities with bridge potential. Chunks outlined in <span style="color:#4a6cf7;font-weight:700">blue</span> are junction nodes (appear in multiple entities).</p>
+
+<!-- Summary stats -->
+<div class="summary-grid">
+  <div class="summary-box">
+    <div class="label">Total entities</div>
+    <div class="value">3,615</div>
+    <div class="detail">after consolidation</div>
+  </div>
+  <div class="summary-box">
+    <div class="label">defines &rarr; uses bridges</div>
+    <div class="value">742</div>
+    <div class="detail">entities with both sides</div>
+  </div>
+  <div class="summary-box">
+    <div class="label">condition &rarr; consequence</div>
+    <div class="value">217</div>
+    <div class="detail">entities with both sides</div>
+  </div>
+  <div class="summary-box">
+    <div class="label">Either bridge type</div>
+    <div class="value">786</div>
+    <div class="detail">union of D&rarr;U or C&rarr;C</div>
+  </div>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4edda;border:1px solid #b7dfca"></div> Defines</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5ec;border:1px solid #cce8d6"></div> Uses</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fde4cc;border:1px solid #f5ceaa"></div> Condition</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fef3dd;border:1px solid #f5e3aa"></div> Consequence</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff;border:2px solid #4a6cf7"></div> Junction node (multi-entity)</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ENTITY CARDS                                    -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<!-- monthly_service_fee -->
+<div class="entity-card">
+  <div class="entity-header">
+    <span class="entity-name">monthly_service_fee</span>
+    <span class="entity-type fee_types">fee_types</span>
+  </div>
+  <div class="aliases">aliases: "monthly service fee", "monthly service fees", "monthly service or maintenance fee"</div>
+  <div class="stats">
+    <span>Frequency: <span class="stat-val">17</span></span>
+    <span>Chunks: <span class="stat-val">14</span></span>
+    <span>Strata: education_center</span>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-defines"><span class="dot"></span> Defines (7 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill defines junction">c_00037_01<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (defines), student_checking_account (uses), overdraft (uses)<br><br>"What is a checking account? A checking account is used for day-to-day cash deposits and withdrawals…"</span></span>
+      <span class="chunk-pill defines junction">c_00037_03<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (defines, condition), direct_deposit (defines), minimum_balance (uses)<br><br>"Some pros include: Not all accounts require a minimum balance… Most traditional checking accounts have a monthly service fee…"</span></span>
+      <span class="chunk-pill defines junction">c_00037_04<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (defines, condition), minimum_balance (defines, condition)<br><br>"Some cons include: Some banks require you to keep a minimum balance in your checking account at all times…"</span></span>
+      <span class="chunk-pill defines junction">c_00049_02<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (defines), cash_back (uses, consequence), debit_card (uses)<br><br>"What to consider before opening a checking account — Before you apply for a checking account…"</span></span>
+      <span class="chunk-pill defines junction">c_00054_03<span class="tooltip"><strong>Junction:</strong> also mentions interest_rate (defines), apy (defines), eligibility_requirement (defines)</span></span>
+      <span class="chunk-pill defines junction">c_00057_02<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (uses), overdraft_fee (defines), out_of_network_atm_fee (defines)<br><br>"Checking account fees to be aware of — Most checking accounts have a monthly service fee…"</span></span>
+      <span class="chunk-pill defines junction">c_00064_01<span class="tooltip"><strong>Junction:</strong> also mentions student_checking_account (defines), online_banking (defines), minimum_balance_requirement (defines, condition)<br><br>"Features and benefits of student checking accounts…"</span></span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-uses"><span class="dot"></span> Uses (8 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill uses junction">c_00038_03<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (defines), debit_card (uses), direct_deposit (uses), foreign_transaction_fee (uses)</span></span>
+      <span class="chunk-pill uses">c_00038_06<span class="tooltip">"…saving_withdrawal_limit_fee (uses, consequence)"</span></span>
+      <span class="chunk-pill uses junction">c_00038_10<span class="tooltip"><strong>Junction:</strong> also mentions minimum_balance (uses, condition), overdraft_fee (uses, consequence)<br><br>"Interest-bearing checking account — Earns interest on your account balance. Most have requirements…"</span></span>
+      <span class="chunk-pill uses junction">c_00047_00<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (defines), pin (defines, condition)<br><br>"How to get a debit card — Debit cards allow consumers to make convenient transactions…"</span></span>
+      <span class="chunk-pill uses junction">c_00049_02<span class="tooltip"><strong>Also a definer</strong> of this entity — chunk both defines and uses monthly_service_fee</span></span>
+      <span class="chunk-pill uses">c_00049_03</span>
+      <span class="chunk-pill uses">c_00063_09</span>
+      <span class="chunk-pill uses junction">c_00066_04<span class="tooltip"><strong>Junction:</strong> also mentions checking_account (uses, condition), saving_account (uses)</span></span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-condition"><span class="dot"></span> Condition (4 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill condition junction">c_00037_01<span class="tooltip">States a rule/prerequisite involving the monthly service fee</span></span>
+      <span class="chunk-pill condition junction">c_00047_00<span class="tooltip">States a condition involving the monthly service fee</span></span>
+      <span class="chunk-pill condition junction">c_00057_02<span class="tooltip">"Most checking accounts have a monthly service fee. There are typically ways to waive monthly service fees if you meet certain requirements…"</span></span>
+      <span class="chunk-pill condition junction">c_00064_01<span class="tooltip">States the condition for waiving: student account status</span></span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-consequence"><span class="dot"></span> Consequence (5 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill consequence junction">c_00037_03<span class="tooltip">"There may be ways to waive them…" — consequence of meeting requirements</span></span>
+      <span class="chunk-pill consequence junction">c_00037_04<span class="tooltip">Consequence: fees charged if minimum balance not met</span></span>
+      <span class="chunk-pill consequence junction">c_00038_10<span class="tooltip">Consequence: potential fees if minimum balance not maintained</span></span>
+      <span class="chunk-pill consequence junction">c_00049_02<span class="tooltip">Consequence of checking account features on fees</span></span>
+      <span class="chunk-pill consequence">c_00063_09</span>
+    </div>
+  </div>
+</div>
+
+<!-- minimum_balance -->
+<div class="entity-card">
+  <div class="entity-header">
+    <span class="entity-name">minimum_balance</span>
+    <span class="entity-type defined_concepts">defined_concepts</span>
+  </div>
+  <div class="aliases">aliases: "minimum balance", "minimum balances", "minimum account balance"</div>
+  <div class="stats">
+    <span>Frequency: <span class="stat-val">9</span></span>
+    <span>Chunks: <span class="stat-val">9</span></span>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-defines"><span class="dot"></span> Defines (3 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill defines junction">c_00037_04<span class="tooltip"><strong>Junction:</strong> also DEFINES monthly_service_fee &amp; checking_account here<br><br>"Some banks require you to keep a minimum balance in your checking account at all times."</span></span>
+      <span class="chunk-pill defines">c_00106_01</span>
+      <span class="chunk-pill defines">c_00106_03</span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-uses"><span class="dot"></span> Uses (6 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill uses">c_00031_02</span>
+      <span class="chunk-pill uses junction">c_00037_03<span class="tooltip"><strong>Junction:</strong> also DEFINES monthly_service_fee, direct_deposit, checking_account</span></span>
+      <span class="chunk-pill uses">c_00038_09</span>
+      <span class="chunk-pill uses junction">c_00038_10<span class="tooltip"><strong>Junction:</strong> also USES monthly_service_fee &amp; overdraft_fee</span></span>
+      <span class="chunk-pill uses">c_00046_06</span>
+      <span class="chunk-pill uses">c_00059_01</span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-condition"><span class="dot"></span> Condition (8 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill condition">c_00031_02</span>
+      <span class="chunk-pill condition junction">c_00037_03<span class="tooltip">States condition: "Not all accounts require a minimum balance…"</span></span>
+      <span class="chunk-pill condition junction">c_00037_04<span class="tooltip">States condition: "require you to keep a minimum balance"</span></span>
+      <span class="chunk-pill condition">c_00038_09</span>
+      <span class="chunk-pill condition junction">c_00038_10<span class="tooltip">States condition: "requirements… like a minimum account balance"</span></span>
+      <span class="chunk-pill condition">c_00046_06</span>
+      <span class="chunk-pill condition">c_00059_01</span>
+      <span class="chunk-pill condition">c_00106_01</span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-consequence"><span class="dot"></span> Consequence (0 chunks)</div>
+    <div class="chunk-list">
+      <span style="font-size:12px;color:#bbb;font-style:italic">— none —</span>
+    </div>
+  </div>
+</div>
+
+<!-- overdraft_fee -->
+<div class="entity-card">
+  <div class="entity-header">
+    <span class="entity-name">overdraft_fee</span>
+    <span class="entity-type fee_types">fee_types</span>
+  </div>
+  <div class="aliases">aliases: "overdraft fee", "overdraft fees"</div>
+  <div class="stats">
+    <span>Frequency: <span class="stat-val">9</span></span>
+    <span>Chunks: <span class="stat-val">8</span></span>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-defines"><span class="dot"></span> Defines (3 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill defines">c_00029_12</span>
+      <span class="chunk-pill defines junction">c_00057_02<span class="tooltip"><strong>Junction:</strong> also DEFINES monthly_service_fee, out_of_network_atm_fee; USES checking_account<br><br>"Checking account fees to be aware of — …overdraft fees when you spend more than what's in your account."</span></span>
+      <span class="chunk-pill defines">c_00058_06</span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-uses"><span class="dot"></span> Uses (5 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill uses junction">c_00038_03<span class="tooltip"><strong>Junction:</strong> also USES monthly_service_fee; DEFINES checking_account</span></span>
+      <span class="chunk-pill uses junction">c_00038_10<span class="tooltip"><strong>Junction:</strong> also USES monthly_service_fee &amp; minimum_balance (condition)</span></span>
+      <span class="chunk-pill uses">c_00048_01</span>
+      <span class="chunk-pill uses junction">c_00049_02<span class="tooltip"><strong>Junction:</strong> also DEFINES monthly_service_fee &amp; checking_account</span></span>
+      <span class="chunk-pill uses">c_00176_11</span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-consequence"><span class="dot"></span> Consequence (4 chunks)</div>
+    <div class="chunk-list">
+      <span class="chunk-pill consequence">c_00029_12</span>
+      <span class="chunk-pill consequence junction">c_00038_10<span class="tooltip"><strong>Junction:</strong> consequence of overdraft — fee applied when minimum_balance condition not met</span></span>
+      <span class="chunk-pill consequence">c_00058_06</span>
+      <span class="chunk-pill consequence">c_00176_11</span>
+    </div>
+  </div>
+</div>
+
+<!-- direct_deposit -->
+<div class="entity-card">
+  <div class="entity-header">
+    <span class="entity-name">direct_deposit</span>
+    <span class="entity-type defined_concepts">defined_concepts</span>
+  </div>
+  <div class="aliases">aliases: "direct deposit", "direct deposits"</div>
+  <div class="stats">
+    <span>Frequency: <span class="stat-val">31</span></span>
+    <span>Chunks: <span class="stat-val">31</span></span>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-defines"><span class="dot"></span> Defines (13 chunks) <span style="color:#aaa;font-weight:400;text-transform:none">— showing 6</span></div>
+    <div class="chunk-list">
+      <span class="chunk-pill defines">c_00029_11</span>
+      <span class="chunk-pill defines junction">c_00037_03<span class="tooltip"><strong>Junction:</strong> also DEFINES monthly_service_fee &amp; checking_account<br><br>"Most traditional checking accounts have a monthly service fee. There may be ways to waive them — like direct deposit…"</span></span>
+      <span class="chunk-pill defines">c_00038_05</span>
+      <span class="chunk-pill defines">c_00058_02</span>
+      <span class="chunk-pill defines">c_00068_05</span>
+      <span class="chunk-pill defines" style="opacity:0.5">+7 more</span>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label role-uses"><span class="dot"></span> Uses (18 chunks) <span style="color:#aaa;font-weight:400;text-transform:none">— showing 5</span></div>
+    <div class="chunk-list">
+      <span class="chunk-pill uses">c_00028_03</span>
+      <span class="chunk-pill uses">c_00031_03</span>
+      <span class="chunk-pill uses">c_00036_08</span>
+      <span class="chunk-pill uses junction">c_00038_03<span class="tooltip"><strong>Junction:</strong> also USES monthly_service_fee &amp; overdraft_fee</span></span>
+      <span class="chunk-pill uses" style="opacity:0.5">+13 more</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHAIN WALKTHROUGH                               -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<div class="chain-section">
+  <h2>Multi-Hop Chain Example</h2>
+  <p class="chain-subtitle">A 3-hop chain through three entities, showing how junction chunks create traversable paths. Each hop uses a different entity as its bridge.</p>
+
+  <!-- Hop 1: chunk_042 defines minimum_balance -->
+  <div class="chain-step">
+    <div class="chain-connector">
+      <div class="chain-dot defines"></div>
+      <div class="chain-line du"></div>
+    </div>
+    <div>
+      <div class="chain-content">
+        <div class="chain-chunk-id">c_00037_04 &nbsp;<span style="font-weight:400;color:#888">education_center / basics</span></div>
+        <div class="chain-text">"Some banks require you to keep a <strong>minimum balance</strong> in your checking account at all times. While there can be ways to waive them, most checking accounts charge a <strong>monthly service fee</strong>."</div>
+        <div style="margin-top:6px">
+          <span style="font-size:10px;padding:2px 6px;background:#d4edda;border-radius:3px;color:#1b5e2f"><strong>defines</strong> minimum_balance</span>
+          <span style="font-size:10px;padding:2px 6px;background:#d4edda;border-radius:3px;color:#1b5e2f;margin-left:4px"><strong>defines</strong> monthly_service_fee</span>
+          <span style="font-size:10px;padding:2px 6px;background:#fde4cc;border-radius:3px;color:#8c4a0a;margin-left:4px"><strong>condition</strong> minimum_balance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin:0 0 0 18px">
+    <span class="chain-edge-label du">defines &rarr; uses &nbsp;via <strong>minimum_balance</strong></span>
+  </div>
+
+  <!-- Hop 2: junction chunk uses minimum_balance + condition on monthly_service_fee -->
+  <div class="chain-step">
+    <div class="chain-connector">
+      <div class="chain-dot uses" style="background:#e0e7ff;border-color:#4a6cf7"></div>
+      <div class="chain-line cc"></div>
+    </div>
+    <div>
+      <div class="chain-content" style="border-color:#4a6cf7;border-width:2px">
+        <div class="chain-chunk-id">c_00038_10 &nbsp;<span style="font-weight:400;color:#4a6cf7">JUNCTION NODE</span></div>
+        <div class="chain-text">"Interest-bearing checking account — Earns interest on your account balance. Most have requirements in order to earn interest, like a <strong>minimum account balance</strong>. Potential fees if <strong>minimum balance</strong> not maintained, including <strong>overdraft fees</strong>."</div>
+        <div style="margin-top:6px">
+          <span style="font-size:10px;padding:2px 6px;background:#e8f5ec;border-radius:3px;color:#4a8c5e"><strong>uses</strong> minimum_balance</span>
+          <span style="font-size:10px;padding:2px 6px;background:#e8f5ec;border-radius:3px;color:#4a8c5e;margin-left:4px"><strong>uses</strong> monthly_service_fee</span>
+          <span style="font-size:10px;padding:2px 6px;background:#fde4cc;border-radius:3px;color:#8c4a0a;margin-left:4px"><strong>condition</strong> minimum_balance</span>
+          <span style="font-size:10px;padding:2px 6px;background:#fef3dd;border-radius:3px;color:#9a6e1a;margin-left:4px"><strong>consequence</strong> overdraft_fee</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin:0 0 0 18px">
+    <span class="chain-edge-label cc">condition &rarr; consequence &nbsp;via <strong>overdraft_fee</strong></span>
+  </div>
+
+  <!-- Hop 3: defines overdraft_fee -->
+  <div class="chain-step">
+    <div class="chain-connector">
+      <div class="chain-dot defines"></div>
+      <div class="chain-line" style="background:transparent"></div>
+    </div>
+    <div>
+      <div class="chain-content">
+        <div class="chain-chunk-id">c_00057_02 &nbsp;<span style="font-weight:400;color:#888">education_center / basics</span></div>
+        <div class="chain-text">"Checking account fees to be aware of — Most checking accounts have a <strong>monthly service fee</strong>. There are typically ways to waive monthly service fees if you meet certain requirements. Other fees include <strong>overdraft fees</strong> when you spend more than what's in your account."</div>
+        <div style="margin-top:6px">
+          <span style="font-size:10px;padding:2px 6px;background:#d4edda;border-radius:3px;color:#1b5e2f"><strong>defines</strong> overdraft_fee</span>
+          <span style="font-size:10px;padding:2px 6px;background:#d4edda;border-radius:3px;color:#1b5e2f;margin-left:4px"><strong>defines</strong> monthly_service_fee</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;padding:16px 20px;background:#f0f4ff;border-radius:8px;border:1px solid #d0d8f0">
+    <div style="font-size:13px;font-weight:700;color:#3451b2;margin-bottom:6px">Possible multi-hop question from this chain:</div>
+    <div style="font-size:13px;color:#444;line-height:1.55">"If a customer fails to maintain the minimum balance in an interest-bearing checking account, what additional fee type might they incur beyond the monthly service charge, and when exactly is it triggered?"</div>
+    <div style="font-size:11px;color:#888;margin-top:8px">
+      Requires: <strong>c_00037_04</strong> (what minimum balance means) &rarr; <strong>c_00038_10</strong> (consequence of not meeting it — overdraft fees) &rarr; <strong>c_00057_02</strong> (what an overdraft fee is and when it fires)
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- EDGE DIAGRAM (SVG)                              -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<div class="edge-section">
+  <h2>Entity Bridge Graph (Subset)</h2>
+  <p class="edge-subtitle">Chunks as nodes, entities as labeled edges. Color encodes the relationship type. Junction nodes sit at the intersection of multiple entity edges.</p>
+
+  <div class="edge-diagram">
+    <svg width="920" height="440" viewBox="0 0 920 440">
+      <defs>
+        <marker id="arrow-du" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6" fill="#2d7d46"/>
+        </marker>
+        <marker id="arrow-cc" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6" fill="#b8560f"/>
+        </marker>
+      </defs>
+
+      <!-- Chunk nodes -->
+      <!-- Row 1 -->
+      <rect x="40" y="40" width="120" height="44" rx="6" fill="#fff" stroke="#ccc"/>
+      <text x="100" y="58" text-anchor="middle" font-size="10" fill="#888">defines min_bal</text>
+      <text x="100" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00037_04</text>
+
+      <rect x="260" y="40" width="120" height="44" rx="6" fill="#fff" stroke="#ccc"/>
+      <text x="320" y="58" text-anchor="middle" font-size="10" fill="#888">defines dir_dep</text>
+      <text x="320" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00037_03</text>
+
+      <rect x="700" y="40" width="120" height="44" rx="6" fill="#fff" stroke="#ccc"/>
+      <text x="760" y="58" text-anchor="middle" font-size="10" fill="#888">defines svc_fee</text>
+      <text x="760" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00064_01</text>
+
+      <!-- Row 2: junction nodes -->
+      <rect x="120" y="180" width="140" height="52" rx="6" fill="#f0f4ff" stroke="#4a6cf7" stroke-width="2"/>
+      <text x="190" y="200" text-anchor="middle" font-size="10" fill="#4a6cf7" font-weight="600">JUNCTION</text>
+      <text x="190" y="216" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00038_10</text>
+
+      <rect x="400" y="180" width="140" height="52" rx="6" fill="#f0f4ff" stroke="#4a6cf7" stroke-width="2"/>
+      <text x="470" y="200" text-anchor="middle" font-size="10" fill="#4a6cf7" font-weight="600">JUNCTION</text>
+      <text x="470" y="216" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00057_02</text>
+
+      <rect x="660" y="180" width="140" height="52" rx="6" fill="#f0f4ff" stroke="#4a6cf7" stroke-width="2"/>
+      <text x="730" y="200" text-anchor="middle" font-size="10" fill="#4a6cf7" font-weight="600">JUNCTION</text>
+      <text x="730" y="216" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00047_00</text>
+
+      <!-- Row 3 -->
+      <rect x="40" y="340" width="120" height="44" rx="6" fill="#fff" stroke="#ccc"/>
+      <text x="100" y="358" text-anchor="middle" font-size="10" fill="#888">defines ovr_fee</text>
+      <text x="100" y="372" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00029_12</text>
+
+      <rect x="300" y="340" width="120" height="44" rx="6" fill="#fff" stroke="#ccc"/>
+      <text x="360" y="358" text-anchor="middle" font-size="10" fill="#888">uses dir_dep</text>
+      <text x="360" y="372" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00038_03</text>
+
+      <rect x="560" y="340" width="120" height="44" rx="6" fill="#fff" stroke="#ccc"/>
+      <text x="620" y="358" text-anchor="middle" font-size="10" fill="#888">uses checking</text>
+      <text x="620" y="372" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00066_04</text>
+
+      <rect x="760" y="340" width="120" height="44" rx="6" fill="#fff" stroke="#ccc"/>
+      <text x="820" y="358" text-anchor="middle" font-size="10" fill="#888">defines chk_acct</text>
+      <text x="820" y="372" text-anchor="middle" font-size="11" font-weight="700" fill="#333">c_00049_02</text>
+
+      <!-- EDGES -->
+      <!-- c_00037_04 → c_00038_10 (defines→uses minimum_balance) -->
+      <line x1="100" y1="84" x2="180" y2="180" stroke="#2d7d46" stroke-width="2" marker-end="url(#arrow-du)"/>
+      <text x="115" y="135" font-size="9" fill="#2d7d46" transform="rotate(-28,115,135)">D→U min_balance</text>
+
+      <!-- c_00037_03 → c_00038_10 (defines→uses minimum_balance) -->
+      <line x1="310" y1="84" x2="210" y2="180" stroke="#2d7d46" stroke-width="1.5" marker-end="url(#arrow-du)" stroke-dasharray="4,3"/>
+      <text x="280" y="130" font-size="9" fill="#2d7d46" transform="rotate(22,280,130)">D→U min_bal</text>
+
+      <!-- c_00037_03 → c_00038_03 (defines→uses direct_deposit) -->
+      <line x1="320" y1="84" x2="360" y2="340" stroke="#2d7d46" stroke-width="1.5" marker-end="url(#arrow-du)"/>
+      <text x="355" y="220" font-size="9" fill="#2d7d46" transform="rotate(80,355,220)">D→U direct_deposit</text>
+
+      <!-- c_00038_10 → c_00057_02 (consequence→defines overdraft_fee, backward lookup) -->
+      <line x1="260" y1="206" x2="400" y2="206" stroke="#b8560f" stroke-width="2" marker-end="url(#arrow-cc)"/>
+      <text x="330" y="198" font-size="9" fill="#b8560f" text-anchor="middle">C→C overdraft_fee</text>
+
+      <!-- c_00057_02 → c_00047_00 (both condition monthly_service_fee) -->
+      <line x1="540" y1="206" x2="660" y2="206" stroke="#b8560f" stroke-width="1.5" marker-end="url(#arrow-cc)" stroke-dasharray="4,3"/>
+      <text x="600" y="198" font-size="9" fill="#b8560f" text-anchor="middle">C→C svc_fee</text>
+
+      <!-- c_00064_01 → c_00047_00 (both relate to monthly_service_fee) -->
+      <line x1="760" y1="84" x2="740" y2="180" stroke="#2d7d46" stroke-width="1.5" marker-end="url(#arrow-du)"/>
+      <text x="770" y="135" font-size="9" fill="#2d7d46" transform="rotate(10,770,135)">D→U svc_fee</text>
+
+      <!-- c_00038_10 → c_00029_12 (consequence overdraft) -->
+      <line x1="170" y1="232" x2="110" y2="340" stroke="#b8560f" stroke-width="1.5" marker-end="url(#arrow-cc)"/>
+      <text x="110" y="290" font-size="9" fill="#b8560f" transform="rotate(60,110,290)">C→C ovr_fee</text>
+
+      <!-- c_00057_02 → c_00038_03 (defines→uses monthly_service_fee) -->
+      <line x1="450" y1="232" x2="380" y2="340" stroke="#2d7d46" stroke-width="1.5" marker-end="url(#arrow-du)"/>
+      <text x="390" y="290" font-size="9" fill="#2d7d46" transform="rotate(50,390,290)">D→U svc_fee</text>
+
+      <!-- c_00047_00 → c_00066_04 (defines→uses checking_account) -->
+      <line x1="720" y1="232" x2="640" y2="340" stroke="#2d7d46" stroke-width="1.5" marker-end="url(#arrow-du)"/>
+      <text x="700" y="290" font-size="9" fill="#2d7d46" transform="rotate(48,700,290)">D→U chk_acct</text>
+
+      <!-- c_00047_00 → c_00049_02 (condition monthly_service_fee) -->
+      <line x1="750" y1="232" x2="810" y2="340" stroke="#b8560f" stroke-width="1.5" marker-end="url(#arrow-cc)" stroke-dasharray="4,3"/>
+      <text x="800" y="290" font-size="9" fill="#b8560f" transform="rotate(-48,800,290)">svc_fee</text>
+
+      <!-- Legend inside SVG -->
+      <rect x="40" y="400" width="12" height="12" rx="2" fill="#fff" stroke="#4a6cf7" stroke-width="2"/>
+      <text x="58" y="411" font-size="10" fill="#555" font-family="Inter, sans-serif">Junction node</text>
+
+      <line x1="160" y1="406" x2="190" y2="406" stroke="#2d7d46" stroke-width="2"/>
+      <text x="196" y="411" font-size="10" fill="#555" font-family="Inter, sans-serif">defines→uses</text>
+
+      <line x1="310" y1="406" x2="340" y2="406" stroke="#b8560f" stroke-width="2"/>
+      <text x="346" y="411" font-size="10" fill="#555" font-family="Inter, sans-serif">condition→consequence</text>
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Info-Density Classifier — 10-Chunk Pilot Results</title>
+<style>
+  :root { --bg: #fafafa; --card: #fff; --border: #e0e0e0; --text: #202124; --muted: #5f6368; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg);
+          color: var(--text); line-height: 1.6; padding: 2rem; max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  .summary { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+           padding: 1rem 1.5rem; min-width: 120px; text-align: center; }
+  .stat-value { font-size: 1.8rem; font-weight: 700; }
+  .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  .stat-info .stat-value { color: #1b7340; }
+  .stat-mkt .stat-value { color: #b5451b; }
+  .stat-flag .stat-value { color: #d93025; }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+           padding: 1.25rem; margin-bottom: 1rem; }
+  .card-header { display: flex; justify-content: space-between; align-items: center;
+                  margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .chunk-meta { display: flex; align-items: center; gap: 0.75rem; }
+  .chunk-meta code { font-size: 0.9rem; font-weight: 600; }
+  .stratum { background: #e8eaed; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; color: var(--muted); }
+  .tokens { font-size: 0.8rem; color: var(--muted); }
+  .classification { display: flex; align-items: center; gap: 0.5rem; }
+  .label-badge { padding: 3px 12px; border-radius: 12px; font-size: 0.82rem; font-weight: 600; }
+  .reason { font-size: 0.88rem; color: var(--muted); font-style: italic; margin-bottom: 0.75rem;
+             padding-left: 0.5rem; border-left: 2px solid #dadce0; }
+  .chunk-text { white-space: pre-wrap; word-wrap: break-word; font-family: 'SF Mono', 'Fira Code', monospace;
+                 font-size: 0.8rem; line-height: 1.6; background: #f8f9fa; padding: 0.75rem;
+                 border-radius: 4px; max-height: 250px; overflow-y: auto; }
+
+  .legend { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+             padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .legend h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
+  .legend ul { list-style: none; padding: 0; }
+  .legend li { margin-bottom: 0.25rem; }
+  .legend li::before { content: "•"; margin-right: 0.5rem; }
+</style>
+</head>
+<body>
+
+<h1>Info-Density Classifier — Pilot Results</h1>
+<p class="subtitle">10 diverse chunks classified with gpt-5.4 (temperature=0) — review before full batch</p>
+
+<div class="summary">
+  <div class="stat stat-info">
+    <div class="stat-value">8</div>
+    <div class="stat-label">Informational</div>
+  </div>
+  <div class="stat stat-mkt">
+    <div class="stat-value">2</div>
+    <div class="stat-label">Marketing</div>
+  </div>
+  <div class="stat stat-flag">
+    <div class="stat-value">2</div>
+    <div class="stat-label">is_low_info</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">10</div>
+    <div class="stat-label">Total</div>
+  </div>
+</div>
+
+<div class="legend">
+  <h3>Derivation</h3>
+  <ul>
+    <li><strong>is_low_info</strong> = label is "marketing" AND confidence is not "low"</li>
+    <li>This flag is advisory metadata — it does not drop chunks from the corpus</li>
+  </ul>
+</div>
+
+
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00223_15</code>
+          <span class="stratum">education_center</span>
+          <span class="tokens">45t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">It describes specific customer service availability and access levels for cardmembers.</div>
+      <pre class="chunk-text">### Customer service
+Cardmembers have 24/7 access to a customer service specialist from almost anywhere in the world. Additionally, Reserve cardmembers enjoy exclusive access to a dedicated customer service team available every day of the week.</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00213_01</code>
+          <span class="stratum">education_center</span>
+          <span class="tokens">197t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">It explains what welcome bonuses are, how they work, and their typical requirements and effects.</div>
+      <pre class="chunk-text">## Understanding credit card welcome bonuses
+Credit card welcome bonus offers are introductory incentives offered by issuers. These bonuses are designed to offer value in the form of points, miles or cash back when new cardmembers meet specific spending requirements within a designated period, typically a few months after account opening.
+- Purpose: The primary goal of welcome bonuses is to encourage new users to apply for and start using the credit card.
+- Requirements: To earn these bonuses, cardmembers usually need to spend a certain amount on their credit cards within the first few months.…</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00006_07</code>
+          <span class="stratum">credit_cards</span>
+          <span class="tokens">41t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">The chunk states specific reward terms: no expiration while the account is open and no minimum redemption amount.</div>
+      <pre class="chunk-text">### NO EXPIRATION
+Cash back rewards do not expire
+Cash Back rewards do not expire as long as your account is open.
+And there is no minimum to redeem for cash back.Explore Additional Benefits</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00096_11</code>
+          <span class="stratum">credit_cards</span>
+          <span class="tokens">78t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">It gives a specific eligibility and payment-detail explanation about using rewards and gift cards with a Pay Over Time plan.</div>
+      <pre class="chunk-text">### Can I use rewards and/or Amazon gift cards when I use a Chase Pay Over Time plan at checkout?
+Yes, eligible orders can be paid for with Chase Ultimate Rewards points and Amazon gift card(s) or any combination of the two. If you choose to do so, your card will be charged the remaining balance at checkout, and your Chase Pay Over Time plan will reflect this amount.</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00015_06</code>
+          <span class="stratum">personal_banking</span>
+          <span class="tokens">112t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">It states specific consent terms and communication methods for account-related disclosures.</div>
+      <pre class="chunk-text">### 6. Contacting You Electronically and by Email or through Your Mobile Device
+You consent to receive electronic communications and disclosures from us in connection with your Chase Card and a Wallet. You agree that we can contact you by email at any email address you provide to us in connection with any Chase product, service or account, or through the mobile device on which you have downloaded the Chase Mobile app.
+Communications to you may include contact from companies working on our behalf to service your accounts. You agree to update your contact information with us when it changes.</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00021_11</code>
+          <span class="stratum">personal_banking</span>
+          <span class="tokens">86t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">It gives specific opt-out instructions and contact methods for removing eligible cards from Paze.</div>
+      <pre class="chunk-text">## What if I want to opt out of Paze?
+Contact Chase through the Secure Message Center or by calling 1-800-935-9935 to request that your eligible Chase credit and debit cards are not made available for use.
+If your eligible Chase credit and debit cards are already in Paze, you can remove them in the Chase Mobile app. You can also opt out of Paze in the Chase Mobile app.</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #b5451b;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00289_07</code>
+          <span class="stratum">mortgage</span>
+          <span class="tokens">31t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#fce8e6;color:#b5451b;">marketing</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          <span style="background:#d93025;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;margin-left:6px;">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">This is a promotional navigation snippet highlighting resource links without substantive explanatory details.</div>
+      <pre class="chunk-text">## Explore mortgage resources
+### Mortgage preapproval: What is it and how do you get one?
+### Types of mortgage loans: Home financing options to consider</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #b5451b;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00288_17</code>
+          <span class="stratum">mortgage</span>
+          <span class="tokens">44t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#fce8e6;color:#b5451b;">marketing</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          <span style="background:#d93025;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;margin-left:6px;">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The chunk mainly promotes Chase content offerings with a podcast callout rather than providing substantive homebuying information.</div>
+      <pre class="chunk-text">Award-winning podcast
+Helpful articles
+Compare cities
+### Beginner to Buyer: A podcast
+Listen in and get answers to your homebuying questions on our Beginner to Buyer podcast series hosted by Nadeska Alexis.</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00122_09</code>
+          <span class="stratum">education_center</span>
+          <span class="tokens">20t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">It directly answers a product-usage question with a specific fact.</div>
+      <pre class="chunk-text">## Can a credit card be used right away?
+Yes, your credit card is ready to use.</pre>
+    </div>
+    <div class="card" style="border-left:4px solid #1b7340;">
+      <div class="card-header">
+        <div class="chunk-meta">
+          <code>c_00170_03</code>
+          <span class="stratum">education_center</span>
+          <span class="tokens">390t</span>
+        </div>
+        <div class="classification">
+          <span class="label-badge" style="background:#e6f4ea;color:#1b7340;">informational</span>
+          <span style="background:#1a73e8;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;">high</span>
+          
+        </div>
+      </div>
+      <div class="reason">The chunk mainly gives specific guidance and factual explanations about building credit and monitoring credit usage.</div>
+      <pre class="chunk-text">## How to build credit with your first credit card
+When you begin using your new credit card, you&#x27;ll want to demonstrate responsible credit management over time. Eventually, you&#x27;ll establish a credit history. It&#x27;s a gradual process but could impact your ability to qualify for loans or secure favorable interest rates in the future. Here are a few ways you can take action to try to build credit:
+- Make on-time payments: Your payment history is a significant factor in your credit score. Always pay at least the minimum amount due by the due date. It&#x27;s helpful to set up auto payments or text alerts…</pre>
+    </div>
+
+</body>
+</html>

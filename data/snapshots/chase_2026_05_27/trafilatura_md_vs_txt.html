@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trafilatura: Markdown vs Plain Text Comparison</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #fff; color: #1a1a1a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65; padding: 40px 20px; max-width: 960px; margin: 0 auto;
+  }
+  h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #6b7280; font-size: 0.92rem; margin-bottom: 36px; }
+  h2 {
+    font-size: 1.2rem; font-weight: 700; margin-top: 44px; margin-bottom: 14px;
+    padding-bottom: 5px; border-bottom: 2px solid #e5e7eb;
+  }
+  h3 { font-size: 1.02rem; font-weight: 600; margin-top: 22px; margin-bottom: 8px; }
+  p, li { font-size: 0.92rem; }
+  ul, ol { margin: 8px 0 12px 22px; }
+  li { margin-bottom: 4px; }
+
+  .box { border-radius: 8px; padding: 16px 18px; margin: 14px 0; font-size: 0.88rem; }
+  .box-finding { background: #fef2f2; border-left: 4px solid #ef4444; }
+  .box-ok      { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .box-info    { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .box-warn    { background: #fffbeb; border-left: 4px solid #f59e0b; }
+  .box strong  { display: block; margin-bottom: 4px; font-size: 0.9rem; }
+
+  code {
+    background: #f3f4f6; padding: 1px 5px; border-radius: 3px;
+    font-family: "SF Mono", "Fira Code", Consolas, monospace; font-size: 0.84rem;
+  }
+  pre {
+    background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 6px;
+    padding: 14px 16px; overflow-x: auto; margin: 10px 0 14px;
+    font-family: "SF Mono", "Fira Code", Consolas, monospace;
+    font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; word-break: break-word;
+  }
+  .hl { background: #fef08a; padding: 0 2px; border-radius: 2px; }
+  .hl-green { background: #bbf7d0; padding: 0 2px; border-radius: 2px; }
+  .hl-red { background: #fecaca; padding: 0 2px; border-radius: 2px; }
+
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 16px; font-size: 0.86rem; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #e5e7eb; }
+  th { font-weight: 600; background: #f9fafb; color: #374151; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.mono { font-family: "SF Mono", Consolas, monospace; font-size: 0.82rem; }
+  td.good { color: #16a34a; font-weight: 600; }
+  td.bad  { color: #dc2626; font-weight: 600; }
+  td.same { color: #9ca3af; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+  .split-label { font-size: 0.78rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+
+  .verdict {
+    font-size: 1rem; font-weight: 700; margin: 20px 0 10px;
+    padding: 12px 18px; border-radius: 8px;
+  }
+  .verdict-yes  { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+  .verdict-no   { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+  .verdict-mixed { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
+
+  .page-card {
+    border: 1px solid #e5e7eb; border-radius: 8px; margin: 16px 0; overflow: hidden;
+  }
+  .page-card-header {
+    background: #f9fafb; padding: 12px 16px; border-bottom: 1px solid #e5e7eb;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  }
+  .page-card-header .pid { font-weight: 700; font-size: 0.95rem; }
+  .page-card-header .url { font-size: 0.78rem; color: #6b7280; font-family: monospace; }
+  .page-card-body { padding: 16px; }
+
+  .tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px; letter-spacing: 0.02em; margin-right: 4px;
+  }
+  .tag-heading { background: #dbeafe; color: #1d4ed8; }
+  .tag-bold    { background: #fef3c7; color: #92400e; }
+  .tag-bullet  { background: #d1fae5; color: #065f46; }
+  .tag-type    { background: #f3e8ff; color: #7c3aed; }
+</style>
+</head>
+<body>
+
+<h1>Trafilatura: Markdown vs Plain Text</h1>
+<p class="subtitle">Does chase.com's HTML preserve enough structure that markdown output is richer? &middot; 5 pages tested</p>
+
+<!-- ================================================================ -->
+<h2>Summary Table</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Page</th>
+      <th>Type</th>
+      <th># / ##/ ###</th>
+      <th>**bold**</th>
+      <th>Bullets (md / txt)</th>
+      <th>Words (md / txt)</th>
+      <th>Heading-concat fix?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>p_00087 &mdash; Overdraft FAQ</td>
+      <td><span class="tag tag-type">FAQ</span></td>
+      <td class="bad">0 / 0 / 0</td>
+      <td class="num">4</td>
+      <td class="num">3 / 4</td>
+      <td class="num">1708 / 1707</td>
+      <td class="bad">No</td>
+    </tr>
+    <tr>
+      <td>p_00005 &mdash; Sapphire Reserve Biz</td>
+      <td><span class="tag tag-type">Product</span></td>
+      <td class="good">0 / 6 / 12</td>
+      <td class="num good">22</td>
+      <td class="num">0 / 0</td>
+      <td class="num">2497 / 2412</td>
+      <td class="same">&mdash;</td>
+    </tr>
+    <tr>
+      <td>p_00071 &mdash; Emergency Fund Guide</td>
+      <td><span class="tag tag-type">Education</span></td>
+      <td class="good">1 / 7 / 3</td>
+      <td class="num">0</td>
+      <td class="num">4 / 4</td>
+      <td class="num">795 / 784</td>
+      <td class="same">&mdash;</td>
+    </tr>
+    <tr>
+      <td>p_00091 &mdash; Total Checking</td>
+      <td><span class="tag tag-type">Product</span></td>
+      <td class="good">0 / 6 / 4</td>
+      <td class="num good">8</td>
+      <td class="num bad">7 / 9</td>
+      <td class="num bad">544 / 647</td>
+      <td class="same">&mdash;</td>
+    </tr>
+    <tr>
+      <td>p_00131 &mdash; Transfer UR Points</td>
+      <td><span class="tag tag-type">Education</span></td>
+      <td class="good">1 / 6 / 4</td>
+      <td class="num">2</td>
+      <td class="num bad">17 / 23</td>
+      <td class="num">896 / 883</td>
+      <td class="same">&mdash;</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ================================================================ -->
+<h2>Page-by-Page Analysis</h2>
+
+<!-- P_00071 -->
+<div class="page-card">
+  <div class="page-card-header">
+    <div>
+      <span class="pid">p_00071 &mdash; Guide to Emergency Fund</span>
+      <span class="tag tag-type">Education</span>
+    </div>
+    <span class="url">/personal/banking/education/.../how-much-should-i-have-in-emergency-fund</span>
+  </div>
+  <div class="page-card-body">
+    <div class="box box-ok">
+      <strong>Best-case scenario: proper semantic HTML &rarr; clean heading hierarchy</strong>
+      Chase's education articles use real <code>&lt;h1&gt;</code>/<code>&lt;h2&gt;</code>/<code>&lt;h3&gt;</code> tags.
+      Markdown output produces a clean hierarchy: 1 <code>#</code>, 7 <code>##</code>, 3 <code>###</code>.
+      These headings map directly to topic boundaries the chunker needs.
+    </div>
+
+    <h3>Markdown output (first 600 chars)</h3>
+    <pre><span class="hl-green"># Guide to emergency fund</span>
+
+<span class="hl-green">## What is an emergency fund?</span>
+
+An emergency fund is a safety net of money that is easy to access
+in case of an urgent financial situation...
+
+<span class="hl-green">## Why is it important to have an emergency fund?</span>
+
+An emergency fund is an important fund to have in your back pocket...
+
+<span class="hl-green">## How much money should you have in an emergency fund?</span>
+
+Now that you know what an emergency fund is, you might be wondering
+how much you should save...
+
+<span class="hl-green">## Building an emergency fund</span>
+
+<span class="hl-green">### Step 1: Set a goal</span></pre>
+
+    <h3>Plain text output (same section)</h3>
+    <pre>Guide to emergency fund
+What is an emergency fund?
+An emergency fund is a safety net of money that is easy to access
+in case of an urgent financial situation...
+Why is it important to have an emergency fund?
+An emergency fund is an important fund to have in your back pocket...
+How much money should you have in an emergency fund?
+Now that you know what an emergency fund is, you might be wondering
+how much you should save...
+Building an emergency fund
+Step 1: Set a goal</pre>
+
+    <p style="margin-top:8px; font-size:0.88rem; color:#6b7280;">
+      The heading text is identical in both &mdash; markdown just adds the <code>#</code>/<code>##</code>/<code>###</code> prefixes.
+      For chunking, this is a reliable signal: split on heading markers instead of the current heuristic.
+    </p>
+  </div>
+</div>
+
+<!-- P_00005 -->
+<div class="page-card">
+  <div class="page-card-header">
+    <div>
+      <span class="pid">p_00005 &mdash; Sapphire Reserve for Business</span>
+      <span class="tag tag-type">Product</span>
+    </div>
+    <span class="url">/business-credit-cards/sapphire/reserve</span>
+  </div>
+  <div class="page-card-body">
+    <div class="box box-ok">
+      <strong>Richest structural gain: 18 headings + 22 bold markers</strong>
+      Product pages use <code>&lt;h2&gt;</code> for major sections (Travel Benefits, Dining, etc.)
+      and <code>&lt;h3&gt;</code> for individual benefits ($300 annual travel credit, $500 Edit credit, etc.).
+      Bold markers highlight dollar amounts and key terms.
+    </div>
+
+    <h3>Markdown output (travel benefits section)</h3>
+    <pre><span class="hl-green">## Travel Benefits</span>
+
+<span class="hl-green">### $300 annual travel credit</span>
+
+You have the freedom to take your business anywhere with the
+<span class="hl">**most flexible travel credit**</span> available. Receive up to
+<span class="hl">**$300**</span> in statement credits each anniversary year.
+
+Purchases that qualify will not earn points.
+
+<span class="hl-green">### NEW$250 credit for select Chase Travel Hotels</span>
+
+Get up to <span class="hl">**$250**</span> in statement credits through 12/31/26...</pre>
+
+    <h3>Same section in plain text</h3>
+    <pre>Travel Benefits
+$300 annual travel credit
+You have the freedom to take your business anywhere with the
+most flexible travel credit available. Receive up to $300 in
+statement credits each anniversary year.
+Purchases that qualify will not earn points.
+NEW$250 credit for select Chase Travel Hotels
+Get up to $250 in statement credits through 12/31/26...</pre>
+
+    <p style="margin-top:8px; font-size:0.88rem; color:#6b7280;">
+      <code>##</code>/<code>###</code> markers clearly distinguish section headings from content lines.
+      In plain text, <code>"Travel Benefits"</code> and <code>"$300 annual travel credit"</code>
+      are indistinguishable from content without the short-line heuristic.
+      Note: the <code>NEW$250</code> concatenation bug appears in both formats &mdash; that's an extraction issue.
+    </p>
+  </div>
+</div>
+
+<!-- P_00091 -->
+<div class="page-card">
+  <div class="page-card-header">
+    <div>
+      <span class="pid">p_00091 &mdash; Chase Total Checking</span>
+      <span class="tag tag-type">Product</span>
+    </div>
+    <span class="url">/personal/checking/total-checking</span>
+  </div>
+  <div class="page-card-body">
+    <div class="box box-warn">
+      <strong>Mixed: good headings, but markdown drops content and mangles the fee list</strong>
+      10 headings recovered (6 <code>##</code> + 4 <code>###</code>), which is valuable.
+      But markdown lost 103 words vs. plain text (544 vs 647), and the fee waiver
+      list lost its bullet structure.
+    </div>
+
+    <h3>Fee section comparison</h3>
+    <div class="split">
+      <div>
+        <div class="split-label">Markdown</div>
+        <pre><span class="hl-green">## $15 or $0 Monthly Service Fee</span>
+
+You can avoid the fee by doing ONE of
+the following each statement period:
+
+<span class="hl-red">**$500+**in qualifying electronic deposits
+
+-OR-**$1,500+**balance at the beginning
+of each day</span>
+
+-OR-<span class="hl-red">**$5,000+**average beginning day
+balance...</span></pre>
+      </div>
+      <div>
+        <div class="split-label">Plain Text</div>
+        <pre>$15 or $0 Monthly Service Fee
+You can avoid the fee by doing ONE of
+the following each statement period:
+
+<span class="hl-green">- $500+ in qualifying electronic deposits
+-OR- - $1,500+ balance at the beginning
+of each day</span>
+
+-OR- <span class="hl-green">- $5,000+ average beginning day
+balance...</span></pre>
+      </div>
+    </div>
+
+    <p style="font-size:0.88rem; color:#6b7280;">
+      Markdown converts the fee options to <code>**bold**</code> inline text with no spacing
+      between the amount and the description. Plain text preserves the bullet structure.
+      The <code>##</code> heading on the section title is a clear win; the body formatting is a regression.
+    </p>
+  </div>
+</div>
+
+<!-- P_00131 -->
+<div class="page-card">
+  <div class="page-card-header">
+    <div>
+      <span class="pid">p_00131 &mdash; How to Transfer UR Points</span>
+      <span class="tag tag-type">Education</span>
+    </div>
+    <span class="url">/personal/credit-cards/education/basics/how-to-transfer-chase-ultimate-rewards-points</span>
+  </div>
+  <div class="page-card-body">
+    <div class="box box-info">
+      <strong>Good headings, but list rendering degrades</strong>
+      11 headings recovered. But the airline/hotel partner list is worse in markdown &mdash;
+      brand names with registered marks get split across lines, and markdown lost 6 bullet items
+      (17 vs 23 in plain text).
+    </div>
+
+    <h3>Partner list comparison</h3>
+    <div class="split">
+      <div>
+        <div class="split-label">Markdown</div>
+        <pre><span class="hl-red">**Airlines:**- AerClub, loyalty
+program of Aer Lingus
+- The British Airways Club
+- Air France KLM - Flying Blue
+...
+- United MileagePlus
+&reg; - Virgin Atlantic Flying Club</span>
+
+<span class="hl-red">**Hotels:**- IHG
+&reg;One Rewards - Marriott Bonvoy&trade;
+- World of Hyatt
+&reg;</span></pre>
+      </div>
+      <div>
+        <div class="split-label">Plain Text</div>
+        <pre><span class="hl-green">- Airlines:
+- AerClub, loyalty program of
+  Aer Lingus
+- The British Airways Club
+- Air France KLM - Flying Blue
+...
+- United MileagePlus&reg;
+- Virgin Atlantic Flying Club</span>
+
+<span class="hl-green">- Hotels:
+- IHG&reg; One Rewards
+- Marriott Bonvoy&trade;
+- World of Hyatt&reg;</span></pre>
+      </div>
+    </div>
+
+    <p style="font-size:0.88rem; color:#6b7280;">
+      Markdown glues the category label into the first bullet (<code>**Airlines:**- AerClub</code>)
+      and splits registered-mark symbols onto separate lines. Plain text handles the list cleanly.
+    </p>
+  </div>
+</div>
+
+<!-- P_00087 -->
+<div class="page-card">
+  <div class="page-card-header">
+    <div>
+      <span class="pid">p_00087 &mdash; Overdraft FAQ</span>
+      <span class="tag tag-type">FAQ</span>
+    </div>
+    <span class="url">/personal/checking/overdraft-services/faqs</span>
+  </div>
+  <div class="page-card-body">
+    <div class="box box-finding">
+      <strong>No structural gain at all &mdash; zero headings in either format</strong>
+      The FAQ page uses accordion <code>&lt;div&gt;</code> toggles, not semantic heading tags.
+      Markdown output is essentially identical to plain text: no <code>#</code> markers,
+      same concatenation bug (<code>QuestionsWith</code>), same wall of paragraphs.
+    </div>
+    <p style="font-size:0.88rem; color:#6b7280; margin-top:8px;">
+      This confirms that the heading-concatenation issue on p_00087 is an extraction problem
+      (accordion HTML structure), not a format choice. Switching to markdown wouldn't help this page.
+    </p>
+  </div>
+</div>
+
+
+<!-- ================================================================ -->
+<h2>Findings</h2>
+
+<h3>What markdown gives you</h3>
+<ul>
+  <li><strong>Reliable heading markers</strong> on pages that use semantic HTML (education articles, product pages).
+    Education articles get <code># / ## / ###</code> that map perfectly to topic boundaries.
+    Product pages get <code>## / ###</code> for sections and benefit cards.</li>
+  <li><strong>Bold markers</strong> on dollar amounts, key terms, and product names &mdash; useful signal
+    for identifying factual content in product pages (22 bold spans on the Sapphire card page).</li>
+</ul>
+
+<h3>What markdown breaks</h3>
+<ul>
+  <li><strong>Bullet lists degrade.</strong> On 2 of 5 pages (p_00091, p_00131), markdown lost bullets or
+    mangled them by gluing category labels into the first item. Plain text had cleaner list structure.</li>
+  <li><strong>Word count drops.</strong> p_00091 lost 103 words (16%) in markdown mode &mdash; trafilatura's
+    markdown renderer seems to drop some content that the txt renderer keeps.</li>
+  <li><strong>Spacing artifacts.</strong> Bold markers run into adjacent text without spaces
+    (<code>**$500+**in qualifying</code>), which would confuse downstream parsing.</li>
+  <li><strong>FAQ/accordion pages get nothing.</strong> Pages built with <code>&lt;div&gt;</code>-based
+    accordions produce zero heading markers in either format.</li>
+</ul>
+
+<h3>The concatenation bug is format-independent</h3>
+<p>
+  <code>"Frequently Asked QuestionsWith..."</code> appears identically in both txt and markdown output for p_00087.
+  <code>"NEW$250"</code> appears identically in both for p_00005. Switching output format doesn't fix these.
+</p>
+
+
+<!-- ================================================================ -->
+<h2>Recommendation</h2>
+
+<div class="verdict verdict-mixed">
+  Switch to markdown &mdash; but only for the heading markers, and compensate for the list regressions.
+</div>
+
+<p style="margin-top:12px;">The heading markers are the key win. They replace the current heuristic-based heading detector with explicit structural signals from the HTML. Concretely:</p>
+
+<ol>
+  <li><strong>Switch <code>output_format</code> to <code>"markdown"</code></strong> in <code>src/extract.py</code>.</li>
+  <li><strong>Update the chunker</strong> to split on <code>^#{1,3} </code> lines as primary chunk boundaries
+    instead of the current <code>is_heading()</code> heuristic. Fall back to the heuristic for pages with zero
+    markdown headings (FAQ/accordion pages).</li>
+  <li><strong>Post-process markdown artifacts</strong>: strip bold markers (<code>**</code>) from the text
+    before chunking &mdash; they add noise for QA but their structural signal (identifying heading lines) has
+    already been consumed.</li>
+  <li><strong>Verify no content loss</strong>: run word-count comparison across all 290 pages. If markdown
+    consistently drops &gt;5% of content on product/checking pages (like p_00091), consider a hybrid approach:
+    use markdown for heading detection only, but keep the txt body.</li>
+</ol>
+
+<div class="box box-info">
+  <strong>Hybrid alternative (lower risk)</strong>
+  Extract each page in <em>both</em> formats. Use markdown solely to identify heading line numbers, then apply
+  those boundaries to the plain-text version. This gets the heading structure without any of the list/content
+  regressions. Slightly more code, but no risk of content loss.
+</div>
+
+</body>
+</html>

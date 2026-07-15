@@ -1,0 +1,15 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pkl
+*.gpickle
+.DS_Store
+
+# Large data files (>50MB) - store separately
+data/raw/
+data/snapshots/chase_2026_05_27/chain_inventory.jsonl
+data/snapshots/chase_2026_05_27/entity_embeddings_cache.jsonl
+data/snapshots/chase_2026_05_27/entity_harvest_batch_input.jsonl
+data/snapshots/chase_2026_05_27/seed_chains_reservoir.jsonl
+data/snapshots/chase_2026_05_27/info_density_batch_input.jsonl

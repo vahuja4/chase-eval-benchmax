@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>is_low_info Chunks — Sample of 10</title>
+<style>
+  :root { --bg: #fafafa; --card: #fff; --border: #e0e0e0; --text: #202124; --muted: #5f6368; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg);
+          color: var(--text); line-height: 1.6; padding: 2rem; max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .note { background: #e8f0fe; border: 1px solid #aecbfa; border-radius: 8px; padding: 1rem 1.25rem;
+           font-size: 0.88rem; margin-bottom: 2rem; }
+  .note strong { color: #1a73e8; }
+
+  .stats { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+           padding: 0.75rem 1.25rem; text-align: center; }
+  .stat-value { font-size: 1.6rem; font-weight: 700; }
+  .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+           border-left: 4px solid #b5451b; padding: 1.25rem; margin-bottom: 1rem; }
+  .card-header { display: flex; justify-content: space-between; align-items: center;
+                  margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .left { display: flex; align-items: center; gap: 0.75rem; }
+  .left code { font-size: 0.9rem; font-weight: 600; }
+  .stratum { background: #e8eaed; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; color: var(--muted); }
+  .tokens, .occ { font-size: 0.8rem; color: var(--muted); }
+  .right { display: flex; align-items: center; gap: 0.4rem; }
+  .badge { padding: 2px 9px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; }
+  .marketing { background: #fce8e6; color: #b5451b; }
+  .conf-high { background: #1a73e8; color: #fff; }
+  .conf-medium { background: #e8710a; color: #fff; }
+  .low-info { background: #d93025; color: #fff; }
+
+  .reason { font-size: 0.88rem; color: var(--muted); font-style: italic; margin-bottom: 0.75rem;
+             padding-left: 0.5rem; border-left: 2px solid #dadce0; }
+  .text { white-space: pre-wrap; word-wrap: break-word; font-family: 'SF Mono', 'Fira Code', monospace;
+           font-size: 0.8rem; line-height: 1.6; background: #f8f9fa; padding: 0.75rem;
+           border-radius: 4px; max-height: 250px; overflow-y: auto; }
+</style>
+</head>
+<body>
+
+<h1>is_low_info Chunks — Sample</h1>
+<p class="subtitle">10 random chunks flagged as marketing (high/medium confidence) by GPT-5.4</p>
+
+<div class="note">
+  <strong>These chunks are NOT dropped.</strong> The <code>is_low_info</code> flag is advisory metadata
+  that stays on the chunk in <code>chunks.jsonl</code>. Downstream question generation can use it to
+  deprioritize these chunks, but the corpus retains them.
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-value">352</div>
+    <div class="stat-label">Total is_low_info</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">3089</div>
+    <div class="stat-label">Total chunks</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">11.4%</div>
+    <div class="stat-label">Low-info rate</div>
+  </div>
+</div>
+
+
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00053_11</code>
+          <span class="stratum">education_center</span>
+          <span class="tokens">36t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">This is broad promotional messaging about mobile banking’s popularity without specific product facts or instructions.</div>
+      <pre class="text">## Did you know?
+Mobile apps are one of the most popular ways to bank. In fact, many people now say their banking app has become an essential tool for their life.</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00097_06</code>
+          <span class="stratum">education_center</span>
+          <span class="tokens">81t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The passage is primarily persuasive value-focused copy about benefits of rewards rather than specific program details or instructions.</div>
+      <pre class="text">## The bottom line
+Credit card rewards may serve as a useful tool for helping you manage your cash flow and potentially lower certain expenses. By understanding your credit card&#x27;s reward program and using your card strategically, you can use your rewards program to help cover the costs of your purchases. Whether it helps you with expenses for groceries, healthcare or paying bills, every point or cash back reward can make a difference.</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00021_01</code>
+          <span class="stratum">personal_banking</span>
+          <span class="tokens">31t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-medium">medium</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The chunk is primarily promotional reassurance with a slogan-like headline, despite mentioning one product benefit.</div>
+      <pre class="text">## Seamless shopping with the bank you know and trust
+### Added security
+Rest easy. Paze doesn&#x27;t share your actual card numbers with online merchants.</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00040_07</code>
+          <span class="stratum">education_center</span>
+          <span class="tokens">92t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The chunk is a motivational summary with generic encouragement and no specific factual banking details or instructions.</div>
+      <pre class="text">## In summary
+Digital nomads often deal with unique banking challenges which require making some important choices. From handling multiple currencies to picking the right bank for your lifestyle, each of these choices can impact your financial well-being down the line. But with a sound understanding of digital nomad banking, these challenges may just become opportunities to give your money some structure. So, if you’re an aspiring digital nomad, why not start planning your own banking strategy today?</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00017_06</code>
+          <span class="stratum">personal_banking</span>
+          <span class="tokens">60t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The chunk mainly promotes enabling notifications and signing in with generic convenience benefits rather than giving substantive details.</div>
+      <pre class="text">## Sign up to be notified when you make an eligible purchase
+Enable notifications for your future eligible Chase debit card purchases and make setting up your next Chase Pay in 4 plan even easier. Sign in to get started.
+## Frequently asked questions
+Still have questions? See the full frequently asked questions.</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00007_50</code>
+          <span class="stratum">credit_cards</span>
+          <span class="tokens">52t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The chunk is primarily promotional, highlighting benefits and value propositions without detailed terms or instructions.</div>
+      <pre class="text">### At A Glance
+Earn points fast with Aeroplan.
+3X points at grocery stores, on dining including take out and eligible delivery services and on purchases made directly with Air Canada. Plus, enjoy free first checked bag and other Aeroplan travel benefits.</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00084_01</code>
+          <span class="stratum">personal_banking</span>
+          <span class="tokens">43t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The chunk is primarily promotional value messaging highlighting benefits without detailed product terms or instructions.</div>
+      <pre class="text">## Power up your teen’s financial journey
+### $0 Monthly Service Fee
+- Let your teen manage money with confidence with a $0 Monthly Service Fee.
+- Have peace of mind with no overdraft fees.</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00268_03</code>
+          <span class="stratum">credit_cards</span>
+          <span class="tokens">26t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">This is slogan-like promotional copy with no specific product details or instructions.</div>
+      <pre class="text">A CARD FOR EVERY
+CASHBACKING STYLE
+### Freedom Unlimited®
+## A CARD FOR EVERY CASHBACKING STYLE</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00284_05</code>
+          <span class="stratum">investing</span>
+          <span class="tokens">31t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">The chunk is promotional headline copy encouraging engagement without providing specific factual guidance.</div>
+      <pre class="text">## Life after sports
+Master your transition to a thriving post-sports career with these wealth management insights
+### Plan for your next chapter with these strategic insights</pre>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="left">
+          <code>c_00288_17</code>
+          <span class="stratum">mortgage</span>
+          <span class="tokens">44t</span>
+          <span class="occ">occ=1</span>
+        </div>
+        <div class="right">
+          <span class="badge marketing">marketing</span>
+          <span class="badge conf-high">high</span>
+          <span class="badge low-info">is_low_info</span>
+        </div>
+      </div>
+      <div class="reason">This is promotional copy highlighting a podcast and encouraging engagement without providing substantive homebuying information.</div>
+      <pre class="text">Award-winning podcast
+Helpful articles
+Compare cities
+### Beginner to Buyer: A podcast
+Listen in and get answers to your homebuying questions on our Beginner to Buyer podcast series hosted by Nadeska Alexis.</pre>
+    </div>
+
+</body>
+</html>

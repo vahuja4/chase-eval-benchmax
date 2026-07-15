@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Info-Density Classifier Prompt — chase_2026_05_27</title>
+<style>
+  :root { --bg: #fafafa; --card: #fff; --border: #e0e0e0; --code-bg: #f5f5f5;
+           --accent: #1a73e8; --text: #202124; --muted: #5f6368; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg);
+          color: var(--text); line-height: 1.6; padding: 2rem; max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .params { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .param { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+            padding: 0.75rem 1.25rem; }
+  .param-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+                  color: var(--muted); margin-bottom: 0.2rem; }
+  .param-value { font-size: 1rem; font-weight: 600; font-family: 'SF Mono', 'Fira Code', monospace; }
+  section { margin-bottom: 2rem; }
+  h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; padding-bottom: 0.4rem;
+        border-bottom: 2px solid var(--accent); display: inline-block; }
+  .prompt-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+                  padding: 1.5rem; }
+  .prompt-card pre { white-space: pre-wrap; word-wrap: break-word; font-family: 'SF Mono', 'Fira Code', monospace;
+                      font-size: 0.85rem; line-height: 1.7; }
+  .json-block { background: var(--code-bg); border-radius: 4px; padding: 0.75rem 1rem;
+                 margin: 0.5rem 0; border-left: 3px solid var(--accent); }
+  .example { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+              padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+  .example-header { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .hash { font-family: monospace; color: var(--muted); font-weight: 400; font-size: 0.8rem; }
+  .user-msg { white-space: pre-wrap; word-wrap: break-word; font-family: 'SF Mono', 'Fira Code', monospace;
+               font-size: 0.82rem; line-height: 1.6; background: var(--code-bg); padding: 0.75rem;
+               border-radius: 4px; max-height: 200px; overflow-y: auto; }
+  .expected { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+               padding: 1.25rem; }
+  .expected pre { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; line-height: 1.7;
+                   background: var(--code-bg); padding: 0.75rem; border-radius: 4px; }
+  .note { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 1rem 1.25rem;
+           font-size: 0.88rem; color: #5d4037; margin-top: 1.5rem; }
+  .note strong { color: #e65100; }
+</style>
+</head>
+<body>
+
+<h1>Info-Density Classifier Prompt</h1>
+<p class="subtitle">Step 1.7 Phase A' — chase_2026_05_27 snapshot</p>
+
+<div class="params">
+  <div class="param">
+    <div class="param-label">Model</div>
+    <div class="param-value">gpt-5.4</div>
+  </div>
+  <div class="param">
+    <div class="param-label">Temperature</div>
+    <div class="param-value">0</div>
+  </div>
+  <div class="param">
+    <div class="param-label">Max tokens</div>
+    <div class="param-value">150</div>
+  </div>
+  <div class="param">
+    <div class="param-label">Total requests</div>
+    <div class="param-value">3,092</div>
+  </div>
+  <div class="param">
+    <div class="param-label">API mode</div>
+    <div class="param-value">Batch</div>
+  </div>
+</div>
+
+<section>
+  <h2>System Prompt</h2>
+  <div class="prompt-card">
+    <pre>You are evaluating chunks of text from chase.com pages for an
+evaluation set of question-answering systems. For each chunk,
+determine whether it is &quot;informational&quot; or &quot;marketing&quot; content.
+
+Informational content contains specific facts, instructions,
+explanations, or descriptions a customer might want to learn —
+fees, features, eligibility rules, how-to steps, product details,
+policy language.
+
+Marketing content is promotional copy designed to drive action
+without conveying specific facts — taglines, slogans, call-to-action
+funnels, &quot;apply now&quot; prompts, generic value propositions.
+
+A chunk can be a mix; classify by what dominates the chunk.
+Procedural content that contains imperatives (&quot;Tap Lock Card&quot;,
+&quot;Enter your social security number&quot;) is informational, not marketing.
+
+Return JSON only, no other text:
+{
+  &quot;label&quot;: &quot;informational&quot; | &quot;marketing&quot;,
+  &quot;confidence&quot;: &quot;high&quot; | &quot;medium&quot; | &quot;low&quot;,
+  &quot;reason&quot;: &quot;&lt;one short sentence&gt;&quot;
+}</pre>
+  </div>
+</section>
+
+<section>
+  <h2>Expected Response Format</h2>
+  <div class="expected">
+    <pre>{
+  "label": "informational" | "marketing",
+  "confidence": "high" | "medium" | "low",
+  "reason": "&lt;one short sentence&gt;"
+}</pre>
+  </div>
+</section>
+
+<section>
+  <h2>Sample User Messages (8 of 3,092)</h2>
+  
+        <div class="example">
+            <div class="example-header">Example 1 <span class="hash">8405ef309d36061c…</span></div>
+            <pre class="user-msg">Chunk:
+### Rewards points
+Rewards points are a type of incentive earned through making purchases in select categories. Points can be earned through bonus promotions or by making purchases in specified categories, such as restaurants, grocery stores, gas stations and more. Keep in mind that some credit cards offer higher rewards points for certain categories than others, so be sure to do your homework and consider how you&#x27;ll be using your rewards card.
+With a rewards credit card, you may be able to earn 1 point for every $1 spent. Your rewards credit card may also offer more generous point earning options, such as 2-5 points for every $1 spent on travel, dining, at grocery stores and more.</pre>
+        </div>
+        <div class="example">
+            <div class="example-header">Example 2 <span class="hash">4ce00f8cb278db3b…</span></div>
+            <pre class="user-msg">Chunk:
+# What is a bank account number?
+A bank account number is a unique set of digits assigned to the account when you open a bank account. Financial institutions will assign such numbers to each account you hold. Businesses and banks use these numbers to identify your account. A bank account number is not to be confused with the routing number, which identifies the financial institution. For this article, we’ll focus on the bank account number.</pre>
+        </div>
+        <div class="example">
+            <div class="example-header">Example 3 <span class="hash">167a74f7c5d8500e…</span></div>
+            <pre class="user-msg">Chunk:
+$300 DoorDash promos
+DashPass members get up to $25 each month to spend on DoorDash, which includes a $5 monthly promo to spend on restaurant orders and two $10 promos each month to save on groceries, retail orders, and more. Available through 12/31/27.</pre>
+        </div>
+        <div class="example">
+            <div class="example-header">Example 4 <span class="hash">7330e0f7dfc52afb…</span></div>
+            <pre class="user-msg">Chunk:
+Things to consider:
+You need to have a minimum credit score and a certain amount of cash to qualify.</pre>
+        </div>
+        <div class="example">
+            <div class="example-header">Example 5 <span class="hash">8f5ebb9cd2b0488b…</span></div>
+            <pre class="user-msg">Chunk:
+### Can I pay off a Chase Pay Over Time plan early, and will there be a penalty for doing so?
+Once a Pay Over Time plan appears on your statement, you can pay it off early without any penalties by paying your full statement balance.
+Keep in mind: If you want to pay it off before then, you can pay your current balance. If you pay off a plan early, you won&#x27;t incur any future fees for that plan. Once a plan is paid off, there is no way to reinstate the plan.</pre>
+        </div>
+        <div class="example">
+            <div class="example-header">Example 6 <span class="hash">9dcfb37fe53eee17…</span></div>
+            <pre class="user-msg">Chunk:
+## Student banking resources
+Explore more options and banking tips for students and parents alike.
+## The right account for you
+After you turn 19, your Chase High School Checking account will convert to a Chase Total Checking® account. However, we offer other accounts that may be a better fit.</pre>
+        </div>
+        <div class="example">
+            <div class="example-header">Example 7 <span class="hash">61454b6fbdc60491…</span></div>
+            <pre class="user-msg">Chunk:
+## 4. Harnessing delayed gratification
+Delaying gratification means resisting the temptation of an immediate reward in favor of a later, often more meaningful or satisfying, outcome. In terms of shopping, it’s about taking a moment to pause and reflect on a purchase rather than acting on the immediate desire to buy. Here’s how you might harness delayed gratification in your daily spending habits:
+- “Sleeping on” purchases: Before making a big purchase, take a night to think it over. This break allows emotions to settle and more reasoned thinking to take over, and may lead to a more mindful buying decision.
+- Avoiding shopping in trigger situations: This could mean staying away from online shopping on the phone or in bed where you might be more prone to impulse buying. Or it could mean choosing a different way to blow off steam or have fun when you would otherwise go shopping. The key is to stick to designated shopping times when you can be more intentional and focused.
+- Setting clear goals and rewards: Aligning your purchases with your long-term goals keeps your money in perspective. If a purchase doesn’t align with any of your objectives, consider postponing it, reinforcing your ability to delay immediate wants for more significant gains.</pre>
+        </div>
+        <div class="example">
+            <div class="example-header">Example 8 <span class="hash">17e4b0152fd6ead6…</span></div>
+            <pre class="user-msg">Chunk:
+## Digital nomad jobs
+The scope of digital nomad jobs is wide and varied, spanning many industries. Some common fields include software development, digital marketing, graphic design, consulting and many others. To identify some possible digital nomad jobs look for professions you could perform remotely with digital tools. You may find one that aligns with your skills and potentially fits into the digital nomad jobs spectrum.</pre>
+        </div>
+</section>
+
+<div class="note">
+  <strong>Classification rules:</strong> A chunk can be a mix — classify by what dominates.
+  Procedural content with imperatives is <em>informational</em>, not marketing.
+  The <code>is_low_info</code> flag is derived downstream: <code>label == "marketing" AND confidence != "low"</code>.
+</div>
+
+</body>
+</html>

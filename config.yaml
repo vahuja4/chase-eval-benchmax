@@ -1,0 +1,54 @@
+platform:
+  llm_api_key: ${LLM_API_KEY}
+  llm_base_url: "https://api.openai.com/v1"
+
+corpus:
+  corpus_name: "chase_help_2026_05_27"
+  corpus_id: "6558ec44-c948-4ed0-a099-63dd786078ad"
+  min_chunk_chars: 400
+
+corpus_context:
+  enabled: true
+  description: "Chase.com public help and product articles covering credit cards, banking, auto loans, mortgages, and investments."
+
+targets:
+  total_samples: 30
+  primary_type_distribution:
+    lookup: 0.34
+    multi_hop: 0.66
+  hop_distribution:
+    1: 0.34
+    2: 0.33
+    3: 0.33
+
+linker:
+  type: metadata
+  search_agent_pct: 1.0
+
+generation:
+  mode: llm_direct
+  llm_direct:
+    model: "gpt-5.4"
+
+filtering:
+  filters:
+    - quality_gate
+    - retrieval_too_easy_llm
+    - grounding_llm
+    - hop_count_validity
+    - env_rollout
+  retrieval_llm:
+    judge_model: "gpt-5.4"
+  grounding_llm:
+    judge_model: "gpt-5.4"
+
+refinement:
+  enabled: true
+  model: "gpt-5.4"
+  max_refinements_per_item: 1
+
+output:
+  dir: "outputs/calibration_30"
+
+micro_batch:
+  resume: true

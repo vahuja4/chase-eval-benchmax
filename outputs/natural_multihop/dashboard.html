@@ -1,0 +1,441 @@
+<title>Multi-Hop QA Pipeline — 15 Questions</title>
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --bg-card: #ffffff;
+    --bg-card-alt: #f0efeb;
+    --bg-inset: #e8e6e1;
+    --text-primary: #1a1917;
+    --text-secondary: #5c5a55;
+    --text-tertiary: #8a877f;
+    --border: #dddbd5;
+    --border-light: #eae8e3;
+    --accent: #2d6a4f;
+    --accent-light: #d8f3dc;
+    --accent-text: #1b4332;
+    --warn: #b45309;
+    --warn-light: #fef3c7;
+    --warn-text: #92400e;
+    --fail: #b91c1c;
+    --fail-light: #fee2e2;
+    --success: #15803d;
+    --success-light: #dcfce7;
+    --multi-hop: #6d28d9;
+    --multi-hop-light: #ede9fe;
+    --lookup: #0369a1;
+    --lookup-light: #e0f2fe;
+    --score-bar-bg: #e8e6e1;
+    --score-bar-fill: #2d6a4f;
+    --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Menlo', monospace;
+    --sans: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141311; --bg-card: #1e1d1a; --bg-card-alt: #252420; --bg-inset: #2a2926;
+      --text-primary: #e8e6e1; --text-secondary: #a09d96; --text-tertiary: #6e6b64;
+      --border: #333230; --border-light: #2a2926;
+      --accent: #52b788; --accent-light: #1b3a2a; --accent-text: #95d5b2;
+      --warn: #f59e0b; --warn-light: #422006; --warn-text: #fbbf24;
+      --fail: #ef4444; --fail-light: #450a0a;
+      --success: #22c55e; --success-light: #14532d;
+      --multi-hop: #a78bfa; --multi-hop-light: #2e1065;
+      --lookup: #38bdf8; --lookup-light: #0c4a6e;
+      --score-bar-bg: #2a2926; --score-bar-fill: #52b788;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141311; --bg-card: #1e1d1a; --bg-card-alt: #252420; --bg-inset: #2a2926;
+    --text-primary: #e8e6e1; --text-secondary: #a09d96; --text-tertiary: #6e6b64;
+    --border: #333230; --border-light: #2a2926;
+    --accent: #52b788; --accent-light: #1b3a2a; --accent-text: #95d5b2;
+    --warn: #f59e0b; --warn-light: #422006; --warn-text: #fbbf24;
+    --fail: #ef4444; --fail-light: #450a0a;
+    --success: #22c55e; --success-light: #14532d;
+    --multi-hop: #a78bfa; --multi-hop-light: #2e1065;
+    --lookup: #38bdf8; --lookup-light: #0c4a6e;
+    --score-bar-bg: #2a2926; --score-bar-fill: #52b788;
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f6f3; --bg-card: #ffffff; --bg-card-alt: #f0efeb; --bg-inset: #e8e6e1;
+    --text-primary: #1a1917; --text-secondary: #5c5a55; --text-tertiary: #8a877f;
+    --border: #dddbd5; --border-light: #eae8e3;
+    --accent: #2d6a4f; --accent-light: #d8f3dc; --accent-text: #1b4332;
+    --warn: #b45309; --warn-light: #fef3c7; --warn-text: #92400e;
+    --fail: #b91c1c; --fail-light: #fee2e2;
+    --success: #15803d; --success-light: #dcfce7;
+    --multi-hop: #6d28d9; --multi-hop-light: #ede9fe;
+    --lookup: #0369a1; --lookup-light: #e0f2fe;
+    --score-bar-bg: #e8e6e1; --score-bar-fill: #2d6a4f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text-primary); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .header { margin-bottom: 40px; }
+  .header-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
+  .header h1 { font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .header-sub { font-size: 15px; color: var(--text-secondary); max-width: 680px; }
+
+  .stats-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 36px; }
+  .stat-cell { background: var(--bg-card); padding: 16px 18px; display: flex; flex-direction: column; gap: 2px; }
+  .stat-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
+  .stat-value { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .stat-value.accent { color: var(--accent); }
+  .stat-detail { font-size: 11px; color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+
+  .section-title { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title::before { content: ''; width: 3px; height: 18px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+
+  .stage-flow { display: flex; gap: 0; align-items: stretch; overflow-x: auto; padding-bottom: 4px; margin-bottom: 36px; }
+  .stage-node { flex: 1; min-width: 120px; background: var(--bg-card); border: 1px solid var(--border); padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; position: relative; }
+  .stage-node:first-child { border-radius: 8px 0 0 8px; }
+  .stage-node:last-child { border-radius: 0 8px 8px 0; }
+  .stage-node + .stage-node { border-left: none; }
+  .stage-node::after { content: ''; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 5px solid var(--border); z-index: 1; }
+  .stage-node:last-child::after { display: none; }
+  .stage-name { font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); }
+  .stage-count { font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stage-time { font-family: var(--mono); font-size: 11px; color: var(--text-tertiary); }
+
+  /* Naturalness distribution bar */
+  .dist-section { margin-bottom: 36px; }
+  .dist-bar { display: flex; height: 32px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+  .dist-seg { display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; font-weight: 600; color: white; min-width: 28px; transition: flex 0.3s; }
+  .dist-seg.s-high { background: var(--accent); }
+  .dist-seg.s-mid { background: var(--warn); }
+  .dist-seg.s-low { background: var(--fail); }
+  .dist-legend { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+  .dist-legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); }
+  .dist-dot { width: 8px; height: 8px; border-radius: 2px; }
+  .dist-dot.high { background: var(--accent); }
+  .dist-dot.mid { background: var(--warn); }
+  .dist-dot.low { background: var(--fail); }
+
+  /* Question cards */
+  .q-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+  .q-card.rejected { opacity: 0.55; }
+  .q-header { padding: 18px 22px 14px; display: flex; align-items: flex-start; gap: 12px; }
+  .q-rank { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-tertiary); background: var(--bg-inset); width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 5px; flex-shrink: 0; margin-top: 2px; }
+  .q-rank.fail { background: var(--fail-light); color: var(--fail); }
+  .q-content { flex: 1; min-width: 0; }
+  .q-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 6px; }
+  .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; font-weight: 500; white-space: nowrap; }
+  .tag-multi-hop { background: var(--multi-hop-light); color: var(--multi-hop); }
+  .tag-lookup { background: var(--lookup-light); color: var(--lookup); }
+  .tag-pass { background: var(--success-light); color: var(--success); }
+  .tag-regen { background: var(--warn-light); color: var(--warn-text); }
+  .tag-fail { background: var(--fail-light); color: var(--fail); }
+  .q-question { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 6px; }
+  .q-answer { font-size: 13px; line-height: 1.5; color: var(--text-secondary); max-height: 4.5em; overflow: hidden; position: relative; }
+  .q-answer.expanded { max-height: none; }
+  .q-toggle { font-family: var(--mono); font-size: 11px; color: var(--accent); cursor: pointer; margin-top: 4px; background: none; border: none; padding: 0; }
+  .q-toggle:hover { text-decoration: underline; }
+
+  .q-scores { padding: 0 22px 14px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .score-item { display: flex; flex-direction: column; gap: 3px; min-width: 100px; flex: 1; }
+  .score-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); display: flex; justify-content: space-between; }
+  .score-label span { font-weight: 600; color: var(--text-secondary); }
+  .score-bar { height: 4px; background: var(--score-bar-bg); border-radius: 2px; overflow: hidden; }
+  .score-bar-inner { height: 100%; border-radius: 2px; }
+  .score-bar-inner.high { background: var(--score-bar-fill); }
+  .score-bar-inner.mid { background: var(--warn); }
+  .score-bar-inner.low { background: var(--fail); }
+
+  .q-dims { padding: 0 22px 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .dim { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-secondary); }
+  .dim-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .dim-dot.full { background: var(--accent); }
+  .dim-dot.partial { background: var(--warn); }
+  .dim-dot.empty { background: var(--score-bar-bg); }
+
+  .q-reasoning { border-top: 1px solid var(--border-light); padding: 12px 22px; }
+  .reasoning-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 3px; }
+  .reasoning-text { font-size: 12px; line-height: 1.5; color: var(--text-secondary); font-style: italic; }
+
+  .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--text-tertiary); }
+
+  .filter-bar { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .filter-btn { font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; padding: 5px 12px; border-radius: 5px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .stage-flow { flex-wrap: wrap; }
+    .stage-node { min-width: 100%; border-radius: 0 !important; border-left: 1px solid var(--border) !important; }
+    .stage-node + .stage-node { border-top: none; }
+    .stage-node::after { display: none; }
+    .q-scores { flex-direction: column; }
+    .page { padding: 24px 16px 60px; }
+    .header h1 { font-size: 22px; }
+  }
+</style>
+
+<div class="page">
+  <div class="header">
+    <div class="header-eyebrow">Chase Help Corpus &middot; 2026-07-15</div>
+    <h1>Multi-Hop QA Pipeline Results</h1>
+    <div class="header-sub">15 candidates generated across 5 batches. Search-agent linker with LinkerEnv, naturalness judge (Sonnet), max 2 hops. 7 multi-hop, 8 lookup accepted. 2 rejected by hop validity.</div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-cell">
+      <div class="stat-label">Generated</div>
+      <div class="stat-value">17</div>
+      <div class="stat-detail">15 accepted, 2 rejected</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Acceptance</div>
+      <div class="stat-value accent">88%</div>
+      <div class="stat-detail">15/17 candidates</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Natural (&ge;0.6)</div>
+      <div class="stat-value accent">10 / 15</div>
+      <div class="stat-detail">5 below threshold</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Multi-hop</div>
+      <div class="stat-value">7</div>
+      <div class="stat-detail">8 lookup</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Wall time</div>
+      <div class="stat-value">151s</div>
+      <div class="stat-detail">7 regenerations</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Batches</div>
+      <div class="stat-value">5</div>
+      <div class="stat-detail">100% fill rate</div>
+    </div>
+  </div>
+
+  <div class="section-title">Pipeline stages</div>
+  <div class="stage-flow">
+    <div class="stage-node"><div class="stage-name">Generation</div><div class="stage-count">17</div><div class="stage-time">206.8s</div></div>
+    <div class="stage-node"><div class="stage-name">Quality gate</div><div class="stage-count">24</div><div class="stage-time">&lt;1ms</div></div>
+    <div class="stage-node"><div class="stage-name">Grounding</div><div class="stage-count">23 pass</div><div class="stage-time">20.7s</div></div>
+    <div class="stage-node"><div class="stage-name">Hop validity</div><div class="stage-count">15 pass</div><div class="stage-time">34.6s</div></div>
+    <div class="stage-node"><div class="stage-name">Regeneration</div><div class="stage-count">7</div><div class="stage-time">95.7s</div></div>
+  </div>
+
+  <div class="dist-section">
+    <div class="section-title">Naturalness distribution</div>
+    <div class="dist-bar" id="dist-bar"></div>
+    <div class="dist-legend">
+      <div class="dist-legend-item"><div class="dist-dot high"></div>High (&ge;0.85): 8</div>
+      <div class="dist-legend-item"><div class="dist-dot mid"></div>Medium (0.6&ndash;0.84): 2</div>
+      <div class="dist-legend-item"><div class="dist-dot low"></div>Low (&lt;0.6): 5</div>
+    </div>
+  </div>
+
+  <div class="section-title">All 15 questions (ranked by naturalness)</div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All (15)</button>
+    <button class="filter-btn" data-filter="multi_hop">Multi-hop (7)</button>
+    <button class="filter-btn" data-filter="lookup">Lookup (8)</button>
+    <button class="filter-btn" data-filter="pass">Natural &ge;0.6 (10)</button>
+  </div>
+
+  <div id="cards"></div>
+
+  <div class="footer">
+    <div>benchmax &middot; chase_help_2026_05_27 &middot; 3,089 chunks</div>
+    <div>151.1s total &middot; 7 regen &middot; 2 rejected</div>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {
+    q: "Do I still have Chase Zero Liability Protection if I use my Chase card through Paze?",
+    a: "The terms and agreement that govern your Chase Card do not change when the Chase Card is added to or Activated in a Wallet. Purchases made with your Chase credit and/or debit cards have Chase Zero Liability Protection for unauthorized card transactions. This means that you won’t be liable for any unauthorized transactions as long as they are reported promptly.",
+    type: "multi_hop", nat: 1.0, grounding: 0.99, hop_validity: 1.0, regen: true,
+    dims: {intent: 1.0, concise: 1.0, phrasing: 1.0, plausible: 1.0},
+    reasoning: "This is a clear, single-intent question about whether a specific protection carries over when using a card through a specific payment platform (Paze). It’s concise, phrased exactly as someone would type into a search bar or ask customer support, and reflects a realistic concern for someone adopting a new digital wallet service."
+  },
+  {
+    q: "If my credit score improved, can I qualify to upgrade from a starter card to a better rewards card?",
+    a: "If you have been consistently working on improving your credit score and it has increased since obtaining your current credit card, you may qualify for cards with better rewards, APRs and perks. There is no hard-and-fast rule as to how much money you need to make in order to get approved for a credit card.",
+    type: "multi_hop", nat: 1.0, grounding: 0.99, hop_validity: 1.0, regen: false,
+    dims: {intent: 1.0, concise: 1.0, phrasing: 1.0, plausible: 1.0},
+    reasoning: "This is a clear, single, concise question that a real person would naturally ask a bank or credit card company about upgrading their card based on improved credit score. It sounds like a typical customer service inquiry."
+  },
+  {
+    q: "What type of travel credit card should I get if I want to earn miles toward a free flight?",
+    a: "One common way to work toward a free flight is with an airline credit card. Some credit cards are co-branded with specific airlines and offer rewards in the form of miles. There are three basic types of travel credit cards: co-branded airline cards, co-branded hotel cards and cards that offer you points for travel-related spending across many brands.",
+    type: "multi_hop", nat: 1.0, grounding: 0.99, hop_validity: 1.0, regen: true,
+    dims: {intent: 1.0, concise: 1.0, phrasing: 1.0, plausible: 1.0},
+    reasoning: "This is a clear, concise, single-intent question that sounds exactly like something a real person would type into a search engine or ask a financial advisor. It’s a common, plausible query about travel credit cards and miles rewards."
+  },
+  {
+    q: "Why would I transfer my Chase Ultimate Rewards points to someone in my household?",
+    a: "Chase allows cardmembers to transfer Ultimate Rewards points to a household member. This may be a valuable feature for families or couples looking to combine their rewards to achieve larger travel goals, such as booking a premium flight or a long hotel stay.",
+    type: "multi_hop", nat: 1.0, grounding: 0.99, hop_validity: 1.0, regen: false,
+    dims: {intent: 1.0, concise: 1.0, phrasing: 1.0, plausible: 1.0},
+    reasoning: "This is a clear, single-intent question about a specific, plausible scenario (transferring Chase points to a household member). It’s concise, phrased naturally as a real person would ask, and reflects a genuine common query about credit card rewards programs."
+  },
+  {
+    q: "What travel-related credit card benefit could help if my luggage is delayed?",
+    a: "Many business travel credit cards provide benefits that could be useful while employees are traveling. This might include travel protection benefits, which may include lost luggage reimbursement and baggage delay insurance. Some credit cards offer insurance for lost or delayed luggage.",
+    type: "multi_hop", nat: 1.0, grounding: 0.99, hop_validity: 1.0, regen: true,
+    dims: {intent: 1.0, concise: 1.0, phrasing: 1.0, plausible: 1.0},
+    reasoning: "This is a clear, concise, single-intent question that sounds like a natural query someone would type into a search engine or ask a support agent, especially if they’re dealing with a delayed luggage situation and wondering about credit card protections."
+  },
+  {
+    q: "How can the way I receive my paycheck help my chances when I’m trying to get approved for a new card?",
+    a: "Besides being a convenient way to receive your paychecks, direct deposit also creates a record of your employment income. This is a great way to show lenders you have a steady stream of income and may pose less of a risk for defaulting on your credit card payments.",
+    type: "lookup", nat: 0.9, grounding: 0.99, hop_validity: null, regen: false,
+    dims: {intent: 1.0, concise: 0.9, phrasing: 0.9, plausible: 0.9},
+    reasoning: "This reads as a single, coherent question about how direct deposit or income setup might affect credit card approval odds. It’s concise and phrased naturally, like something a person would ask a bank representative or search online."
+  },
+  {
+    q: "When should I pay my starter credit card bill to help build credit and avoid a late payment on my credit report?",
+    a: "Pay your statement balance, or the minimum payment, on or before the due date. When you receive a statement from your credit card issuer, you will have at least 21 days to make a payment. If you make a payment after that due date, you will be in late-payment territory.",
+    type: "multi_hop", nat: 0.85, grounding: 0.99, hop_validity: 1.0, regen: false,
+    dims: {intent: 0.9, concise: 0.85, phrasing: 0.9, plausible: 0.95},
+    reasoning: "This reads as a single coherent question about timing credit card payments to build credit and avoid late marks — both goals are naturally linked since payment timing affects both. It’s reasonably concise, phrased like a real question."
+  },
+  {
+    q: "If I book a rental car with Ultimate Rewards points, when does Chase auto rental coverage apply and is it primary or secondary?",
+    a: "If you want to have Auto Rental Collision Damage Waiver coverage for the duration of your car rental, be sure to book the reservation using either your Ultimate Rewards points or a Chase credit card. You will also need to decline the rental car company’s collision damage coverage. This insurance is usually secondary to the protection in your personal auto policy. Premium credit cards may offer primary coverage.",
+    type: "multi_hop", nat: 0.85, grounding: 0.99, hop_validity: 1.0, regen: true,
+    dims: {intent: 0.9, concise: 0.85, phrasing: 0.9, plausible: 0.95},
+    reasoning: "This reads as one coherent question about rental car insurance coverage tied to a specific payment method, with a natural follow-up about primary/secondary status. It’s concise and phrased like a real question someone booking a car might ask."
+  },
+  {
+    q: "student loan no credit history cosigner",
+    a: "Federal student loans: These are government loans offered by the U.S. Department of Education. You can generally qualify for these loans even if you have no credit history. Private student loans: These come from banks, credit unions or other financial organizations. You usually have to pass a credit check or need someone to co-sign.",
+    type: "lookup", nat: 0.85, grounding: 0.99, hop_validity: null, regen: false,
+    dims: {intent: 0.9, concise: 1.0, phrasing: 0.85, plausible: 0.95},
+    reasoning: "This reads like a typical search-bar query someone would type when researching student loans without credit history and needing a cosigner. Short, keyword-style phrasing common in search engines, coherent in intent."
+  },
+  {
+    q: "Chase banking notifications setup steps",
+    a: "To sign up for Account Alerts, you’ll need to sign in to your account and choose “Profile & settings,” then “Alerts,” then “Choose alerts” in the left-hand menu under the Alerts section. We’ll show you the list of available alerts for your account.",
+    type: "lookup", nat: 0.75, grounding: 1.0, hop_validity: null, regen: false,
+    dims: {intent: 1.0, concise: 1.0, phrasing: 0.75, plausible: 1.0},
+    reasoning: "This is a clear single-intent query about setting up Chase banking notifications. It’s concise and plausible as something a real user would search. The phrasing is slightly keyword-like (‘setup steps’ instead of a full question)."
+  },
+  {
+    q: "What trip-related perks does this premium card include if I want things like airport lounge access, reimbursement for trusted traveler application fees, hotel stay extras, and other travel credits?",
+    a: "They include: a $300 annual travel credit, access to over 1,300 airport lounges worldwide with a complimentary Priority Pass Select membership, a statement credit for TSA PreCheck®/Global Entry, access to The Edit by Chase Travel, and IHG® One Rewards Platinum Elite Status.",
+    type: "lookup", nat: 0.6, grounding: 0.99, hop_validity: null, regen: true,
+    dims: {intent: 0.9, concise: 0.6, phrasing: 0.7, plausible: 0.9},
+    reasoning: "The question asks about a single coherent topic (travel perks of a premium card), but lists multiple specific examples in one breath, making it a bit long and list-like rather than a crisp natural query."
+  },
+  {
+    q: "Can I cap what someone else on my account is able to spend, and if that isn’t available on regular consumer cards, what can I do instead to control their card use?",
+    a: "While you can’t set up a specific spending limit for authorized users with most personal credit cards, business owners can set a spending limit on any Chase Ink® business credit card. While you might not be able to formally set a spending limit on personal credit cards, you usually can log into your account and lock or unlock an authorized user’s card.",
+    type: "lookup", nat: 0.6, grounding: 0.99, hop_validity: null, regen: false,
+    dims: {intent: 0.7, concise: 0.6, phrasing: 0.7, plausible: 0.9},
+    reasoning: "A fairly natural follow-up someone might ask a bank rep about controlling an authorized user’s spending. A bit long with an embedded conditional, which slightly hurts conciseness, but plausible."
+  },
+  {
+    q: "What benefits might someone in college get from opening a beginner payment card if they want help building financial habits, covering surprise expenses, and making purchases while studying in another country?",
+    a: "As a student, opening a credit card could prove beneficial. Aside from enabling you to start learning about and establishing your credit, a student credit card may provide cash back incentives, a line of credit for unexpected costs, and no foreign transaction fees.",
+    type: "lookup", nat: 0.5, grounding: 0.99, hop_validity: null, regen: false,
+    dims: {intent: 0.6, concise: 0.5, phrasing: 0.5, plausible: 0.6},
+    reasoning: "The question bundles three distinct benefit categories into one query, which feels somewhat stitched together rather than a single natural thought. The phrasing feels more like a constructed prompt listing multiple criteria than an organic question."
+  },
+  {
+    q: "I’m evaluating whether the value I’ve accumulated from my card spending can disappear over time. Under what conditions is that balance unlikely to lapse, and when might similar perks follow different timing rules?",
+    a: "There’s no singular answer, but if you’re earning cash back through your issuer’s rewards system and your credit card remains open and not in default, it’s unlikely. Other types of rewards, such as miles or hotel points, may have different expiration policies.",
+    type: "lookup", nat: 0.3, grounding: 1.0, hop_validity: null, regen: false,
+    dims: {intent: 0.4, concise: 0.5, phrasing: 0.3, plausible: 0.4},
+    reasoning: "The question combines two sub-questions with vague, formal phrasing (‘value I’ve accumulated’, ‘balance unlikely to lapse’). A typical person would ask ‘Do my credit card points expire?’ The second clause about ‘similar perks’ with ‘different timing rules’ reads artificially stitched on."
+  },
+  {
+    q: "Chase Secure Banking wire transfer fees availability",
+    a: "Domestic and international incoming wires have a $15 fee per transfer. Outgoing wire transfers are not available for Chase Secure Checking℠.",
+    type: "lookup", nat: 0.3, grounding: 0.99, hop_validity: null, regen: false,
+    dims: {intent: 0.3, concise: 0.6, phrasing: 0.3, plausible: 0.3},
+    reasoning: "This reads like a keyword string rather than a real question — it mashes together three separate concepts (Chase Secure Banking, wire transfer fees, and availability) without clear grammatical structure or a single coherent intent."
+  }
+];
+
+function scoreClass(v) { return v >= 0.85 ? 'high' : v >= 0.6 ? 'mid' : 'low'; }
+function dimDot(v) { return v >= 0.85 ? 'full' : v >= 0.5 ? 'partial' : 'empty'; }
+
+// Distribution bar
+const distBar = document.getElementById('dist-bar');
+const high = DATA.filter(d => d.nat >= 0.85).length;
+const mid = DATA.filter(d => d.nat >= 0.6 && d.nat < 0.85).length;
+const low = DATA.filter(d => d.nat < 0.6).length;
+distBar.innerHTML =
+  `<div class="dist-seg s-high" style="flex:${high}">${high}</div>` +
+  `<div class="dist-seg s-mid" style="flex:${mid}">${mid}</div>` +
+  `<div class="dist-seg s-low" style="flex:${low}">${low}</div>`;
+
+// Render cards
+function renderCards(filter) {
+  const container = document.getElementById('cards');
+  let items = DATA;
+  if (filter === 'multi_hop') items = DATA.filter(d => d.type === 'multi_hop');
+  else if (filter === 'lookup') items = DATA.filter(d => d.type === 'lookup');
+  else if (filter === 'pass') items = DATA.filter(d => d.nat >= 0.6);
+
+  container.innerHTML = items.map((d, i) => {
+    const rank = DATA.indexOf(d) + 1;
+    const isBelow = d.nat < 0.6;
+    const tags = [
+      `<span class="tag tag-${d.type === 'multi_hop' ? 'multi-hop' : 'lookup'}">${d.type === 'multi_hop' ? 'multi-hop' : 'lookup'}</span>`,
+      d.regen ? '<span class="tag tag-regen">regenerated</span>' : '',
+      isBelow ? '<span class="tag tag-fail">below threshold</span>' : '<span class="tag tag-pass">pass</span>'
+    ].filter(Boolean).join('');
+
+    const hopVal = d.hop_validity !== null
+      ? `<div class="score-item"><div class="score-label">Hop validity <span>${d.hop_validity}</span></div><div class="score-bar"><div class="score-bar-inner high" style="width:${d.hop_validity*100}%"></div></div></div>`
+      : '';
+
+    return `<div class="q-card ${isBelow ? 'rejected' : ''}">
+      <div class="q-header">
+        <div class="q-rank ${isBelow ? 'fail' : ''}">${isBelow ? '×' : rank}</div>
+        <div class="q-content">
+          <div class="q-tags">${tags}</div>
+          <div class="q-question">${d.q}</div>
+          <div class="q-answer" id="ans-${rank}">${d.a}</div>
+          <button class="q-toggle" onclick="toggleAns(${rank})">show more</button>
+        </div>
+      </div>
+      <div class="q-scores">
+        <div class="score-item"><div class="score-label">Grounding <span>${d.grounding}</span></div><div class="score-bar"><div class="score-bar-inner ${scoreClass(d.grounding)}" style="width:${d.grounding*100}%"></div></div></div>
+        ${hopVal}
+        <div class="score-item"><div class="score-label">Naturalness <span>${d.nat.toFixed(2)}</span></div><div class="score-bar"><div class="score-bar-inner ${scoreClass(d.nat)}" style="width:${d.nat*100}%"></div></div></div>
+      </div>
+      <div class="q-dims">
+        <div class="dim"><div class="dim-dot ${dimDot(d.dims.intent)}"></div>Intent ${d.dims.intent}</div>
+        <div class="dim"><div class="dim-dot ${dimDot(d.dims.concise)}"></div>Concise ${d.dims.concise}</div>
+        <div class="dim"><div class="dim-dot ${dimDot(d.dims.phrasing)}"></div>Phrasing ${d.dims.phrasing}</div>
+        <div class="dim"><div class="dim-dot ${dimDot(d.dims.plausible)}"></div>Plausible ${d.dims.plausible}</div>
+      </div>
+      <div class="q-reasoning">
+        <div class="reasoning-label">Naturalness judge</div>
+        <div class="reasoning-text">${d.reasoning}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleAns(rank) {
+  const el = document.getElementById('ans-' + rank);
+  const btn = el.nextElementSibling;
+  el.classList.toggle('expanded');
+  btn.textContent = el.classList.contains('expanded') ? 'show less' : 'show more';
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(btn.dataset.filter);
+  });
+});
+
+renderCards('all');
+</script>

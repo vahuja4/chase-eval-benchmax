@@ -1,0 +1,1473 @@
+{
+  "dumped_at": "2026-06-16T11:30:53",
+  "corpus_summary": "Themes: customer help, product FAQs, account support, and consumer financial education.\nDomain: consumer financial services across banking, credit cards, lending, rewards, and related products.\nUser persona: likely a Chase customer or prospective customer looking up product details, troubleshooting steps, fees, eligibility, or how to use benefits.",
+  "corpus_description": "Chase.com public help and product articles covering credit cards, banking, auto loans, mortgages, and investments.",
+  "corpus_queries": [
+    "check Chase credit card application status",
+    "how to redeem Chase Ultimate Rewards points",
+    "when does Chase charge an overdraft fee",
+    "Chase Secure Banking monthly service fee avoid",
+    "error applying for Chase auto financing online",
+    "can I have both a Chase travel card and cash back card",
+    "do Chase credit card points expire",
+    "how do Chase debit card overdrafts work",
+    "business credit card application status Chase",
+    "are Chase credit card rewards points worth it"
+  ],
+  "search_modes": [
+    "lexical"
+  ],
+  "best_search_mode": "lexical",
+  "capabilities": {
+    "has_document_ids": true,
+    "has_section_headers": false,
+    "has_sequential_links": false,
+    "has_dates": false
+  },
+  "entity_count": 177,
+  "entities": [
+    {
+      "name": "credit cards",
+      "document_frequency": 0.3953,
+      "quality_score": 0.4904,
+      "chunk_count": 1221
+    },
+    {
+      "name": "credit score",
+      "document_frequency": 0.089,
+      "quality_score": 0.879,
+      "chunk_count": 275
+    },
+    {
+      "name": "credit",
+      "document_frequency": 0.5066,
+      "quality_score": 0.4347,
+      "chunk_count": 1565
+    },
+    {
+      "name": "card",
+      "document_frequency": 0.5474,
+      "quality_score": 0.4434,
+      "chunk_count": 1691
+    },
+    {
+      "name": "checking accounts",
+      "document_frequency": 0.0647,
+      "quality_score": 0.9164,
+      "chunk_count": 200
+    },
+    {
+      "name": "rewards credit",
+      "document_frequency": 0.0327,
+      "quality_score": 0.9094,
+      "chunk_count": 101
+    },
+    {
+      "name": "chase credit",
+      "document_frequency": 0.0495,
+      "quality_score": 0.8826,
+      "chunk_count": 153
+    },
+    {
+      "name": "travel credit",
+      "document_frequency": 0.0346,
+      "quality_score": 0.9058,
+      "chunk_count": 107
+    },
+    {
+      "name": "card rewards",
+      "document_frequency": 0.034,
+      "quality_score": 0.92,
+      "chunk_count": 105
+    },
+    {
+      "name": "student credit",
+      "document_frequency": 0.0214,
+      "quality_score": 0.9026,
+      "chunk_count": 66
+    },
+    {
+      "name": "account",
+      "document_frequency": 0.2829,
+      "quality_score": 0.5984,
+      "chunk_count": 874
+    },
+    {
+      "name": "chase mobile",
+      "document_frequency": 0.0356,
+      "quality_score": 0.8575,
+      "chunk_count": 110
+    },
+    {
+      "name": "chase pay",
+      "document_frequency": 0.0288,
+      "quality_score": 0.8778,
+      "chunk_count": 89
+    },
+    {
+      "name": "rewards points",
+      "document_frequency": 0.0609,
+      "quality_score": 0.872,
+      "chunk_count": 188
+    },
+    {
+      "name": "chase travel",
+      "document_frequency": 0.0418,
+      "quality_score": 0.8431,
+      "chunk_count": 129
+    },
+    {
+      "name": "shopping portal",
+      "document_frequency": 0.0165,
+      "quality_score": 0.8502,
+      "chunk_count": 51
+    },
+    {
+      "name": "rewards cash",
+      "document_frequency": 0.0019,
+      "quality_score": 0.5588,
+      "chunk_count": 6
+    },
+    {
+      "name": "savings accounts",
+      "document_frequency": 0.0456,
+      "quality_score": 0.92,
+      "chunk_count": 141
+    },
+    {
+      "name": "fee",
+      "document_frequency": 0.1868,
+      "quality_score": 0.7588,
+      "chunk_count": 577
+    },
+    {
+      "name": "chase sapphire",
+      "document_frequency": 0.0259,
+      "quality_score": 0.86,
+      "chunk_count": 80
+    },
+    {
+      "name": "cash credit",
+      "document_frequency": 0.0,
+      "quality_score": 0.47,
+      "chunk_count": 0
+    },
+    {
+      "name": "cash",
+      "document_frequency": 0.201,
+      "quality_score": 0.7275,
+      "chunk_count": 621
+    },
+    {
+      "name": "chase freedom",
+      "document_frequency": 0.0411,
+      "quality_score": 0.8264,
+      "chunk_count": 127
+    },
+    {
+      "name": "earn rewards",
+      "document_frequency": 0.0421,
+      "quality_score": 0.8602,
+      "chunk_count": 130
+    },
+    {
+      "name": "build credit",
+      "document_frequency": 0.0162,
+      "quality_score": 0.8203,
+      "chunk_count": 50
+    },
+    {
+      "name": "shop earn",
+      "document_frequency": 0.0,
+      "quality_score": 0.4842,
+      "chunk_count": 0
+    },
+    {
+      "name": "bank account",
+      "document_frequency": 0.0346,
+      "quality_score": 0.8779,
+      "chunk_count": 107
+    },
+    {
+      "name": "cards offer",
+      "document_frequency": 0.0537,
+      "quality_score": 0.8736,
+      "chunk_count": 166
+    },
+    {
+      "name": "chase ultimate",
+      "document_frequency": 0.0392,
+      "quality_score": 0.8647,
+      "chunk_count": 121
+    },
+    {
+      "name": "rise card",
+      "document_frequency": 0.0081,
+      "quality_score": 0.6587,
+      "chunk_count": 25
+    },
+    {
+      "name": "credit history",
+      "document_frequency": 0.0444,
+      "quality_score": 0.8478,
+      "chunk_count": 137
+    },
+    {
+      "name": "credit utilization",
+      "document_frequency": 0.0181,
+      "quality_score": 0.8547,
+      "chunk_count": 56
+    },
+    {
+      "name": "credit limit",
+      "document_frequency": 0.0324,
+      "quality_score": 0.8819,
+      "chunk_count": 100
+    },
+    {
+      "name": "student loans",
+      "document_frequency": 0.0217,
+      "quality_score": 0.92,
+      "chunk_count": 67
+    },
+    {
+      "name": "earn points",
+      "document_frequency": 0.0327,
+      "quality_score": 0.8719,
+      "chunk_count": 101
+    },
+    {
+      "name": "business credit",
+      "document_frequency": 0.0129,
+      "quality_score": 0.7227,
+      "chunk_count": 40
+    },
+    {
+      "name": "rise credit",
+      "document_frequency": 0.0055,
+      "quality_score": 0.6301,
+      "chunk_count": 17
+    },
+    {
+      "name": "deposit",
+      "document_frequency": 0.0819,
+      "quality_score": 0.8567,
+      "chunk_count": 253
+    },
+    {
+      "name": "mobile app",
+      "document_frequency": 0.0201,
+      "quality_score": 0.8529,
+      "chunk_count": 62
+    },
+    {
+      "name": "lower credit",
+      "document_frequency": 0.0084,
+      "quality_score": 0.6179,
+      "chunk_count": 26
+    },
+    {
+      "name": "card points",
+      "document_frequency": 0.0078,
+      "quality_score": 0.6449,
+      "chunk_count": 24
+    },
+    {
+      "name": "earn cash",
+      "document_frequency": 0.0204,
+      "quality_score": 0.8837,
+      "chunk_count": 63
+    },
+    {
+      "name": "affect credit",
+      "document_frequency": 0.0016,
+      "quality_score": 0.5133,
+      "chunk_count": 5
+    },
+    {
+      "name": "card issuers",
+      "document_frequency": 0.0554,
+      "quality_score": 0.8502,
+      "chunk_count": 171
+    },
+    {
+      "name": "airline credit",
+      "document_frequency": 0.0062,
+      "quality_score": 0.643,
+      "chunk_count": 19
+    },
+    {
+      "name": "chase shopping",
+      "document_frequency": 0.0049,
+      "quality_score": 0.6171,
+      "chunk_count": 15
+    },
+    {
+      "name": "use credit",
+      "document_frequency": 0.0032,
+      "quality_score": 0.5282,
+      "chunk_count": 10
+    },
+    {
+      "name": "points chase",
+      "document_frequency": 0.0,
+      "quality_score": 0.4613,
+      "chunk_count": 0
+    },
+    {
+      "name": "cash card",
+      "document_frequency": 0.0,
+      "quality_score": 0.52,
+      "chunk_count": 0
+    },
+    {
+      "name": "annual fee",
+      "document_frequency": 0.0499,
+      "quality_score": 0.92,
+      "chunk_count": 154
+    },
+    {
+      "name": "freedom rise",
+      "document_frequency": 0.0278,
+      "quality_score": 0.8558,
+      "chunk_count": 86
+    },
+    {
+      "name": "pay time",
+      "document_frequency": 0.0,
+      "quality_score": 0.4076,
+      "chunk_count": 0
+    },
+    {
+      "name": "debit cards",
+      "document_frequency": 0.0434,
+      "quality_score": 0.92,
+      "chunk_count": 134
+    },
+    {
+      "name": "rewards",
+      "document_frequency": 0.2736,
+      "quality_score": 0.6215,
+      "chunk_count": 845
+    },
+    {
+      "name": "bank",
+      "document_frequency": 0.1489,
+      "quality_score": 0.7713,
+      "chunk_count": 460
+    },
+    {
+      "name": "bonus offer",
+      "document_frequency": 0.0133,
+      "quality_score": 0.7637,
+      "chunk_count": 41
+    },
+    {
+      "name": "benefits",
+      "document_frequency": 0.1217,
+      "quality_score": 0.8058,
+      "chunk_count": 376
+    },
+    {
+      "name": "rewards portal",
+      "document_frequency": 0.0091,
+      "quality_score": 0.6693,
+      "chunk_count": 28
+    },
+    {
+      "name": "improve credit",
+      "document_frequency": 0.0,
+      "quality_score": 0.4875,
+      "chunk_count": 0
+    },
+    {
+      "name": "chase online",
+      "document_frequency": 0.0065,
+      "quality_score": 0.6127,
+      "chunk_count": 20
+    },
+    {
+      "name": "cash travel",
+      "document_frequency": 0.0,
+      "quality_score": 0.4784,
+      "chunk_count": 0
+    },
+    {
+      "name": "card earns",
+      "document_frequency": 0.0126,
+      "quality_score": 0.7655,
+      "chunk_count": 39
+    },
+    {
+      "name": "digital wallet",
+      "document_frequency": 0.0097,
+      "quality_score": 0.7142,
+      "chunk_count": 30
+    },
+    {
+      "name": "travel portal",
+      "document_frequency": 0.0126,
+      "quality_score": 0.7189,
+      "chunk_count": 39
+    },
+    {
+      "name": "mobile banking",
+      "document_frequency": 0.0074,
+      "quality_score": 0.6689,
+      "chunk_count": 23
+    },
+    {
+      "name": "money overseas",
+      "document_frequency": 0.0029,
+      "quality_score": 0.5783,
+      "chunk_count": 9
+    },
+    {
+      "name": "travel cards",
+      "document_frequency": 0.011,
+      "quality_score": 0.7401,
+      "chunk_count": 34
+    },
+    {
+      "name": "impact credit",
+      "document_frequency": 0.0003,
+      "quality_score": 0.4518,
+      "chunk_count": 1
+    },
+    {
+      "name": "statement credit",
+      "document_frequency": 0.0495,
+      "quality_score": 0.8437,
+      "chunk_count": 153
+    },
+    {
+      "name": "open account",
+      "document_frequency": 0.0006,
+      "quality_score": 0.4564,
+      "chunk_count": 2
+    },
+    {
+      "name": "student checking",
+      "document_frequency": 0.0052,
+      "quality_score": 0.6236,
+      "chunk_count": 16
+    },
+    {
+      "name": "cash purchase",
+      "document_frequency": 0.0,
+      "quality_score": 0.5126,
+      "chunk_count": 0
+    },
+    {
+      "name": "sapphire reserve",
+      "document_frequency": 0.0288,
+      "quality_score": 0.9068,
+      "chunk_count": 89
+    },
+    {
+      "name": "cards",
+      "document_frequency": 0.269,
+      "quality_score": 0.6022,
+      "chunk_count": 831
+    },
+    {
+      "name": "starter credit",
+      "document_frequency": 0.012,
+      "quality_score": 0.7434,
+      "chunk_count": 37
+    },
+    {
+      "name": "credit journey",
+      "document_frequency": 0.0142,
+      "quality_score": 0.7873,
+      "chunk_count": 44
+    },
+    {
+      "name": "loans",
+      "document_frequency": 0.0881,
+      "quality_score": 0.8421,
+      "chunk_count": 272
+    },
+    {
+      "name": "hotel credit",
+      "document_frequency": 0.0097,
+      "quality_score": 0.696,
+      "chunk_count": 30
+    },
+    {
+      "name": "ready credit",
+      "document_frequency": 0.0,
+      "quality_score": 0.4988,
+      "chunk_count": 0
+    },
+    {
+      "name": "participating retailers",
+      "document_frequency": 0.0045,
+      "quality_score": 0.589,
+      "chunk_count": 14
+    },
+    {
+      "name": "unlimited card",
+      "document_frequency": 0.0065,
+      "quality_score": 0.6276,
+      "chunk_count": 20
+    },
+    {
+      "name": "apply credit",
+      "document_frequency": 0.0,
+      "quality_score": 0.5,
+      "chunk_count": 0
+    },
+    {
+      "name": "service fee",
+      "document_frequency": 0.0246,
+      "quality_score": 0.8919,
+      "chunk_count": 76
+    },
+    {
+      "name": "rewards expire",
+      "document_frequency": 0.0026,
+      "quality_score": 0.5428,
+      "chunk_count": 8
+    },
+    {
+      "name": "categories cash",
+      "document_frequency": 0.0,
+      "quality_score": 0.4863,
+      "chunk_count": 0
+    },
+    {
+      "name": "building credit",
+      "document_frequency": 0.0113,
+      "quality_score": 0.7118,
+      "chunk_count": 35
+    },
+    {
+      "name": "new credit",
+      "document_frequency": 0.012,
+      "quality_score": 0.7173,
+      "chunk_count": 37
+    },
+    {
+      "name": "overdraft fee",
+      "document_frequency": 0.0146,
+      "quality_score": 0.8114,
+      "chunk_count": 45
+    },
+    {
+      "name": "creating budget",
+      "document_frequency": 0.0,
+      "quality_score": 0.52,
+      "chunk_count": 0
+    },
+    {
+      "name": "bonus categories",
+      "document_frequency": 0.0236,
+      "quality_score": 0.8599,
+      "chunk_count": 73
+    },
+    {
+      "name": "mortgage",
+      "document_frequency": 0.0531,
+      "quality_score": 0.8599,
+      "chunk_count": 164
+    },
+    {
+      "name": "points redeemed",
+      "document_frequency": 0.0003,
+      "quality_score": 0.464,
+      "chunk_count": 1
+    },
+    {
+      "name": "earn chase",
+      "document_frequency": 0.0036,
+      "quality_score": 0.5286,
+      "chunk_count": 11
+    },
+    {
+      "name": "closing costs",
+      "document_frequency": 0.0074,
+      "quality_score": 0.6689,
+      "chunk_count": 23
+    },
+    {
+      "name": "purchases chase",
+      "document_frequency": 0.0,
+      "quality_score": 0.447,
+      "chunk_count": 0
+    },
+    {
+      "name": "home lending",
+      "document_frequency": 0.0055,
+      "quality_score": 0.5549,
+      "chunk_count": 17
+    },
+    {
+      "name": "direct deposit",
+      "document_frequency": 0.0185,
+      "quality_score": 0.8132,
+      "chunk_count": 57
+    },
+    {
+      "name": "types credit",
+      "document_frequency": 0.0,
+      "quality_score": 0.4435,
+      "chunk_count": 0
+    },
+    {
+      "name": "portal chase",
+      "document_frequency": 0.0,
+      "quality_score": 0.4434,
+      "chunk_count": 0
+    },
+    {
+      "name": "travel rewards",
+      "document_frequency": 0.0159,
+      "quality_score": 0.8373,
+      "chunk_count": 49
+    },
+    {
+      "name": "banking",
+      "document_frequency": 0.0541,
+      "quality_score": 0.8375,
+      "chunk_count": 167
+    },
+    {
+      "name": "account alerts",
+      "document_frequency": 0.0074,
+      "quality_score": 0.6689,
+      "chunk_count": 23
+    },
+    {
+      "name": "card balance",
+      "document_frequency": 0.0117,
+      "quality_score": 0.6693,
+      "chunk_count": 36
+    },
+    {
+      "name": "freedom unlimited",
+      "document_frequency": 0.023,
+      "quality_score": 0.8337,
+      "chunk_count": 71
+    },
+    {
+      "name": "chase card",
+      "document_frequency": 0.032,
+      "quality_score": 0.8337,
+      "chunk_count": 99
+    },
+    {
+      "name": "closing",
+      "document_frequency": 0.0155,
+      "quality_score": 0.7442,
+      "chunk_count": 48
+    },
+    {
+      "name": "card late",
+      "document_frequency": 0.0019,
+      "quality_score": 0.5588,
+      "chunk_count": 6
+    },
+    {
+      "name": "cards chase",
+      "document_frequency": 0.0087,
+      "quality_score": 0.6396,
+      "chunk_count": 27
+    },
+    {
+      "name": "travel benefits",
+      "document_frequency": 0.0081,
+      "quality_score": 0.6819,
+      "chunk_count": 25
+    },
+    {
+      "name": "hotel loyalty",
+      "document_frequency": 0.0045,
+      "quality_score": 0.6106,
+      "chunk_count": 14
+    },
+    {
+      "name": "portal earn",
+      "document_frequency": 0.0,
+      "quality_score": 0.4245,
+      "chunk_count": 0
+    },
+    {
+      "name": "card benefits",
+      "document_frequency": 0.0065,
+      "quality_score": 0.6493,
+      "chunk_count": 20
+    },
+    {
+      "name": "cardmember offer",
+      "document_frequency": 0.0142,
+      "quality_score": 0.8029,
+      "chunk_count": 44
+    },
+    {
+      "name": "redeem rewards",
+      "document_frequency": 0.0113,
+      "quality_score": 0.7423,
+      "chunk_count": 35
+    },
+    {
+      "name": "purchase earn",
+      "document_frequency": 0.0,
+      "quality_score": 0.5135,
+      "chunk_count": 0
+    },
+    {
+      "name": "sign bonus",
+      "document_frequency": 0.0,
+      "quality_score": 0.508,
+      "chunk_count": 0
+    },
+    {
+      "name": "account fees",
+      "document_frequency": 0.0039,
+      "quality_score": 0.5835,
+      "chunk_count": 12
+    },
+    {
+      "name": "send money",
+      "document_frequency": 0.0087,
+      "quality_score": 0.6797,
+      "chunk_count": 27
+    },
+    {
+      "name": "manage credit",
+      "document_frequency": 0.0013,
+      "quality_score": 0.5277,
+      "chunk_count": 4
+    },
+    {
+      "name": "card bonus",
+      "document_frequency": 0.001,
+      "quality_score": 0.5199,
+      "chunk_count": 3
+    },
+    {
+      "name": "transfer points",
+      "document_frequency": 0.0091,
+      "quality_score": 0.6817,
+      "chunk_count": 28
+    },
+    {
+      "name": "va loans",
+      "document_frequency": 0.0049,
+      "quality_score": 0.5969,
+      "chunk_count": 15
+    },
+    {
+      "name": "overdraft",
+      "document_frequency": 0.0194,
+      "quality_score": 0.8883,
+      "chunk_count": 60
+    },
+    {
+      "name": "financial aid",
+      "document_frequency": 0.0026,
+      "quality_score": 0.547,
+      "chunk_count": 8
+    },
+    {
+      "name": "cardmembers earn",
+      "document_frequency": 0.0042,
+      "quality_score": 0.4847,
+      "chunk_count": 13
+    },
+    {
+      "name": "chase customers",
+      "document_frequency": 0.0055,
+      "quality_score": 0.6033,
+      "chunk_count": 17
+    },
+    {
+      "name": "sapphire preferred",
+      "document_frequency": 0.0129,
+      "quality_score": 0.7519,
+      "chunk_count": 40
+    },
+    {
+      "name": "account child",
+      "document_frequency": 0.0,
+      "quality_score": 0.4916,
+      "chunk_count": 0
+    },
+    {
+      "name": "joint bank",
+      "document_frequency": 0.0042,
+      "quality_score": 0.5725,
+      "chunk_count": 13
+    },
+    {
+      "name": "multiple credit",
+      "document_frequency": 0.0049,
+      "quality_score": 0.5854,
+      "chunk_count": 15
+    },
+    {
+      "name": "new cardmember",
+      "document_frequency": 0.0278,
+      "quality_score": 0.8807,
+      "chunk_count": 86
+    },
+    {
+      "name": "payment history",
+      "document_frequency": 0.0175,
+      "quality_score": 0.8293,
+      "chunk_count": 54
+    },
+    {
+      "name": "worth",
+      "document_frequency": 0.0337,
+      "quality_score": 0.8771,
+      "chunk_count": 104
+    },
+    {
+      "name": "online banking",
+      "document_frequency": 0.012,
+      "quality_score": 0.7163,
+      "chunk_count": 37
+    },
+    {
+      "name": "chase shop",
+      "document_frequency": 0.0052,
+      "quality_score": 0.5803,
+      "chunk_count": 16
+    },
+    {
+      "name": "late payments",
+      "document_frequency": 0.0113,
+      "quality_score": 0.6993,
+      "chunk_count": 35
+    },
+    {
+      "name": "account holder",
+      "document_frequency": 0.0081,
+      "quality_score": 0.6327,
+      "chunk_count": 25
+    },
+    {
+      "name": "rewards purchasing",
+      "document_frequency": 0.0,
+      "quality_score": 0.4705,
+      "chunk_count": 0
+    },
+    {
+      "name": "boost credit",
+      "document_frequency": 0.0,
+      "quality_score": 0.4696,
+      "chunk_count": 0
+    },
+    {
+      "name": "eligible chase",
+      "document_frequency": 0.0175,
+      "quality_score": 0.8183,
+      "chunk_count": 54
+    },
+    {
+      "name": "open bank",
+      "document_frequency": 0.0,
+      "quality_score": 0.4665,
+      "chunk_count": 0
+    },
+    {
+      "name": "use card",
+      "document_frequency": 0.0003,
+      "quality_score": 0.472,
+      "chunk_count": 1
+    },
+    {
+      "name": "late fees",
+      "document_frequency": 0.0094,
+      "quality_score": 0.6531,
+      "chunk_count": 29
+    },
+    {
+      "name": "points travel",
+      "document_frequency": 0.0,
+      "quality_score": 0.4652,
+      "chunk_count": 0
+    },
+    {
+      "name": "apr annual",
+      "document_frequency": 0.0,
+      "quality_score": 0.4651,
+      "chunk_count": 0
+    },
+    {
+      "name": "banks require",
+      "document_frequency": 0.0019,
+      "quality_score": 0.5025,
+      "chunk_count": 6
+    },
+    {
+      "name": "upgrade chase",
+      "document_frequency": 0.0,
+      "quality_score": 0.4605,
+      "chunk_count": 0
+    },
+    {
+      "name": "airline hotel",
+      "document_frequency": 0.0,
+      "quality_score": 0.4602,
+      "chunk_count": 0
+    },
+    {
+      "name": "reserve card",
+      "document_frequency": 0.0133,
+      "quality_score": 0.7249,
+      "chunk_count": 41
+    },
+    {
+      "name": "limit increase",
+      "document_frequency": 0.0071,
+      "quality_score": 0.5988,
+      "chunk_count": 22
+    },
+    {
+      "name": "ultimate rewards",
+      "document_frequency": 0.0508,
+      "quality_score": 0.8545,
+      "chunk_count": 157
+    },
+    {
+      "name": "savings",
+      "document_frequency": 0.0754,
+      "quality_score": 0.8522,
+      "chunk_count": 233
+    },
+    {
+      "name": "minimum payment",
+      "document_frequency": 0.0162,
+      "quality_score": 0.7758,
+      "chunk_count": 50
+    },
+    {
+      "name": "hurt credit",
+      "document_frequency": 0.0003,
+      "quality_score": 0.457,
+      "chunk_count": 1
+    },
+    {
+      "name": "card spending",
+      "document_frequency": 0.0019,
+      "quality_score": 0.4887,
+      "chunk_count": 6
+    },
+    {
+      "name": "credit report",
+      "document_frequency": 0.0246,
+      "quality_score": 0.8497,
+      "chunk_count": 76
+    },
+    {
+      "name": "mobile",
+      "document_frequency": 0.0605,
+      "quality_score": 0.8481,
+      "chunk_count": 187
+    },
+    {
+      "name": "card miles",
+      "document_frequency": 0.0049,
+      "quality_score": 0.5434,
+      "chunk_count": 15
+    },
+    {
+      "name": "select hotel",
+      "document_frequency": 0.0003,
+      "quality_score": 0.4511,
+      "chunk_count": 1
+    },
+    {
+      "name": "redeemed credit",
+      "document_frequency": 0.0,
+      "quality_score": 0.4439,
+      "chunk_count": 0
+    },
+    {
+      "name": "variable apr",
+      "document_frequency": 0.0078,
+      "quality_score": 0.5989,
+      "chunk_count": 24
+    },
+    {
+      "name": "pay plan",
+      "document_frequency": 0.0,
+      "quality_score": 0.4421,
+      "chunk_count": 0
+    },
+    {
+      "name": "redeem cash",
+      "document_frequency": 0.0029,
+      "quality_score": 0.4974,
+      "chunk_count": 9
+    },
+    {
+      "name": "app",
+      "document_frequency": 0.3011,
+      "quality_score": 0.5704,
+      "chunk_count": 930
+    },
+    {
+      "name": "advisor",
+      "document_frequency": 0.0097,
+      "quality_score": 0.6267,
+      "chunk_count": 30
+    },
+    {
+      "name": "financial literacy",
+      "document_frequency": 0.0013,
+      "quality_score": 0.4571,
+      "chunk_count": 4
+    },
+    {
+      "name": "access funds",
+      "document_frequency": 0.0003,
+      "quality_score": 0.4374,
+      "chunk_count": 1
+    },
+    {
+      "name": "travel purchased",
+      "document_frequency": 0.0062,
+      "quality_score": 0.5482,
+      "chunk_count": 19
+    },
+    {
+      "name": "payments",
+      "document_frequency": 0.1269,
+      "quality_score": 0.7892,
+      "chunk_count": 392
+    },
+    {
+      "name": "purchases",
+      "document_frequency": 0.2114,
+      "quality_score": 0.6737,
+      "chunk_count": 653
+    },
+    {
+      "name": "opening card",
+      "document_frequency": 0.0,
+      "quality_score": 0.4215,
+      "chunk_count": 0
+    },
+    {
+      "name": "chase",
+      "document_frequency": 0.4574,
+      "quality_score": 0.4208,
+      "chunk_count": 1413
+    },
+    {
+      "name": "maximize points",
+      "document_frequency": 0.0,
+      "quality_score": 0.4207,
+      "chunk_count": 0
+    },
+    {
+      "name": "cash points",
+      "document_frequency": 0.0,
+      "quality_score": 0.4169,
+      "chunk_count": 0
+    },
+    {
+      "name": "travel earn",
+      "document_frequency": 0.0,
+      "quality_score": 0.4102,
+      "chunk_count": 0
+    },
+    {
+      "name": "annual",
+      "document_frequency": 0.0803,
+      "quality_score": 0.8038,
+      "chunk_count": 248
+    },
+    {
+      "name": "redeem points",
+      "document_frequency": 0.0113,
+      "quality_score": 0.626,
+      "chunk_count": 35
+    }
+  ],
+  "entity_cooccurrence_count": 4451,
+  "top_cooccurrences": [
+    {
+      "pair": [
+        "card",
+        "credit"
+      ],
+      "count": 1320
+    },
+    {
+      "pair": [
+        "card",
+        "credit cards"
+      ],
+      "count": 1221
+    },
+    {
+      "pair": [
+        "credit",
+        "credit cards"
+      ],
+      "count": 1221
+    },
+    {
+      "pair": [
+        "card",
+        "chase"
+      ],
+      "count": 961
+    },
+    {
+      "pair": [
+        "card",
+        "cards"
+      ],
+      "count": 831
+    },
+    {
+      "pair": [
+        "chase",
+        "credit"
+      ],
+      "count": 803
+    },
+    {
+      "pair": [
+        "card",
+        "rewards"
+      ],
+      "count": 755
+    },
+    {
+      "pair": [
+        "cards",
+        "credit"
+      ],
+      "count": 737
+    },
+    {
+      "pair": [
+        "cards",
+        "credit cards"
+      ],
+      "count": 716
+    },
+    {
+      "pair": [
+        "chase",
+        "credit cards"
+      ],
+      "count": 658
+    },
+    {
+      "pair": [
+        "credit",
+        "rewards"
+      ],
+      "count": 657
+    },
+    {
+      "pair": [
+        "chase",
+        "purchases"
+      ],
+      "count": 653
+    },
+    {
+      "pair": [
+        "credit cards",
+        "rewards"
+      ],
+      "count": 616
+    },
+    {
+      "pair": [
+        "app",
+        "card"
+      ],
+      "count": 615
+    },
+    {
+      "pair": [
+        "chase",
+        "rewards"
+      ],
+      "count": 567
+    },
+    {
+      "pair": [
+        "card",
+        "purchases"
+      ],
+      "count": 561
+    },
+    {
+      "pair": [
+        "app",
+        "credit"
+      ],
+      "count": 545
+    },
+    {
+      "pair": [
+        "app",
+        "chase"
+      ],
+      "count": 500
+    },
+    {
+      "pair": [
+        "card",
+        "cash"
+      ],
+      "count": 497
+    },
+    {
+      "pair": [
+        "cards",
+        "chase"
+      ],
+      "count": 492
+    },
+    {
+      "pair": [
+        "cards",
+        "rewards"
+      ],
+      "count": 490
+    },
+    {
+      "pair": [
+        "credit",
+        "purchases"
+      ],
+      "count": 476
+    },
+    {
+      "pair": [
+        "account",
+        "chase"
+      ],
+      "count": 430
+    },
+    {
+      "pair": [
+        "credit cards",
+        "purchases"
+      ],
+      "count": 428
+    },
+    {
+      "pair": [
+        "cash",
+        "credit"
+      ],
+      "count": 425
+    },
+    {
+      "pair": [
+        "account",
+        "card"
+      ],
+      "count": 421
+    },
+    {
+      "pair": [
+        "app",
+        "credit cards"
+      ],
+      "count": 418
+    },
+    {
+      "pair": [
+        "cash",
+        "chase"
+      ],
+      "count": 393
+    },
+    {
+      "pair": [
+        "cash",
+        "credit cards"
+      ],
+      "count": 389
+    },
+    {
+      "pair": [
+        "cash",
+        "rewards"
+      ],
+      "count": 384
+    },
+    {
+      "pair": [
+        "purchases",
+        "rewards"
+      ],
+      "count": 371
+    },
+    {
+      "pair": [
+        "account",
+        "credit"
+      ],
+      "count": 350
+    },
+    {
+      "pair": [
+        "card",
+        "fee"
+      ],
+      "count": 333
+    },
+    {
+      "pair": [
+        "cards",
+        "cash"
+      ],
+      "count": 330
+    },
+    {
+      "pair": [
+        "account",
+        "app"
+      ],
+      "count": 325
+    },
+    {
+      "pair": [
+        "account",
+        "bank"
+      ],
+      "count": 309
+    },
+    {
+      "pair": [
+        "cards",
+        "purchases"
+      ],
+      "count": 305
+    },
+    {
+      "pair": [
+        "credit",
+        "fee"
+      ],
+      "count": 300
+    },
+    {
+      "pair": [
+        "benefits",
+        "card"
+      ],
+      "count": 288
+    },
+    {
+      "pair": [
+        "app",
+        "cards"
+      ],
+      "count": 285
+    },
+    {
+      "pair": [
+        "chase",
+        "fee"
+      ],
+      "count": 278
+    },
+    {
+      "pair": [
+        "credit",
+        "credit score"
+      ],
+      "count": 275
+    },
+    {
+      "pair": [
+        "cash",
+        "purchases"
+      ],
+      "count": 273
+    },
+    {
+      "pair": [
+        "credit",
+        "payments"
+      ],
+      "count": 264
+    },
+    {
+      "pair": [
+        "account",
+        "credit cards"
+      ],
+      "count": 262
+    },
+    {
+      "pair": [
+        "benefits",
+        "credit"
+      ],
+      "count": 261
+    },
+    {
+      "pair": [
+        "app",
+        "rewards"
+      ],
+      "count": 243
+    },
+    {
+      "pair": [
+        "credit cards",
+        "fee"
+      ],
+      "count": 241
+    },
+    {
+      "pair": [
+        "benefits",
+        "credit cards"
+      ],
+      "count": 231
+    },
+    {
+      "pair": [
+        "app",
+        "fee"
+      ],
+      "count": 226
+    }
+  ],
+  "corpus_pool_size": 500,
+  "seed_chunk_count": 500,
+  "census": {
+    "chunk_count": 3089,
+    "strata": null,
+    "linkability_p50": null,
+    "linkability_p75": null,
+    "header_prevalence": 0.0
+  },
+  "corpus_profile_raw": {
+    "enabled": true,
+    "used": true,
+    "summary": "Themes: customer help, product FAQs, account support, and consumer financial education.\nDomain: consumer financial services across banking, credit cards, lending, rewards, and related products.\nUser persona: likely a Chase customer or prospective customer looking up product details, troubleshooting steps, fees, eligibility, or how to use benefits.",
+    "example_queries": [
+      "check Chase credit card application status",
+      "how to redeem Chase Ultimate Rewards points",
+      "when does Chase charge an overdraft fee",
+      "Chase Secure Banking monthly service fee avoid",
+      "error applying for Chase auto financing online",
+      "can I have both a Chase travel card and cash back card",
+      "do Chase credit card points expire",
+      "how do Chase debit card overdrafts work",
+      "business credit card application status Chase",
+      "are Chase credit card rewards points worth it"
+    ],
+    "user_prompt": "Analyze the following document corpus:\n\n<user_context>\nDescription: Chase.com public help and product articles covering credit cards, banking, auto loans, mortgages, and investments.\nExample queries provided by user: \n</user_context>\n\n<top_level_chunks>\n{\n  \"chunk_id\": \"c_00124_02\",\n  \"file\": \"p_00124\",\n  \"heading_path\": \"How to check your credit card application status > How else can I check my credit card application status?\",\n  \"page_title\": \"How to Check Your Credit Card Application Status | Chase\",\n  \"stratum\": \"education_center\",\n  \"sub_stratum\": \"basics\"\n}\n## How else can I check my credit card application status?\nMajor credit card issuers have customer service phone lines that you can usually use to check an application status. The line might quickly lead to a specialist who can provide detailed information about your credit card application, if available. Other times, you may need to navigate brief automated prompts to get a status update.\nWhenever you check an application's status by phone, you may have to provide a reference number for your application and verify your identity with information like your Social Security number. Your reference number would be provided after you submit a credit card application. Check any notices or materials you received when you completed your application.\nIf you apply for a credit card with Chase, we may provide important updates until we make a decision on your application. If you urgently need an update, please refer to any communications we've sent or call us at 1-888-338-2586. You can also call this number to check a Chase business credit card application status.\n\n{\n  \"chunk_id\": \"c_00086_03\",\n  \"file\": \"p_00086\",\n  \"heading_path\": \"When a fee won't be charged\",\n  \"page_title\": \"Debit Card Coverage | Overdraft Services | Chase.com\",\n  \"stratum\": \"personal_banking\",\n  \"sub_stratum\": \"checking\"\n}\n## When a fee won't be charged\n- With Chase Overdraft Assist\u2120, if you\u2019re overdrawn by $50 or less at the end of the business day OR if you\u2019re overdrawn by more than $50 and you bring your account balance to overdrawn by $50 or less at the end of the next business day (you have until 11 PM ET (8 PM PT) to make a deposit or transfer). Chase Overdraft Assist does not require enrollment and comes with all Chase checking accounts except Chase First Checking\u2120, Chase High School Checking\u2120 or Chase Secure Checking\u2120.\n- If your transaction is $5 or less.\n- If your debit card transaction was authorized when there was a sufficient available balance in your account.\n- If your debit card transaction is declined.\n- For Chase Sapphire\u2120 Checking and Chase Private Client Checking\u2120 accounts, there are no Overdraft Fees when item(s) are presented against an account with insufficient funds on the first four business days during the current and prior 12 statement periods. On a business day when we returned item(s), this counts toward the four business days when an Overdraft Fee will not be charged.\n## For business accounts\nSee information on How your transactions will work for business accounts (PDF)\n\n{\n  \"chunk_id\": \"c_00001_15\",\n  \"file\": \"p_00001\",\n  \"heading_path\": \"Answers to your financing questions > What should I do if I receive an error when applying online?\",\n  \"page_title\": \"Chase Auto | Shop for a car | dealer inventory | Chase.com\",\n  \"stratum\": \"auto\",\n  \"sub_stratum\": \"loans\"\n}\nWhat should I do if I receive an error when applying online?\nIf you receive an error message, first refresh your browser and try again. If it continues, use a different browser (i.e. Firefox, Chrome).\nWhen I apply online, my joint account owner's personal information pre-fills. How can I remove their info?\nTo apply with only your information, choose \"No\" when asked if you're a Chase customer during the application. Then, you'll be able to enter your info.\n1 To finance a new or used car with your dealer through JPMorgan Chase Bank, N.A. (\"Chase\"), you must purchase your car from a dealer in the Chase network. All applications are subject to credit approval by Chase. Additional terms and conditions apply, such as vehicle make, age and mileage. Your lock applies only to the specific vehicle, dealer and terms you requested; any changes may result in a rate change.\n\n{\n  \"chunk_id\": \"c_00238_06\",\n  \"file\": \"p_00238\",\n  \"heading_path\": \"How to redeem credit card points > How do I redeem reward points?\",\n  \"page_title\": \"How do you redeem credit card reward points? | Chase\",\n  \"stratum\": \"education_center\",\n  \"sub_stratum\": \"rewards_benefits\"\n}\n## How do I redeem reward points?\nReward points can usually be redeemed through your credit card reward portal or mobile app. If you are actively working to earn and accumulate points, don't forget to check if there are any expiration dates associated with your earned points.\nChase Sapphire is an official partner of the PGA Championship.\n</top_level_chunks>\n\n<random_sampled_chunks>\n{\n  \"chunk_id\": \"c_00200_01\",\n  \"file\": \"p_00200\",\n  \"heading_path\": \"A beginner\\u2019s guide to Chase credit card rewards > What are Chase Ultimate Rewards?\",\n  \"page_title\": \"A beginner\\u2019s guide to Chase credit card rewards | Chase\",\n  \"stratum\": \"education_center\",\n  \"sub_stratum\": \"rewards_benefits\"\n}\n## What are Chase Ultimate Rewards?\nChase Ultimate Rewards is the rewards program for many Chase-branded rewards credit cards. If you have an eligible Chase card, you may earn points on many of your everyday purchases.\nSeveral Chase credit cards offer a rate of at least a single point per dollar spent, and some cards offer additional points through sign-up bonuses, certain rewards categories and other offers. Chase Ultimate Rewards points don\u2019t expire as long as your credit card account remains open.\nThe rewards structure provides many ways to redeem credit card points, including for travel, gift cards, cash back, exclusive offers and more. You may be able to use points to make purchases with certain online retailers. The best way to use Chase points may vary based on your own preferences and expenses.\n\n{\n  \"chunk_id\": \"c_00120_05\",\n  \"file\": \"p_00120\",\n  \"heading_path\": \"Can you have a Chase travel credit card and cash back card? > In summary\",\n  \"page_title\": \"Can I Have a Chase Travel Credit Card & Cash Back Card? | Chase\",\n  \"stratum\": \"education_center\",\n  \"sub_stratum\": \"basics\"\n}\n## In summary\nYou can hold both a Chase travel credit card and a cash back card if you meet their eligibility requirements, giving you more ways to earn and redeem rewards. Travel cards typically earn rewards as points or miles and cash back cards earn points that can be redeemed for cash back. Cardmembers may be able to combine or pool their rewards in the Chase Ultimate Rewards portal.\nWhen having more than one card, you may want to be mindful of extra management, annual fees and the timing of your card application to make the most of your Chase card pairings.\n\n{\n  \"chunk_id\": \"c_00013_24\",\n  \"file\": \"p_00013\",\n  \"heading_path\": \"Chase Secure BankingSMA simple checking account with no overdraft fees2 > How to avoid the Chase Secure Banking Monthly Service Fee? Expand content\",\n  \"page_title\": \"Chase Secure Banking | Checking Account With No Overdraft Fees | Chase.com\",\n  \"stratum\": \"personal_banking\",\n  \"sub_stratum\": \"checking\"\n}\n10 This score improvement resource does not guarantee you will reach your credit score goal even if you complete the recommended actions, as there are other factors that may impact your VantageScore. This resource should be used for educational purposes only. There are various types of credit scores that lenders can access to make a lending decision. The credit score you receive is based on the VantageScore\u00ae 3.0 model and may not be the credit score model used by your lender or by Chase. You should carefully consider your needs and objectives before making any decisions, and consult the appropriate professional(s).\n11 Special Provisions for Card Transactions (Zero Liability Protection): Chase will reimburse unauthorized debit card transactions when reported promptly. Certain limitations apply. See Deposit Account Agreement for details.\n12 Spending Planner is meant to help you track and manage your spending, and is based on posted transactions within your Chase accounts. It may not include all your financial activity, such as other sources of income or external transactions. The numbers we provide are updated throughout the day, but are subject to adjustment and correction; consider your full financial picture when making decisions.\n13 Chase Mobile\u00ae app is available for select mobile devices. Enroll in Chase OnlineSM or on the Chase Mobile app. Deposits made through the Chase Mobile app are subject to deposit limits and funds are typically available by next business day. Deposit limits may change at any time. Other restrictions apply. See chase.com/QuickDeposit or the Chase Mobile app for eligible mobile devices, limitations, terms, conditions and details. Message and data rates may apply.\n14 Account Alerts: There's no charge from Chase, but message and data rates may apply. Delivery of alerts may be delayed for various reasons, including service outages affecting your phone, wireless or internet provider; technology failures; and system capacity limitations. Any time you review your balance, keep in mind it may not reflect all transactions including recent debit card transactions.\n\n{\n  \"chunk_id\": \"c_00263_07\",\n  \"file\": \"p_00263\",\n  \"heading_path\": \"What are credit card points & how do they work? > Are credit card points worth it?\",\n  \"page_title\": \"What are Credit Card Points, How to Earn Them and How Do They Work? | Chase\",\n  \"stratum\": \"education_center\",\n  \"sub_stratum\": \"rewards_benefits\"\n}\n## Are credit card points worth it?\nYour lifestyle and spending habits will influence whether a credit card that offers rewards points are worth it to you. There may also be opportunities to earn cash back points by making your regular purchases on a rewards credit card. Frequent travelers may find it convenient and worthwhile to book hotel rooms and flights through select travel booking sites to earn miles or points or enroll in co-branded loyalty programs for exclusive point accumulation. Bonus promotions (which typically have spending requirements) could also offer additional ways to earn points, depending on the promotion being offered.\n</random_sampled_chunks>\n\nReturn your analysis as JSON with keys: thoughts, summary, example_queries",
+    "raw_response": "{\n  \"thoughts\": \"This corpus appears to be a public-facing financial services help and education library from Chase.com. It mixes product pages, FAQs, support content, and educational articles across several consumer finance domains: credit cards, checking/debit banking, auto financing, mortgages/investments as noted in the description, and rewards programs. The sampled chunks suggest two major content types: practical account/product support (application status, overdraft fee rules, online application errors, account features) and educational guidance for consumers comparing or understanding financial products (credit card rewards, points, card combinations, basics). The likely searcher is a retail banking or credit card customer/prospect trying to solve a specific task, understand fees/eligibility, or learn how Chase products work before applying or using them.\",\n  \"summary\": \"Themes: customer help, product FAQs, account support, and consumer financial education.\\nDomain: consumer financial services across banking, credit cards, lending, rewards, and related products.\\nUser persona: likely a Chase customer or prospective customer looking up product details, troubleshooting steps, fees, eligibility, or how to use benefits.\",\n  \"example_queries\": [\n    \"check Chase credit card application status\",\n    \"how to redeem Chase Ultimate Rewards points\",\n    \"when does Chase charge an overdraft fee\",\n    \"Chase Secure Banking monthly service fee avoid\",\n    \"error applying for Chase auto financing online\",\n    \"can I have both a Chase travel card and cash back card\",\n    \"do Chase credit card points expire\",\n    \"how do Chase debit card overdrafts work\",\n    \"business credit card application status Chase\",\n    \"are Chase credit card rewards points worth it\"\n  ]\n}"
+  }
+}

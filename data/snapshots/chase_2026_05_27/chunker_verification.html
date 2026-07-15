@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chunker Verification Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+         background: #fff; color: #1a1a1a; line-height: 1.5; padding: 2rem 3rem; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: .25rem; }
+  .subtitle { color: #666; font-size: .9rem; margin-bottom: 2rem; }
+  h2 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 .75rem; padding-bottom: .35rem;
+       border-bottom: 2px solid #e5e5e5; }
+  h3 { font-size: .95rem; font-weight: 600; margin: 1.25rem 0 .5rem; color: #333; }
+
+  /* Stats table */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: .5rem; margin-bottom: 1.5rem; }
+  .stat-card { background: #f7f7f8; border-radius: 6px; padding: .6rem .8rem; text-align: center; }
+  .stat-card .label { font-size: .7rem; text-transform: uppercase; letter-spacing: .04em; color: #888; }
+  .stat-card .value { font-size: 1.3rem; font-weight: 700; color: #111; }
+
+  /* Histogram */
+  .hist-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: .85rem; }
+  .hist-table th { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid #ddd; color: #666;
+                   font-weight: 500; }
+  .hist-table td { padding: .3rem .5rem; border-bottom: 1px solid #f0f0f0; }
+  .hist-bar-cell { width: 50%; }
+  .hist-bar { height: 18px; background: #3b82f6; border-radius: 3px; min-width: 2px; }
+  .hist-pct { color: #888; font-size: .8rem; }
+
+  /* Chunk cards */
+  .chunk-card { background: #fafafa; border: 1px solid #e8e8e8; border-radius: 6px;
+                padding: .75rem 1rem; margin-bottom: .75rem; }
+  .chunk-meta { margin-bottom: .4rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .chunk-meta code { font-size: .8rem; font-weight: 600; color: #555; }
+  .badge { display: inline-block; font-size: .65rem; font-weight: 600; padding: .15rem .45rem;
+           border-radius: 3px; letter-spacing: .02em; }
+  .badge.tok { background: #dbeafe; color: #1d4ed8; }
+  .badge.stratum { background: #e8e8e8; color: #555; }
+  .badge.long-split { background: #fef3c7; color: #92400e; }
+  .badge.bucket { background: #d1fae5; color: #065f46; font-size: .7rem; }
+  .chunk-text { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: .78rem;
+                line-height: 1.55; white-space: pre-wrap; word-break: break-word;
+                background: #fff; border: 1px solid #eee; border-radius: 4px; padding: .6rem .8rem;
+                max-height: 320px; overflow-y: auto; color: #333; }
+  .chunk-text .heading { color: #1d4ed8; font-weight: 600; }
+  .chunk-text .bullet { color: #059669; }
+
+  /* no_info cards */
+  .noinfo-card { background: #fff8f0; border: 1px solid #f0dcc8; border-radius: 6px;
+                 padding: .75rem 1rem; margin-bottom: .6rem; }
+  .noinfo-card .ni-url { font-size: .78rem; color: #666; word-break: break-all; }
+  .noinfo-card .ni-meta { font-size: .8rem; margin: .3rem 0; }
+  .noinfo-card pre { font-size: .75rem; background: #fff; border: 1px solid #eee; border-radius: 4px;
+                     padding: .5rem; max-height: 150px; overflow-y: auto; white-space: pre-wrap;
+                     word-break: break-word; color: #555; }
+
+  .section-note { font-size: .85rem; color: #666; margin-bottom: 1rem; line-height: 1.6; }
+  .category-label { display: inline-block; font-size: .75rem; font-weight: 600; color: #666;
+                    margin-bottom: .3rem; text-transform: uppercase; letter-spacing: .03em; }
+</style>
+</head>
+<body>
+<h1>Chunker Verification Report</h1>
+<p class="subtitle">chase_2026_05_27 &mdash; 306 pages, 290 chunked, 16 no_info skipped</p>
+
+<h2>1. Distribution Stats</h2>
+<div class="stats-grid">
+<div class="stat-card"><div class="label">Total</div><div class="value">3169</div></div>
+<div class="stat-card"><div class="label">Min</div><div class="value">20</div></div>
+<div class="stat-card"><div class="label">P10</div><div class="value">32</div></div>
+<div class="stat-card"><div class="label">P25</div><div class="value">49</div></div>
+<div class="stat-card"><div class="label">Median</div><div class="value">79</div></div>
+<div class="stat-card"><div class="label">P75</div><div class="value">131</div></div>
+<div class="stat-card"><div class="label">P90</div><div class="value">196</div></div>
+<div class="stat-card"><div class="label">Max</div><div class="value">400</div></div>
+<div class="stat-card"><div class="label">Long-split</div><div class="value">4</div></div>
+</div>
+<table class="hist-table"><tr><th>Bucket</th><th>Count</th><th></th><th></th></tr>
+<tr><td><20</td><td>0</td><td class="hist-bar-cell"><div class="hist-bar" style="width:2px"></div></td><td class="hist-pct">0.0%</td></tr>
+<tr><td>20-49</td><td>809</td><td class="hist-bar-cell"><div class="hist-bar" style="width:190px"></div></td><td class="hist-pct">25.5%</td></tr>
+<tr><td>50-99</td><td>1189</td><td class="hist-bar-cell"><div class="hist-bar" style="width:280px"></div></td><td class="hist-pct">37.5%</td></tr>
+<tr><td>100-199</td><td>868</td><td class="hist-bar-cell"><div class="hist-bar" style="width:204px"></div></td><td class="hist-pct">27.4%</td></tr>
+<tr><td>200-299</td><td>225</td><td class="hist-bar-cell"><div class="hist-bar" style="width:52px"></div></td><td class="hist-pct">7.1%</td></tr>
+<tr><td>300-399</td><td>76</td><td class="hist-bar-cell"><div class="hist-bar" style="width:17px"></div></td><td class="hist-pct">2.4%</td></tr>
+<tr><td>400+</td><td>2</td><td class="hist-bar-cell"><div class="hist-bar" style="width:2px"></div></td><td class="hist-pct">0.1%</td></tr>
+</table>
+<h2>2. Sample Chunks by Size Bucket</h2>
+<p class="section-note">One chunk per target size range, plus one long-split example.</p>
+<div class="category-label">~30t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00269_15</code> <span class="badge tok">34t</span><span class="badge stratum">credit_cards/freedom</span></div><pre class="chunk-text"><span class="heading">## WE MADE REDEEMING EASY, TOO</span>
+<span class="heading">### Shopping</span>
+Treat yourself. Redeem points for gift cards or shop with points at your favorite retailers.</pre></div>
+<div class="category-label">~80t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00153_04</code> <span class="badge tok">73t</span><span class="badge stratum">education_center/basics</span></div><pre class="chunk-text"><span class="heading">### Get a parent or co-signer</span>
+Some credit cards will allow parents to act as co-signers for the card, which uses the parents' credit history for approval, but pushes the responsibility of repayment directly on the student. However, if the student fails to make payments on the card, the co-signer becomes fully liable to repay the debt in full.</pre></div>
+<div class="category-label">~80t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00076_06</code> <span class="badge tok">87t</span><span class="badge stratum">education_center/budgeting_saving</span></div><pre class="chunk-text"><span class="heading">## 6. Stopping impulse buys</span>
+The impulse buy may be a curse for many budgeters. Measures like shopping lists, accountability partners or mandatory waiting periods on unplanned purchases may go a long way toward warding off impulsive spending. Identifying personal triggers that lead to impulse buying may help stop impulsive purchases before they happen. This generally involves recognizing situations and emotions that seem to encourage spontaneous spending and learning to navigate them.</pre></div>
+<div class="category-label">~150t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00254_00</code> <span class="badge tok">141t</span><span class="badge stratum">education_center/rewards_benefits</span></div><pre class="chunk-text"><span class="heading"># Can I pay my credit card bill with reward points?</span>
+Travel, renting cars and staying at hotels spring to mind as the most obvious perks of credit card reward programs. Yet you can also redeem your reward points for statement credit or cash back to pay down a portion of your credit card balance. If you have some travel costs coming up, you might get better value from using points for that as you may get more value out of your points by redeeming toward hotels and flights. It really depends on how much debt you have and what interest rate you're paying.
+Here are some ways to leverage your reward points toward your credit card balance as well as a few tips on when and how to redeem them.</pre></div>
+<div class="category-label">~150t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00103_01</code> <span class="badge tok">148t</span><span class="badge stratum">education_center/basics</span></div><pre class="chunk-text"><span class="heading">## Benefits of Chase Refer-A-Friend program</span>
+Did you know that the Refer-A-Friend program is a benefit of many Chase cards? Visit Chase’s Refer-A-Friend page to see if your card is eligible. With Chase's Refer-A-Friend program, you can earn rewards by sharing your unique URL with friends.
+When your friend applies for a Chase credit card using your URL and their application is approved, both you and your friend receive the promotional rewards active at that time. These rewards can vary depending on the current offer available upon approval.
+It's an easy way for both you and your friend to benefit from the program. By sharing the advantages of being a Chase cardmember, you both have the opportunity to enjoy additional rewards.</pre></div>
+<div class="category-label">~250t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00105_04</code> <span class="badge tok">268t</span><span class="badge stratum">education_center/basics</span></div><pre class="chunk-text"><span class="heading">## Compare fees, rates and card features</span>
+Before adding your child as an authorized user or helping them apply for their first credit card, take a close look at the fees, interest rates and eligibility requirements. These details can affect how manageable the card is over time. Consider the following:
+<span class="bullet">- Understand the annual percentage rate (APR): The APR is the interest charged if the balance isn’t paid in full each month. With APR, if your child does not pay off their balance each month, they could end up paying a substantial amount of interest. The longer the balance carries over, the more interest they may be charged.</span>
+<span class="bullet">- Check for late payment fees: Some issuers charge a fee for late payments. These fees vary by card issuer, but they can add up quickly if your child forgets to pay on time. Setting up automatic payments or reminders could help avoid these charges.</span>
+<span class="bullet">- Watch for annual fees: Some cards have annual fees just for keeping the account open. While some teen-friendly options may not have them, it’s still worth reviewing the fine print to avoid unexpected charges.</span>
+<span class="bullet">- Review penalty APRs: Missing payments or breaking card terms could trigger a higher interest rate known as a penalty APR. This rate can increase what your child owes over time. It's helpful to talk about the importance of responsible card use early on.</span></pre></div>
+<div class="category-label">~250t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00111_07</code> <span class="badge tok">257t</span><span class="badge stratum">education_center/basics</span></div><pre class="chunk-text"><span class="heading">## How do student card rewards compare to regular credit cards?</span>
+The rewards offered by student credit cards are generally more modest when compared to those available on regular, non-student credit cards. This difference is primarily due to the target audience and the primary purpose of student cards.
+<span class="bullet">- Earning rates: Regular credit cards may offer earning rates such as 2% cash back on all purchases or different percentages in specific bonus categories. In contrast, student credit card rewards may offer around 1% cash back or a similar points equivalent on general spending. This difference can add up over time for those with higher spending habits, and some consumers consider credit card upgrades after establishing a strong credit history.</span>
+<span class="bullet">- Bonus categories and caps: Some regular credit cards offer more diverse and generous bonus categories, sometimes without spending caps, allowing cardholders to earn additional rewards on their everyday expenses. If they have bonus categories, student cards often come with lower spending caps or fewer categories. This means the potential for maximizing those earnings is generally lower.</span>
+<span class="bullet">- Premium perks: Regular credit cards, particularly those with annual fees, may come with additional perks like travel insurance, extended warranties, purchase protection and airport lounge access. These student credit card benefits are rarely found on student cards, which tend to focus on more basic features and rewards.</span></pre></div>
+<div class="category-label">~380t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00013_22</code> <span class="badge tok">387t</span><span class="badge stratum">personal_banking/checking</span></div><pre class="chunk-text">4 Chase Secure BankingSM: $0 Monthly Service Fee when you have ONE of the following during each statement period: Option #1: $250+ in qualifying electronic deposits; OR, Option #2: an account owner who is age 17-24. Qualifying electronic deposits include payments from your employer or government entities (benefits, tax refunds, etc.), made using the ACH network, Real Time Payment (RTP®), FedNow® Service, or third-party services that facilitate payments to your debit card using the Visa® or Mastercard® network. Transactions such as Zelle®, cash, checks, wire transfers, and interest payments do not count as qualifying electronic deposits. Otherwise a $4.95 Monthly Service Fee will apply.
+Product terms subject to change. For more information, please see a banker or visit chase.com/checking.
+5 Savings represents the average monthly reported savings on fees for money orders, check cashing, U.S. remittances, prepaid debit cards, and bill paying services by 1815 Chase Secure Banking customers who responded to a Chase survey fielded in May and June 2025. The responses represent 0.067% of the total population of Chase Secure Banking customers. Your savings may vary.
+6 Enrollment in Zelle® at a participating financial institution using an eligible U.S. checking or savings account is required to use the service. Chase customers may not enroll using savings accounts; an eligible Chase consumer or business checking account is required, and may have its own account fees. Consult your account agreement. Funds are typically made available in minutes when the recipient's email address or U.S. mobile number is already enrolled with Zelle® (go to enroll.zellepay.com to view participating banks). Select transactions could take up to 3 business days. Enroll on the Chase Mobile® app or Chase OnlineSM. Limitations may apply. Message and data rates may apply.</pre></div>
+<div class="category-label">~380t</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00270_10</code> <span class="badge tok">393t</span><span class="badge stratum">credit_cards/freedom</span></div><pre class="chunk-text"><span class="heading">### Feeding America® Inclusions</span>
+<span class="heading">### Feeding America® Exclusions</span>
+To ensure your charitable donation is eligible for the 5% Cash Back reward, be sure to donate directly through Feeding America’s official channels using the links provided here or on the Merchant List page. Local chapters may not be eligible due to transaction processing procedures.
+You’d be surprised! You can earn up to $75 bonus cash back each quarter ($15 cash back plus your $60 bonus cash back), and you always earn unlimited 1% cash back on all other purchases! Here’s a look at how your cash back can add up over just one quarter:
+<span class="bullet">- Amazon quarterly spend of $600 earns $30 quarterly cash back.</span>
+<span class="bullet">- Plus: Chase Travel℠ quarterly spend of $800 earns $40 quarterly cash back.</span>
+<span class="bullet">- Plus: Feeding America® quarterly spend of $100 earns $5 quarterly cash back.</span>
+<span class="bullet">- Totals: Quarterly Total Spend of $1,500 earns $75 cash back.</span>
+You always earn unlimited 1% cash back on all other purchases. See your Rewards Program Rules and Regulations/Agreement for details.
+“Cash Back rewards” are the rewards you earn under the program. Cash Back rewards are tracked as points and each $1 in Cash Back rewards earned is equal to 100 points. You may simply see “Cash Back” in marketing materials when referring to the rewards you earn. When you use points to redeem for cash, each point is worth $0.01 (one cent), which means that 100 points equals $1 in redemption value. You can use your points to redeem for cash through an account statement credit or electronic deposit into an eligible checking or savings account held by a financial institution located in the United States.
+No. You will earn a total of 5% cash back even on purchases that may qualify in two or more eligible bonus categories; for example, using PayPal for a department store purchase if both are categories.</pre></div>
+<div class="category-label">long-split</div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00156_02</code> <span class="badge tok">369t</span><span class="badge stratum">education_center/basics</span><span class="badge long-split">long-split</span></div><pre class="chunk-text"><span class="heading">## What are the types of BNPL? The concept of BNPL is nothing farfetched: Buy something today in agreement that you will pay the entire cost over time. However, there's been a surge in companies providing BNPL in the last several years. You may have seen some when shopping online, and your credit card might offer a BNPL feature. There are two primary types you’re likely to find on the market:</span>
+<span class="bullet">- A traditional BNPL company provides a payment option that splits a purchase into multiple payments, with or without interest, at the time of payment. An account is needed to be able to use the pay over time functionality.</span>
+<span class="bullet">- A BNPL feature is typically associated with a credit or debit card and is managed through a customer’s bank/credit card company. Chase Pay Over Time® is a BNPL feature offered with certain Chase credit cards. With a participating Chase credit card, you can break up eligible card purchases you’ve already made of $100 or more into equal monthly payments. Chase Pay Over Time is available on many Chase credit cards, including:</span>
+<span class="bullet">- Amazon Prime Visa</span>
+<span class="bullet">- Amazon Visa</span>
+<span class="bullet">- Chase Freedom®</span>
+<span class="bullet">- Chase Freedom Unlimited®</span>
+<span class="bullet">- Chase Freedom Flex®</span>
+<span class="bullet">- Chase Freedom Rise®</span>
+<span class="bullet">- Chase Freedom® Student</span>
+<span class="bullet">- Chase Sapphire®</span>
+<span class="bullet">- Chase Sapphire Preferred®</span>
+<span class="bullet">- Chase Sapphire Reserve®</span>
+<span class="bullet">- Chase Slate®</span>
+<span class="bullet">- Chase Slate Edge®</span>
+<span class="bullet">- Disney® Visa® Card</span>
+<span class="bullet">- Disney® Premier Visa® Card</span>
+<span class="bullet">- DoorDash Rewards MasterCard®</span>
+<span class="bullet">- Instacart Mastercard®</span>
+<span class="bullet">- Many Chase hotel cards, airline cards and business cards</span>
+Chase Pay Over Time plans set up on a recently made purchase have durations ranging from 3 to 24 months. The ranges available are based on the purchase amount, your creditworthiness and your account history.</pre></div>
+<h2>3. FAQ Page Chunks (p_00087)</h2>
+<p class="section-note">Chase Overdraft Services FAQ &mdash; each Q&amp;A should form its own chunk with <code>##</code> question headings.</p>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00087_00</code> <span class="badge tok">175t</span><span class="badge stratum">personal_banking/checking</span></div><pre class="chunk-text">Chase Overdraft Services
+Frequently Asked Questions
+<span class="heading">## What is Chase Overdraft Assist℠ and do I have to enroll?</span>
+With Chase Overdraft Assist℠, we won’t charge an Overdraft Fee if you’re overdrawn by $50 or less at the end of the business day OR if you’re overdrawn by more than $50 and you bring your account balance to overdrawn by $50 or less at the end of the next business day (you have until 11 PM ET (8 PM PT) to make a deposit or transfer).
+Chase Overdraft Assist does not require enrollment and comes with all Chase checking accounts except Chase First Checking℠, Chase High School Checking℠ or Chase Secure Checking℠. For business accounts, see information on Chase Business Overdraft Services in the Additional Banking Services and Fees for Business Accounts.</pre></div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00087_01</code> <span class="badge tok">238t</span><span class="badge stratum">personal_banking/checking</span></div><pre class="chunk-text"><span class="heading">## How will I be notified of Chase Overdraft Assist and when I need to make a deposit or transfer to avoid overdraft fees?</span>
+You can sign up to receive Account Alerts by email, text message and push notification when your account is overdrawn.
+This alert will also notify you when your account was overdrawn more than $50 and you need to make a deposit or transfer to avoid an Overdraft Fee.
+To sign up for Account Alerts when your account is overdrawn, you’ll need to sign in to your account via chase.com or the Chase Mobile® app. Once signed in, choose “Profile &amp; settings,” then “Alerts,” then “Choose alerts” in the left-hand menu under the Alerts section. We'll show you the list of available alerts for your account, select “My account is overdrawn” under “Balance and spending” and choose your delivery methods. You'll need to repeat these steps for each account you'd like to sign up for alerts.
+You’re responsible for making a deposit or transfer to avoid an Overdraft Fee even if you do not receive a notification alerting you that your account is overdrawn more than $50.</pre></div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00087_02</code> <span class="badge tok">124t</span><span class="badge stratum">personal_banking/checking</span></div><pre class="chunk-text"><span class="heading">## If I overdraw my account, how long do I have to avoid being charged an Overdraft Fee and what are my options for making a deposit or transfers?</span>
+If your account balance at the end of the business day is overdrawn by more than $50, then you need to make a deposit or transfer to avoid an Overdraft Fee on the transactions that overdrew your account. You will have until 11 PM ET (8 PM PT) on the next business day to make a deposit or transfer that brings your account balance to overdrawn by $50 or less at the end of that business day.</pre></div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00087_03</code> <span class="badge tok">139t</span><span class="badge stratum">personal_banking/checking</span></div><pre class="chunk-text">You can deposit or transfer funds via:
+<span class="bullet">- Chase Branch, before it closes: cash deposit, check deposit or transfers from another Chase account</span>
+<span class="bullet">- ATM, before 11 PM ET (8 PM PT): cash deposit, check deposit or transfers from another Chase account</span>
+<span class="bullet">- Chase.com/mobile, received before 11 PM ET (8 PM PT): transfers from another Chase account, Zelle®, or Chase QuickDeposit℠</span>
+<span class="bullet">- Non-Chase accounts: Processing times may be longer and transfers from non-Chase accounts may not settle prior to our 11 PM ET (8 PM PT) cutoff</span>
+For check deposits, this assumes Chase does not place a hold and the check is not returned.</pre></div>
+<div class="chunk-card"><div class="chunk-meta"><code>c_00087_04</code> <span class="badge tok">397t</span><span class="badge stratum">personal_banking/checking</span></div><pre class="chunk-text"><span class="heading">## How much do I need to deposit into my account to avoid an Overdraft Fee?</span>
+You need to deposit and transfer enough money to bring your account balance to overdrawn by $50 or less at the end of the business day. To calculate your account balance at the end of the business day, we take your previous end of day’s balance and post credits. If there are any deposits not yet available for use or holds (such as a garnishment), these will reduce the account balance used to pay your transactions. Then we subtract any debit transactions presented during our nightly processing.
+When you make a deposit or transfer you need to consider any other transactions or purchases, even if they are not shown as pending on your account, that may be presented on the current business day in order to bring your account balance to overdrawn by $50 or less by the end of the business day.
+Example: No $34 Overdraft Fees — Overdrawn by more than $50 and you make a deposit to bring your account balance to overdrawn by $50 or less at the end of the next business day: On Monday, you start the day with $5 in your account. Throughout the day, we receive three $25 checks drawn on your account. During our nightly processing for Monday, we pay these transactions, leaving your end of day account balance overdrawn by $70. To avoid the $34 Overdraft Fee, you make a cash deposit of $30 by 11 PM ET (8 PM PT) on Tuesday, leaving your end of day account balance overdrawn by $40.
+Result: A $34 Overdraft Fee was not charged because your account balance is overdrawn by $50 or less at the end of the business day. If you had not made that cash deposit, then your account balance would have remained overdrawn by more than $50 on Tuesday and you would have been charged a $34 Overdraft Fee on the check.</pre></div>
+<h2>4. no_info Pages &mdash; Origin &amp; Content</h2>
+<p class="section-note">
+  These 16 pages are excluded from chunking. They fall into <strong>three categories</strong>:
+</p>
+<h3>A. JS-rendered shell pages (12 pages)</h3>
+<p class="section-note">
+  Pages whose real content loads via JavaScript. Trafilatura only captures the static shell:
+  a "We've enhanced our platform" banner, the page title, and a Chase Survey overlay prompt.
+  Token counts cluster at 156&ndash;164t &mdash; all boilerplate, no substantive content.<br>
+  <strong>Detection:</strong> <code>SHELL_MARKER = "We've enhanced our platform for chase.com"</code> + token_count &lt; 200.
+</p>
+<h3>B. Boilerplate-only pages (3 pages)</h3>
+<p class="section-note">Pages where trafilatura extracted only footer/legal text or very thin content (&lt;120 tokens). The debt calculator page is an interactive JS tool; the student education and CD pages have minimal static text.</p>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/content/chase-ux/en/digital/digital-payments/samsung-pay</div>
+  <div class="ni-meta"><span class="badge tok">157t</span> <span class="badge stratum">personal_banking/digital_payments</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Chase and Samsung Pay
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a few moments to ...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/digital/digital-payments/additional-wallets</div>
+  <div class="ni-meta"><span class="badge tok">156t</span> <span class="badge stratum">personal_banking/digital_payments</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Digital Wallet options
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a few moments to...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/digital/digital-payments/google-pay.html</div>
+  <div class="ni-meta"><span class="badge tok">157t</span> <span class="badge stratum">personal_banking/digital_payments</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Chase and Google Pay
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a few moments to a...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/digital/digital-payments/samsung-pay</div>
+  <div class="ni-meta"><span class="badge tok">157t</span> <span class="badge stratum">personal_banking/digital_payments</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Chase and Samsung Pay
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a few moments to ...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/digital/resources/debt-management-calculator</div>
+  <div class="ni-meta"><span class="badge tok">105t</span> <span class="badge stratum">customer_service/tools</span></div>
+  <pre>## Other Products &amp; Services:
+&quot;Chase,&quot; &quot;JPMorgan,&quot; &quot;JPMorgan
+Chase,&quot; the JPMorgan Chase logo and the Octagon Symbol are trademarks of JPMorgan Chase Bank, N.A. JPMorgan Chase Bank, N.A. is a wholly-owned subsidiary of JPMorgan Chase &amp; Co.
+Bank deposit accounts, such as checking and savings, may be s...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/digital/spend-instantly</div>
+  <div class="ni-meta"><span class="badge tok">159t</span> <span class="badge stratum">personal_banking/digital_payments</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Use your new card right away
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a few mome...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/banking/education/student</div>
+  <div class="ni-meta"><span class="badge tok">167t</span> <span class="badge stratum">education_center/student</span></div>
+  <pre>## Investing by J.P. Morgan
+Partner with a global leader who puts your financial needs first. Invest on your own or work with an advisor — we have the products, technology and investment education, to help you grow your wealth. Visit a J.P. Morgan Wealth Management Branch or check out our latest onl...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/financial-goals</div>
+  <div class="ni-meta"><span class="badge tok">164t</span> <span class="badge stratum">personal_banking/general</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Pick your financial goals and take control of your financial future
+Start of overlay
+## Chase Survey
+Your feedback is im...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/financial-goals/budget</div>
+  <div class="ni-meta"><span class="badge tok">158t</span> <span class="badge stratum">personal_banking/financial_goals</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Approach your budget with confidence
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a ...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/financial-goals/credit</div>
+  <div class="ni-meta"><span class="badge tok">158t</span> <span class="badge stratum">personal_banking/financial_goals</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Understand the importance of credit
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a f...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/financial-goals/life-moments</div>
+  <div class="ni-meta"><span class="badge tok">158t</span> <span class="badge stratum">personal_banking/financial_goals</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Financial tools for life moments
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a few ...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/financial-goals/protection</div>
+  <div class="ni-meta"><span class="badge tok">159t</span> <span class="badge stratum">personal_banking/financial_goals</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Know how to spot suspicious activity
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a ...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/financial-goals/savings</div>
+  <div class="ni-meta"><span class="badge tok">162t</span> <span class="badge stratum">personal_banking/financial_goals</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# See how savings can help you stay on track
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you t...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/financial-goals/students</div>
+  <div class="ni-meta"><span class="badge tok">164t</span> <span class="badge stratum">personal_banking/financial_goals</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Budget, Saving, and Credit tips and tools for students
+Start of overlay
+## Chase Survey
+Your feedback is important to us...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/savings/bank-cd</div>
+  <div class="ni-meta"><span class="badge tok">97t</span> <span class="badge stratum">personal_banking/savings</span></div>
+  <pre># Open a Chase Certificate of Deposit
+## CD ladders available for Private Clients
+Talk with a Private Client Banker to take advantage of a CD ladder strategy that allows you to earn interest over time, while also providing you flexible access to your money.
+## Certificate of Deposit FAQ
+## Let's get...</pre>
+</div>
+<div class="noinfo-card">
+  <div class="ni-url">https://www.chase.com/personal/savings/savings-account</div>
+  <div class="ni-meta"><span class="badge tok">158t</span> <span class="badge stratum">personal_banking/savings</span></div>
+  <pre>We’ve enhanced our platform for chase.com. For a better experience, download the Chase app for your iPhone or Android. Or, go to System Requirements from your laptop or desktop.
+# Chase Savings℠ Account
+Start of overlay
+## Chase Survey
+Your feedback is important to us. Will you take a few moments to...</pre>
+</div>
+<h3>C. Classification Logic</h3>
+<p class="section-note">
+  In <code>src/stratify.py</code>, <code>classify_page_type()</code> marks a page <code>no_info</code> if any of:<br>
+  &bull; It's in the manual <code>NO_INFO_PAGE_IDS</code> set (currently just <code>p_00078</code>, the student education hub)<br>
+  &bull; It contains the JS-shell marker text AND token_count &lt; 200<br>
+  &bull; Its token_count &lt; 120 (catches the debt calculator at 105t and CD page at 97t)<br><br>
+  These pages are <strong>skipped during chunking</strong> since they'd produce only boilerplate chunks.
+  The real content on these URLs requires a JS-capable crawler (Playwright/Puppeteer).
+</p>
+</body></html>

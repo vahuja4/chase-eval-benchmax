@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chase Corpus Profile — Entities & Co-occurrences</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; color: #1a1a1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; padding: 32px 48px; max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 32px; }
+  h2 { font-size: 18px; font-weight: 600; margin: 32px 0 16px; border-bottom: 2px solid #e5e5e5; padding-bottom: 8px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 24px 0 12px; color: #333; }
+
+  /* Summary cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .card { background: #f8f8f8; border: 1px solid #e5e5e5; border-radius: 8px; padding: 16px; }
+  .card .label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .value { font-size: 28px; font-weight: 700; margin-top: 4px; }
+  .card .detail { font-size: 12px; color: #666; margin-top: 2px; }
+
+  /* Capabilities */
+  .caps { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .cap { font-size: 13px; padding: 4px 12px; border-radius: 16px; border: 1px solid #ddd; }
+  .cap.yes { background: #e8f5e9; border-color: #a5d6a7; color: #2e7d32; }
+  .cap.no { background: #fafafa; border-color: #ddd; color: #999; }
+
+  /* Entity table */
+  .entity-table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; background: #f5f5f5; border-bottom: 2px solid #ddd; font-weight: 600; position: sticky; top: 0; cursor: pointer; user-select: none; }
+  th:hover { background: #eee; }
+  th .arrow { font-size: 10px; margin-left: 4px; color: #999; }
+  td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+  tr:hover td { background: #fafafa; }
+  .bar-cell { position: relative; }
+  .bar { position: absolute; left: 0; top: 2px; bottom: 2px; border-radius: 3px; opacity: 0.15; }
+  .bar-freq { background: #2196f3; }
+  .bar-quality { background: #4caf50; }
+  .bar-chunks { background: #ff9800; }
+  .num { font-variant-numeric: tabular-nums; }
+  .entity-name { font-weight: 500; }
+
+  /* Search box */
+  .search-box { margin-bottom: 12px; }
+  .search-box input { width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; }
+  .search-box input:focus { border-color: #2196f3; box-shadow: 0 0 0 2px rgba(33,150,243,0.1); }
+  .match-count { font-size: 12px; color: #888; margin-top: 4px; }
+
+  /* Co-occurrence chart */
+  .cooc-row { display: flex; align-items: center; margin-bottom: 4px; font-size: 13px; }
+  .cooc-pair { width: 260px; flex-shrink: 0; text-align: right; padding-right: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cooc-bar-wrap { flex: 1; height: 22px; background: #f5f5f5; border-radius: 4px; overflow: hidden; position: relative; }
+  .cooc-bar { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .cooc-count { width: 60px; flex-shrink: 0; text-align: right; font-variant-numeric: tabular-nums; padding-left: 8px; color: #555; }
+  .cooc-section { margin-bottom: 32px; }
+
+  /* Color scale for co-occurrence bars */
+  .cooc-bar.high { background: #1565c0; }
+  .cooc-bar.mid { background: #42a5f5; }
+  .cooc-bar.low { background: #90caf9; }
+
+  /* Network graph */
+  #network-canvas { border: 1px solid #e5e5e5; border-radius: 8px; display: block; margin: 0 auto; }
+  .network-controls { display: flex; gap: 16px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .network-controls label { font-size: 13px; color: #555; }
+  .network-controls input[type=range] { width: 160px; }
+  .network-controls span { font-size: 12px; color: #888; font-variant-numeric: tabular-nums; }
+
+  /* Queries */
+  .query-list { list-style: none; }
+  .query-list li { padding: 6px 12px; background: #f8f8f8; border: 1px solid #eee; border-radius: 6px; margin-bottom: 6px; font-size: 13px; font-family: 'SF Mono', Menlo, monospace; }
+</style>
+</head>
+<body>
+
+<h1>Chase Corpus Profile</h1>
+<p class="subtitle">Dumped 2026-06-16 — chase_help_2026_05_27 (6558ec44)</p>
+
+<div class="cards">
+  <div class="card">
+    <div class="label">Total chunks</div>
+    <div class="value">3,089</div>
+    <div class="detail">289 documents</div>
+  </div>
+  <div class="card">
+    <div class="label">Seed pool</div>
+    <div class="value">500</div>
+    <div class="detail">used for generation</div>
+  </div>
+  <div class="card">
+    <div class="label">Entities</div>
+    <div class="value">177</div>
+    <div class="detail">via KeyBERT extraction</div>
+  </div>
+  <div class="card">
+    <div class="label">Co-occurrences</div>
+    <div class="value">4,451</div>
+    <div class="detail">entity pairs sharing chunks</div>
+  </div>
+  <div class="card">
+    <div class="label">Search mode</div>
+    <div class="value" style="font-size:20px;">Lexical</div>
+    <div class="detail">BM25 only</div>
+  </div>
+  <div class="card">
+    <div class="label">Header prevalence</div>
+    <div class="value">0%</div>
+    <div class="detail">no section headers</div>
+  </div>
+</div>
+
+<h2>Capabilities</h2>
+<div class="caps">
+  <span class="cap yes">Document IDs</span>
+  <span class="cap no">Section Headers</span>
+  <span class="cap no">Sequential Links</span>
+  <span class="cap no">Dates</span>
+</div>
+
+<h2>Sample Queries</h2>
+<ul class="query-list" id="query-list"></ul>
+
+<h2>Entities (177)</h2>
+<h3>Distribution overview</h3>
+<p style="font-size:13px;color:#666;margin-bottom:16px;">
+  Quality score: higher = more specific and useful for linking. Document frequency: fraction of corpus containing the entity.
+  Broad entities (credit, card) have low quality but high frequency. Specific entities (chase sapphire, credit utilization) score higher.
+</p>
+
+<div class="search-box">
+  <input type="text" id="entity-search" placeholder="Filter entities..." />
+  <div class="match-count" id="match-count"></div>
+</div>
+
+<div class="entity-table-wrap">
+<table id="entity-table">
+  <thead>
+    <tr>
+      <th data-col="idx">#<span class="arrow"></span></th>
+      <th data-col="name">Entity<span class="arrow"></span></th>
+      <th data-col="quality_score">Quality Score<span class="arrow"></span></th>
+      <th data-col="document_frequency">Doc Frequency<span class="arrow"></span></th>
+      <th data-col="chunk_count">Chunk Count<span class="arrow"></span></th>
+    </tr>
+  </thead>
+  <tbody id="entity-tbody"></tbody>
+</table>
+</div>
+
+<h2>Top 50 Co-occurrences</h2>
+<p style="font-size:13px;color:#666;margin-bottom:16px;">
+  Entity pairs that appear together most often across chunks. High co-occurrence = strong linkage signal for multi-hop question generation.
+</p>
+<div class="cooc-section" id="cooc-chart"></div>
+
+<h2>Entity Co-occurrence Network</h2>
+<p style="font-size:13px;color:#666;margin-bottom:8px;">
+  Nodes = entities (sized by chunk count), edges = co-occurrences (thicker = higher count). Drag nodes to rearrange. Use the slider to filter by minimum co-occurrence count.
+</p>
+<div class="network-controls">
+  <label>Min co-occurrence: <input type="range" id="cooc-threshold" min="200" max="1200" value="300" step="50"><span id="cooc-threshold-val">300</span></label>
+  <label>Node labels: <input type="checkbox" id="show-labels" checked></label>
+</div>
+<canvas id="network-canvas" width="1000" height="600"></canvas>
+
+<script>
+const ENTITIES = [{"name":"credit cards","document_frequency":0.3953,"quality_score":0.4904,"chunk_count":1221},{"name":"credit score","document_frequency":0.089,"quality_score":0.879,"chunk_count":275},{"name":"credit","document_frequency":0.5066,"quality_score":0.4347,"chunk_count":1565},{"name":"card","document_frequency":0.5474,"quality_score":0.4434,"chunk_count":1691},{"name":"checking accounts","document_frequency":0.0647,"quality_score":0.9164,"chunk_count":200},{"name":"rewards credit","document_frequency":0.0327,"quality_score":0.9094,"chunk_count":101},{"name":"chase credit","document_frequency":0.0495,"quality_score":0.8826,"chunk_count":153},{"name":"travel credit","document_frequency":0.034600000000000004,"quality_score":0.9058,"chunk_count":107},{"name":"card rewards","document_frequency":0.034,"quality_score":0.92,"chunk_count":105},{"name":"student credit","document_frequency":0.0214,"quality_score":0.9026,"chunk_count":66},{"name":"account","document_frequency":0.2829,"quality_score":0.5984,"chunk_count":874},{"name":"chase mobile","document_frequency":0.0356,"quality_score":0.8575,"chunk_count":110},{"name":"chase pay","document_frequency":0.0288,"quality_score":0.8778,"chunk_count":89},{"name":"rewards points","document_frequency":0.0609,"quality_score":0.872,"chunk_count":188},{"name":"chase travel","document_frequency":0.0418,"quality_score":0.8431,"chunk_count":129},{"name":"shopping portal","document_frequency":0.0165,"quality_score":0.8502,"chunk_count":51},{"name":"rewards cash","document_frequency":0.0019,"quality_score":0.5588,"chunk_count":6},{"name":"savings accounts","document_frequency":0.0456,"quality_score":0.92,"chunk_count":141},{"name":"fee","document_frequency":0.1868,"quality_score":0.7588,"chunk_count":577},{"name":"chase sapphire","document_frequency":0.0259,"quality_score":0.86,"chunk_count":80},{"name":"cash credit","document_frequency":0.0,"quality_score":0.47,"chunk_count":0},{"name":"cash","document_frequency":0.201,"quality_score":0.7275,"chunk_count":621},{"name":"chase freedom","document_frequency":0.0411,"quality_score":0.8264,"chunk_count":127},{"name":"earn rewards","document_frequency":0.0421,"quality_score":0.8602,"chunk_count":130},{"name":"build credit","document_frequency":0.0162,"quality_score":0.8203,"chunk_count":50},{"name":"shop earn","document_frequency":0.0,"quality_score":0.4842,"chunk_count":0},{"name":"bank account","document_frequency":0.0346,"quality_score":0.8779,"chunk_count":107},{"name":"cards offer","document_frequency":0.0537,"quality_score":0.8736,"chunk_count":166},{"name":"chase ultimate","document_frequency":0.0392,"quality_score":0.8647,"chunk_count":121},{"name":"rise card","document_frequency":0.0081,"quality_score":0.6587,"chunk_count":25},{"name":"credit history","document_frequency":0.0444,"quality_score":0.8478,"chunk_count":137},{"name":"credit utilization","document_frequency":0.0181,"quality_score":0.8547,"chunk_count":56},{"name":"credit limit","document_frequency":0.0324,"quality_score":0.8819,"chunk_count":100},{"name":"student loans","document_frequency":0.0217,"quality_score":0.92,"chunk_count":67},{"name":"earn points","document_frequency":0.0327,"quality_score":0.8719,"chunk_count":101},{"name":"business credit","document_frequency":0.0129,"quality_score":0.7227,"chunk_count":40},{"name":"rise credit","document_frequency":0.0055,"quality_score":0.6301,"chunk_count":17},{"name":"rewards","document_frequency":0.268,"quality_score":0.6494,"chunk_count":828},{"name":"transfer","document_frequency":0.0968,"quality_score":0.8463,"chunk_count":299},{"name":"authorized user","document_frequency":0.0191,"quality_score":0.92,"chunk_count":59},{"name":"points transfer","document_frequency":0.0191,"quality_score":0.838,"chunk_count":59},{"name":"overdraft","document_frequency":0.0152,"quality_score":0.8574,"chunk_count":47},{"name":"chase","document_frequency":0.3527,"quality_score":0.4788,"chunk_count":1090},{"name":"balance transfer","document_frequency":0.0259,"quality_score":0.8957,"chunk_count":80},{"name":"interest rate","document_frequency":0.0585,"quality_score":0.892,"chunk_count":181},{"name":"annual fee","document_frequency":0.0489,"quality_score":0.8807,"chunk_count":151},{"name":"auto loan","document_frequency":0.0324,"quality_score":0.92,"chunk_count":100},{"name":"ink business","document_frequency":0.0204,"quality_score":0.8609,"chunk_count":63},{"name":"cards","document_frequency":0.3189,"quality_score":0.5212,"chunk_count":985},{"name":"purchases","document_frequency":0.2432,"quality_score":0.6618,"chunk_count":751},{"name":"mobile app","document_frequency":0.0288,"quality_score":0.8765,"chunk_count":89},{"name":"direct deposit","document_frequency":0.0268,"quality_score":0.92,"chunk_count":83},{"name":"payments","document_frequency":0.1095,"quality_score":0.838,"chunk_count":338},{"name":"points","document_frequency":0.1618,"quality_score":0.7794,"chunk_count":500},{"name":"bank","document_frequency":0.1508,"quality_score":0.7693,"chunk_count":466},{"name":"benefits","document_frequency":0.1199,"quality_score":0.8128,"chunk_count":370},{"name":"mortgage","document_frequency":0.0599,"quality_score":0.92,"chunk_count":185},{"name":"freedom flex","document_frequency":0.0201,"quality_score":0.8437,"chunk_count":62},{"name":"travel","document_frequency":0.1221,"quality_score":0.8073,"chunk_count":377},{"name":"minimum payment","document_frequency":0.0146,"quality_score":0.8777,"chunk_count":45},{"name":"bonus categories","document_frequency":0.0188,"quality_score":0.856,"chunk_count":58},{"name":"introductory apr","document_frequency":0.0087,"quality_score":0.7814,"chunk_count":27},{"name":"monthly fee","document_frequency":0.0159,"quality_score":0.8627,"chunk_count":49},{"name":"business cards","document_frequency":0.0175,"quality_score":0.8529,"chunk_count":54},{"name":"fraud","document_frequency":0.0298,"quality_score":0.92,"chunk_count":92},{"name":"investment","document_frequency":0.0421,"quality_score":0.92,"chunk_count":130},{"name":"routing number","document_frequency":0.0107,"quality_score":0.8715,"chunk_count":33},{"name":"debit card","document_frequency":0.0356,"quality_score":0.92,"chunk_count":110},{"name":"app","document_frequency":0.2246,"quality_score":0.6722,"chunk_count":694},{"name":"trip cancellation","document_frequency":0.0078,"quality_score":0.7752,"chunk_count":24},{"name":"hard inquiry","document_frequency":0.0058,"quality_score":0.6987,"chunk_count":18},{"name":"late payment","document_frequency":0.0249,"quality_score":0.887,"chunk_count":77},{"name":"credit report","document_frequency":0.0285,"quality_score":0.89,"chunk_count":88},{"name":"sapphire preferred","document_frequency":0.0184,"quality_score":0.8606,"chunk_count":57},{"name":"sapphire reserve","document_frequency":0.0175,"quality_score":0.8608,"chunk_count":54},{"name":"apr","document_frequency":0.0609,"quality_score":0.877,"chunk_count":188},{"name":"refinance","document_frequency":0.0175,"quality_score":0.92,"chunk_count":54},{"name":"zelle","document_frequency":0.0175,"quality_score":0.92,"chunk_count":54},{"name":"wire transfer","document_frequency":0.0133,"quality_score":0.8928,"chunk_count":41},{"name":"freedom unlimited","document_frequency":0.0197,"quality_score":0.8543,"chunk_count":61},{"name":"home equity","document_frequency":0.0181,"quality_score":0.92,"chunk_count":56},{"name":"rental car","document_frequency":0.0094,"quality_score":0.8164,"chunk_count":29},{"name":"identity theft","document_frequency":0.0068,"quality_score":0.8108,"chunk_count":21},{"name":"penalty apr","document_frequency":0.0049,"quality_score":0.6944,"chunk_count":15},{"name":"joint account","document_frequency":0.0062,"quality_score":0.7529,"chunk_count":19},{"name":"grace period","document_frequency":0.0113,"quality_score":0.8483,"chunk_count":35},{"name":"foreign transaction","document_frequency":0.0165,"quality_score":0.8707,"chunk_count":51},{"name":"fico score","document_frequency":0.0049,"quality_score":0.6728,"chunk_count":15},{"name":"travel insurance","document_frequency":0.0133,"quality_score":0.8583,"chunk_count":41},{"name":"digital wallet","document_frequency":0.0094,"quality_score":0.8203,"chunk_count":29},{"name":"online banking","document_frequency":0.0362,"quality_score":0.92,"chunk_count":112},{"name":"grocery","document_frequency":0.0236,"quality_score":0.889,"chunk_count":73},{"name":"cd","document_frequency":0.0217,"quality_score":0.8903,"chunk_count":67},{"name":"heloc","document_frequency":0.0107,"quality_score":0.8658,"chunk_count":33},{"name":"atm","document_frequency":0.0272,"quality_score":0.9018,"chunk_count":84},{"name":"primary cardholder","document_frequency":0.0078,"quality_score":0.77,"chunk_count":24},{"name":"down payment","document_frequency":0.0139,"quality_score":0.8668,"chunk_count":43},{"name":"dining","document_frequency":0.0178,"quality_score":0.8714,"chunk_count":55},{"name":"ach","document_frequency":0.0042,"quality_score":0.6345,"chunk_count":13},{"name":"apy","document_frequency":0.0139,"quality_score":0.8655,"chunk_count":43},{"name":"prequalification","document_frequency":0.0068,"quality_score":0.7679,"chunk_count":21},{"name":"notarization","document_frequency":0.0029,"quality_score":0.5798,"chunk_count":9},{"name":"escrow","document_frequency":0.0062,"quality_score":0.7469,"chunk_count":19},{"name":"chip card","document_frequency":0.0039,"quality_score":0.6159,"chunk_count":12},{"name":"amortization","document_frequency":0.0036,"quality_score":0.6006,"chunk_count":11},{"name":"quickpay","document_frequency":0.0049,"quality_score":0.6816,"chunk_count":15},{"name":"venmo","document_frequency":0.0019,"quality_score":0.5085,"chunk_count":6},{"name":"tsys","document_frequency":0.0006,"quality_score":0.408,"chunk_count":2},{"name":"safeguard","document_frequency":0.0068,"quality_score":0.7586,"chunk_count":21},{"name":"preapproval","document_frequency":0.0068,"quality_score":0.7632,"chunk_count":21},{"name":"contactless","document_frequency":0.0081,"quality_score":0.7859,"chunk_count":25},{"name":"insurance","document_frequency":0.0456,"quality_score":0.8974,"chunk_count":141},{"name":"debt","document_frequency":0.0401,"quality_score":0.8766,"chunk_count":124},{"name":"notification","document_frequency":0.0188,"quality_score":0.8665,"chunk_count":58},{"name":"military","document_frequency":0.0123,"quality_score":0.8507,"chunk_count":38},{"name":"credit card debt","document_frequency":0.0107,"quality_score":0.8201,"chunk_count":33},{"name":"dispute","document_frequency":0.0175,"quality_score":0.8736,"chunk_count":54},{"name":"pin","document_frequency":0.0133,"quality_score":0.8541,"chunk_count":41},{"name":"statement","document_frequency":0.0553,"quality_score":0.8879,"chunk_count":171},{"name":"student","document_frequency":0.0379,"quality_score":0.8742,"chunk_count":117},{"name":"closing costs","document_frequency":0.0094,"quality_score":0.8174,"chunk_count":29},{"name":"total checking","document_frequency":0.0107,"quality_score":0.8408,"chunk_count":33},{"name":"income","document_frequency":0.0327,"quality_score":0.8767,"chunk_count":101},{"name":"bonus","document_frequency":0.0553,"quality_score":0.8898,"chunk_count":171},{"name":"collateral","document_frequency":0.0033,"quality_score":0.5843,"chunk_count":10},{"name":"cosigner","document_frequency":0.0068,"quality_score":0.756,"chunk_count":21},{"name":"budgeting","document_frequency":0.0165,"quality_score":0.8582,"chunk_count":51},{"name":"paperless","document_frequency":0.0052,"quality_score":0.691,"chunk_count":16},{"name":"mobile check","document_frequency":0.0081,"quality_score":0.7943,"chunk_count":25},{"name":"convenience check","document_frequency":0.0023,"quality_score":0.5441,"chunk_count":7},{"name":"tax","document_frequency":0.0268,"quality_score":0.884,"chunk_count":83},{"name":"autopay","document_frequency":0.0139,"quality_score":0.8547,"chunk_count":43},{"name":"signup bonus","document_frequency":0.0197,"quality_score":0.8623,"chunk_count":61},{"name":"variable apr","document_frequency":0.0078,"quality_score":0.7817,"chunk_count":24},{"name":"price protection","document_frequency":0.0033,"quality_score":0.5871,"chunk_count":10},{"name":"global entry","document_frequency":0.0068,"quality_score":0.7651,"chunk_count":21},{"name":"tsa precheck","document_frequency":0.0062,"quality_score":0.7482,"chunk_count":19},{"name":"lounge access","document_frequency":0.0068,"quality_score":0.7638,"chunk_count":21},{"name":"chip pin","document_frequency":0.0016,"quality_score":0.4838,"chunk_count":5},{"name":"purchase protection","document_frequency":0.0094,"quality_score":0.8141,"chunk_count":29},{"name":"extended warranty","document_frequency":0.0068,"quality_score":0.7593,"chunk_count":21},{"name":"baggage delay","document_frequency":0.0033,"quality_score":0.587,"chunk_count":10},{"name":"roadside assistance","document_frequency":0.0029,"quality_score":0.5669,"chunk_count":9},{"name":"return protection","document_frequency":0.0042,"quality_score":0.6348,"chunk_count":13},{"name":"cell phone","document_frequency":0.0039,"quality_score":0.6175,"chunk_count":12},{"name":"emergency assistance","document_frequency":0.0023,"quality_score":0.5393,"chunk_count":7},{"name":"visa signature","document_frequency":0.0016,"quality_score":0.4845,"chunk_count":5},{"name":"dash pass","document_frequency":0.0029,"quality_score":0.5686,"chunk_count":9},{"name":"lyft","document_frequency":0.0019,"quality_score":0.5119,"chunk_count":6},{"name":"peloton","document_frequency":0.0016,"quality_score":0.4838,"chunk_count":5},{"name":"doordash","document_frequency":0.0023,"quality_score":0.5338,"chunk_count":7},{"name":"gopuff","document_frequency":0.0013,"quality_score":0.4606,"chunk_count":4},{"name":"instacart","document_frequency":0.0023,"quality_score":0.5392,"chunk_count":7},{"name":"military banking","document_frequency":0.0042,"quality_score":0.6477,"chunk_count":13},{"name":"quickdeposit","document_frequency":0.0019,"quality_score":0.5148,"chunk_count":6},{"name":"securemessage","document_frequency":0.0016,"quality_score":0.4898,"chunk_count":5},{"name":"creditwise","document_frequency":0.0006,"quality_score":0.4108,"chunk_count":2},{"name":"smartlist","document_frequency":0.0006,"quality_score":0.408,"chunk_count":2},{"name":"va loan","document_frequency":0.0042,"quality_score":0.6491,"chunk_count":13},{"name":"fha loan","document_frequency":0.0036,"quality_score":0.6155,"chunk_count":11},{"name":"jumbo mortgage","document_frequency":0.0029,"quality_score":0.5738,"chunk_count":9},{"name":"earnest money","document_frequency":0.0023,"quality_score":0.5426,"chunk_count":7},{"name":"pmi","document_frequency":0.0039,"quality_score":0.6324,"chunk_count":12},{"name":"title insurance","document_frequency":0.0023,"quality_score":0.5431,"chunk_count":7}];
+
+const COOCCURRENCES = [{"pair":["card","credit"],"count":1320},{"pair":["card","credit cards"],"count":1221},{"pair":["credit","credit cards"],"count":1221},{"pair":["card","chase"],"count":961},{"pair":["card","cards"],"count":831},{"pair":["chase","credit"],"count":803},{"pair":["card","rewards"],"count":755},{"pair":["cards","credit"],"count":737},{"pair":["cards","credit cards"],"count":716},{"pair":["chase","credit cards"],"count":658},{"pair":["credit","rewards"],"count":657},{"pair":["chase","purchases"],"count":653},{"pair":["credit cards","rewards"],"count":616},{"pair":["app","card"],"count":615},{"pair":["chase","rewards"],"count":567},{"pair":["card","purchases"],"count":561},{"pair":["app","credit"],"count":545},{"pair":["app","chase"],"count":500},{"pair":["card","cash"],"count":497},{"pair":["cards","chase"],"count":492},{"pair":["cards","rewards"],"count":490},{"pair":["credit","purchases"],"count":476},{"pair":["account","chase"],"count":430},{"pair":["credit cards","purchases"],"count":428},{"pair":["cash","credit"],"count":425},{"pair":["account","card"],"count":421},{"pair":["app","credit cards"],"count":418},{"pair":["cash","chase"],"count":393},{"pair":["cash","credit cards"],"count":389},{"pair":["cash","rewards"],"count":384},{"pair":["purchases","rewards"],"count":371},{"pair":["account","credit"],"count":350},{"pair":["card","fee"],"count":333},{"pair":["cards","cash"],"count":330},{"pair":["account","app"],"count":325},{"pair":["account","bank"],"count":309},{"pair":["cards","purchases"],"count":305},{"pair":["credit","fee"],"count":300},{"pair":["benefits","card"],"count":288},{"pair":["app","cards"],"count":285},{"pair":["chase","fee"],"count":278},{"pair":["credit","credit score"],"count":275},{"pair":["cash","purchases"],"count":273},{"pair":["credit","payments"],"count":264},{"pair":["account","credit cards"],"count":262},{"pair":["benefits","credit"],"count":261},{"pair":["app","rewards"],"count":243},{"pair":["credit cards","fee"],"count":241},{"pair":["benefits","credit cards"],"count":231},{"pair":["app","fee"],"count":226}];
+
+const QUERIES = ["check Chase credit card application status","how to redeem Chase Ultimate Rewards points","when does Chase charge an overdraft fee","Chase Secure Banking monthly service fee avoid","error applying for Chase auto financing online","can I have both a Chase travel card and cash back card","do Chase credit card points expire","how do Chase debit card overdrafts work","business credit card application status Chase","are Chase credit card rewards points worth it"];
+
+// Render queries
+const ql = document.getElementById('query-list');
+QUERIES.forEach(q => { const li = document.createElement('li'); li.textContent = q; ql.appendChild(li); });
+
+// Entity table with sorting
+let sortCol = 'quality_score', sortDir = -1;
+const entityData = ENTITIES.map((e, i) => ({...e, idx: i + 1}));
+const maxFreq = Math.max(...ENTITIES.map(e => e.document_frequency));
+const maxChunks = Math.max(...ENTITIES.map(e => e.chunk_count));
+
+function renderTable(data) {
+  const tbody = document.getElementById('entity-tbody');
+  tbody.innerHTML = '';
+  data.forEach(e => {
+    const tr = document.createElement('tr');
+    const freqPct = (e.document_frequency / maxFreq * 100).toFixed(1);
+    const qualPct = (e.quality_score * 100).toFixed(1);
+    const chunkPct = (e.chunk_count / maxChunks * 100).toFixed(1);
+    tr.innerHTML = `
+      <td class="num">${e.idx}</td>
+      <td class="entity-name">${e.name}</td>
+      <td class="bar-cell"><div class="bar bar-quality" style="width:${qualPct}%"></div><span class="num">${e.quality_score.toFixed(3)}</span></td>
+      <td class="bar-cell"><div class="bar bar-freq" style="width:${freqPct}%"></div><span class="num">${(e.document_frequency * 100).toFixed(1)}%</span></td>
+      <td class="bar-cell"><div class="bar bar-chunks" style="width:${chunkPct}%"></div><span class="num">${e.chunk_count.toLocaleString()}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('match-count').textContent = `${data.length} of ${ENTITIES.length} entities`;
+}
+
+function sortAndRender() {
+  const filter = document.getElementById('entity-search').value.toLowerCase();
+  let data = entityData.filter(e => !filter || e.name.toLowerCase().includes(filter));
+  data.sort((a, b) => {
+    const av = a[sortCol], bv = b[sortCol];
+    if (typeof av === 'string') return sortDir * av.localeCompare(bv);
+    return sortDir * (av - bv);
+  });
+  renderTable(data);
+}
+
+document.querySelectorAll('#entity-table th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (sortCol === col) sortDir *= -1;
+    else { sortCol = col; sortDir = col === 'name' ? 1 : -1; }
+    document.querySelectorAll('#entity-table th .arrow').forEach(a => a.textContent = '');
+    th.querySelector('.arrow').textContent = sortDir === 1 ? ' ▲' : ' ▼';
+    sortAndRender();
+  });
+});
+
+document.getElementById('entity-search').addEventListener('input', sortAndRender);
+sortAndRender();
+document.querySelector('[data-col="quality_score"] .arrow').textContent = ' ▼';
+
+// Co-occurrence horizontal bar chart
+const coocChart = document.getElementById('cooc-chart');
+const maxCooc = COOCCURRENCES[0].count;
+COOCCURRENCES.forEach(c => {
+  const pct = (c.count / maxCooc * 100).toFixed(1);
+  const cls = c.count > 800 ? 'high' : c.count > 400 ? 'mid' : 'low';
+  const row = document.createElement('div');
+  row.className = 'cooc-row';
+  row.innerHTML = `
+    <div class="cooc-pair">${c.pair[0]} ↔ ${c.pair[1]}</div>
+    <div class="cooc-bar-wrap"><div class="cooc-bar ${cls}" style="width:${pct}%"></div></div>
+    <div class="cooc-count">${c.count.toLocaleString()}</div>
+  `;
+  coocChart.appendChild(row);
+});
+
+// Force-directed network graph
+const canvas = document.getElementById('network-canvas');
+const ctx = canvas.getContext('2d');
+let threshold = 300;
+let showLabels = true;
+let nodes = [], edges = [], dragging = null, dragOffset = {x:0, y:0};
+
+function buildGraph() {
+  const filteredEdges = COOCCURRENCES.filter(c => c.count >= threshold);
+  const nodeNames = new Set();
+  filteredEdges.forEach(c => { nodeNames.add(c.pair[0]); nodeNames.add(c.pair[1]); });
+
+  const entityMap = {};
+  ENTITIES.forEach(e => entityMap[e.name] = e);
+
+  const oldPositions = {};
+  nodes.forEach(n => { oldPositions[n.name] = {x: n.x, y: n.y}; });
+
+  nodes = [...nodeNames].map(name => {
+    const e = entityMap[name] || {chunk_count: 10, quality_score: 0.5};
+    const old = oldPositions[name];
+    return {
+      name,
+      r: Math.max(6, Math.sqrt(e.chunk_count) * 0.6),
+      quality: e.quality_score,
+      x: old ? old.x : 100 + Math.random() * (canvas.width - 200),
+      y: old ? old.y : 100 + Math.random() * (canvas.height - 200),
+      vx: 0, vy: 0,
+    };
+  });
+
+  const nodeIdx = {};
+  nodes.forEach((n, i) => nodeIdx[n.name] = i);
+
+  edges = filteredEdges.map(c => ({
+    source: nodeIdx[c.pair[0]],
+    target: nodeIdx[c.pair[1]],
+    count: c.count,
+  }));
+}
+
+function simulate() {
+  const k = 0.005, repulsion = 8000, damping = 0.85, dt = 1;
+  nodes.forEach(n => { n.vx = 0; n.vy = 0; });
+
+  // Repulsion
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      let dx = nodes[j].x - nodes[i].x, dy = nodes[j].y - nodes[i].y;
+      let d2 = dx * dx + dy * dy;
+      if (d2 < 1) d2 = 1;
+      const f = repulsion / d2;
+      const fx = f * dx / Math.sqrt(d2), fy = f * dy / Math.sqrt(d2);
+      nodes[i].vx -= fx; nodes[i].vy -= fy;
+      nodes[j].vx += fx; nodes[j].vy += fy;
+    }
+  }
+
+  // Attraction
+  edges.forEach(e => {
+    const s = nodes[e.source], t = nodes[e.target];
+    const dx = t.x - s.x, dy = t.y - s.y;
+    const d = Math.sqrt(dx * dx + dy * dy);
+    const f = k * (d - 120);
+    const fx = f * dx / d, fy = f * dy / d;
+    s.vx += fx; s.vy += fy;
+    t.vx -= fx; t.vy -= fy;
+  });
+
+  // Center gravity
+  const cx = canvas.width / 2, cy = canvas.height / 2;
+  nodes.forEach(n => {
+    n.vx += (cx - n.x) * 0.001;
+    n.vy += (cy - n.y) * 0.001;
+  });
+
+  nodes.forEach(n => {
+    if (n === dragging) return;
+    n.vx *= damping; n.vy *= damping;
+    n.x += n.vx * dt; n.y += n.vy * dt;
+    n.x = Math.max(n.r, Math.min(canvas.width - n.r, n.x));
+    n.y = Math.max(n.r, Math.min(canvas.height - n.r, n.y));
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Edges
+  const maxEdge = edges.length ? Math.max(...edges.map(e => e.count)) : 1;
+  edges.forEach(e => {
+    const s = nodes[e.source], t = nodes[e.target];
+    const w = 0.5 + (e.count / maxEdge) * 4;
+    ctx.strokeStyle = `rgba(100,100,100,${0.1 + (e.count / maxEdge) * 0.4})`;
+    ctx.lineWidth = w;
+    ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(t.x, t.y); ctx.stroke();
+  });
+
+  // Nodes
+  nodes.forEach(n => {
+    const hue = n.quality * 120; // 0=red, 120=green
+    ctx.fillStyle = `hsl(${hue}, 60%, 50%)`;
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+  });
+
+  // Labels
+  if (showLabels) {
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#333';
+    nodes.forEach(n => {
+      ctx.fillText(n.name, n.x, n.y - n.r - 4);
+    });
+  }
+}
+
+function tick() {
+  simulate();
+  draw();
+  requestAnimationFrame(tick);
+}
+
+buildGraph();
+tick();
+
+// Interaction
+canvas.addEventListener('mousedown', e => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  nodes.forEach(n => {
+    if (Math.hypot(n.x - mx, n.y - my) < n.r + 4) {
+      dragging = n;
+      dragOffset.x = n.x - mx; dragOffset.y = n.y - my;
+    }
+  });
+});
+canvas.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const rect = canvas.getBoundingClientRect();
+  dragging.x = e.clientX - rect.left + dragOffset.x;
+  dragging.y = e.clientY - rect.top + dragOffset.y;
+});
+canvas.addEventListener('mouseup', () => { dragging = null; });
+canvas.addEventListener('mouseleave', () => { dragging = null; });
+
+document.getElementById('cooc-threshold').addEventListener('input', e => {
+  threshold = +e.target.value;
+  document.getElementById('cooc-threshold-val').textContent = threshold;
+  buildGraph();
+});
+document.getElementById('show-labels').addEventListener('change', e => {
+  showLabels = e.target.checked;
+});
+</script>
+
+</body>
+</html>

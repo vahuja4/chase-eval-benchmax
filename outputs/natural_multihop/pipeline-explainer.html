@@ -1,0 +1,1231 @@
+<title>Eval Generation Pipeline</title>
+<style>
+  :root {
+    --bg: #f8f7f3;
+    --surface: #ffffff;
+    --ink: #1e2235;
+    --ink-muted: #5c5f72;
+    --ink-faint: #999baa;
+    --accent: #2b6cb0;
+    --accent-wash: #e8f0fa;
+    --highlight: #b87318;
+    --highlight-wash: #faf0df;
+    --border: #d8d5cc;
+    --border-fine: #e8e5de;
+
+    --prep: #2b6cb0;
+    --gen: #b87318;
+    --val: #7554a0;
+    --out: #1a7a42;
+    --ext: #a85070;
+
+    --pass: #1a7a42;
+    --pass-wash: #e5f5ec;
+    --fail: #c03a2b;
+    --fail-wash: #fce8e6;
+    --regen: #7554a0;
+    --regen-wash: #f0ebf7;
+
+    --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+
+    --content-w: 740px;
+    --flow-box-w: 300px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111320;
+      --surface: #1a1d2e;
+      --ink: #dfddd7;
+      --ink-muted: #8c8fa4;
+      --ink-faint: #555872;
+      --accent: #5ba0e0;
+      --accent-wash: #162538;
+      --highlight: #d9a03e;
+      --highlight-wash: #2a2315;
+      --border: #282b3c;
+      --border-fine: #222436;
+
+      --prep: #5ba0e0;
+      --gen: #d9a03e;
+      --val: #a080d4;
+      --out: #3ab86a;
+      --ext: #d47a98;
+
+      --pass: #3ab86a;
+      --pass-wash: #132518;
+      --fail: #e05544;
+      --fail-wash: #2a1515;
+      --regen: #a080d4;
+      --regen-wash: #1d1530;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111320;
+    --surface: #1a1d2e;
+    --ink: #dfddd7;
+    --ink-muted: #8c8fa4;
+    --ink-faint: #555872;
+    --accent: #5ba0e0;
+    --accent-wash: #162538;
+    --highlight: #d9a03e;
+    --highlight-wash: #2a2315;
+    --border: #282b3c;
+    --border-fine: #222436;
+    --prep: #5ba0e0;
+    --gen: #d9a03e;
+    --val: #a080d4;
+    --out: #3ab86a;
+    --ext: #d47a98;
+    --pass: #3ab86a;
+    --pass-wash: #132518;
+    --fail: #e05544;
+    --fail-wash: #2a1515;
+    --regen: #a080d4;
+    --regen-wash: #1d1530;
+  }
+  :root[data-theme="light"] {
+    --bg: #f8f7f3;
+    --surface: #ffffff;
+    --ink: #1e2235;
+    --ink-muted: #5c5f72;
+    --ink-faint: #999baa;
+    --accent: #2b6cb0;
+    --accent-wash: #e8f0fa;
+    --highlight: #b87318;
+    --highlight-wash: #faf0df;
+    --border: #d8d5cc;
+    --border-fine: #e8e5de;
+    --prep: #2b6cb0;
+    --gen: #b87318;
+    --val: #7554a0;
+    --out: #1a7a42;
+    --ext: #a85070;
+    --pass: #1a7a42;
+    --pass-wash: #e5f5ec;
+    --fail: #c03a2b;
+    --fail-wash: #fce8e6;
+    --regen: #7554a0;
+    --regen-wash: #f0ebf7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header h1 {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .page-header .subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    max-width: 560px;
+  }
+
+  /* ── Headings ── */
+  h2 {
+    font-family: var(--display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-family: var(--body);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--border-fine);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+
+  /* ── Sections ── */
+  .section {
+    margin-top: 2.5rem;
+  }
+  .section + .section { margin-top: 3rem; }
+
+  /* ── Phase banner ── */
+  .phase {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-fine);
+  }
+  .phase-pip {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .phase-label {
+    font-family: var(--body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .phase-title {
+    font-family: var(--display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.25;
+    flex: 1;
+  }
+  .phase[data-phase="prep"] .phase-pip { background: var(--prep); }
+  .phase[data-phase="prep"] .phase-label { color: var(--prep); }
+  .phase[data-phase="gen"] .phase-pip { background: var(--gen); }
+  .phase[data-phase="gen"] .phase-label { color: var(--gen); }
+  .phase[data-phase="val"] .phase-pip { background: var(--val); }
+  .phase[data-phase="val"] .phase-label { color: var(--val); }
+  .phase[data-phase="out"] .phase-pip { background: var(--out); }
+  .phase[data-phase="out"] .phase-label { color: var(--out); }
+  .phase[data-phase="ext"] .phase-pip { background: var(--ext); }
+  .phase[data-phase="ext"] .phase-label { color: var(--ext); }
+
+  /* ── Stage cards ── */
+  .stage-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--border);
+  }
+  .stage-card[data-phase="prep"] { border-left-color: var(--prep); }
+  .stage-card[data-phase="gen"] { border-left-color: var(--gen); }
+  .stage-card[data-phase="val"] { border-left-color: var(--val); }
+  .stage-card[data-phase="out"] { border-left-color: var(--out); }
+  .stage-card[data-phase="ext"] { border-left-color: var(--ext); }
+
+  .stage-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  .stage-card p {
+    color: var(--ink-muted);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  /* ── Detail blocks ── */
+  details {
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--border-fine);
+    padding-top: 0.5rem;
+  }
+  details summary {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 0.25rem 0;
+    user-select: none;
+  }
+  details summary:hover { text-decoration: underline; }
+  details[open] summary { margin-bottom: 0.5rem; }
+  details .detail-body {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+  details .detail-body ul {
+    padding-left: 1.25rem;
+    margin: 0.4rem 0;
+  }
+  details .detail-body li {
+    margin-bottom: 0.3rem;
+  }
+  details .detail-body li strong {
+    color: var(--ink);
+  }
+
+  /* ── Flow diagram ── */
+  .flow-wrap {
+    margin: 2rem auto 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 4.5rem 2rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+  .flow-box {
+    width: var(--flow-box-w);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+    border: 1.5px solid;
+  }
+  .flow-box:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  }
+  .flow-box[data-phase="prep"] {
+    background: color-mix(in srgb, var(--prep) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--prep) 30%, var(--border));
+    color: var(--prep);
+  }
+  .flow-box[data-phase="gen"] {
+    background: color-mix(in srgb, var(--gen) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--gen) 30%, var(--border));
+    color: var(--gen);
+  }
+  .flow-box[data-phase="val"] {
+    background: color-mix(in srgb, var(--val) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--val) 30%, var(--border));
+    color: var(--val);
+  }
+  .flow-box[data-phase="out"] {
+    background: color-mix(in srgb, var(--out) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--out) 30%, var(--border));
+    color: var(--out);
+  }
+  .flow-box[data-phase="ext"] {
+    background: color-mix(in srgb, var(--ext) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--ext) 30%, var(--border));
+    color: var(--ext);
+  }
+
+  .flow-connector {
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    position: relative;
+    z-index: 0;
+  }
+  .flow-connector::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--border);
+  }
+
+  .flow-group {
+    width: calc(var(--flow-box-w) + 20px);
+    border: 1.5px dashed color-mix(in srgb, var(--val) 40%, var(--border));
+    border-radius: 8px;
+    padding: 0.5rem 0.6rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+  }
+  .flow-group-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--val);
+    margin-bottom: 0.15rem;
+  }
+  .flow-group .flow-box {
+    width: calc(var(--flow-box-w) - 10px);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .flow-branch {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0;
+    width: var(--flow-box-w);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .flow-branch-item {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.3rem 0.65rem;
+    border-radius: 12px;
+    letter-spacing: 0.02em;
+  }
+  .flow-branch-item.pass {
+    background: var(--pass-wash);
+    color: var(--pass);
+  }
+  .flow-branch-item.fail {
+    background: var(--fail-wash);
+    color: var(--fail);
+  }
+  .flow-branch-item.regen {
+    background: var(--regen-wash);
+    color: var(--regen);
+  }
+
+  /* Regen loop bracket */
+  .regen-loop {
+    position: absolute;
+    right: 1.25rem;
+    border: 2px solid var(--regen);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    width: 30px;
+    z-index: 0;
+  }
+  .regen-loop-label {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--regen);
+    white-space: nowrap;
+    transform-origin: center center;
+  }
+  .regen-loop-arrow {
+    position: absolute;
+    top: -6px;
+    left: -2px;
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid var(--regen);
+  }
+
+  /* ── Variant table ── */
+  .variant-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 0.75rem 0;
+    overflow-x: auto;
+    display: block;
+  }
+  .variant-table th, .variant-table td {
+    text-align: left;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--border-fine);
+    vertical-align: top;
+  }
+  .variant-table th {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    border-bottom-color: var(--border);
+  }
+  .variant-table td { color: var(--ink-muted); }
+  .variant-table td strong { color: var(--ink); font-weight: 600; }
+  .variant-table tr:last-child td { border-bottom: none; }
+
+  /* ── Filter chain vis ── */
+  .filter-chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .filter-stage {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border-fine);
+  }
+  .filter-stage:last-child { border-bottom: none; }
+  .filter-stage-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--val);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .filter-stage-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 130px;
+  }
+  .filter-stage-desc {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  /* ── Verdict badges ── */
+  .verdict-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+  }
+  .verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 10px;
+  }
+  .verdict.pass { background: var(--pass-wash); color: var(--pass); }
+  .verdict.fail { background: var(--fail-wash); color: var(--fail); }
+  .verdict.regen { background: var(--regen-wash); color: var(--regen); }
+
+  /* ── Config snippet ── */
+  .config-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    color: var(--ink-muted);
+    margin: 0.75rem 0 1rem;
+  }
+  .config-block .key { color: var(--accent); }
+  .config-block .val { color: var(--highlight); }
+  .config-block .cmt { color: var(--ink-faint); font-style: italic; }
+
+  /* ── Overview grid ── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .overview-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+  .overview-item .oi-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.25rem;
+  }
+  .overview-item .oi-value {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .overview-item .oi-note {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .page { padding: 2rem 1rem 3rem; }
+    .page-header h1 { font-size: 1.65rem; }
+    .flow-wrap { padding: 1.5rem 3rem 1.5rem 1rem; }
+    .flow-box { width: 240px; font-size: 0.78rem; }
+    .flow-group { width: 260px; }
+    .flow-group .flow-box { width: 230px; }
+    .filter-stage { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+    .filter-stage-name { min-width: auto; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .regen-loop { right: 0.5rem; width: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-box { transition: none; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="page-header">
+    <h1>Eval Generation Pipeline</h1>
+    <p class="subtitle">
+      A multi-stage system for generating high-quality question–answer pairs from document corpora,
+      with LLM-powered linking, iterative filtering, and automated regeneration.
+    </p>
+  </header>
+
+  <!-- ── Overview ── -->
+  <section class="section">
+    <p>
+      The pipeline ingests a corpus of document chunks and produces evaluated QA pairs suitable
+      for training and benchmarking RAG systems. It handles the full lifecycle: profiling the corpus
+      to understand its structure, linking chunks that share cross-document relationships,
+      generating questions via LLM, validating each question through a chain of automated judges,
+      and regenerating any that fail validation with targeted feedback.
+    </p>
+
+    <div class="overview-grid">
+      <div class="overview-item">
+        <div class="oi-label">Output</div>
+        <div class="oi-value">QA Pairs</div>
+        <div class="oi-note">Multi-hop &amp; lookup types, train/eval split</div>
+      </div>
+      <div class="overview-item">
+        <div class="oi-label">Strategy</div>
+        <div class="oi-value">Generate &amp; Filter</div>
+        <div class="oi-note">With regeneration loop for failed items</div>
+      </div>
+      <div class="overview-item">
+        <div class="oi-label">Execution</div>
+        <div class="oi-value">Micro-batch</div>
+        <div class="oi-note">Dynamic sizing, checkpointed, resumable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Flow diagram ── -->
+  <section class="section">
+    <h2>Pipeline Architecture</h2>
+    <p style="color: var(--ink-muted); font-size: 0.92rem;">
+      Each stage below is described in detail further down.
+      Click a stage to jump to its section.
+    </p>
+    <div class="flow-wrap" id="flow-diagram">
+      <div class="flow-box" data-phase="prep" onclick="scrollToSection('sec-loading')">Corpus Loading</div>
+      <div class="flow-connector"></div>
+      <div class="flow-box" data-phase="prep" onclick="scrollToSection('sec-profiling')">Corpus Profiling &amp; Entity Extraction</div>
+      <div class="flow-connector"></div>
+      <div class="flow-box" data-phase="gen" onclick="scrollToSection('sec-linking')">Chunk Linking</div>
+      <div class="flow-connector"></div>
+      <div class="flow-box" data-phase="gen" onclick="scrollToSection('sec-generation')" id="flow-gen">QA Generation</div>
+      <div class="flow-connector"></div>
+
+      <div class="flow-group" id="flow-filters">
+        <div class="flow-group-label">Filter Chain</div>
+        <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Deterministic Guards</div>
+        <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Quality Gate</div>
+        <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Grounding LLM</div>
+        <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Hop Count Validity</div>
+      </div>
+
+      <div class="flow-connector" style="height: 14px;"></div>
+      <div class="flow-branch" id="flow-branch">
+        <span class="flow-branch-item pass">Passed</span>
+        <span class="flow-branch-item fail">Rejected</span>
+        <span class="flow-branch-item regen" onclick="scrollToSection('sec-regen')" style="cursor:pointer">Refinement</span>
+      </div>
+      <div class="flow-connector"></div>
+
+      <div class="flow-box" data-phase="out" onclick="scrollToSection('sec-postprocess')">Post-Processing &amp; Dedup</div>
+      <div class="flow-connector"></div>
+      <div class="flow-box" data-phase="out" onclick="scrollToSection('sec-format')">Train / Eval Split</div>
+      <div class="flow-connector" style="border-left: 2px dashed var(--border); background: none;"></div>
+      <div class="flow-box" data-phase="ext" onclick="scrollToSection('sec-naturalness')">Naturalness Judge</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PHASE: PREPARATION                         -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="phase" data-phase="prep" id="sec-loading">
+    <div class="phase-pip"></div>
+    <div>
+      <div class="phase-label">Phase 1</div>
+      <div class="phase-title">Preparation</div>
+    </div>
+  </div>
+
+  <div class="stage-card" data-phase="prep">
+    <h3>Corpus Loading</h3>
+    <p>
+      The pipeline starts by loading document chunks from a corpus source — typically a
+      PostgreSQL-backed chunk store. Chunks are the atomic units of text: paragraphs or
+      sections of documents, each identified by a unique hash with associated metadata
+      (file path, headers, document ID).
+    </p>
+    <p>
+      A <strong>diverse profile sample</strong> is drawn from the full corpus. This sample
+      drives corpus profiling, entity extraction, and seed chunk selection for generation.
+      The sampling strategy prioritizes diversity across documents rather than random draws,
+      ensuring coverage of different topics and document types.
+    </p>
+    <details>
+      <summary>How chunks are materialized</summary>
+      <div class="detail-body">
+        <p>
+          If the source doesn't already hold chunks in memory, the pipeline materializes
+          them (up to 50,000) via a sequential scan or random sample. This ensures the
+          entity-chunk graph and linker can resolve any chunk by hash during generation.
+        </p>
+      </div>
+    </details>
+  </div>
+
+  <div class="stage-card" data-phase="prep" id="sec-profiling">
+    <h3>Corpus Profiling</h3>
+    <p>
+      An LLM generates a structured summary of what the corpus contains, along with
+      representative example queries. The profiler receives sampled top-level chunks
+      (document beginnings) and random deep chunks, combined with any user-provided
+      description.
+    </p>
+    <p>
+      This corpus summary is injected into every generation prompt, giving the
+      question-writing LLM context about the domain, vocabulary, and types of information
+      available. Without profiling, the generator would work blind.
+    </p>
+    <details>
+      <summary>Entity extraction</summary>
+      <div class="detail-body">
+        <p>
+          When enabled, the pipeline extracts named entities and key phrases from all
+          corpus chunks using KeyBERT combined with metadata analysis. This builds three
+          structures:
+        </p>
+        <ul>
+          <li><strong>Entity → Chunk index</strong> — which chunks mention each entity</li>
+          <li><strong>Chunk → Entity index</strong> — which entities appear in each chunk</li>
+          <li><strong>Entity co-occurrence matrix</strong> — which entities appear together,
+          enabling cross-document relationship discovery</li>
+        </ul>
+        <p>
+          These indices feed into the linker and the auto-tuner, helping the pipeline
+          understand which chunks can be meaningfully connected for multi-hop questions.
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary>Auto-tuning</summary>
+      <div class="detail-body">
+        <p>
+          After profiling, the pipeline runs a <strong>corpus-aware auto-tuner</strong>
+          that adjusts generation targets based on what the corpus can actually support.
+          If the corpus is small or lacks cross-document connections, the tuner may reduce
+          the multi-hop percentage or lower the total sample count. It also adjusts hop
+          distribution and reasoning mode distribution based on entity density and
+          metadata richness.
+        </p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PHASE: GENERATION                           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="phase" data-phase="gen" id="sec-linking">
+    <div class="phase-pip"></div>
+    <div>
+      <div class="phase-label">Phase 2</div>
+      <div class="phase-title">Linking &amp; Generation</div>
+    </div>
+  </div>
+
+  <div class="stage-card" data-phase="gen">
+    <h3>Chunk Linking</h3>
+    <p>
+      For each generation task, the linker finds a <strong>primary chunk</strong> (the seed)
+      and one or more <strong>secondary chunks</strong> that share a meaningful relationship.
+      Together, these form an <em>anchor bundle</em> — the evidence base from which a
+      multi-hop question will be generated.
+    </p>
+    <p>
+      Three linking strategies are available, selectable via configuration:
+    </p>
+
+    <table class="variant-table">
+      <thead>
+        <tr><th>Linker</th><th>How it works</th><th>Best for</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Metadata</strong></td>
+          <td>Finds secondary chunks by structural signals: same document, shared
+            headers, overlapping entities, metadata similarity. Fast and deterministic.</td>
+          <td>Corpora with rich metadata and clear document structure</td>
+        </tr>
+        <tr>
+          <td><strong>Search Agent</strong></td>
+          <td>An LLM-powered agent with access to corpus search tools. It reads the
+            primary chunk, formulates search queries, evaluates results, and iteratively
+            discovers connections — mimicking how a human researcher would find related content.
+            Uses rollout-based exploration with configurable turn and tool-call limits.</td>
+          <td>Finding deep semantic connections across documents</td>
+        </tr>
+        <tr>
+          <td><strong>Wiki</strong></td>
+          <td>Uses pre-built entity cluster wiki pages (generated from the entity
+            co-occurrence graph) to find chunks connected through shared topic clusters.</td>
+          <td>Entity-dense corpora with clear topic clusters</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <details>
+      <summary>Search Agent internals</summary>
+      <div class="detail-body">
+        <p>
+          The search agent linker wraps a metadata linker as its baseline, then selectively
+          upgrades a percentage of tasks to use the LLM agent. The agent operates in a
+          <strong>rollout environment</strong> — a sandboxed session where it can call search
+          tools and reason about results. The environment provides:
+        </p>
+        <ul>
+          <li>Corpus search (semantic, keyword, hybrid)</li>
+          <li>The primary chunk content and metadata</li>
+          <li>A system prompt instructing it to find related chunks that would enable multi-hop questions</li>
+        </ul>
+        <p>
+          The agent's tool calls and reasoning are captured in the rollout result.
+          Secondary chunks extracted from the agent's search results are validated against
+          minimum quality thresholds (chunk length, similarity to primary) before being
+          included in the anchor bundle.
+        </p>
+      </div>
+    </details>
+  </div>
+
+  <div class="stage-card" data-phase="gen" id="sec-generation">
+    <h3>QA Generation</h3>
+    <p>
+      Given an anchor bundle, an LLM generates a question–answer pair. The generation prompt
+      includes the corpus summary, primary and secondary chunk content, structural hints
+      from the linker (e.g., evidence chains explaining how chunks relate), and — for
+      regeneration attempts — feedback from previous filter failures.
+    </p>
+    <p>
+      Generation is <strong>micro-batched</strong>: tasks are grouped into small batches
+      processed in parallel. The batch size is auto-computed based on the total target count,
+      and the system dynamically allocates remaining tasks across QA types
+      (lookup vs. multi-hop) and hop counts to meet distribution targets.
+    </p>
+
+    <details>
+      <summary>Task creation and distribution</summary>
+      <div class="detail-body">
+        <p>
+          Before generation, the pipeline creates <code>GenerationTask</code> objects
+          specifying:
+        </p>
+        <ul>
+          <li><strong>qa_type</strong> — lookup (single-chunk) or multi_hop (cross-chunk)</li>
+          <li><strong>target_hop_count</strong> — how many reasoning steps the question should require</li>
+          <li><strong>seed_chunk_id</strong> — the primary chunk to build from</li>
+          <li><strong>prompt template</strong> — customizable per qa_type</li>
+        </ul>
+        <p>
+          The distribution is governed by configurable ratios. For example,
+          <code>primary_type_distribution: {lookup: 0.0, multi_hop: 1.0}</code>
+          produces only multi-hop questions, while
+          <code>hop_distribution: {2: 1.0}</code> targets exclusively 2-hop questions.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Custom prompt templates</summary>
+      <div class="detail-body">
+        <p>
+          Each qa_type can have its own prompt template. Templates use a simple placeholder
+          syntax (<code>{variable_name}</code>) and conditional blocks
+          (<code>[[if var]]...[[endif]]</code>). Available variables include:
+        </p>
+        <ul>
+          <li><code>{corpus_summary}</code> — the profiled corpus description</li>
+          <li><code>{primary_chunk}</code>, <code>{secondary_chunks}</code> — chunk content</li>
+          <li><code>{evidence_chain}</code> — how chunks connect (from linker)</li>
+          <li><code>{target_hop_count}</code> — desired reasoning depth</li>
+          <li><code>{failed_question}</code>, <code>{regeneration_prompt}</code> — feedback for retries</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PHASE: VALIDATION                           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="phase" data-phase="val" id="sec-filters">
+    <div class="phase-pip"></div>
+    <div>
+      <div class="phase-label">Phase 3</div>
+      <div class="phase-title">Validation</div>
+    </div>
+  </div>
+
+  <div class="stage-card" data-phase="val">
+    <h3>Filter Chain</h3>
+    <p>
+      Every generated QA pair passes through a configurable sequence of filters.
+      Each filter sets one of three verdicts:
+    </p>
+    <div class="verdict-row">
+      <span class="verdict pass">Passed — accepted</span>
+      <span class="verdict fail">Rejected — permanently dropped</span>
+      <span class="verdict regen">Needs Refinement — sent to regeneration</span>
+    </div>
+    <p>
+      The filter chain is ordered — a question must survive each stage to reach the next.
+      The default chain includes four stages:
+    </p>
+
+    <div class="filter-chain">
+      <div class="filter-stage">
+        <div class="filter-stage-num">1</div>
+        <div class="filter-stage-name">Deterministic Guards</div>
+        <div class="filter-stage-desc">Format validation, length checks, structural requirements. No LLM calls — pure rule-based.</div>
+      </div>
+      <div class="filter-stage">
+        <div class="filter-stage-num">2</div>
+        <div class="filter-stage-name">Quality Gate</div>
+        <div class="filter-stage-desc">Basic quality checks: is it a well-formed question? Does the answer make sense? Rejects malformed or trivial outputs.</div>
+      </div>
+      <div class="filter-stage">
+        <div class="filter-stage-num">3</div>
+        <div class="filter-stage-name">Grounding LLM</div>
+        <div class="filter-stage-desc">An LLM judge verifies that the answer is actually supported by the referenced chunks. Catches hallucinated or extrapolated answers.</div>
+      </div>
+      <div class="filter-stage">
+        <div class="filter-stage-num">4</div>
+        <div class="filter-stage-name">Hop Count Validity</div>
+        <div class="filter-stage-desc">An LLM judge verifies the question genuinely requires the claimed number of reasoning hops. Catches questions that look multi-hop but can be answered from a single chunk.</div>
+      </div>
+    </div>
+
+    <details>
+      <summary>Optional filter stages</summary>
+      <div class="detail-body">
+        <ul>
+          <li><strong>Retrieval Too Easy</strong> — An LLM judge checks whether naive keyword retrieval would find the answer without multi-hop reasoning. Ensures questions actually test the RAG system's composition ability.</li>
+          <li><strong>Env Rollout</strong> — Tests the question against an actual RAG agent in a sandboxed environment. If the agent answers correctly with trivial retrieval, the question is too easy.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="stage-card" data-phase="val" id="sec-regen">
+    <h3>Regeneration Loop</h3>
+    <p>
+      Items that receive a <em>needs_refinement</em> verdict aren't simply discarded — they're
+      sent back to the generator with specific feedback about why they failed. This creates a
+      closed loop: generate → filter → feedback → regenerate → re-filter.
+    </p>
+    <p>
+      The loop runs up to <code>max_rounds</code> times per batch. On each iteration, the
+      regeneration prompt includes:
+    </p>
+    <ul style="padding-left: 1.25rem; margin: 0.5rem 0 1rem; color: var(--ink-muted); font-size: 0.94rem; line-height: 1.7;">
+      <li>The <strong>failure reason</strong> and judge reasoning from the previous attempt</li>
+      <li>The <strong>previous question and answer</strong> to improve upon</li>
+      <li>A <strong>failure type classification</strong> (too_easy, unsupported, unknown) that determines the expected corrective action</li>
+      <li>A <strong>refinement hint</strong> with specific guidance</li>
+    </ul>
+
+    <details>
+      <summary>Seed reanchoring</summary>
+      <div class="detail-body">
+        <p>
+          If a question fails repeatedly with the same seed chunk, the pipeline can
+          <strong>reanchor</strong> — switch to a different seed chunk entirely. This prevents
+          wasting regeneration rounds on a chunk that simply can't support a good question.
+          The reanchoring threshold is configurable
+          (<code>max_same_seed_attempts_before_reanchor</code>).
+        </p>
+        <p>
+          When reanchoring, the pipeline first tries to sample a fresh chunk from the corpus.
+          If that fails, it rotates to another chunk from the existing seed pool.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Failure type → expected action mapping</summary>
+      <div class="detail-body">
+        <table class="variant-table">
+          <thead>
+            <tr><th>Failure type</th><th>Expected action</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>too_easy</strong></td>
+              <td>Increase difficulty while keeping the answer locked to the source chunks</td>
+            </tr>
+            <tr>
+              <td><strong>unsupported</strong></td>
+              <td>Reanchor to new evidence and revise the answer using the new chunks</td>
+            </tr>
+            <tr>
+              <td><strong>unknown</strong></td>
+              <td>Address the filter feedback while remaining grounded in source evidence</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PHASE: OUTPUT                               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="phase" data-phase="out" id="sec-postprocess">
+    <div class="phase-pip"></div>
+    <div>
+      <div class="phase-label">Phase 4</div>
+      <div class="phase-title">Output</div>
+    </div>
+  </div>
+
+  <div class="stage-card" data-phase="out">
+    <h3>Post-Processing</h3>
+    <p>
+      After all batches complete and filtering/regeneration converges, the pipeline
+      applies global post-processing to the full set of accepted items:
+    </p>
+    <ul style="padding-left: 1.25rem; margin: 0.5rem 0; color: var(--ink-muted); font-size: 0.94rem; line-height: 1.7;">
+      <li>
+        <strong>Deduplication</strong> — Removes near-duplicate questions using n-gram similarity
+        (configurable threshold). Prevents the dataset from containing rephrased versions of the
+        same question.
+      </li>
+      <li>
+        <strong>Type relabeling</strong> — Corrects qa_type labels based on actual reference
+        chunk structure. A question labeled <code>multi_hop</code> but with all chunks from the
+        same document gets relabeled as <code>lookup</code>, and vice versa.
+      </li>
+      <li>
+        <strong>Type quota balancing</strong> — Accepts items up to the target count per qa_type,
+        sorted by composite quality score. Excess items beyond the quota are rejected even if
+        they passed all filters.
+      </li>
+    </ul>
+  </div>
+
+  <div class="stage-card" data-phase="out" id="sec-format">
+    <h3>Train / Eval Split</h3>
+    <p>
+      The final accepted items are split into training and evaluation sets. The split
+      is stratified by qa_type and style to ensure both sets have representative distributions.
+      The default split ratio is 80% train / 20% eval.
+    </p>
+    <p>
+      Each item in the output includes the question, answer, reference chunks, eval scores
+      (grounding, hop validity, composite), generation metadata, and the full journey event
+      log tracking every stage the item passed through.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PHASE: EXTENSION                            -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="phase" data-phase="ext" id="sec-naturalness">
+    <div class="phase-pip"></div>
+    <div>
+      <div class="phase-label">Extension</div>
+      <div class="phase-title">Naturalness Judge</div>
+    </div>
+  </div>
+
+  <div class="stage-card" data-phase="ext">
+    <h3>Cross-Model Naturalness Evaluation</h3>
+    <p>
+      An optional post-pipeline step that evaluates whether generated questions sound natural —
+      like something a real person would actually type or ask. This uses a
+      <strong>different model</strong> than the generator (cross-model evaluation) to avoid
+      self-reinforcing biases.
+    </p>
+    <p>
+      Each question is scored on four dimensions, each rated 0.0–1.0:
+    </p>
+
+    <table class="variant-table">
+      <thead>
+        <tr><th>Dimension</th><th>What it measures</th><th>Red flags</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Single Intent</strong></td>
+          <td>Does the question read as one coherent thing the person wants to know?</td>
+          <td>Multiple sub-questions stitched together with "and"</td>
+        </tr>
+        <tr>
+          <td><strong>Conciseness</strong></td>
+          <td>Is it reasonably short?</td>
+          <td>50+ word questions with embedded clauses</td>
+        </tr>
+        <tr>
+          <td><strong>Natural Phrasing</strong></td>
+          <td>Does it sound like a real search query or support request?</td>
+          <td>Role-playing scenarios, excessive hedging, manufactured setups</td>
+        </tr>
+        <tr>
+          <td><strong>Plausible Intent</strong></td>
+          <td>Is there a realistic reason someone would ask this?</td>
+          <td>Questions manufactured to connect unrelated topics</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The overall score is the <strong>minimum</strong> of the four dimensions — one bad
+      dimension fails the entire question. Questions below a configurable threshold
+      (typically 0.6) are filtered out.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- CONFIGURATION REFERENCE                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" style="margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+    <h2>Key Configuration</h2>
+    <p style="color: var(--ink-muted); font-size: 0.92rem;">
+      The pipeline is configured through a <code>PipelineConfig</code> dataclass.
+      The most impactful settings:
+    </p>
+
+    <div class="config-block">
+      <span class="key">targets.total_samples</span>: <span class="val">15</span> <span class="cmt"># total QA pairs to produce</span><br>
+      <span class="key">targets.primary_type_distribution</span>: <span class="val">{lookup: 0.0, multi_hop: 1.0}</span><br>
+      <span class="key">targets.hop_distribution</span>: <span class="val">{2: 1.0}</span> <span class="cmt"># all 2-hop questions</span><br>
+      <br>
+      <span class="key">linker.type</span>: <span class="val">"search_agent"</span> <span class="cmt"># or "metadata", "wiki"</span><br>
+      <span class="key">linker.search_agent_pct</span>: <span class="val">1.0</span> <span class="cmt"># fraction using agent linker</span><br>
+      <span class="key">linker.search_agent.max_turns</span>: <span class="val">4</span><br>
+      <br>
+      <span class="key">filtering.filters</span>: <span class="val">["quality_gate", "grounding_llm", "hop_count_validity"]</span><br>
+      <br>
+      <span class="key">refinement.enabled</span>: <span class="val">true</span><br>
+      <span class="key">refinement.max_rounds</span>: <span class="val">4</span> <span class="cmt"># max regeneration attempts per batch</span><br>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- DATA FLOW SUMMARY                           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+    <h2>Data Flow Summary</h2>
+    <p style="color: var(--ink-muted); font-size: 0.92rem;">
+      Tracing a single QA pair through the pipeline:
+    </p>
+    <ol style="padding-left: 1.5rem; color: var(--ink-muted); font-size: 0.94rem; line-height: 1.8;">
+      <li>A <strong>seed chunk</strong> is selected from the corpus profile sample</li>
+      <li>The <strong>linker</strong> finds 1–3 secondary chunks related to the seed</li>
+      <li>These chunks form an <strong>anchor bundle</strong> with structural hints</li>
+      <li>The <strong>generator LLM</strong> receives the bundle and produces a QA pair</li>
+      <li><strong>Deterministic guards</strong> validate format and structure</li>
+      <li>The <strong>quality gate</strong> checks basic question/answer quality</li>
+      <li>The <strong>grounding judge</strong> verifies the answer is supported by the chunks</li>
+      <li>The <strong>hop count judge</strong> confirms multi-hop reasoning is required</li>
+      <li>If the item needs refinement, it loops back to step 4 with feedback</li>
+      <li>Accepted items are <strong>deduplicated</strong> and <strong>type-balanced</strong></li>
+      <li>Final items are split into <strong>train and eval</strong> sets</li>
+      <li>Optionally, a <strong>naturalness judge</strong> scores and filters for realism</li>
+    </ol>
+    <p>
+      Each item carries a <strong>journey event log</strong> recording every stage it passed
+      through, every verdict it received, and every regeneration attempt — providing full
+      traceability from seed chunk to final output.
+    </p>
+  </section>
+
+</div>
+
+<script>
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Position the regeneration loop bracket
+  function positionRegenLoop() {
+    const flow = document.getElementById('flow-diagram');
+    const gen = document.getElementById('flow-gen');
+    const branch = document.getElementById('flow-branch');
+    if (!flow || !gen || !branch) return;
+
+    // Remove existing bracket if any
+    const existing = flow.querySelector('.regen-loop');
+    if (existing) existing.remove();
+
+    const flowRect = flow.getBoundingClientRect();
+    const genRect = gen.getBoundingClientRect();
+    const branchRect = branch.getBoundingClientRect();
+
+    const top = genRect.top - flowRect.top + genRect.height / 2;
+    const bottom = branchRect.bottom - flowRect.top - 8;
+
+    const bracket = document.createElement('div');
+    bracket.className = 'regen-loop';
+    bracket.style.top = top + 'px';
+    bracket.style.height = (bottom - top) + 'px';
+
+    const arrow = document.createElement('div');
+    arrow.className = 'regen-loop-arrow';
+    bracket.appendChild(arrow);
+
+    const label = document.createElement('div');
+    label.className = 'regen-loop-label';
+    label.textContent = 'Regeneration Loop';
+    bracket.appendChild(label);
+
+    flow.appendChild(bracket);
+  }
+
+  positionRegenLoop();
+  window.addEventListener('resize', positionRegenLoop);
+</script>

@@ -1,0 +1,13 @@
+stratum,hop_count,has_cc,count,cc_share,spec_ge_01_AND_cc,spec_ge_01_AND_cc_share
+credit_cards,3,False,7913,0.695648,0,0.000000
+credit_cards,3,True,3462,0.304352,44,0.003868
+credit_cards,4,False,33670,0.491899,0,0.000000
+credit_cards,4,True,34779,0.508101,59,0.000862
+cross_domain,3,False,660976,0.832835,0,0.000000
+cross_domain,3,True,132670,0.167165,126,0.000159
+cross_domain,4,False,26297057,0.728043,0,0.000000
+cross_domain,4,True,9823144,0.271957,230,0.000006
+education_center,3,False,1994620,0.792810,0,0.000000
+education_center,3,True,521267,0.207190,655,0.000260
+education_center,4,False,66227191,0.703403,0,0.000000
+education_center,4,True,27925397,0.296597,1483,0.000016

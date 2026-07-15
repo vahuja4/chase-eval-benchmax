@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chase RAG Eval — Calibration Run (10 samples)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1a2e;
+    padding: 40px 24px;
+    line-height: 1.6;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    color: #6b7280;
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  .summary-bar {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 32px;
+  }
+  .summary-stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .summary-stat .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+  .summary-stat .stat-label {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .card {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .card-header {
+    background: #f8fafc;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .sample-num {
+    font-size: 18px;
+    font-weight: 700;
+    color: #334155;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .scores-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .score-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+  .score-label {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .score-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  .card-body { padding: 20px; }
+  .qa-section { margin-bottom: 20px; }
+  .qa-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+  }
+  .qa-text {
+    font-size: 15px;
+    color: #334155;
+    line-height: 1.7;
+  }
+  .qa-text.answer {
+    background: #f0fdf4;
+    border-left: 3px solid #22c55e;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+  }
+  .chunks-section { margin-top: 16px; }
+  .chunk {
+    background: #fafafa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 10px;
+  }
+  .chunk-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .chunk-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6366f1;
+    text-transform: uppercase;
+  }
+  .chunk-meta {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+  }
+  .chunk-details {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 10px;
+  }
+  .chunk-content {
+    font-size: 13px;
+    color: #475569;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.6;
+    max-height: 300px;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Chase RAG Eval Dataset</h1>
+  <p class="subtitle">Calibration run &mdash; 10 target samples &mdash; 9 passed &mdash; Sonnet 4.6 rollout / GPT-5.4 judges</p>
+  <div class="summary-bar">
+    <div class="summary-stat"><span class="stat-value">9</span><span class="stat-label">Passed</span></div>
+    <div class="summary-stat"><span class="stat-value">2</span><span class="stat-label">Rejected</span></div>
+    <div class="summary-stat"><span class="stat-value">6</span><span class="stat-label">Regenerations</span></div>
+    <div class="summary-stat"><span class="stat-value">7</span><span class="stat-label">Lookup</span></div>
+    <div class="summary-stat"><span class="stat-value">2</span><span class="stat-label">Multi-hop</span></div>
+    <div class="summary-stat"><span class="stat-value">6</span><span class="stat-label">Train</span></div>
+    <div class="summary-stat"><span class="stat-value">3</span><span class="stat-label">Eval</span></div>
+  </div>
+  
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#1</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+          <span class="badge" style="background:#8b5cf6">train</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.99</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.994</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I'm evaluating an upfront cash incentive from a money provider for starting or adding a relationship, and I need to understand what this type of offer is meant to do and whether I usually have to complete any required activity before receiving it. What does the article say?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">A bank sign-up bonus is a promotion offered by financial institutions to attract new customers or encourage existing customers to open new accounts or use specific services. A bank sign-up bonus can vary by type and design and may have certain qualifying transactions or activities that the account holder may need to complete before receiving the bonus.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">What Is a Bank Sign-up Bonus? | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00031</span>
+            <span><strong>Chunk ID:</strong> c_00031_00</span>
+            <span><strong>Stratum:</strong> education_center / basics</span>
+            <span><strong>Heading:</strong> What is a bank sign-up bonus?</span>
+          </div>
+          <pre class="chunk-content"># What is a bank sign-up bonus?
+A bank sign-up bonus is a promotion offered by financial institutions to attract new customers or encourage existing customers to open new accounts or use specific services. A bank sign-up bonus can vary by type and design and may have certain qualifying transactions or activities that the account holder may need to complete before receiving the bonus. But when chosen wisely, these offers may provide you with a valuable jumpstart in utilizing your new account and managing your finances. Let’s explore some of the different checking account bonuses and a few tips on how to find the best offers for you.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#2</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+          <span class="badge" style="background:#8b5cf6">train</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.99</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.994</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What sources of money can I count when filling out an application for a new card?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">You can include your spouse’s income, investment returns and allowance as part of your annual income on your credit card application.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Understanding Income for Credit Cards | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00148</span>
+            <span><strong>Chunk ID:</strong> c_00148_00</span>
+            <span><strong>Stratum:</strong> education_center / basics</span>
+            <span><strong>Heading:</strong> Understanding income requirements for credit cards</span>
+          </div>
+          <pre class="chunk-content"># Understanding income requirements for credit cards
+## Quick insights
+- Income is an important factor that is considered during the credit card approval process.
+- Consider reviewing the terms and agreements of the card you are applying for to make sure you meet the minimum requirements, such as income and credit score.
+- You can include your spouse’s income, investment returns and allowance as part of your annual income on your credit card application.
+Income is an important factor when it comes to getting access to lines of credit, such as credit cards. However, it’s not the only factor.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#3</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+          <span class="badge" style="background:#8b5cf6">train</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.99</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.994</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">While submitting a vehicle financing request on the website, the page keeps failing, and it also auto-populates another person tied to my banking relationship. What exact steps should I take to retry the submission and make sure only my own details are used?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">If you receive an error message, first refresh your browser and try again. If it continues, use a different browser (i.e. Firefox, Chrome).
+When I apply online, my joint account owner's personal information pre-fills. How can I remove their info?
+To apply with only your information, choose "No" when asked if you're a Chase customer during the application. Then, you'll be able to enter your info.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Chase Auto | Shop for a car | dealer inventory | Chase.com</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00001</span>
+            <span><strong>Chunk ID:</strong> c_00001_15</span>
+            <span><strong>Stratum:</strong> auto / loans</span>
+            <span><strong>Heading:</strong> Answers to your financing questions > What should I do if I receive an error when applying online?</span>
+          </div>
+          <pre class="chunk-content">What should I do if I receive an error when applying online?
+If you receive an error message, first refresh your browser and try again. If it continues, use a different browser (i.e. Firefox, Chrome).
+When I apply online, my joint account owner's personal information pre-fills. How can I remove their info?
+To apply with only your information, choose "No" when asked if you're a Chase customer during the application. Then, you'll be able to enter your info.
+1 To finance a new or used car with your dealer through JPMorgan Chase Bank, N.A. ("Chase"), you must purchase your car from a dealer in the Chase network. All applications are subject to credit approval by Chase. Additional terms and conditions apply, such as vehicle make, age and mileage. Your lock applies only to the specific vehicle, dealer and terms you requested; any changes may result in a rate change.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#4</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+          <span class="badge" style="background:#8b5cf6">train</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.99</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.994</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What details should I have ready before I start the form to request a new card, so I can finish it without surprises?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Most credit card applications will want the answers to the following questions: your full legal name; your Social Security number and/or ITIN; your physical address; your gross annual income; your employment status; and your housing costs.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">How to Increase Your Approval Odds for a Credit Card | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00136</span>
+            <span><strong>Chunk ID:</strong> c_00136_09</span>
+            <span><strong>Stratum:</strong> education_center / basics</span>
+            <span><strong>Heading:</strong> How to boost your credit card approval odds > What information do I have to provide on a credit card application?</span>
+          </div>
+          <pre class="chunk-content">## What information do I have to provide on a credit card application?
+Curious what you'll be asked on an application? Card issuers want to get a full picture of your financial health before lending you credit. In addition to reviewing your credit history, most credit card applications will want the answers to the following questions:
+- Your full legal name. This is the name you use on your official government documentation, like your driver's license and passport.
+- Your Social Security number and/or ITIN. The Social Security Administration provides SSNs, while the Internal Revenue Service issues ITINs. A credit card application typically requires only one or the other.
+- Your physical address. This is the address where you expect to receive your credit card statements.
+- Your gross annual income. "Gross" refers to your income before taxes. Card issuers use this information to estimate your ability to pay your card debt and determine what your credit line will be.
+- Your employment status. This identifies whether you are employed, unemployed or self-employed. You may need to provide your employer's phone number (or, if you are self-employed, a tax document) for verification purposes.
+- Your housing costs. Your application may ask if you rent or pay a mortgage and if so, how much you pay each month.
+Being clear on the answers to all these questions will help you feel more prepared when you fill out your application.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#5</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+          <span class="badge" style="background:#8b5cf6">train</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.99</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.994</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">Why might a caregiver want to start a money-management account for a young family member, and what money skills could it help introduce early on?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Opening a bank account in your child’s name may help build financial literacy from an early age. Parents or guardians can use their child’s bank account to introduce topics such as budgeting, saving and earned interest in a way that makes personal finance fun and approachable.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">How To Open a Bank Account for a Minor | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00048</span>
+            <span><strong>Chunk ID:</strong> c_00048_00</span>
+            <span><strong>Stratum:</strong> education_center / basics</span>
+            <span><strong>Heading:</strong> How to open a bank account for a minor</span>
+          </div>
+          <pre class="chunk-content"># How to open a bank account for a minor
+Opening a bank account in your child’s name may help build financial literacy from an early age. Parents or guardians can use their child’s bank account to introduce topics such as budgeting, saving and earned interest in a way that makes personal finance fun and approachable. Let’s learn how to open a bank account for a minor and some helpful tips for the process.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#6</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+          <span class="badge" style="background:#8b5cf6">train</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.97</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.838</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">1.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I'm advising a friend who wants a simple wallet strategy: one card they can use almost everywhere for the same return on general spending, plus a second option they should watch for limited-time merchant-group bonuses when buying household essentials, ordering meals to their door, filling the car, or shopping for kids' gifts. Based on Chase's explanations, what reward structure fits each part of that plan, and which Chase cards are given as examples of the steady everyday-earn option?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">For the card they can use almost everywhere for the same return on general spending, the reward structure is a flat rate cash back card. Chase Freedom Rise® and Chase Freedom Unlimited® are two examples of 1.5% cash back credit cards. For the second option, the reward structure is rotating categories. Examples of stores and retailers that may be featured include supermarkets or grocery stores, food delivery services, toy and novelty stores, and gas stations.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (2)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Earning cash back at stores | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00258</span>
+            <span><strong>Chunk ID:</strong> c_00258_02</span>
+            <span><strong>Stratum:</strong> education_center / rewards_benefits</span>
+            <span><strong>Heading:</strong> Earning cash back at stores > Which stores offer cash back on purchases?</span>
+          </div>
+          <pre class="chunk-content">## Which stores offer cash back on purchases?
+Many stores and retailers offer cash back, either through their own loyalty programs or through partnerships with credit card companies. Here are a few examples:
+- Supermarkets: Credit cards may offer cash back deals with supermarkets or grocery stores. For instance, the Chase Freedom Flex may include grocery stores in its rotating 5% cash back categories.
+- Online retailers: Many online retailers offer cash back through specific credit cards or cash back apps.
+- Food delivery: The Chase Freedom Flex card has been known to include food delivery services in its 5% cash back categories, allowing you to earn rewards on your grocery or meal deliveries.
+- Toy and novelty stores: Toy stores may also be featured in rotating cash back categories, and select retailers offer co-branded cards.
+- Gas stations: Many major gas stations offer cash back when you use certain credit cards. They can also be featured in rotating cash back categories with the Chase Freedom Flex card.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">1.5% Cash Back Credit Cards Options | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00253</span>
+            <span><strong>Chunk ID:</strong> c_00253_00</span>
+            <span><strong>Stratum:</strong> education_center / rewards_benefits</span>
+            <span><strong>Heading:</strong> 1.5% cash back credit cards options</span>
+          </div>
+          <pre class="chunk-content"># 1.5% cash back credit cards options
+## Quick insights
+- Cash back credit cards allow cardmembers to earn a percentage back from purchases they make with their cards.
+- Cash back may vary between credit cards and/or spending categories.
+- Chase Freedom Rise® and Chase Freedom Unlimited® are two examples of 1.5% cash back credit cards.
+Many consumers choose their credit cards based on the potential rewards they can earn with them—including cash back. Cash back credit cards can be popular options due to their rewards structure. Typically, these credit cards allow cardmembers to earn a certain percent of cash back either at a flat rate, on tiered categories or on rotating categories.
+Read on to learn whether a 1.5% cash back credit card could be a good option for you, which 1.5% cash back credit card might be right for you how to earn and redeem cash back rewards.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#7</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+          <span class="badge" style="background:#6366f1">eval</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.99</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.994</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What determines how much I earn for each dollar I spend and what I can get when I use those earnings, and are there any limits on how much I can build up over time or in certain spending categories?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">Value of rewards points: This details how many points are earned per dollar spent and how those points can be redeemed. This can include the conversion rate for points to cash, travel, gift cards or other rewards, which can vary between credit card issuers and specific cards.
+
+Rewards caps: Rewards caps are the maximum number of rewards points, miles or cash back a cardholder can earn within a certain period or on certain types of purchases. It can affect a cardholder's spending and rewards earning potential.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">A Quick Guide to Credit Card Rewards Programs | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00256</span>
+            <span><strong>Chunk ID:</strong> c_00256_03</span>
+            <span><strong>Stratum:</strong> education_center / rewards_benefits</span>
+            <span><strong>Heading:</strong> A quick guide to credit card rewards programs > Common credit card rewards terms</span>
+          </div>
+          <pre class="chunk-content">- Value of rewards points: This details how many points are earned per dollar spent and how those points can be redeemed. This can include the conversion rate for points to cash, travel, gift cards or other rewards, which can vary between credit card issuers and specific cards.
+- Rewards caps: Rewards caps are the maximum number of rewards points, miles or cash back a cardholder can earn within a certain period or on certain types of purchases. It can affect a cardholder's spending and rewards earning potential.
+This is not an exhaustive list. Be sure to fully read your card’s terms and conditions to understand how, when and where you can earn and redeem credit card rewards.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#8</span>
+          <span class="badge" style="background:#4f46e5">multi_hop</span>
+          <span class="badge" style="background:#6366f1">eval</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">0.99</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">0.996</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">1.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">What should I look for if I’m helping someone who has very little borrowing history pick a first card that can help them get established financially, and I also want to know which options from the same issuer would at least earn rewards when used for recurring home service payments?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">You should consider “fees, interest rates and credit-building potential” when choosing among cards, because “easy-to-qualify cards provide opportunities for individuals with limited or poor credit histories to build a solid financial foundation.” For a first card, “The Chase Freedom Rise credit card offers a range of features that can make it a solid choice for first-time cardholders. The card can help those new to credit cards start to build credit, earn rewards and learn financial management.” For recurring home service payments, “Chase Freedom Unlimited” earns “at least 1.5% cash back on all purchases, including utilities,” and “Chase Freedom Flex” earns “at least 1% cash back on all purchases, including utilities,” with “rotating bonus categories that change every quarter” that “can potentially include utilities like phone, internet, cable or other utilities.”</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (3)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Redeeming Cash Back Rewards with a Chase Freedom Rise® Credit Card | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00139</span>
+            <span><strong>Chunk ID:</strong> c_00139_05</span>
+            <span><strong>Stratum:</strong> education_center / basics</span>
+            <span><strong>Heading:</strong> Redeeming cash back rewards with a Chase Freedom Rise® credit card > The bottom line</span>
+          </div>
+          <pre class="chunk-content">## The bottom line
+The Chase Freedom Rise credit card offers a range of features that can make it a solid choice for first-time cardholders. The card can help those new to credit cards start to build credit, earn rewards and learn financial management. By understanding and utilizing the benefits of cash back rewards, you can make informed decisions that align with your financial goals and maximize the value of every dollar spent.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 2</span>
+            <span class="chunk-meta">Earning Cash Back when using a Credit Card for Utility Payments | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00112</span>
+            <span><strong>Chunk ID:</strong> c_00112_05</span>
+            <span><strong>Stratum:</strong> education_center / basics</span>
+            <span><strong>Heading:</strong> Earning cash back on utilities > Which Chase credit cards are best for paying utility bills?</span>
+          </div>
+          <pre class="chunk-content">## Which Chase credit cards are best for paying utility bills?
+While Chase doesn’t have a credit card that provides a permanent enhanced earning rate on utilities, the Chase Freedom credit cards allow you to earn rewards on utilities. Let’s take a closer look:
+- Chase Freedom Unlimited: The Chase Freedom Unlimited card earns at least 1.5% cash back on all purchases, including utilities.
+- Chase Freedom Flex: The Chase Freedom Flex card earns at least 1% cash back on all purchases, including utilities, but it also features rotating bonus categories that change every quarter, and these can potentially include utilities like phone, internet, cable or other utilities. Like the Freedom Unlimited, Freedom Flex also comes with a low annual fee.</pre>
+        </div>
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 3</span>
+            <span class="chunk-meta">Why Some Cards Are “Easier” To Qualify for Than Others | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00113</span>
+            <span><strong>Chunk ID:</strong> c_00113_05</span>
+            <span><strong>Stratum:</strong> education_center / basics</span>
+            <span><strong>Heading:</strong> Why are some credit cards "easier" to qualify for than others > The bottom line</span>
+          </div>
+          <pre class="chunk-content">## The bottom line
+Choosing the right credit card involves understanding the requirements and benefits of each option. Easy-to-qualify cards provide opportunities for individuals with limited or poor credit histories to build a solid financial foundation. By considering factors such as fees, interest rates and credit-building potential, you can select a card that meets your needs and supports your financial goals.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="sample-num">#9</span>
+          <span class="badge" style="background:#0d9488">lookup</span>
+          <span class="badge" style="background:#6366f1">eval</span>
+        </div>
+        <div class="scores-row">
+          <div class="score-pill">
+            <span class="score-label">Grounding</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Retrieval Diff</span>
+            <span class="score-value">1.0</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Composite</span>
+            <span class="score-value">1.000</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Query Style</span>
+            <span class="score-value">natural</span>
+          </div>
+          <div class="score-pill">
+            <span class="score-label">Link Confidence</span>
+            <span class="score-value">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="qa-section">
+          <div class="qa-label">Question</div>
+          <div class="qa-text">I'm trying to cut my weekly food bill without sacrificing nutrition, and I also want ingredients that keep longer so I can purchase larger quantities with less waste. What option from the produce section does the guidance recommend, and what tradeoff should I keep in mind when planning meals?</div>
+        </div>
+        <div class="qa-section">
+          <div class="qa-label">Answer</div>
+          <div class="qa-text answer">When sticking to a grocery shop budget, frozen fruits and vegetables may be a more affordable alternative to fresh produce, with the same (or better) nutritional benefits. Frozen produce also stores better than fresh, making it easier to buy in bulk and reduce the amount of spoilage in your groceries. That said, you might find that frozen produce is less appealing or useful depending on the recipe you want to make, so consider them as an option in the greater scheme of your diet.</div>
+        </div>
+        <div class="chunks-section">
+          <div class="qa-label">Reference Chunks (1)</div>
+          
+        <div class="chunk">
+          <div class="chunk-header">
+            <span class="chunk-label">Chunk 1</span>
+            <span class="chunk-meta">Food Shopping On A Budget | Chase</span>
+          </div>
+          <div class="chunk-details">
+            <span><strong>File:</strong> p_00070</span>
+            <span><strong>Chunk ID:</strong> c_00070_04</span>
+            <span><strong>Stratum:</strong> education_center / budgeting_saving</span>
+            <span><strong>Heading:</strong> Ways to grocery shop on a budget > How to shop for food on a budget > Consider frozen over fresh</span>
+          </div>
+          <pre class="chunk-content">### Consider frozen over fresh
+When sticking to a grocery shop budget, frozen fruits and vegetables may be a more affordable alternative to fresh produce, with the same (or better) nutritional benefits. Frozen produce also stores better than fresh, making it easier to buy in bulk and reduce the amount of spoilage in your groceries. That said, you might find that frozen produce is less appealing or useful depending on the recipe you want to make, so consider them as an option in the greater scheme of your diet.</pre>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,563 @@
+[
+  {
+    "index": 0,
+    "question": "If I\u2019m traveling far from home and either I or a close family member gets sick or injured, how much can I get paid back for care costs, and is there any amount I have to pay myself first?",
+    "answer": "If you or an immediate family member become sick or injured while you're 100 miles or more from home on a trip, you can be reimbursed up to $2,500 for medical expenses, subject to a $50 deductible.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "4170a1a68532eb6575058411fb3bf4aef619fcf36a5e1d39a74a546f4ff84c07",
+        "content_preview": "Emergency Medical and Dental\nIf you or an immediate family member become sick or injured while you're 100 miles or more from home on a trip, you can be reimbursed up to $2,500 for medical expenses, subject to a $50 deductible.\u0394 Same page link to disclaimer \u0394\n\u0394 Same page link to disclaimer reference ",
+        "metadata": {
+          "file": "p_00009",
+          "stratum": "credit_cards",
+          "chunk_id": "c_00009_33",
+          "page_title": "Chase Sapphire Reserve Credit Card | Chase.com",
+          "sub_stratum": "sapphire",
+          "heading_path": "Chase Sapphire Reserve\u00ae Credit Card > Explore additional benefits > Travel protection > Emergency Medical and Dental"
+        }
+      }
+    ]
+  },
+  {
+    "index": 1,
+    "question": "When choosing between a cash back and travel credit card, should I factor in 3% cash back card annual fees and category restrictions?",
+    "answer": "By carefully considering factors such as annual fees and earning categories, as well as understanding the specific benefits and drawbacks of each type of card, you can make an informed decision that aligns with your financial habits and goals. Some of the potential drawbacks of 3% cash back credit cards include: Annual fees: Some 3% cash back credit cards may charge an annual fee, which could reduce your overall rewards value if you don\u2019t spend enough to offset the cost. Category restrictions: You may only get 3% back in specific categories, and some cards require you to activate or choose your bonus categories each quarter.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "801771cd10d8ad4cf1740be44acd9b596cff5355256d6fc49d3e83baa3dba154",
+        "content_preview": "## Bottom line\nChoosing a new credit card is a big decision that can be aided by a little research ahead of time. By carefully considering factors such as annual fees and earning categories, as well as understanding the specific benefits and drawbacks of each type of card, you can make an informed d",
+        "metadata": {
+          "file": "p_00102",
+          "stratum": "education_center",
+          "chunk_id": "c_00102_13",
+          "page_title": "Cash Back vs. Travel Credit Card: Which to Choose | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Choosing between cash back and travel credit cards > Bottom line"
+        }
+      },
+      {
+        "id": "1f65026bb0c1a8391a37cd20ba6cc367b33aec86147c272d697548778bf94fbc",
+        "content_preview": "## Drawbacks of 3% cash back credit cards\nSome of the potential drawbacks of 3% cash back credit cards include:\n- Spending caps: Some 3% cash back cards limit how much you can earn by capping rewards at a certain amount per quarter or year. Once you reach this cap, the cash back rate may be lowered ",
+        "metadata": {
+          "file": "p_00196",
+          "stratum": "education_center",
+          "chunk_id": "c_00196_03",
+          "page_title": "What to Know About 3% Cash Back Credit Cards | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "What to know about 3% cash back credit cards > Drawbacks of 3% cash back credit cards"
+        }
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "question": "What can I book with the points I earn from a travel credit card?",
+    "answer": "Travel credit cards often come with an introductory offer, providing the cardmember with mileage or points. You can typically earn points on everyday spending. These points can later be redeemed for travel-related rewards. To make the most of your purchases for travel, you can book your flights, hotels and more through the Chase Travel portal.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "0c49014ab577ffdbcd1bfc91108126d24cb2c56a60915d53325cf44dc0aaa195",
+        "content_preview": "### Travel credit cards\nTravel credit cards are a type of rewards card geared specifically toward travel. Travel credit cards often come with an introductory offer, providing the cardmember with mileage or points. These rewards may take effect when the user hits a designated amount spent within a sp",
+        "metadata": {
+          "file": "p_00147",
+          "stratum": "education_center",
+          "chunk_id": "c_00147_03",
+          "page_title": "Different Types of Credit Cards, Explained | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Types of credit cards explained > What are the different types of credit cards? > Travel credit cards"
+        }
+      },
+      {
+        "id": "f58ffd09479d295a3eb0fc4e37d2b257924d05899d7100e2ea655bdbb44c7930",
+        "content_preview": "# How to use the Chase Travel portal\nOne of the many perks of using a Chase branded credit card could be the opportunity to earn and redeem points for travel-related purchases. What\u2019s more, did you know that you could maximize your points value and reap even more rewards points by booking through th",
+        "metadata": {
+          "file": "p_00133",
+          "stratum": "education_center",
+          "chunk_id": "c_00133_00",
+          "page_title": "How to Use the Chase Travel Portal | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to use the Chase Travel portal"
+        }
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "question": "If I open a joint high-yield savings account, can the other person withdraw money on their own?",
+    "answer": "A joint high yield savings account (HYSA) is a savings account shared by multiple people that may provide a higher-than-average rate of return. Each person on a joint bank account has the same access to deposit, spend, transfer and withdraw money.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "7faa6ce0682889f9029584a687064e2695c95604160c7b55b2b08fd692275978",
+        "content_preview": "# What is a joint high yield savings account?\n## Quick insights\n- A joint high yield savings account (HYSA) is a savings account shared by multiple people that may provide a higher-than-average rate of return.\n- It can be shared by anywhere from two to four people, depending on the provider.\n- HYSAs",
+        "metadata": {
+          "file": "p_00054",
+          "stratum": "education_center",
+          "chunk_id": "c_00054_00",
+          "page_title": "What is a joint high-yield savings account? | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "What is a joint high yield savings account?"
+        }
+      },
+      {
+        "id": "e29eafcf9dc9d310951686b37379f2cfbc214f59b61e1dc18d865e212184ce6b",
+        "content_preview": "# Understanding joint bank accounts: A guide\n## Quick insights\n- A joint bank account can be a checking or savings account managed by multiple people.\n- Each person on a joint bank account has the same access to deposit, spend, transfer and withdraw money.\n- Managing a joint bank account successfull",
+        "metadata": {
+          "file": "p_00063",
+          "stratum": "education_center",
+          "chunk_id": "c_00063_00",
+          "page_title": "Pros And Cons Of Joint Bank Accounts | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Understanding joint bank accounts: A guide"
+        }
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "question": "Chase card extra charge after missed payment",
+    "answer": "The timing and amount of a late fee depend on your card\u2019s terms and conditions. In general, when your credit card issuer receives the set minimum payment a certain number of days past the due date, a late fee may be charged. When you\u2019re charged a late fee, you\u2019ll probably receive a notice from your bank. That notice should include the amount of the late fee and any balance that is past due. The notice may also suggest steps you can take to pay the fee and outstanding balance.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "64ce4d522aa5834b36ebb8be81536f457b84f0d677dab3e171f37b97a8a28a4a",
+        "content_preview": "## How do late fees work?\nThe timing and amount of a late fee depend on your card\u2019s terms and conditions. In general, when your credit card issuer receives the set minimum payment a certain number of days past the due date, a late fee may be charged. When you\u2019re charged a late fee, you\u2019ll probably r",
+        "metadata": {
+          "file": "p_00108",
+          "stratum": "education_center",
+          "chunk_id": "c_00108_02",
+          "page_title": "Credit Card Late Fees Explained | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Credit card late fees explained > How do late fees work?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "question": "If I'm trying to plan my spending to earn the highest extra return on this card, how often do the bonus spending areas change and what kinds of purchases are they usually for?",
+    "answer": "The categories change every three months, often in spending areas like grocery stores and gas stations. Chase releases the bonus categories shortly before the quarter begins.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "591f70262dabdef6c5c637657db51b1df8dbc7e0b573bb3b5e42b4c5f5f5dd2e",
+        "content_preview": "## What are the 5% rewards categories for Chase Freedom Flex?\nThe Chase Freedom cashback calendar makes it easier to map out spending for the quarter. Chase Freedom Flex 5% rewards categories are quarterly bonuses where you can accumulate extra points for qualifying purchases. The categories change ",
+        "metadata": {
+          "file": "p_00183",
+          "stratum": "education_center",
+          "chunk_id": "c_00183_01",
+          "page_title": "How to Activate Chase Freedom Flex Rewards Categories | Chase",
+          "sub_stratum": "chase_cards",
+          "heading_path": "How to activate Chase Freedom Flex Rewards categories > What are the 5% rewards categories for Chase Freedom Flex?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 6,
+    "question": "How do I maximize rewards with a rotating 5% cash back card?",
+    "answer": "By keeping track of your rotating bonus categories and planning your spending, you may be able to maximize your earning potential. Some cards feature rotating categories that usually change every quarter, and they may require activation and strategic spending to get the most out of their benefits.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "883da32bc99f626ea2214d405f71cd2da897727875f8b36c01a3125cc6876069",
+        "content_preview": "# Rotating credit card bonus categories: A quick guide\n## Quick insights\n- Rewards credit cards can give you the opportunity to earn rewards or cash back for spending you\u2019re already doing.\n- Rotating bonus credit cards can offer bonus rewards-earning opportunities in categories that change over time",
+        "metadata": {
+          "file": "p_00140",
+          "stratum": "education_center",
+          "chunk_id": "c_00140_00",
+          "page_title": "Rotating Credit Card Bonus Categories: A Quick Guide | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Rotating credit card bonus categories: A quick guide"
+        }
+      },
+      {
+        "id": "acd38d9fa182de6810cd1eb866ea93c28242bc23e010a766e2e7e790b7ec05aa",
+        "content_preview": "## What is a 5% cash back credit card?\nA 5% cash back credit card is a type of rewards credit card that offers 5% cash back on purchases in specific categories. Some cards have fixed bonus categories, such as gas stations or grocery stores, while others feature rotating categories that usually chang",
+        "metadata": {
+          "file": "p_00118",
+          "stratum": "education_center",
+          "chunk_id": "c_00118_01",
+          "page_title": "A Guide to 5% Cash Back Credit Cards | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Guide to 5% cash back credit cards > What is a 5% cash back credit card?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "question": "Chase Freedom trip cancellation reimbursement limits",
+    "answer": "Trip Cancellation and Interruption Insurance: You can be reimbursed up to $1,500 per covered traveler and $6,000 per trip for your pre-paid, non-refundable passenger fares, if your trip is canceled or cut short by sickness, severe weather or other covered situations.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "72b7e3a54fd8f3dabf85df140c1d6ee4d19a34338429eb6b90d4f76a5d74f3ab",
+        "content_preview": "## Chase Freedom credit card benefits explained\nSome purchase and travel protections come with all Freedom Flex, Freedom Unlimited and Freedom Rise credit cards:\n- Purchase Protection: Covers your eligible new purchases for 120 days from the date of purchase against damage or theft up to $500 per it",
+        "metadata": {
+          "file": "p_00179",
+          "stratum": "education_center",
+          "chunk_id": "c_00179_01",
+          "page_title": "Chase Freedom Benefits Guide | Chase",
+          "sub_stratum": "chase_cards",
+          "heading_path": "Chase Freedom benefits guide > Chase Freedom credit card benefits explained"
+        }
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "question": "Should I pay my entire current balance before my statement closing date to help my credit utilization ratio?",
+    "answer": "Making this type of payment typically might help improve your credit utilization ratio, while also avoiding interest and late charges, helping to maintain a strong payment history and helping to maintain or potentially improve your credit score. Most credit card issuers report your balance to the credit bureaus on or around the statement closing date, which is the last day of your billing cycle.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "98bd1a8ac7f45df6911326963cfdf0e9abc598b27881343e941221dd5b106c24",
+        "content_preview": "## Paying the current balance\nAnother payment option is to pay off the entire current balance. This amount would be the balance from your prior statement close date and any charges that have been made since the close date. Making this type of payment typically might help improve your credit utilizat",
+        "metadata": {
+          "file": "p_00143",
+          "stratum": "education_center",
+          "chunk_id": "c_00143_04",
+          "page_title": "Statement Balance vs Minimum Payment | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Statement balance vs minimum payment: What's the difference? > Paying the current balance"
+        }
+      },
+      {
+        "id": "2dfa7a4ccc3edc74343b042c35eab99e8bd98f4b35bc1019f28e1e27f30a006b",
+        "content_preview": "## Understanding when balances are reported to credit bureaus\nCredit card balances are reported to credit bureaus on a regular basis, typically once a month. The specific timing and process can vary depending on the credit card issuer. Most credit card issuers report your balance to the credit burea",
+        "metadata": {
+          "file": "p_00126",
+          "stratum": "education_center",
+          "chunk_id": "c_00126_05",
+          "page_title": "How to Manage Your First Credit Card\u2019s Low Credit Limit | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to manage your first credit card\u2019s low limit > Understanding when balances are reported to credit bureaus"
+        }
+      }
+    ]
+  },
+  {
+    "index": 9,
+    "question": "For someone who is new to borrowing and wants a way to pay over time without having to put down money upfront, what school-focused option is described, who is it generally intended for, and does Chase provide that exact option or a different beginner choice?",
+    "answer": "One option for an unsecured credit card for an applicant with no credit history is a student credit card. Student credit cards don't require a deposit like secured cards do, and usually function more like a regular credit card. While eligibility can vary between issuers, student cards are usually designed specifically for individuals 18 and over attending college. Chase does not offer student credit cards, but does offer a starter credit card for students and non-students who are new to credit.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "e20339cc12ddf2074695bca38ddbea92ecf375b6931f588b0d552af6a1ae3e71",
+        "content_preview": "### Student credit cards\nOne option for an unsecured credit card for an applicant with no credit history is a student credit card. Student credit cards don't require a deposit like secured cards do, and usually function more like a regular credit card.\nHowever, the eligibility requirements generally",
+        "metadata": {
+          "file": "p_00110",
+          "stratum": "education_center",
+          "chunk_id": "c_00110_04",
+          "page_title": "How to Get a Credit Card with No Credit History | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to get a credit card with no credit history > Credit cards you may be able to get with no credit history > Student credit cards"
+        }
+      }
+    ]
+  },
+  {
+    "index": 10,
+    "question": "How much of my student credit card limit should I use to help build credit?",
+    "answer": "Student credit cards \"offer a lower credit limit.\" It is generally a good idea to try to keep your credit utilization ratio below 30 percent, and \"the best way to use a student credit card is to pay off your balance in full each month.\"",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "3bc6abd9c3e7be461022779b07704f2d521a15726704e40eb8183f8b90fa011c",
+        "content_preview": "Student credit cards\nStudent credit cards have a more flexible acceptance rate of lower credit scores than traditional credit cards. However, these cards may charge higher interest rates and offer a lower credit limit. The best way to use a student credit card is to pay off your balance in full each",
+        "metadata": {
+          "file": "p_00168",
+          "stratum": "education_center",
+          "chunk_id": "c_00168_14",
+          "page_title": "What to Do to Establish Credit for the First Time  | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "How to establish credit for the first time > How do you build credit for the first time? > Open loans and credit cards with low credit score requirements > Student credit cards"
+        }
+      },
+      {
+        "id": "7681900da65fd542bf1770d1c5aae2dd1b284a2f412e3798ae3d80865145945b",
+        "content_preview": "## Budgeting to prevent high credit utilization\nYour credit limit is the amount of credit available for you to spend with your card. However, just because you have the credit, it may not be a good idea to use it all. Maintaining a healthy credit utilization ratio could potentially help you increase ",
+        "metadata": {
+          "file": "p_00126",
+          "stratum": "education_center",
+          "chunk_id": "c_00126_02",
+          "page_title": "How to Manage Your First Credit Card\u2019s Low Credit Limit | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to manage your first credit card\u2019s low limit > Budgeting to prevent high credit utilization"
+        }
+      }
+    ]
+  },
+  {
+    "index": 11,
+    "question": "How do rewards credit card sign-up bonuses work for cash back cards?",
+    "answer": "It's common to see a sign-up bonus. This is an offer with an incentive to spend a certain amount of money in a certain period of time in exchange for rewards. Sign-up bonuses usually award cash back. However, you'll have to meet a minimum spending requirement within a certain period.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "bc0ab5ebbd630b1b18e87dd807fe1f9336093a5a28eb0c2e0c79e795d7550598",
+        "content_preview": "## How a rewards credit card works\nRewards credit cards work in a few ways. It's common to see a sign-up bonus. This is an offer with an incentive to spend a certain amount of money in a certain period of time in exchange for rewards. You may continue racking up points towards rewards even after hit",
+        "metadata": {
+          "file": "p_00265",
+          "stratum": "education_center",
+          "chunk_id": "c_00265_02",
+          "page_title": "What is the best rewards credit card for me? | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "What is the best rewards credit card for me? > How a rewards credit card works"
+        }
+      },
+      {
+        "id": "87dffdf375e50d0e854d0e6abfd5c13a035a947862bcc425b62f06baca68766a",
+        "content_preview": "### Pros\n- May have a low annual fee: You may only pay an annual fee once a year around your account anniversary. The fee may be worthwhile based on the cash back you earn.\n- Intro annual percentage rates (APRs): Cash back cards tend to offer an intro APR on purchases for a limited time. Although th",
+        "metadata": {
+          "file": "p_00171",
+          "stratum": "education_center",
+          "chunk_id": "c_00171_10",
+          "page_title": "The Pros and Cons of Cash Back Credit Cards | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "Pros and cons of cash back credit cards > Cash back credit card benefits and drawbacks > Pros"
+        }
+      }
+    ]
+  },
+  {
+    "index": 12,
+    "question": "Chase paused loan payments approval required",
+    "answer": "Regardless of the type, you will need to request and be approved for a deferment\u2014it is not automatic.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "29fb8d48ad492a6a587b96e7cc9f5a373bfc9b453786a4fff45bb47f25e70002",
+        "content_preview": "## What types of loans can you defer?\nThe way a deferred payment works depends on the type of loan you're planning to pause. Regardless of the type, you will need to request and be approved for a deferment\u2014it is not automatic. When you defer payments on a loan, your credit report may show this as de",
+        "metadata": {
+          "file": "p_00191",
+          "stratum": "education_center",
+          "chunk_id": "c_00191_02",
+          "page_title": "How Deferred Payments Affect your Credit Score | Chase",
+          "sub_stratum": "credit_score",
+          "heading_path": "Do deferred payments affect your credit score? > What types of loans can you defer?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 13,
+    "question": "What should I look at to get the most value from a card that gives me something back on the purchases I was already planning to make?",
+    "answer": "If you\u2019re looking to get the most out of a rewards credit card, there are a couple things you may want to keep in mind. These include the card\u2019s rewards structure. You may accrue points, miles or cash back as you spend on the credit card. As you compare credit cards that earn cash back vs. points, you may assess which rewards program aligns with your spending habit. Strategic use of credit cards may help you earn rewards and more on the purchases you were planning to make anyway. Of course, overspending or not paying off your monthly balance may lead to interest charges that could potentially offset rewards you earn.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "36aeea626b8432f9dfd8d74b1633a54b77169ead7821f22af38deb5318dfc26d",
+        "content_preview": "## How to maximize credit card rewards and benefits\nIf you\u2019re looking to get the most out of a rewards credit card, there are a couple things you may want to keep in mind. These include the card\u2019s rewards structure. You may accrue points, miles or cash back as you spend on the credit card. As you co",
+        "metadata": {
+          "file": "p_00248",
+          "stratum": "education_center",
+          "chunk_id": "c_00248_01",
+          "page_title": "Tips for Maximizing Your Credit Card Rewards While Shopping | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Tips for maximizing your credit card rewards while shopping > How to maximize credit card rewards and benefits"
+        }
+      }
+    ]
+  },
+  {
+    "index": 14,
+    "question": "I'm comparing cards that temporarily boost my return only for certain types of purchases. Can you explain the kind where the eligible spending areas may either stay the same or change every few months, there may be a quarterly earning limit, and purchases after that threshold drop to a lower ongoing return?",
+    "answer": "A 5% cash back credit card is a type of rewards credit card that offers 5% cash back on purchases in specific categories. Some cards have fixed bonus categories, such as gas stations or grocery stores, while others feature rotating categories that usually change every quarter.\n\nGenerally, there\u2019s a cap on how much you can earn at the 5% rate each quarter, after which purchases may earn a lower base rate\u2013often 1% or 1.5%. These credit cards can be a way to maximize rewards, but they may require activation and strategic spending to get the most out of their benefits.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "acd38d9fa182de6810cd1eb866ea93c28242bc23e010a766e2e7e790b7ec05aa",
+        "content_preview": "## What is a 5% cash back credit card?\nA 5% cash back credit card is a type of rewards credit card that offers 5% cash back on purchases in specific categories. Some cards have fixed bonus categories, such as gas stations or grocery stores, while others feature rotating categories that usually chang",
+        "metadata": {
+          "file": "p_00118",
+          "stratum": "education_center",
+          "chunk_id": "c_00118_01",
+          "page_title": "A Guide to 5% Cash Back Credit Cards | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Guide to 5% cash back credit cards > What is a 5% cash back credit card?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 15,
+    "question": "I want to use the rewards from my card account to pay for a vehicle hire. What are the available ways to do that, and if I complete it through the bank\u2019s travel booking site, what steps do I follow to choose the vehicle type?",
+    "answer": "There are two options for booking a rental car using Ultimate Rewards points. You could redeem points for a statement credit or bank deposit, then apply the funds toward a rental car reservation.\nThe other option is booking the reservation with your points through the Chase Travel portal.\n- Sign in to your account at the Chase Travel portal.\n- Choose the credit card account you wish to use to redeem points.\n- Select \u201cRedeem\u201d next to your points balance.\nSearch for the brand of rental car and select the size and vehicle category you want, such as Economy, Compact, Intermediate or Full Size. You can also choose between Compact or an Intermediate SUV.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "6b9f53604c8caf9a77d27156d65dcc49d03472d830fc4e5d51c959af45a809f0",
+        "content_preview": "## How do I book a rental car using Chase Ultimate Rewards points?\nThere are two options for booking a rental car using Ultimate Rewards points. You could redeem points for a statement credit or bank deposit, then apply the funds toward a rental car reservation.\nThe other option is booking the reser",
+        "metadata": {
+          "file": "p_00151",
+          "stratum": "education_center",
+          "chunk_id": "c_00151_02",
+          "page_title": "How To Redeem Chase Ultimate Rewards Points for Rental Cars | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to redeem Chase Ultimate Rewards points for rental cars > How do I book a rental car using Chase Ultimate Rewards points?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 16,
+    "question": "college funding options use first borrow best",
+    "answer": "Since scholarships and grants don\u2019t need to be repaid, it may be a good idea to exhaust these options before taking out loans. If loans are necessary, federal student loans have better interest rates than private student loans in most cases.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "e6780863ded0b2b2c3988a3d439f5fa251c58b1416071cfd347e5f3b14571932",
+        "content_preview": "### Explore all funding options\nUnderstanding the different types of funding available for college can help you make more informed financial decisions. Here are some common ways students fund their education:\n- Scholarships: Financial awards that generally don\u2019t need to be repaid, though they may ha",
+        "metadata": {
+          "file": "p_00051",
+          "stratum": "education_center",
+          "chunk_id": "c_00051_06",
+          "page_title": "How To Reduce Student Loans | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to minimize student loans > How to reduce student debt > Explore all funding options"
+        }
+      }
+    ]
+  },
+  {
+    "index": 17,
+    "question": "What can I do to avoid spur-of-the-moment spending when I'm trying to stay on a very limited budget?",
+    "answer": "Measures like shopping lists, accountability partners or mandatory waiting periods on unplanned purchases may go a long way toward warding off impulsive spending. Identifying personal triggers that lead to impulse buying may help stop impulsive purchases before they happen. This generally involves recognizing situations and emotions that seem to encourage spontaneous spending and learning to navigate them.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "04534ce994c63d67d1412a214f0d2fc996910f59c23e2df9da4f58ee8b7fe52c",
+        "content_preview": "## 6. Stopping impulse buys\nThe impulse buy may be a curse for many budgeters. Measures like shopping lists, accountability partners or mandatory waiting periods on unplanned purchases may go a long way toward warding off impulsive spending. Identifying personal triggers that lead to impulse buying ",
+        "metadata": {
+          "file": "p_00076",
+          "stratum": "education_center",
+          "chunk_id": "c_00076_06",
+          "page_title": "11 Ways to Save Money on a Tight Budget | Chase",
+          "sub_stratum": "budgeting_saving",
+          "heading_path": "11 Ways to save money on a tight budget > 6. Stopping impulse buys"
+        }
+      }
+    ]
+  },
+  {
+    "index": 18,
+    "question": "Can a debt consolidation loan help my credit over time even if applying causes a temporary score dip?",
+    "answer": "Explore how debt consolidation loans may affect your credit score. Learn about potential impacts, from initial inquiries to long-term benefits of simplified payments. When you apply for a new credit card, the issuer will likely run a hard inquiry on your credit. This inquiry can cause a temporary dip in your score. If you use the new credit card responsibly and make timely payments, it may have a positive long-term effect on your score.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "29cb5504fc1ad1963a67e8fe600181ec6a79ff10311e1c50ce25e6f63fedb1e0",
+        "content_preview": "How debt consolidation loans can impact your credit\nExplore how debt consolidation loans may affect your credit score. Learn about potential impacts, from initial inquiries to long-term benefits of simplified payments.build credit\nWhat are goodwill letters and do they help your credit score?Goodwill",
+        "metadata": {
+          "file": "p_00160",
+          "stratum": "education_center",
+          "chunk_id": "c_00160_08",
+          "page_title": "Build Credit | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "Building credit > Learn more about the importance of credit scores > How debt consolidation loans can impact your credit"
+        }
+      },
+      {
+        "id": "6bd5ca6d8b9c11456739755f5840d0817323e552417764d0c53cde7108ebcbf1",
+        "content_preview": "## How a new card can impact your credit score\nEarning a new cardmember welcome bonus offer typically means that you\u2019re opening a new credit card, which can impact on your credit score. When you apply for a new credit card, the issuer will likely run a hard inquiry on your credit. This inquiry can c",
+        "metadata": {
+          "file": "p_00134",
+          "stratum": "education_center",
+          "chunk_id": "c_00134_04",
+          "page_title": "Deciding How to Use Your Credit Card Welcome Bonus Offer | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Deciding how to use your credit card sign-up bonus offer > How a new card can impact your credit score"
+        }
+      }
+    ]
+  },
+  {
+    "index": 19,
+    "question": "For Chase\u2019s student rewards card, what may improve my chances of being approved?",
+    "answer": "For students and others new to credit cards, having an open Chase checking account with a minimum of $250 in deposits within three days of submitting the card application may improve their chances of being approved for Freedom Rise.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "3793def1efb3cff6123c01d946755210f20adc3f1ba8ed15b979cd47efd5c5a2",
+        "content_preview": "## Does Chase offer student credit cards with rewards?\nChase Freedom\u00ae Rise is a card that offers rewards designed for individuals new to credit cards, including students. It features cash back rewards on all purchases. Freedom Rise has perks that may appeal to students, such as three months of compl",
+        "metadata": {
+          "file": "p_00199",
+          "stratum": "education_center",
+          "chunk_id": "c_00199_14",
+          "page_title": "Are There Rewards Cards for Students | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Are there rewards cards for students? > Does Chase offer student credit cards with rewards?"
+        }
+      },
+      {
+        "id": "78dfd0a0a271c651ebfff867550685f811caf6538d34f1f4358b43f7765593c2",
+        "content_preview": "## How do I apply for a Chase Freedom Rise credit card?\nTo apply for a Chase Freedom Rise credit card, visit a Chase branch and ask for someone to assist you. You may also apply through the Chase website.\nTo open a Chase checking account or apply for a credit card, you will need to provide proof of ",
+        "metadata": {
+          "file": "p_00182",
+          "stratum": "education_center",
+          "chunk_id": "c_00182_10",
+          "page_title": "Freedom Rise\u2120 | Chase Starter Credit Card",
+          "sub_stratum": "chase_cards",
+          "heading_path": "Get to know the Chase Freedom Rise\u2120 credit card > How do I apply for a Chase Freedom Rise credit card?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 20,
+    "question": "If my credit card is 30 days late and gets sent to collections, how long can that collections mark stay on my credit report?",
+    "answer": "Credit card delinquency happens when you fail to make a credit card payment after a certain period of time (for example, 30 days). At this point, your issuer may have possibly sent your debt to a collections agency in an attempt to get you to repay your debts. A collection is a type of derogatory remark that can last up to 7 years or more on your credit report.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "ecf6c5972aa40cba1c1639e42d7071e38f58fca327a2c523a055884923bdbb67",
+        "content_preview": "# How long do collections stay on your credit report?\nYou've just received your latest credit report and as you review the information you notice an item that has a negative impact on credit score\u2014collections.\nA collection is a type of derogatory remark that can last up to 7 years or more on your cr",
+        "metadata": {
+          "file": "p_00165",
+          "stratum": "education_center",
+          "chunk_id": "c_00165_00",
+          "page_title": "How Long do Collections Stay on Your Credit Report | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "How long do collections stay on your credit report?"
+        }
+      },
+      {
+        "id": "b83a800bcf67cd6040b850562de5ac3ec9eaf3875d151d24fbf3192d158ac780",
+        "content_preview": "## Credit card default\nPrior to default, you may first face credit card delinquency (note, this is different from loan delinquency, which we will describe in more detail later). Credit card delinquency happens when you fail to make a credit card payment after a certain period of time (for example, 3",
+        "metadata": {
+          "file": "p_00162",
+          "stratum": "education_center",
+          "chunk_id": "c_00162_07",
+          "page_title": "Default vs Delinquency: What's the Difference? | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "Default vs delinquency: How they impact credit > Credit card default"
+        }
+      }
+    ]
+  }
+]
