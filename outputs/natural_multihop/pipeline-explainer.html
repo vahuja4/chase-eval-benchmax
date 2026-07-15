@@ -822,21 +822,55 @@
       <summary>Search Agent internals</summary>
       <div class="detail-body">
         <p>
-          The search agent linker wraps a metadata linker as its baseline, then selectively
-          upgrades a percentage of tasks to use the LLM agent. The agent operates in a
-          <strong>rollout environment</strong> — a sandboxed session where it can call search
-          tools and reason about results. The environment provides:
+          Every linking request starts with the <strong>metadata linker</strong> (zero-cost,
+          rule-based). That result carries a confidence score. The search agent linker then
+          decides whether to upgrade to an LLM-driven link based on two triggers:
         </p>
         <ul>
-          <li>Corpus search (semantic, keyword, hybrid)</li>
-          <li>The primary chunk content and metadata</li>
-          <li>A system prompt instructing it to find related chunks that would enable multi-hop questions</li>
+          <li>The metadata linker's confidence is below 0.5 (weak structural match), <em>or</em></li>
+          <li>The task is randomly selected by <code>search_agent_pct</code> (e.g. 1.0 = always use LLM)</li>
         </ul>
         <p>
-          The agent's tool calls and reasoning are captured in the rollout result.
-          Secondary chunks extracted from the agent's search results are validated against
-          minimum quality thresholds (chunk length, similarity to primary) before being
-          included in the anchor bundle.
+          When the LLM path fires, the linker sends the primary chunk's content to a
+          <strong>rollout server</strong> — a remote execution environment running a
+          <code>LinkerEnv</code>. Inside this environment, an LLM agent has access to
+          corpus search tools (semantic, keyword, hybrid). The agent reads the primary
+          chunk, formulates search queries, inspects results, and iterates — typically
+          over 3–4 turns with configurable limits on turns and tool calls.
+        </p>
+        <p>
+          The rollout captures all of the agent's messages, tool calls, and reasoning.
+          From these, the linker extracts two things:
+        </p>
+        <ul>
+          <li><strong>Search queries</strong> — parsed from the agent's tool calls
+            (supports Anthropic tool_use blocks, OpenAI-style function calls, and
+            XML <code>&lt;tool_call&gt;</code> tags)</li>
+          <li><strong>Evidence chain</strong> — the agent's explanation of how the
+            chunks connect, parsed from <code>&lt;evidence_chain&gt;</code> tags in
+            its final message</li>
+        </ul>
+        <p>
+          The extracted queries are then <strong>replayed</strong> against the actual
+          corpus search index to retrieve real Chunk objects. These candidates go through
+          a multi-step filter:
+        </p>
+        <ul>
+          <li>Chunks shorter than 400 characters are dropped</li>
+          <li>Same-file chunks are excluded (unless in "sequential" reasoning mode)</li>
+          <li>Chunks already used by prior questions are skipped (cross-question dedup)</li>
+          <li>A Jaccard coherence floor (≥0.15 token overlap with primary) removes
+            unrelated results</li>
+        </ul>
+        <p>
+          Surviving candidates are ranked by a composite score (60% search relevance,
+          40% coherence), then passed through a <strong>greedy diversity selector</strong>
+          that caps pairwise similarity at 0.8 to avoid near-duplicate secondaries.
+          The top <em>N</em> become the anchor bundle's secondary chunks.
+        </p>
+        <p>
+          If the LLM rollout fails for any reason, the linker falls back to the
+          metadata linker's result (flagged with <code>llm_fallback: true</code>).
         </p>
       </div>
     </details>
