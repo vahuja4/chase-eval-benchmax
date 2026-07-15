@@ -1,0 +1,74 @@
+[
+  {
+    "question": "What should I know if I want to use my card rewards with a specific airline or hotel I like, and when might a brand-specific card make more sense instead?",
+    "naturalness_overall": 0.6,
+    "naturalness_scores": {
+      "single_intent": 0.75,
+      "conciseness": 0.6,
+      "natural_phrasing": 0.8,
+      "plausible_intent": 0.85,
+      "overall": 0.6,
+      "reasoning": "This reads as one general topic (using rewards with a preferred travel brand vs. getting a co-branded card) but is phrased as two linked questions joined by 'and', making it slightly compound rather than a single crisp ask. It's a bit longer than a typical quick question but still plausible as something a person comparing card options might ask a support agent or forum. Phrasing is natural, not overly scripted or role-play-like."
+    }
+  },
+  {
+    "question": "Does linking a Chase Sapphire\u00ae Checking account waive the Chase Total Checking monthly service fee?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 0.9,
+      "overall": 0.9,
+      "reasoning": "This is a clear, single-intent question about whether linking one specific Chase account type waives a fee on another. It's concise and phrased naturally, similar to something a real customer would ask a bank representative or search online. The scenario is plausible since Chase does offer relationship-based fee waivers, making this a realistic banking question."
+    }
+  },
+  {
+    "question": "What kinds of benefits might a first card for someone in school offer, and does this bank mention an option for people who are just starting out with borrowing?",
+    "naturalness_overall": 0.4,
+    "naturalness_scores": {
+      "single_intent": 0.4,
+      "conciseness": 0.5,
+      "natural_phrasing": 0.4,
+      "plausible_intent": 0.5,
+      "overall": 0.4,
+      "reasoning": "This question combines two related but distinct sub-questions: (1) general benefits of student credit cards, and (2) whether a specific bank offers a product for credit beginners. The phrasing 'this bank' implies a specific context not established, making it feel stitched together from a template rather than a single natural thought. A real person would likely ask one or the other, or phrase it more directly like 'Does [bank] have a student credit card and what are the perks?'"
+    }
+  },
+  {
+    "question": "How long is a paper payment from someone's bank account usually still usable, and what should I do before trying to cash one that's pretty old?",
+    "naturalness_overall": 0.5,
+    "naturalness_scores": {
+      "single_intent": 0.7,
+      "conciseness": 0.8,
+      "natural_phrasing": 0.5,
+      "plausible_intent": 0.7,
+      "overall": 0.5,
+      "reasoning": "The two parts (check validity period, what to do before cashing an old check) are related and plausible together, but the phrase 'paper payment from someone's bank account' is an unnatural, roundabout way to say 'check' \u2014 a real person would just say 'check.' This awkward phrasing suggests the question was reworded to obscure a simpler term, hurting naturalness."
+    }
+  },
+  {
+    "question": "What are the main ways I can use the rewards I've built up on my card when I want to pay for a trip?",
+    "naturalness_overall": 0.75,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.85,
+      "natural_phrasing": 0.75,
+      "plausible_intent": 0.9,
+      "overall": 0.75,
+      "reasoning": "This reads as a single, clear question about redeeming card rewards for travel. It's reasonably concise, though the phrasing 'rewards I've built up' and 'when I want to pay for a trip' is slightly wordier than a typical natural query like 'How can I use my credit card rewards for travel?' Still, it's plausible as something a real cardholder would ask a bank or support agent."
+    }
+  },
+  {
+    "question": "How does a bank account grow over time by paying returns on both the money I originally put in and the earnings it already added before?",
+    "naturalness_overall": 0.5,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.7,
+      "natural_phrasing": 0.5,
+      "plausible_intent": 0.8,
+      "overall": 0.5,
+      "reasoning": "This is a single coherent question about compound interest, reasonably short but with an awkward, overly formal phrasing ('paying returns on both the money I originally put in and the earnings it already added before') that a real person would more likely phrase as 'how does compound interest work on a savings account?'. The intent is plausible - someone curious about how their savings grow - but the wording is stilted rather than natural conversational phrasing."
+    }
+  }
+]

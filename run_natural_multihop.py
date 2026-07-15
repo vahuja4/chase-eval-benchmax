@@ -222,6 +222,7 @@ cfg = PipelineConfig(
     filtering=FilteringConfig(
         filters=[
             "quality_gate",
+            "retrieval_too_easy_llm",
             "grounding_llm",
             "hop_count_validity",
         ],
@@ -243,7 +244,7 @@ cfg = PipelineConfig(
         model="gpt-5.4",
         max_refinements_per_item=1,
     ),
-    output=OutputConfig(dir="outputs/natural_multihop"),
+    output=OutputConfig(dir="outputs/natural_multihop_batch4"),
     micro_batch=MicroBatchConfig(resume=False),
 )
 
@@ -254,7 +255,7 @@ def _rollout_factory(cfg):
     return RolloutClient(api_key=cfg.platform.api_key)
 
 
-out_dir = Path("outputs/natural_multihop")
+out_dir = Path("outputs/natural_multihop_batch4")
 out_dir.mkdir(parents=True, exist_ok=True)
 
 print("=" * 60)
@@ -265,7 +266,8 @@ print("  1. Max 2 hops (no 3-4 hop contrivance)")
 print("  2. Search-agent linker (LLM-assisted linking)")
 print("  3. Relaxed obfuscation (naturalness > difficulty)")
 print("  4. Naturalness judge (Sonnet, cross-model)")
-print(f"  Target: 10 candidates -> keep best 5")
+print(f"  5. Retrieval-too-easy filter (keyword overlap + LLM judge)")
+print(f"  Target: 10 candidates")
 print("=" * 60)
 
 # ===== Run the pipeline =====

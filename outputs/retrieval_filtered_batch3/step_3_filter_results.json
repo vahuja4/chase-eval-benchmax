@@ -1,0 +1,1364 @@
+{
+  "passed": [
+    {
+      "index": 0,
+      "question": "What should I know if I want to use my card rewards with a specific airline or hotel I like, and when might a brand-specific card make more sense instead?",
+      "answer": "Some credit cards let you transfer points or miles to select travel partners, then you can redeem rewards through that company's loyalty program. Travel partners often include airlines and hotels. Note that rewards can gain or lose value when transferred, so it's wise to review your card's terms for rewards transfers.\n\nIf you'd rather not transfer rewards for travel, a hotel or airline credit card may be a good fit for your lifestyle. These cobranded cards can be particularly valuable if you travel often and prefer using a certain airline or hotel. The affiliations may offer cardmembers specific perks and benefits, such as room upgrades or free checked bags. Keep in mind that some hotel and airline cards may have an annual fee.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "composite": 0.9942857142857143,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_1_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "grounding_supported",
+          "details": {
+            "filter_reason": "grounding_filter_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_1_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_1_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "lookup",
+            "remaining_quota_after_accept": 4
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "question": "Does linking a Chase Sapphire\u00ae Checking account waive the Chase Total Checking monthly service fee?",
+      "answer": "Chase Total Checking\u00ae: $0 Monthly Service Fee when you have any ONE of the following during each statement period: Option #4: Link this account to a qualifying checking account. Qualifying Linked Checking Accounts include ... Chase Sapphire\u00ae Checking.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.788,
+        "composite": 0.996,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00004"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_0_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_0_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_0_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 3
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "question": "What kinds of benefits might a first card for someone in school offer, and does this bank mention an option for people who are just starting out with borrowing?",
+      "answer": "Typically, student credit cards come with pros such as:\n- Lower fees: Many student credit cards come with lower service fees.\n- Introductory APR offers: Student credit cards may come with low APR introductory offers, which lets you avoid paying interest on purchases for the duration of the offer period.\n- Rewards programs: Student credit cards usually come with rewards like earning cash back or other redeemable rewards points on eligible purchases.\n- Student benefits: Student credit cards may give you the opportunity to make use of special student perks. For example, some cards may offer higher cash back percentages if you carry a high GPA. Other cards may include rewards incentives for consistent, on-time payments.\nWhile Chase does not offer student credit cards, the Chase Freedom Rise\u2122 credit card is designed for people new to credit cards, which often includes students. The Freedom Rise card earns 1.5% cash back on all purchases.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "composite": 0.9942857142857143,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_0_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "grounding_supported",
+          "details": {
+            "filter_reason": "grounding_filter_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_0_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_0_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "lookup",
+            "remaining_quota_after_accept": 3
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "question": "How long is a paper payment from someone's bank account usually still usable, and what should I do before trying to cash one that's pretty old?",
+      "answer": "It\u2019s typical for personal checks to expire after six months. This time frame is laid out in the Uniform Commercial Code (UCC), a set of laws that govern commercial transactions in the United States. After six months, it\u2019s generally at the bank\u2019s discretion whether a personal check is considered expired. If you\u2019re cashing older checks, it may make sense to contact the issuer first. Perhaps they could re-issue the check or confirm they can still honor it.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "composite": 0.9942857142857143,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_3_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "grounding_supported",
+          "details": {
+            "filter_reason": "grounding_filter_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_3_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_3_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "lookup",
+            "remaining_quota_after_accept": 2
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "question": "What are the main ways I can use the rewards I've built up on my card when I want to pay for a trip?",
+      "answer": "When it\u2019s time to redeem your rewards, you\u2019ll likely have one or both of these options through your card:\n- Booking directly through a travel portal\n- Transferring your points to a partner program",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "composite": 0.9942857142857143,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00001",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00001",
+            "seed_chunk_id": "b2de347030a41cf34bb79afa12582c1aeb153f7160538d7eef15b4a73079757c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_3_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "grounding_supported",
+          "details": {
+            "filter_reason": "grounding_filter_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_3_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_3_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "lookup",
+            "remaining_quota_after_accept": 1
+          }
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "question": "How does a bank account grow over time by paying returns on both the money I originally put in and the earnings it already added before?",
+      "answer": "A compound interest account pays interest on the account\u2019s principal balance and any interest it had previously accrued. Because higher principals net higher returns, and higher returns then add to those principals, growth from compounding becomes progressively stronger with time.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "composite": 0.9942857142857143,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_2_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "grounding_supported",
+          "details": {
+            "filter_reason": "grounding_filter_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_2_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_2_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "lookup",
+            "remaining_quota_after_accept": 0
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "index": 0,
+      "question": "When does a student account make more sense than a regular checking account?",
+      "filter_status": "rejected",
+      "filter_reason": "grounding_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=unsupported (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00002",
+            "seed_chunk_id": "6215a0785b8531931bc928d400a33be9ce1f83bb4a3cac4865045ff1d2df9761",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_1_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unsupported_or_unanswerable",
+          "details": {
+            "filter_reason": "grounding_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "question": "How can a first-time cardholder improve their chances of getting lower rates and higher limits later?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00003",
+            "seed_chunk_id": "815f6bcc84a3fddefd0995b58a6079b884b650f8361061e90a4659f1ea755611",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_1_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "question": "What can I do when I keep buying things in the moment, especially in certain environments or moods, and I want a simple way to cool off first and make sure my spending supports what matters to me later?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00000",
+            "seed_chunk_id": "3cb05b97cff90661fcced567a0326c0387f3a1375f26b91b2bbaf1b9566f8c4b",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_0_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "question": "Chase eCheck accepted bills recurring payments",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00002",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00002",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00002",
+            "seed_chunk_id": "a8bc41ed3217e9a091a125ef0e0f2370b3b76e603e460ef2d0fa461bda892dcd",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_0_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "question": "Can I pool points with my spouse at the same address, then move them to a travel partner instead of cashing out?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00003",
+            "seed_chunk_id": "2a616c3878bdf7757e7aadbce6912c032058eb658e49dd1b934dbb31a8593d80",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_0_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "question": "Can I use a parent to help me qualify for a Chase student credit card if I\u2019m under 21?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00002",
+            "seed_chunk_id": "12377e058c6bed10df2b224a4114030f1080442e8cbd311d88724a9624b9a993",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_3_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "question": "Which way to get a free hotel stay is tied to a specific hotel chain?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unsupported_or_unanswerable",
+          "details": {
+            "filter_reason": "grounding_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unsupported",
+          "details": {
+            "source_task_id": "iter_2_00002",
+            "seed_chunk_id": "346c6ec2d1d8f58ca27a25f85b216d11f7c1a3bda037cf8e73aab5641a518326",
+            "reanchored": true
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_2_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "question": "Which travel card type lets me use miles for things like priority boarding?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_2_00001",
+            "seed_chunk_id": "7103acdd07274999a680844c40e9005fe456b6a6e2a0a820e70da6f26088d268",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_2_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "question": "Can a cash back card complement my travel card if I want to turn cash back into travel rewards?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_4_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_4_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "redundant_chunk_found",
+          "details": {
+            "filter_reason": "hop_count_validity_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "redundant_chunk",
+          "details": {
+            "source_task_id": "iter_4_00000",
+            "seed_chunk_id": "a06dc78338aa7b299c137331d4d85c1abb98589b5ee7248e6156567d978f05dd",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_4_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "question": "Why did my autopay change from statement balance to interest saving balance after I set up Chase Pay Over Time?",
+      "filter_status": "rejected",
+      "filter_reason": "deterministic_rejected",
+      "filter_reasoning": "multi_hop_high_chunk_overlap",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_5_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_5_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_5_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "deterministic_rejected",
+          "details": {
+            "filter_reason": "deterministic_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "question": "If I want cash without changing my low mortgage rate, when would my monthly payment likely go up?",
+      "filter_status": "rejected",
+      "filter_reason": "hop_count_validity_rejected",
+      "filter_reasoning": "Chunk 77620f6ca7014b4e2b757cbe1d2a03877502de15f013c605ad6d5b5e3cac75d5 is redundant \u2014 the answer can be derived without it.",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_5_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_5_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_5_00001",
+            "seed_chunk_id": "ec8681d7c87a559d1648b58a55a486ecdd731b5eab7ee648004685aeb2ebcaa9",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_5_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "redundant_chunk_found",
+          "details": {
+            "filter_reason": "hop_count_validity_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "question": "What\u2019s the payoff strategy called where I make minimum payments on everything, put extra toward the highest-rate balance, then roll that payment to the next one?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_6_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_6_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00000",
+            "seed_chunk_id": "1d64dad722133dcb2d3f6ba682b46b7174471fe07262ea8c5939e158c85a551e",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_6_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "question": "How should I decide if a higher-fee rewards card is worth it when I spend mostly on groceries and rarely travel?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_8_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_8_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_8_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_8_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_8_00000",
+            "seed_chunk_id": "6b534a991b727166392e224c313d66fa8d79dcd7b47ace5c65caa07ebf8f18e7",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_8_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "question": "If my credit card payment misses the due date by a few days, what actually happens?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_7_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_7_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_7_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_7_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_7_00000",
+            "seed_chunk_id": "a6d86158029dfeeddf800d3eef15ea128f1bc79721198c67a6606b50400e34b5",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_7_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "question": "For a streaming subscription, when would Freedom Flex beat Freedom Unlimited on rewards?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_7_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_7_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_7_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_7_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_7_00001",
+            "seed_chunk_id": "6b04b27acec53f84e28861e5404ab53641976ca06f48267635106432840e6b18",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_7_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "question": "Who can get the extra points from Chase\u2019s online shopping site, and are those points on top of the rewards I already earn with my card?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (1/1).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_9_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_9_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_9_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_9_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_9_00000",
+            "seed_chunk_id": "75a7fa1ed44a3d1a5aca65cbe3f31f4c8f5d8876d465e173b51bd69aa5f79ba2",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_9_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    }
+  ]
+}

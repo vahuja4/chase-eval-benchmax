@@ -708,16 +708,6 @@
       The sampling strategy prioritizes diversity across documents rather than random draws,
       ensuring coverage of different topics and document types.
     </p>
-    <details>
-      <summary>How chunks are materialized</summary>
-      <div class="detail-body">
-        <p>
-          If the source doesn't already hold chunks in memory, the pipeline materializes
-          them (up to 50,000) via a sequential scan or random sample. This ensures the
-          entity-chunk graph and linker can resolve any chunk by hash during generation.
-        </p>
-      </div>
-    </details>
   </div>
 
   <div class="stage-card" data-phase="prep" id="sec-profiling">
@@ -757,13 +747,23 @@
       <summary>Auto-tuning</summary>
       <div class="detail-body">
         <p>
-          After profiling, the pipeline runs a <strong>corpus-aware auto-tuner</strong>
-          that adjusts generation targets based on what the corpus can actually support.
-          If the corpus is small or lacks cross-document connections, the tuner may reduce
-          the multi-hop percentage or lower the total sample count. It also adjusts hop
-          distribution and reasoning mode distribution based on entity density and
-          metadata richness.
+          After profiling, the pipeline checks whether your requested settings are realistic
+          for this particular corpus, and dials them back if not. Specifically:
         </p>
+        <ul>
+          <li><strong>Multi-hop percentage</strong> — if the corpus has weak cross-document
+          connections (unstructured metadata, few shared entities), the pipeline lowers the
+          share of multi-hop questions so it isn't forced to fabricate thin connections.</li>
+          <li><strong>Hop count</strong> — if most chunks are short or few are suitable for
+          linking, 3+-hop questions are cut back in favor of 2-hop, since there isn't enough
+          material to chain three or more chunks reliably.</li>
+          <li><strong>Total sample count</strong> — if you asked for more questions than the
+          corpus can support (e.g. 500 questions from 100 usable chunks), the count is capped
+          at twice the usable pool.</li>
+          <li><strong>Reasoning modes</strong> — modes like "temporal" (date-based reasoning) or
+          "sequential" (step-order reasoning) are removed or reduced if the corpus lacks the
+          relevant metadata (e.g. fewer than 5% of chunks have dates).</li>
+        </ul>
       </div>
     </details>
   </div>
@@ -893,30 +893,29 @@
       regeneration attempts — feedback from previous filter failures.
     </p>
     <p>
-      Generation is <strong>micro-batched</strong>: tasks are grouped into small batches
-      processed in parallel. The batch size is auto-computed based on the total target count,
-      and the system dynamically allocates remaining tasks across QA types
-      (lookup vs. multi-hop) and hop counts to meet distribution targets.
+      The pipeline doesn't generate all questions at once — it works in small batches
+      (e.g. 5 at a time), running each batch in parallel. Before each batch, it checks
+      how many questions of each type it still needs and assigns work accordingly.
     </p>
 
     <details>
-      <summary>Task creation and distribution</summary>
+      <summary>How each question is set up</summary>
       <div class="detail-body">
         <p>
-          Before generation, the pipeline creates <code>GenerationTask</code> objects
-          specifying:
+          For every question it needs to generate, the pipeline decides three things up front:
         </p>
         <ul>
-          <li><strong>qa_type</strong> — lookup (single-chunk) or multi_hop (cross-chunk)</li>
-          <li><strong>target_hop_count</strong> — how many reasoning steps the question should require</li>
-          <li><strong>seed_chunk_id</strong> — the primary chunk to build from</li>
-          <li><strong>prompt template</strong> — customizable per qa_type</li>
+          <li><strong>Question type</strong> — should this be a <em>lookup</em> question
+          (answerable from a single article) or a <em>multi-hop</em> question (requires
+          combining information from multiple articles)?</li>
+          <li><strong>Hop count</strong> — for multi-hop questions, how many articles should
+          the reader need to consult? (e.g. 2-hop means combining two articles)</li>
+          <li><strong>Starting article</strong> — which chunk to use as the seed; the linker
+          will later find related chunks to pair with it</li>
         </ul>
         <p>
-          The distribution is governed by configurable ratios. For example,
-          <code>primary_type_distribution: {lookup: 0.0, multi_hop: 1.0}</code>
-          produces only multi-hop questions, while
-          <code>hop_distribution: {2: 1.0}</code> targets exclusively 2-hop questions.
+          The mix is controlled by the config. In our run, 100% of questions were multi-hop
+          and all targeted 2-hop (requiring exactly two articles to answer).
         </p>
       </div>
     </details>
@@ -990,15 +989,6 @@
       </div>
     </div>
 
-    <details>
-      <summary>Optional filter stages</summary>
-      <div class="detail-body">
-        <ul>
-          <li><strong>Retrieval Too Easy</strong> — An LLM judge checks whether naive keyword retrieval would find the answer without multi-hop reasoning. Ensures questions actually test the RAG system's composition ability.</li>
-          <li><strong>Env Rollout</strong> — Tests the question against an actual RAG agent in a sandboxed environment. If the agent answers correctly with trivial retrieval, the question is too easy.</li>
-        </ul>
-      </div>
-    </details>
   </div>
 
   <div class="stage-card" data-phase="val" id="sec-regen">
