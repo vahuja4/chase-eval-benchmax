@@ -662,6 +662,7 @@
         <div class="flow-group-label">Filter Chain</div>
         <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Deterministic Guards</div>
         <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Quality Gate</div>
+        <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Retrieval Too Easy</div>
         <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Grounding LLM</div>
         <div class="flow-box" data-phase="val" onclick="scrollToSection('sec-filters')">Hop Count Validity</div>
       </div>
@@ -677,8 +678,8 @@
       <div class="flow-box" data-phase="out" onclick="scrollToSection('sec-postprocess')">Post-Processing &amp; Dedup</div>
       <div class="flow-connector"></div>
       <div class="flow-box" data-phase="out" onclick="scrollToSection('sec-format')">Train / Eval Split</div>
-      <div class="flow-connector" style="border-left: 2px dashed var(--border); background: none;"></div>
-      <div class="flow-box" data-phase="ext" onclick="scrollToSection('sec-naturalness')">Naturalness Judge</div>
+      <div class="flow-connector"></div>
+      <div class="flow-box" data-phase="ext" onclick="scrollToSection('sec-naturalness')">Naturalness Judge (Claude Sonnet)</div>
     </div>
   </section>
 
@@ -963,7 +964,7 @@
     </div>
     <p>
       The filter chain is ordered — a question must survive each stage to reach the next.
-      The default chain includes four stages:
+      The chain includes five stages:
     </p>
 
     <div class="filter-chain">
@@ -979,11 +980,23 @@
       </div>
       <div class="filter-stage">
         <div class="filter-stage-num">3</div>
+        <div class="filter-stage-name">Retrieval Too Easy</div>
+        <div class="filter-stage-desc">Checks whether a simple keyword search would already find the answer
+          — if so, the question doesn't actually require multi-hop reasoning.
+          Works in two layers: first, it searches the corpus using the question text
+          and checks how many of the returned results overlap with the question's
+          reference chunks. If the overlap is high, the question is immediately
+          flagged as too easy. If not, an LLM judge reviews the search results
+          and decides whether someone could answer the question from them alone.
+          In batch3, this filter rejected 10 out of 22 generated questions.</div>
+      </div>
+      <div class="filter-stage">
+        <div class="filter-stage-num">4</div>
         <div class="filter-stage-name">Grounding LLM</div>
         <div class="filter-stage-desc">An LLM judge verifies that the answer is actually supported by the referenced chunks. Catches hallucinated or extrapolated answers.</div>
       </div>
       <div class="filter-stage">
-        <div class="filter-stage-num">4</div>
+        <div class="filter-stage-num">5</div>
         <div class="filter-stage-name">Hop Count Validity</div>
         <div class="filter-stage-desc">An LLM judge verifies the question genuinely requires the claimed number of reasoning hops. Catches questions that look multi-hop but can be answered from a single chunk.</div>
       </div>
@@ -1108,55 +1121,59 @@
   <div class="phase" data-phase="ext" id="sec-naturalness">
     <div class="phase-pip"></div>
     <div>
-      <div class="phase-label">Extension</div>
+      <div class="phase-label">Phase 5</div>
       <div class="phase-title">Naturalness Judge</div>
     </div>
   </div>
 
   <div class="stage-card" data-phase="ext">
-    <h3>Cross-Model Naturalness Evaluation</h3>
+    <h3>Cross-Model Naturalness Scoring</h3>
     <p>
-      An optional post-pipeline step that evaluates whether generated questions sound natural —
-      like something a real person would actually type or ask. This uses a
-      <strong>different model</strong> than the generator (cross-model evaluation) to avoid
-      self-reinforcing biases.
+      After the pipeline finishes, every question that passed the filter chain goes through
+      one more check: does it sound like something a real person would actually ask? The
+      pipeline uses GPT for generation and grounding, but this step deliberately uses a
+      <strong>different model</strong> (Claude Sonnet) to judge naturalness. Using a different
+      model family catches patterns that the generator considers normal but a fresh reader
+      would find awkward or manufactured.
     </p>
     <p>
-      Each question is scored on four dimensions, each rated 0.0–1.0:
+      Each question is scored 0.0–1.0 on four dimensions:
     </p>
 
     <table class="variant-table">
       <thead>
-        <tr><th>Dimension</th><th>What it measures</th><th>Red flags</th></tr>
+        <tr><th>Dimension</th><th>What it checks</th><th>What gets flagged</th></tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Single Intent</strong></td>
-          <td>Does the question read as one coherent thing the person wants to know?</td>
-          <td>Multiple sub-questions stitched together with "and"</td>
+          <td>Is the question asking one clear thing, or does it stitch multiple unrelated questions together?</td>
+          <td>"What's the APR and also how do points transfers work?"</td>
         </tr>
         <tr>
           <td><strong>Conciseness</strong></td>
-          <td>Is it reasonably short?</td>
-          <td>50+ word questions with embedded clauses</td>
+          <td>Is it a reasonable length? Real people don't write 50-word questions.</td>
+          <td>Long questions with nested clauses and qualifiers</td>
         </tr>
         <tr>
           <td><strong>Natural Phrasing</strong></td>
-          <td>Does it sound like a real search query or support request?</td>
-          <td>Role-playing scenarios, excessive hedging, manufactured setups</td>
+          <td>Does it sound like something you'd type into a search bar or ask a support agent?</td>
+          <td>Role-playing ("I'm advising a first-time borrower who..."), manufactured setups</td>
         </tr>
         <tr>
           <td><strong>Plausible Intent</strong></td>
-          <td>Is there a realistic reason someone would ask this?</td>
-          <td>Questions manufactured to connect unrelated topics</td>
+          <td>Would a real person actually want to know this?</td>
+          <td>Questions that exist only to connect unrelated topics</td>
         </tr>
       </tbody>
     </table>
 
     <p>
-      The overall score is the <strong>minimum</strong> of the four dimensions — one bad
-      dimension fails the entire question. Questions below a configurable threshold
-      (typically 0.6) are filtered out.
+      The overall score is the <strong>minimum</strong> of the four — one bad dimension
+      fails the whole question. Any question scoring below <strong>0.6</strong> is dropped.
+      This is typically the strictest filter in the pipeline: in recent runs, roughly half
+      of the questions that passed all five pipeline filters were still cut here for sounding
+      too synthetic.
     </p>
   </div>
 
@@ -1179,7 +1196,7 @@
       <span class="key">linker.search_agent_pct</span>: <span class="val">1.0</span> <span class="cmt"># fraction using agent linker</span><br>
       <span class="key">linker.search_agent.max_turns</span>: <span class="val">4</span><br>
       <br>
-      <span class="key">filtering.filters</span>: <span class="val">["quality_gate", "grounding_llm", "hop_count_validity"]</span><br>
+      <span class="key">filtering.filters</span>: <span class="val">["quality_gate", "retrieval_too_easy_llm", "grounding_llm", "hop_count_validity"]</span><br>
       <br>
       <span class="key">refinement.enabled</span>: <span class="val">true</span><br>
       <span class="key">refinement.max_rounds</span>: <span class="val">4</span> <span class="cmt"># max regeneration attempts per batch</span><br>
@@ -1201,12 +1218,13 @@
       <li>The <strong>generator LLM</strong> receives the bundle and produces a QA pair</li>
       <li><strong>Deterministic guards</strong> validate format and structure</li>
       <li>The <strong>quality gate</strong> checks basic question/answer quality</li>
+      <li>The <strong>retrieval-too-easy</strong> filter checks whether a simple keyword search would find the answer</li>
       <li>The <strong>grounding judge</strong> verifies the answer is supported by the chunks</li>
       <li>The <strong>hop count judge</strong> confirms multi-hop reasoning is required</li>
       <li>If the item needs refinement, it loops back to step 4 with feedback</li>
       <li>Accepted items are <strong>deduplicated</strong> and <strong>type-balanced</strong></li>
       <li>Final items are split into <strong>train and eval</strong> sets</li>
-      <li>Optionally, a <strong>naturalness judge</strong> scores and filters for realism</li>
+      <li>A <strong>naturalness judge</strong> (Claude Sonnet) scores each question on four dimensions and drops anything that sounds synthetic</li>
     </ol>
     <p>
       Each item carries a <strong>journey event log</strong> recording every stage it passed

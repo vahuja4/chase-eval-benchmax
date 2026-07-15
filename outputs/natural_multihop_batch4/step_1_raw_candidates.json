@@ -1,0 +1,1025 @@
+[
+  {
+    "index": 0,
+    "question": "Chase credit card rewards posting statement cycle",
+    "answer": "Many credit cards allow you to earn rewards on your purchases. Typically, you'll earn a certain number of points for each purchase you make. The type of rewards you can earn depends on the card, but points are common. Miles are another form of rewards and are usually associated with airline credit cards. Even if you have a card that earns cash back on your purchases, your rewards may post to your account in the form of points. The exact calculation of the cash back you can earn varies from card to card, but the accumulated rewards are typically added to your account once per statement cycle. When redeemed for cash back, each point likely has a monetary equivalent.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "34c78a1b982fd0ffb3b167d221406f879250d9c5d4632f4df55bb4d0836b5450",
+        "content_preview": "## How can you earn rewards with a credit card?\nMany credit cards allow you to earn rewards on your purchases. Typically, you'll earn a certain number of points for each purchase you make. The type of rewards you can earn depends on the card, but points are common. Miles are another form of rewards ",
+        "metadata": {
+          "file": "p_00207",
+          "stratum": "education_center",
+          "chunk_id": "c_00207_01",
+          "page_title": "Cash Back vs. Points Credit Cards | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Cash back vs. points > How can you earn rewards with a credit card?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 1,
+    "question": "When do I get charged the $4.95 monthly fee for Chase Secure Checking?",
+    "answer": "$4.95 if this option is not met. Chase Secure BankingSM: $0 Monthly Service Fee when you have any ONE of the following during each statement period: Option #1: $250+ in qualifying electronic deposits; OR, Option #2: an account owner who is age 17-24. Qualifying electronic deposits include payments from your employer or government entities (benefits, tax refunds, etc.), made using the ACH network, Real Time Payment (RTP\u00ae), FedNow\u00ae Service, or third-party services that facilitate payments to your debit card using the Visa\u00ae or Mastercard\u00ae network. Transactions such as Zelle\u00ae, cash, checks, wire transfers, and interest payments do not count as qualifying electronic deposits. Otherwise a $4.95 Monthly Service Fee will apply.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "532da508072c0af12c88a901fca264b26e85974cf6ba5fdcbf9688e1834c4f2c",
+        "content_preview": "OR\n$4.95 if this option is not met\nOverdraft Fees \u2014 Not Available\nMoney Order \u2014 $0, No Chase fee\nHelpful tip: You can avoid Surcharge Fees by using a Chase ATM.\n$3 per withdrawal at a non-Chase ATM in the U.S. and the U.S. territories\nSurcharge Fees from the ATM owner/network still apply. A Foreign ",
+        "metadata": {
+          "file": "p_00276",
+          "stratum": "personal_banking",
+          "chunk_id": "c_00276_04",
+          "page_title": "Chase Secure Checking\u2120 | Understanding Savings and Checking Account Fees | Chase.com",
+          "sub_stratum": "fees",
+          "heading_path": "Chase Secure Checking > Chase Secure Checking\u2120 account fees > Account fees > OR"
+        }
+      },
+      {
+        "id": "ee306692fe210163493406ccd14a4fdd878c4e970c4d417b2aa847593e44dc34",
+        "content_preview": "Same page link returns to footnote reference 4For Chase Secure CheckingSM only: Early direct deposit is a service that comes with your Chase Secure Checking account in which we credit your eligible direct deposit transaction up to two business days early. You must set up direct deposit to your accou",
+        "metadata": {
+          "file": "p_00010",
+          "stratum": "personal_banking",
+          "chunk_id": "c_00010_11",
+          "page_title": "Compare Checking Accounts & Apply Online | Chase",
+          "sub_stratum": "checking",
+          "heading_path": "Show me checking accounts for: > Experience seamless banking with Chase > Card lock"
+        }
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "question": "What kind of loan can help me improve my ability to qualify for borrowing by having my payments reported, and when do I get the money from it?",
+    "answer": "Credit builder loans are loans where your payments are reported to credit bureaus, helping you build or improve your credit score. You receive the funds after repaying the loan in full.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "e9e4c1b378a813ab29eba9e6dcd85b4e33e6920526ebed1645b032aeeb116827",
+        "content_preview": "## Learn more about the importance of credit scores\nbuild credit\nTips for selling clothes onlineLearn how to sell clothes online. Read tips on how to choose the right platform, price your items and other tips.build credit\nCredit builder loans: What are they?Credit builder loans are loans where your ",
+        "metadata": {
+          "file": "p_00160",
+          "stratum": "education_center",
+          "chunk_id": "c_00160_05",
+          "page_title": "Build Credit | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "Building credit > Learn more about the importance of credit scores"
+        }
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "question": "How do I make sure my grocery purchase through a Chase shopping portal earns the extra rewards?",
+    "answer": "To access the portal, you\u2019ll typically need to navigate to your credit card mobile app, or for website access, log in through the shopping portal landing page, credit card homepage or your rewards account. Click on the deal that interests you to begin shopping. Be sure to follow the instructions on the offer to receive your points and enable cookies to allow your browser to correctly track your purchases. It can be helpful to ensure that you are logged in to your credit card account before making a purchase through the portal.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "a9e7e8d146584eb964ae10d1b0d2ab760cb85d96117c3957cd9d74050df9ff32",
+        "content_preview": "## How credit card shopping portals work\nIf you have a credit card, you may have access to a shopping portal as a cardmember benefit. Within your credit card shopping portal, you can find promotions and browse participating retailers and stores.\nYou may be able to earn rewards at a higher rate than ",
+        "metadata": {
+          "file": "p_00255",
+          "stratum": "education_center",
+          "chunk_id": "c_00255_01",
+          "page_title": "The Perks of Using a Credit Card Shopping Portal | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "The perks of using a credit card shopping portal > How credit card shopping portals work"
+        }
+      },
+      {
+        "id": "09d6b6f17598203f5103e854a24fb9c2f02b6f503ab8c21e68d4aac301349007",
+        "content_preview": "## Using a credit card shopping portal to buy groceries\nCredit card shopping portals are online platforms that allow cardmembers to earn additional rewards or discounts when making purchases through affiliated retailers. These portals can include grocery stores as participating merchants. Some credi",
+        "metadata": {
+          "file": "p_00249",
+          "stratum": "education_center",
+          "chunk_id": "c_00249_03",
+          "page_title": "Guide to Maximizing Rewards on Grocery Store Purchases | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Guide to maximizing rewards on grocery store purchases > Using a credit card shopping portal to buy groceries"
+        }
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "question": "I need a way to prevent a purchase or payment from triggering a penalty when my everyday spending account comes up short by using funds from another account I already have at the same bank. What are the setup requirements and are there any charges for moving the money?",
+    "answer": "If you have a Chase savings account, you can link it as a backup to your checking account. Then, if you have enough money in your savings account, we\u2019ll transfer the exact amount needed to cover an overdraft transaction. There\u2019s no cost to enroll and there is no fee to transfer money between accounts.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "22e934009d530286f376e4d994a248b09fcaff3b75386c130f81c3cbab75d114",
+        "content_preview": "## Optional overdraft services\nYou can enroll in these services to help avoid potential Overdraft Fees.\n### Overdraft Protection\nIf you have a Chase savings account, you can link it as a backup to your checking account. Then, if you have enough money in your savings account, we\u2019ll transfer the exact",
+        "metadata": {
+          "file": "p_00085",
+          "stratum": "personal_banking",
+          "chunk_id": "c_00085_05",
+          "page_title": "Overdraft Services | Chase.com",
+          "sub_stratum": "checking",
+          "heading_path": "Optional overdraft services"
+        }
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "question": "Will I still earn Shop and Earn points if I use an outside coupon code at checkout?",
+    "answer": "To use Shop and Earn, you will need to access the portal by going through either the Chase website or the Chase Mobile\u00ae app. From there, you can review brands that are eligible for certain rewards and make your purchase through the portal. You may not be able to apply outside discounts (like gift cards or coupon codes) on purchases made through an online shopping portal.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "f75dfbb2334203f96c105553b6b6c19d2bac21f06416a8c0a1bc6ba235053131",
+        "content_preview": "## How does Shop and Earn work?\nTo use Shop and Earn, you will need to access the portal by going through either the Chase website or the Chase Mobile\u00ae app (more on this later).\nFrom there, you can review brands that are eligible for certain rewards and make your purchase through the portal. Once yo",
+        "metadata": {
+          "file": "p_00150",
+          "stratum": "education_center",
+          "chunk_id": "c_00150_03",
+          "page_title": "How to Use The Chase Shopping Portal to Earn Points | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to use the Chase shopping portal to earn points > How does Shop and Earn work?"
+        }
+      },
+      {
+        "id": "54e4e6f0ca0876c7c1cfdc6393124aa9f9d1ec9c99f9c3b2821678b463923ed5",
+        "content_preview": "# Guide to using online shopping portals to help maximize rewards\n## Quick insights\n- A shopping portal is an online platform typically provided by a card issuer or bank that allows its cardmembers to shop and access discounts not available on retail sites.\n- Using a shopping portal may help earn mo",
+        "metadata": {
+          "file": "p_00119",
+          "stratum": "education_center",
+          "chunk_id": "c_00119_00",
+          "page_title": "Guide to Using Online Shopping Portals to Help Maximize Rewards | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Guide to using online shopping portals to help maximize rewards"
+        }
+      }
+    ]
+  },
+  {
+    "index": 6,
+    "question": "Why does financial stability matter when upgrading from a starter credit card?",
+    "answer": "Additionally, achieving financial stability to comfortably manage higher fees or varying rewards structures can indicate your preparedness for an upgrade. Typically, there is variability in income requirements across different types of credit cards, from starter cards to more premium cards with rewards and perks. Generally, more premium cards come with higher income requirements.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "8c55d34fc974e913d23cc07a7716f17914664c7ca80ba2ed1297f85103b86e4f",
+        "content_preview": "## Bottom line\nAs you think about moving on from your starter credit card, consider different factors and compare features of travel, rewards and cash back credit cards. Additionally, achieving financial stability to comfortably manage higher fees or varying rewards structures can indicate your prep",
+        "metadata": {
+          "file": "p_00158",
+          "stratum": "education_center",
+          "chunk_id": "c_00158_10",
+          "page_title": "When to Upgrade Your Starter Credit Card | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "When to upgrade your starter credit card > Bottom line"
+        }
+      },
+      {
+        "id": "51db66da3a4e5c77198348539528f8fdb5fab819dba994e42e11cc1fa2d42dfa",
+        "content_preview": "## How much annual income do you need for a credit card?\nThere is no hard-and-fast rule as to how much money you need to make in order to get approved for a credit card. Typically, there is variability in income requirements across different types of credit cards, from starter cards to more premium ",
+        "metadata": {
+          "file": "p_00148",
+          "stratum": "education_center",
+          "chunk_id": "c_00148_02",
+          "page_title": "Understanding Income for Credit Cards | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Understanding income requirements for credit cards > How much annual income do you need for a credit card?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "question": "I'm evaluating an everyday bank account for routine spending and bill payment, and I need a concise breakdown of the common capabilities it usually includes along with the main drawbacks or charges I should watch for. What are the typical features, benefits, and downsides?",
+    "answer": "Typical checking account features include:\n- Debit card\n- Paper checks\n- Direct deposit\n- Overdraft protection\n- Access to ATMs\n- Online and mobile banking services, including bill pay, transfers, account alerts and mobile check deposit\n\nA great benefit to having a checking account is that you can use it for paying bills or day-to-day purchases. You have access to your funds through a debit card or checks. Sometimes, you may even get a checking bonus for opening a new checking account with qualifying activities.\n\nPotential downsides to most types of checking accounts can include:\n- Usually does not earn interest\n- Monthly service fees\n- Overdraft fees\n- Out-of-network ATM fees\n- Foreign transaction fees",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "60a97ed0404e319057f3cb7c5e38f12e7ef54f775c78580ae7e37699874f0482",
+        "content_preview": "Typical checking account features include:\n- Debit card\n- Paper checks\n- Direct deposit\n- Overdraft protection\n- Access to ATMs\n- Online and mobile banking services, including bill pay, transfers, account alerts and mobile check deposit\nA great benefit to having a checking account is that you can us",
+        "metadata": {
+          "file": "p_00038",
+          "stratum": "education_center",
+          "chunk_id": "c_00038_03",
+          "page_title": "Checking vs. Savings Account | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Checking vs. Savings Account: What should I choose? > Checking vs. savings account features > Checking account benefits > Typical checking account features include:"
+        }
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "question": "credit utilization ratio 30% credit score",
+    "answer": "Keep your credit utilization ratio to 30% or lower: Your credit utilization ratio is the amount of credit you use compared to your total available credit. Using less than 30% of your total credit limit (e.g., keep spending under $300 on a $1,000 limit) shows loan providers you\u2019re managing credit responsibly and could support a healthier credit score.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "4ba945c79d9ad377793a9190dd3ce646e87e900ef1bb1b22ff8a745076fb68a3",
+        "content_preview": "## Smart spending habits to stay out of credit card debt\nBuilding healthy credit is about more than having a card; it\u2019s about how you use it. Small habits can make a big difference in the long run. To stay in control and avoid accumulating unnecessary debt, here are some helpful habits to consider:\n",
+        "metadata": {
+          "file": "p_00117",
+          "stratum": "education_center",
+          "chunk_id": "c_00117_02",
+          "page_title": "Gen Z: A Guide to Smart Credit Card Habits | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Gen Z: A Guide to smart credit card habits > Smart spending habits to stay out of credit card debt"
+        }
+      }
+    ]
+  },
+  {
+    "index": 9,
+    "question": "How can I set up a plan to split a past card purchase into payments, and where can I check on it afterward?",
+    "answer": "Credit cards with BNPL features like Chase Pay Over Time won't appear at the time you make a purchase. You can start a plan from an eligible purchase in your credit card activity, or through the Pay Over Time dashboard on chase.com. You may also use the dashboard to check the status of your plans.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "b5b778174ea00fcee4eea74009c5989c8b4479187f23299eab09885610ec88bf",
+        "content_preview": "## Advantages of BNPL\nHere are a few potential advantages to BNPL plans:\n### Accessibility\nWhen shopping online or from your smartphone, your access to a BNPL plan may be simpler than ever. At checkout, BNPL companies may appear in a short list of the merchant\u2019s payment options if available. Once yo",
+        "metadata": {
+          "file": "p_00156",
+          "stratum": "education_center",
+          "chunk_id": "c_00156_05",
+          "page_title": "What is Buy Now, Pay Later? | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "What is Buy Now, Pay Later? > Advantages of BNPL"
+        }
+      }
+    ]
+  },
+  {
+    "index": 10,
+    "question": "When can an unpaid hospital bill start showing up with the major credit bureaus, and what happens if the amount is under $500 or it\u2019s already been fully paid?",
+    "answer": "The major nationwide consumer reporting agencies (NCRAs) voluntarily removed medical debt less than $500 starting on March 30, 2023. They will no longer include medical debt that has been paid in full after being sent to collections, and they cannot be reported until they are 365 days past the date of first delinquency.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "cb96267e4137b7dc1b3a08ae98c9184959d018ff9815d45dec63060315ef16df",
+        "content_preview": "### Medical debt\nWhile collections can still take place on medical debt that has not been paid, paid medical debt does not appear on credit reports. The major nationwide consumer reporting agencies (NCRAs) voluntarily removed medical debt less than $500 starting on March 30, 2023. They will no longe",
+        "metadata": {
+          "file": "p_00165",
+          "stratum": "education_center",
+          "chunk_id": "c_00165_03",
+          "page_title": "How Long do Collections Stay on Your Credit Report | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "How long do collections stay on your credit report? > Are different types of debt treated differently? > Medical debt"
+        }
+      }
+    ]
+  },
+  {
+    "index": 11,
+    "question": "When evaluating promotions for opening a new everyday spending account, what are the main kinds of incentives banks typically use, and how are they usually delivered or applied?",
+    "answer": "When it comes to checking account bonus offers, there are four common types you\u2019re likely to come across:\n- Cash bonuses: These bonuses are typically paid directly to the account holder either by being deposited directly into their account or through a mailed check. For example, a bank may offer a cash bonus for opening a new checking account after the required qualifying transactions are completed.\n- Additional rewards: Some banks offer reward points that can be redeemed for merchandise, travel or other rewards. You typically earn them through routine activities such as making purchases or signing up for new services.\n- Waived fees: Many checking account bonuses waive certain fees that are commonly associated with maintaining an account. For example, a bank may offer to waive the monthly maintenance fee for a certain period or ATM fees when using the bank's network of ATMs.\n- Additional perks: Some banks offer additional perks and benefits as a bonus for opening a new checking account.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "04067ba7cc6aa84d533193b3b239adc1bf603359165cc6c7f14671d2d52b2ca7",
+        "content_preview": "## Types of checking account bonus offers\nWhen it comes to checking account bonus offers, there are four common types you\u2019re likely to come across:\n- Cash bonuses: These bonuses are typically paid directly to the account holder either by being deposited directly into their account or through a maile",
+        "metadata": {
+          "file": "p_00031",
+          "stratum": "education_center",
+          "chunk_id": "c_00031_01",
+          "page_title": "What Is a Bank Sign-up Bonus? | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "What is a bank sign-up bonus? > Types of checking account bonus offers"
+        }
+      }
+    ]
+  },
+  {
+    "index": 12,
+    "question": "Freedom Rise trip canceled stolen purchase",
+    "answer": "Like other cards in the Chase Freedom family, Freedom Rise comes with the benefits of trip cancellation/interruption insurance for qualified events that prevent travel when booked using your card. You also receive purchase protection against damage and theft for qualified purchases made using the card. Check card terms and conditions for details.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "cfad5775d2c1dacde5dfcf27fb8f41cd996e58bb70d327cafbd5fb4ee708d4d6",
+        "content_preview": "### Enjoy the travel and purchase benefits that come with Chase Freedom cards\nLike other cards in the Chase Freedom family, Freedom Rise comes with the benefits of trip cancellation/interruption insurance for qualified events that prevent travel when booked using your card. You also receive purchase",
+        "metadata": {
+          "file": "p_00182",
+          "stratum": "education_center",
+          "chunk_id": "c_00182_07",
+          "page_title": "Freedom Rise\u2120 | Chase Starter Credit Card",
+          "sub_stratum": "chase_cards",
+          "heading_path": "Get to know the Chase Freedom Rise\u2120 credit card > What are some perks and benefits that come with your Freedom Rise credit card? > Enjoy the travel and purchase benefits that come with Chase Freedom cards"
+        }
+      }
+    ]
+  },
+  {
+    "index": 13,
+    "question": "Can I avoid interest on home improvement purchases if I use my credit card\u2019s introductory financing offer?",
+    "answer": "Planning your home improvement projects around these offers could potentially allow you to finance the project without interest during the introductory period and/or to reach the minimum spending limit to earn your signup bonus. Missing your grace period payment date by even one day can result in interest charges, plus you could get a late fee. Carrying balances transferred from other cards that are not paid off before the promotional APR ends on your credit card can also cause you to lose the grace period for that card.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "27684ab7e96fa070feb3a9f3819f24fecbc40796775c82c74ec30fc50a8282ea",
+        "content_preview": "## Maximizing the benefits of using a credit card for home improvement\nThere are some distinct advantages to financing home improvement projects through a credit card. By leveraging the right credit card, homeowners can not only improve their living spaces but also enjoy a range of financial benefit",
+        "metadata": {
+          "file": "p_00205",
+          "stratum": "education_center",
+          "chunk_id": "c_00205_03",
+          "page_title": "Choosing a cash back card for construction and home improvement | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Choosing a cash back card for construction and home improvement > Maximizing the benefits of using a credit card for home improvement"
+        }
+      },
+      {
+        "id": "5c585a487939947c06102a70abf07adb6777225576d775557e66d7ffceeba739",
+        "content_preview": "## Can you lose your credit card grace period?\nIt\u2019s important to familiarize yourself with the rules governing grace periods. For example, missing your grace period payment date by even one day can result in interest charges, plus you could get a late fee. Carrying balances transferred from other ca",
+        "metadata": {
+          "file": "p_00155",
+          "stratum": "education_center",
+          "chunk_id": "c_00155_02",
+          "page_title": "What is a Grace Period on a Credit Card | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "What is a credit card grace period? > Can you lose your credit card grace period?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 14,
+    "question": "How do I get the Chase Freedom Flex 5% rotating rewards each quarter?",
+    "answer": "Chase Freedom Flex 5% rewards categories are quarterly bonuses where you can accumulate extra points for qualifying purchases. The categories change every three months, often in spending areas like grocery stores and gas stations. Chase releases the bonus categories shortly before the quarter begins. Earn 5% on different categories that rotate each quarter like gas stations, grocery stores and select online merchants on up to $1,500 in total combined purchases each quarter you activate.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "591f70262dabdef6c5c637657db51b1df8dbc7e0b573bb3b5e42b4c5f5f5dd2e",
+        "content_preview": "## What are the 5% rewards categories for Chase Freedom Flex?\nThe Chase Freedom cashback calendar makes it easier to map out spending for the quarter. Chase Freedom Flex 5% rewards categories are quarterly bonuses where you can accumulate extra points for qualifying purchases. The categories change ",
+        "metadata": {
+          "file": "p_00183",
+          "stratum": "education_center",
+          "chunk_id": "c_00183_01",
+          "page_title": "How to Activate Chase Freedom Flex Rewards Categories | Chase",
+          "sub_stratum": "chase_cards",
+          "heading_path": "How to activate Chase Freedom Flex Rewards categories > What are the 5% rewards categories for Chase Freedom Flex?"
+        }
+      },
+      {
+        "id": "924809d1c24f68c53cb5f1d5778e4dbd68e91156091b75b649c02306f5067c31",
+        "content_preview": "Freedom Flex\n- Earn 5% on travel purchased through Chase Travel.\n- Earn 3% on dining at restaurants, including takeout and eligible delivery services.\n- Earn 3% on drugstore purchases.\n- Earn 5% on different categories that rotate each quarter like gas stations, grocery stores and select online merc",
+        "metadata": {
+          "file": "p_00181",
+          "stratum": "education_center",
+          "chunk_id": "c_00181_08",
+          "page_title": "Chase Freedom Flex vs. Freedom Unlimited | Chase",
+          "sub_stratum": "chase_cards",
+          "heading_path": "Chase Freedom Flex\u00ae vs. Freedom Unlimited\u00ae: A Guide > Chase Freedom Flex vs. Freedom Unlimited rewards > Earning points with Chase Freedom Flex vs. Freedom Unlimited > Freedom Flex"
+        }
+      }
+    ]
+  },
+  {
+    "index": 15,
+    "question": "Will paying my credit card on time help me get approved for another card?",
+    "answer": "Yes. Paying at least your minimum payment on time every month will help you establish a positive payment history. Consistent payments overtime may help to improve your credit score and increase your chances of being approved for credit cards. Your credit score is an essential factor in determining credit card approval, and your payment history is a more significant factor in determining your credit score than your credit mix.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "2324a25830ed3c38368fde57b75065a1249b5e2fc87fc9ccfa33ba154b189d9f",
+        "content_preview": "## Why you should pay your credit card bill on time\nEach credit card has a billing cycle that lasts about one month. Once this billing cycle ends, your credit card issuer will send you a monthly statement. This statement includes your account activity, your minimum payment due and a due date. This d",
+        "metadata": {
+          "file": "p_00129",
+          "stratum": "education_center",
+          "chunk_id": "c_00129_01",
+          "page_title": "How to Pay a Credit Card Bill | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to pay a credit card bill > Why you should pay your credit card bill on time"
+        }
+      },
+      {
+        "id": "c8c6bc2169e8808d903e5f97fa95452373990233582faaf091083eaa63d62795",
+        "content_preview": "## How your credit score affects your credit card approval\nYour credit score is an essential factor in determining credit card approval. A good score can help you get a better mortgage rate, opportunities to open new cards and the ability to get approved for other loans. When a lender sees a good cr",
+        "metadata": {
+          "file": "p_00174",
+          "stratum": "education_center",
+          "chunk_id": "c_00174_05",
+          "page_title": "What Credit Score Do You Need for a Credit Card | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "What credit score do you need to get a credit card? > How your credit score affects your credit card approval"
+        }
+      }
+    ]
+  },
+  {
+    "index": 16,
+    "question": "How can I use Chase Freedom Unlimited or Freedom Rise rewards to help pay for essentials like groceries or utility bills?",
+    "answer": "You can use rewards for essentials like groceries or utility bills by redeeming points for gift cards or statement credits, and the rewards may be redeemable for cash back, travel, statement credits or gift cards through the Chase Ultimate Rewards\u00ae program.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "3f2a039e55d7f63839a9850b14e5f7224945a53679c3be0a0ed6a65f2dfd7265",
+        "content_preview": "## 10 ways to use credit card rewards for essentials\nRewards from credit cards can be beneficial when used wisely. Here are 10 ways you might use your credit card rewards for paying bills:\n- Grocery shopping: Many cards offer bonus rewards for grocery store purchases. You can use your credit card re",
+        "metadata": {
+          "file": "p_00097",
+          "stratum": "education_center",
+          "chunk_id": "c_00097_02",
+          "page_title": "10 Ways You Might Use Credit Card Rewards for Essentials | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "10 ways you might use credit card rewards for essentials > 10 ways to use credit card rewards for essentials"
+        }
+      },
+      {
+        "id": "0f8e412e5ac95e8c5a71e38e350f64bd3728fdb9293f104450932efd7ec66ef6",
+        "content_preview": "## Chase Freedom Rise and Freedom Unlimited cards explained\nThe Chase Freedom Rise and Freedom Unlimited credit cards are rewards cards that earn cash back on purchases. Their rewards may be redeemable for cash back, travel, statement credits or gift cards through the Chase Ultimate Rewards\u00ae program",
+        "metadata": {
+          "file": "p_00222",
+          "stratum": "education_center",
+          "chunk_id": "c_00222_01",
+          "page_title": "Chase Freedom Unlimited \u00ae vs. Chase Freedom Rise \u00ae | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "How Chase Freedom Unlimited\u00ae and Chase Freedom Rise\u00ae are different > Chase Freedom Rise and Freedom Unlimited cards explained"
+        }
+      }
+    ]
+  },
+  {
+    "index": 17,
+    "question": "If I\u2019m turned down while trying to get a new card, how will I usually hear about it, and what can I do next to improve my chances?",
+    "answer": "If a credit card application is denied, you'll usually be notified the same way you applied. For example, if you applied online, you will likely be notified by email.\nRegardless of how you receive it, a denial notice may include instructions you can follow to request that the credit card issuer reconsider your application. That process usually requires submitting new or updated information but see your specific notice or contact the card issuer for details.\nAnother option you may have after receiving a denial decision is to apply for a different credit card. There may be credit cards with lower credit limits or approval criteria that could increase your chances of getting a credit card.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "632d05d0ed7975eeb28602790a3a1ce8fbc26c123c62ab31222529e0606c6acd",
+        "content_preview": "## What happens if the application is denied?\nIf a credit card application is denied, you'll usually be notified the same way you applied. For example, if you applied online, you will likely be notified by email.\nRegardless of how you receive it, a denial notice may include instructions you can foll",
+        "metadata": {
+          "file": "p_00122",
+          "stratum": "education_center",
+          "chunk_id": "c_00122_10",
+          "page_title": "How Long Does it Take to Get a Credit Card | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How long does it take to get a credit card? > What happens if the application is denied?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 18,
+    "question": "Why might a Chase hotel co-branded card be better for someone who always stays with one hotel chain?",
+    "answer": "These cards don't earn Ultimate Rewards points but do offer alternative opportunities for redeeming rewards. For the co-branded cards, you still can earn points through purchases, but they'll be redeemable through that specific partner's loyalty program instead. Hotel co-branded credit cards are affiliated with a specific hotel chain and offer rewards through a brand loyalty program. These cards allow you to collect points from your stays at a specific hotel chain and then redeem these points for a discounted night or free stay. Hotel cards could also offer additional perks and benefits that you can enjoy during your stay, such as room upgrades, complimentary breakfast, hotel lounge access and late checkout. If you have a favorite hotel chain, then a hotel credit card may be right for you.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "64cea055c61e2c6824287662d5c120957a5c1d9ba941c1f6200e7aa14e2ade6b",
+        "content_preview": "## The differences between Chase cards and partner cards\nThe above information about Chase Ultimate Rewards points is only applicable to Chase-branded cards. However, Chase also offers co-branded cards with hotel partners. These cards don't earn Ultimate Rewards points but do offer alternative oppor",
+        "metadata": {
+          "file": "p_00261",
+          "stratum": "education_center",
+          "chunk_id": "c_00261_02",
+          "page_title": "How to Use Chase Ultimate Rewards for Hotels | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "How to use Chase Ultimate Rewards\u00ae when booking a hotel > The differences between Chase cards and partner cards"
+        }
+      },
+      {
+        "id": "7b1c116664a60662bf061c80d561fd268a1dec134c60206597edc7f9dbffc239",
+        "content_preview": "### Hotel co-branded cards\nHotel co-branded credit cards are affiliated with a specific hotel chain and offer rewards through a brand loyalty program. These cards allow you to collect points from your stays at a specific hotel chain and then redeem these points for a discounted night or free stay. H",
+        "metadata": {
+          "file": "p_00225",
+          "stratum": "education_center",
+          "chunk_id": "c_00225_02",
+          "page_title": "An Overview: How Do Travel Credit Cards Work? | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "How do travel credit cards work? > What are travel credit cards? > Hotel co-branded cards"
+        }
+      }
+    ]
+  },
+  {
+    "index": 19,
+    "question": "Will opening multiple credit cards help my credit score or hurt it if I\u2019m worried about maxing them out?",
+    "answer": "Having multiple credit cards can affect your credit score in both positive and negative ways, depending on how you manage them. Having more credit cards can increase your overall credit limit, which may lower your credit utilization ratio\u2014the percentage of credit you're using compared to your total limit\u2014and potentially boost your credit score. Note this may only happen if you don\u2019t max out your cards and use all your credit. Maxing out your credit limit can lower your credit score. Applying for too many cards at once can also negatively impact your credit score, as each application results in a hard inquiry on your credit report.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "d19ab37d422661d969a4f117c876c03d4e1d036e0ae5055a6e7c541d1eb0e293",
+        "content_preview": "## Decoding the impact of credit card mistakes\nEach of these mistakes can have serious consequences, for example:\n- Late payments can result in fees, increased interest rates and a hit to your credit score.\n- Only paying the minimum balance can lead to mounting debt due to compound interest, and it ",
+        "metadata": {
+          "file": "p_00106",
+          "stratum": "education_center",
+          "chunk_id": "c_00106_03",
+          "page_title": "Common Credit Card Problems to Avoid | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Common credit card problems to avoid > Decoding the impact of credit card mistakes"
+        }
+      },
+      {
+        "id": "0da18a91c927795c21977613294afb991371056438c1f0f21ad4848698f91060",
+        "content_preview": "## The impact of having multiple credit cards on your credit score\nHaving multiple credit cards can affect your credit score in both positive and negative ways, depending on how you manage them. Below are some key factors to consider:\n- Credit utilization ratio: Having more credit cards can increase",
+        "metadata": {
+          "file": "p_00196",
+          "stratum": "education_center",
+          "chunk_id": "c_00196_05",
+          "page_title": "What to Know About 3% Cash Back Credit Cards | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "What to know about 3% cash back credit cards > The impact of having multiple credit cards on your credit score"
+        }
+      }
+    ]
+  },
+  {
+    "index": 20,
+    "question": "Do I transfer Chase Ultimate Rewards points to airline or hotel partners through the Chase Travel portal?",
+    "answer": "But one of the options cardmembers may not know about is the ability to redeem their points through the Chase TravelSM portal. Chase card members can transfer their points to select travel partners at a 1:1 ratio through the Chase Ultimate Rewards\u00ae portal.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "41c87e7b674b6890345e914d199ca81074e57898b707f88782f67ff1c2deea03",
+        "content_preview": "# Chase Transfer Partners: Everything You Need to Know\n## Quick insights\n- Ultimate Rewards\u00ae gives Chase cardmembers flexibility in redeeming their points, from cash back to special event concert tickets.\n- Several Chase credit cards allow you transfer Ultimate Rewards points to travel partners.\n- T",
+        "metadata": {
+          "file": "p_00104",
+          "stratum": "education_center",
+          "chunk_id": "c_00104_00",
+          "page_title": "Chase Transfer Partners: Everything You Need to Know | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Chase Transfer Partners: Everything You Need to Know"
+        }
+      },
+      {
+        "id": "62afc8f80f3b9cd84a3282db1b2723244abc441287e5b8baf1fad8fcfb8b9f5e",
+        "content_preview": "# How to transfer points through Chase Ultimate Rewards\u00ae\n## Quick insights\n- Chase card members can transfer their points to select travel partners at a 1:1 ratio through the Chase Ultimate Rewards\u00ae portal.\n- Travel partners include several global airline and hotel brands.\n- Points need to be transf",
+        "metadata": {
+          "file": "p_00131",
+          "stratum": "education_center",
+          "chunk_id": "c_00131_00",
+          "page_title": "How to Transfer Chase Ultimate Rewards\u00ae Points | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to transfer points through Chase Ultimate Rewards\u00ae"
+        }
+      }
+    ]
+  },
+  {
+    "index": 21,
+    "question": "Chase spending rewards category limits rules",
+    "answer": "Cash back credit cards accrue rewards when you make purchases within specific categories (such as grocery stores or gas stations) on the card. There are important differences in what kinds of spending get rewarded and what format the rewards take, such as rotating categories and the value of points. You may also have to keep in mind that some cash back credit cards specify a maximum number of cash back you can earn within a specific time period.",
+    "qa_type": "lookup",
+    "min_hop_count": 1,
+    "reference_chunks": [
+      {
+        "id": "90ddde0c5845211b02156328836c97c13855fba613b212eea856434b7d0b0990",
+        "content_preview": "## How do cash back credit cards work?\nCash back credit cards accrue rewards when you make purchases within specific categories (such as grocery stores or gas stations) on the card. There are important differences in what kinds of spending get rewarded and what format the rewards take, such as rotat",
+        "metadata": {
+          "file": "p_00154",
+          "stratum": "education_center",
+          "chunk_id": "c_00154_01",
+          "page_title": "What does cash back on credit cards mean? | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "What are credit card cash back rewards? > How do cash back credit cards work?"
+        }
+      }
+    ]
+  },
+  {
+    "index": 22,
+    "question": "If I miss a credit card payment, when will it show up on my credit report?",
+    "answer": "Once you\u2019re 30 days or more past the due date, creditors typically report the delinquency to credit bureaus. As a result, this delinquency will show up on your credit report and eventually affect your credit score.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "f4d7a5da7872fe5275446faa75846c9761c033b3fcfeca85ab748103788b608c",
+        "content_preview": "# When do late payments show up on your credit report?\n## When do late payments show up on your credit report?\nThe economics of life can sometimes be difficult to navigate\u2014especially when there's inflation, high cost of living and unpredictable events that pose a challenge to budgeting. Your priorit",
+        "metadata": {
+          "file": "p_00176",
+          "stratum": "education_center",
+          "chunk_id": "c_00176_00",
+          "page_title": "When Late Payments Appear on Credit Report | Chase",
+          "sub_stratum": "credit_building",
+          "heading_path": "When do late payments show up on your credit report?"
+        }
+      },
+      {
+        "id": "adc649f4223ae05d988c4894a9162819503898833c338f0921bf524352e09892",
+        "content_preview": "## Understanding the impact of a missed credit card payment\nMissing a credit card payment by even one day can have immediate consequences, such as incurring a late fee or penalty for paying past the due date.\nOnce you\u2019re 30 days or more past the due date, creditors typically report the delinquency t",
+        "metadata": {
+          "file": "p_00138",
+          "stratum": "education_center",
+          "chunk_id": "c_00138_01",
+          "page_title": "Recovering from a Late Credit Card Payment |Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to recover from a late credit card payment > Understanding the impact of a missed credit card payment"
+        }
+      }
+    ]
+  },
+  {
+    "index": 23,
+    "question": "Can I redeem my Chase cash back as a direct deposit into my savings account with no minimum?",
+    "answer": "Earned cash back may be redeemed as a statement credit, direct deposit, check or gift card\u2014the options will depend on your card and issuer. Chase credit cardmembers can redeem their cash back for rewards through the Chase Ultimate Rewards\u00ae online portal. Cardmembers can receive straightforward cash back through either a statement credit or via direct deposit into most U.S. checking and savings accounts. There is no minimum amount for cash back redemption.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "0b6657d90d029088f54ac1a9737bd76d3c20c8b8f1ab914979f51a24367cde54",
+        "content_preview": "## How to redeem cash back\nEarned cash back may be redeemed as a statement credit, direct deposit, check or gift card\u2014the options will depend on your card and issuer. Some may issue the credit automatically, or you may be able to request it\u2014some issuers may have a minimum threshold you have to meet ",
+        "metadata": {
+          "file": "p_00226",
+          "stratum": "education_center",
+          "chunk_id": "c_00226_03",
+          "page_title": "How to Calculate Cash Back on Credit Cards | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "How to calculate cash back on credit cards > How to redeem cash back"
+        }
+      },
+      {
+        "id": "a93540e57aac122d2d4cddb4d6ed9e2f0378b48990b42a5f40c97fc2dcd8a157",
+        "content_preview": "## How to redeem cash back\nChase credit cardmembers can redeem their cash back for rewards through the Chase Ultimate Rewards\u00ae online portal. Generally, Chase cash back rewards can be redeemed for the following categories:\n- Cash back: Cardmembers can receive straightforward cash back through either",
+        "metadata": {
+          "file": "p_00260",
+          "stratum": "education_center",
+          "chunk_id": "c_00260_04",
+          "page_title": "Understanding 2% Cash Back Credit Cards | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Understanding 2% cash back credit cards > How to redeem cash back"
+        }
+      }
+    ]
+  },
+  {
+    "index": 24,
+    "question": "How can I redeem cash back I earn from rotating bonus categories on a Chase cash back card?",
+    "answer": "Making purchases with a cash back credit card allows you to earn points from purchases in select categories. Your credit card may offer promotional cash back opportunities in rotating categories, such as 5% cash back in department store purchases one quarter and 5% cash back on gas station charges the next quarter. At Chase, you can pick how you redeem cash back rewards by choosing how you want to receive them. Here are some options you have when redeeming your cash back: Statement credit: You can use your cash back rewards to help reduce your credit card balance. Products and services: There may be opportunities to use your points for all or part of a payment for the purchase of eligible products or services directly through third-party merchants or service providers. Direct deposit: Cash back rewards also can be redeemed via a direct deposit into your preferred bank account. Gift cards: You also may be able to redeem cash back for gift cards.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "d5d27d7a8aca3a5d719dc08001d361083d9af6718ead839f85714dc8541850ab",
+        "content_preview": "### Cash back cards\nCash back credit cards offer flexibility for earning rewards on everyday purchases. Making purchases with a cash back credit card allows you to earn points from purchases in select categories. Your credit card may offer promotional cash back opportunities in rotating categories, ",
+        "metadata": {
+          "file": "p_00152",
+          "stratum": "education_center",
+          "chunk_id": "c_00152_05",
+          "page_title": "What are rewards credit cards & how do they work? | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "What are rewards credit cards & how do they work? > What is the best kind of rewards credit card? > Cash back cards"
+        }
+      },
+      {
+        "id": "7804d9e1ab3c285f2591fba1279477d6b0a0263c3ce6bf6db119dd141643f21f",
+        "content_preview": "## How to redeem your cash back with Chase\nAt Chase, you can pick how you redeem cash back rewards by choosing how you want to receive them. Here are some options you have when redeeming your cash back:\n- Statement credit: You can use your cash back rewards to help reduce your credit card balance.\n-",
+        "metadata": {
+          "file": "p_00101",
+          "stratum": "education_center",
+          "chunk_id": "c_00101_06",
+          "page_title": "Breaking Down Cash Back Credit Cards From Chase | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Cash back credit cards from Chase > How to redeem your cash back with Chase"
+        }
+      }
+    ]
+  },
+  {
+    "index": 25,
+    "question": "What does a parent need to have to open the Chase account that lets teens get direct deposits?",
+    "answer": "Chase High School Checking\u2120 lets them \"get direct deposits.\" \"The parent must have an existing qualifying Chase checking account which must be linked to the High School Checking account. Qualifying accounts exclude Chase High School Checking, Chase College Checking, Chase Secure Checking and Chase First Checking.\"",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "26692458aa4fd5d27f69b946dbe7d56873526cfccd2106b920d8adca782a5221",
+        "content_preview": "Banking that grows\nwith your family\n## Banking that grows with your family\nChase helps you meet your family members where they are in their financial journey:\n- Teach your child money basics with Chase First Banking\u2120\n- Let them send money to friends and get direct deposits with Chase High School Che",
+        "metadata": {
+          "file": "p_00091",
+          "stratum": "personal_banking",
+          "chunk_id": "c_00091_08",
+          "page_title": "Chase Total Checking\u00ae Account | Checking | Chase.com",
+          "sub_stratum": "checking",
+          "heading_path": "EVERYDAY CHECKING Chase Total Checking\u00ae > Pair a Chase Savings\u2120 account with Chase Total Checking > Banking that grows"
+        }
+      },
+      {
+        "id": "964a5c63da9b563de3db9266a03b9ca24ff0514ad38e4ca29876611ab9615e55",
+        "content_preview": "## FAQs\nChase High School Checking is for student ages 13-17 at account opening with their parent/guardian as a co-owner. The parent must have an existing qualifying Chase checking account which must be linked to the High School Checking account. Qualifying accounts exclude Chase High School Checkin",
+        "metadata": {
+          "file": "p_00084",
+          "stratum": "personal_banking",
+          "chunk_id": "c_00084_11",
+          "page_title": "Chase High School Checking Account | Student Banking | Chase",
+          "sub_stratum": "checking",
+          "heading_path": "Chase High School Checking\u2120 > FAQs"
+        }
+      }
+    ]
+  },
+  {
+    "index": 26,
+    "question": "Can multiple people share a joint high-yield savings account and have the same access to it?",
+    "answer": "Joint savings accounts provide a way for multiple people to access the same savings account. Depending on the provider, you may be able to have up to four people on the same joint savings account. Each person on a joint bank account has the same access to deposit, spend, transfer and withdraw money.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "98bacea2d4bccd7d05cc8dcf738e78aee079d21ab217618eb7dde66788dd4807",
+        "content_preview": "## In summary\nJoint savings accounts provide a way for multiple people to access the same savings account. Depending on the provider, you may be able to have up to four people on the same joint savings account. Typically, one person will need to open the account and can add others to the account eit",
+        "metadata": {
+          "file": "p_00054",
+          "stratum": "education_center",
+          "chunk_id": "c_00054_04",
+          "page_title": "What is a joint high-yield savings account? | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "What is a joint high yield savings account? > In summary"
+        }
+      },
+      {
+        "id": "e29eafcf9dc9d310951686b37379f2cfbc214f59b61e1dc18d865e212184ce6b",
+        "content_preview": "# Understanding joint bank accounts: A guide\n## Quick insights\n- A joint bank account can be a checking or savings account managed by multiple people.\n- Each person on a joint bank account has the same access to deposit, spend, transfer and withdraw money.\n- Managing a joint bank account successfull",
+        "metadata": {
+          "file": "p_00063",
+          "stratum": "education_center",
+          "chunk_id": "c_00063_00",
+          "page_title": "Pros And Cons Of Joint Bank Accounts | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Understanding joint bank accounts: A guide"
+        }
+      }
+    ]
+  },
+  {
+    "index": 27,
+    "question": "Is there a recommended income for a credit card, or should I look at my debt-to-income ratio instead?",
+    "answer": "There is no set income that you should be making to manage your credit card. Your annual income is important, but it is more about how you spend your money that becomes a major factor. It might be a good practice to look at your current debts and calculate your DTI ratio. Your DTI is the comparison of your gross monthly income to your outstanding debts.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "5fa681a5e4ed74ebe832557a23db6a486ea5b40469a839298745275f840d5433",
+        "content_preview": "## What annual income is recommended to manage my credit card without being worried?\nThere is no set income that you should be making to manage your credit card. Your annual income is important, but it is more about how you spend your money that becomes a major factor. Typically, it can be helpful t",
+        "metadata": {
+          "file": "p_00148",
+          "stratum": "education_center",
+          "chunk_id": "c_00148_07",
+          "page_title": "Understanding Income for Credit Cards | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Understanding income requirements for credit cards > What annual income is recommended to manage my credit card without being worried?"
+        }
+      },
+      {
+        "id": "ce119dffdf6fdea98eab78ec3fd8a4aff3ac55067113509214beef6c54dbce55",
+        "content_preview": "### Debt-to-income ratio (DTI)\nJumbo loan DTI standards are typically higher as well. Your DTI is the comparison of your gross monthly income to your outstanding debts. If your percentage of debt is high compared to your monthly income, lenders may deem it potentially difficult for you to make your ",
+        "metadata": {
+          "file": "p_00296",
+          "stratum": "education_center",
+          "chunk_id": "c_00296_05",
+          "page_title": "Qualifying For A Jumbo Loan: Limits and Requirements | Chase",
+          "sub_stratum": "mortgage_education",
+          "heading_path": "Jumbo loan qualifications, limits and more > Jumbo loan requirements and qualifications > Debt-to-income ratio (DTI)"
+        }
+      }
+    ]
+  },
+  {
+    "index": 28,
+    "question": "Why does applying for a student credit card change if you're under 21?",
+    "answer": "To apply for a student credit card, you may need to show proof of a steady income from a part-time or full-time job or have a co-signer (a person over the age of 21 with a steady income who takes responsibility for your late or missed payments) join you in the application process. The CARD Act of 2009 requires card issuers to assess independent income sources for applicants under the age of 21. People ages 18 to 21 applying for a credit card must show proof of independent income\u2014unless they have a co-signer, usually a parent or guardian.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "ef4f64a0face73a508472221875ea2bd1a2946a83575d389c32a5d8a33e8ad43",
+        "content_preview": "## How do I apply for a student credit card if I am over the age of 21?\n- Research the best type of student credit card for your needs.\n- Learn about the application requirements.\n- Obtain relevant proof of your personal income or assets.\n- Obtain relevant proof that you are enrolled in school. Some",
+        "metadata": {
+          "file": "p_00157",
+          "stratum": "education_center",
+          "chunk_id": "c_00157_04",
+          "page_title": "When & how to apply for a student credit card | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "When & how to apply for a student credit card > How do I apply for a student credit card if I am over the age of 21?"
+        }
+      },
+      {
+        "id": "612b05498470e234381af14b9db0cb77d145b01f5a076aebbf56b715a031f9bd",
+        "content_preview": "### Proof of income requirements\nThe CARD Act of 2009 requires card issuers to assess independent income sources for applicants under the age of 21. People ages 18 to 21 applying for a credit card must show proof of independent income\u2014unless they have a co-signer, usually a parent or guardian.\nIf a ",
+        "metadata": {
+          "file": "p_00199",
+          "stratum": "education_center",
+          "chunk_id": "c_00199_05",
+          "page_title": "Are There Rewards Cards for Students | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Are there rewards cards for students? > What to know when applying for a student credit card > Proof of income requirements"
+        }
+      }
+    ]
+  },
+  {
+    "index": 29,
+    "question": "Can I transfer Chase Ultimate Rewards points to a travel partner with my card, and what are the transfer rules?",
+    "answer": "To transfer points to a travel partner, you need to have one of the following Chase credit cards: Sapphire Preferred\u00ae, Sapphire Reserve\u00ae, Ink Business Preferred\u00ae. Here are the steps to take to transfer Ultimate Rewards points you\u2019ve earned: Sign in to your account at chase.com. Choose the \u201cRedeem Rewards\u201d prompt within the dashboard. Select an option to transfer between eligible cards or travel partners. Points can be transferred in 1,000-point increments. Keep in mind that all points transfers are final. Chase has partnered with several leading hotel and airline loyalty programs to enable direct transfer of points at a 1:1 ratio. While most point transfers process by the next business day, they may take up to 7 business days.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "e63f4d5852f4862fb10c95c1cffb4b52dd3964b4131962db9b39be3800e3772e",
+        "content_preview": "## How can I transfer Chase Ultimate Rewards points?\nHere are the steps to take to transfer Ultimate Rewards points you\u2019ve earned:\n- Sign in to your account at chase.com.\n- Choose the \u201cRedeem Rewards\u201d prompt within the dashboard.\n- Select an option to transfer between eligible cards or travel partne",
+        "metadata": {
+          "file": "p_00104",
+          "stratum": "education_center",
+          "chunk_id": "c_00104_03",
+          "page_title": "Chase Transfer Partners: Everything You Need to Know | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Chase Transfer Partners: Everything You Need to Know > How can I transfer Chase Ultimate Rewards points?"
+        }
+      },
+      {
+        "id": "a65f96c8f7e5d370e3dbfda87f532af0ec28ffaf9a6ffa9f9219499561b3d44f",
+        "content_preview": "## Understanding how points transfers through Chase Ultimate Rewards work\nChase Ultimate Rewards is the portal for Chase credit cards in which you can redeem points for travel purchases, dining and more. To transfer points to a travel partner, you need to have one of the following Chase credit cards",
+        "metadata": {
+          "file": "p_00131",
+          "stratum": "education_center",
+          "chunk_id": "c_00131_01",
+          "page_title": "How to Transfer Chase Ultimate Rewards\u00ae Points | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to transfer points through Chase Ultimate Rewards\u00ae > Understanding how points transfers through Chase Ultimate Rewards work"
+        }
+      }
+    ]
+  },
+  {
+    "index": 30,
+    "question": "If I buy through Chase Shop and Earn, when should the bonus points post to my account?",
+    "answer": "By logging into the Ultimate Rewards portal, navigating to the Shop and Earn portal and clicking through to eligible stores, you can earn bonus points per dollar spent when shopping through the portal. Your points may be posted to your account on the Shop and Earn shopping details page within 15 days of your purchase, and you\u2019ll receive an email confirming this. However, it can take up to 60 days for the points to get posted to your account.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "f75dfbb2334203f96c105553b6b6c19d2bac21f06416a8c0a1bc6ba235053131",
+        "content_preview": "## How does Shop and Earn work?\nTo use Shop and Earn, you will need to access the portal by going through either the Chase website or the Chase Mobile\u00ae app (more on this later).\nFrom there, you can review brands that are eligible for certain rewards and make your purchase through the portal. Once yo",
+        "metadata": {
+          "file": "p_00150",
+          "stratum": "education_center",
+          "chunk_id": "c_00150_03",
+          "page_title": "How to Use The Chase Shopping Portal to Earn Points | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to use the Chase shopping portal to earn points > How does Shop and Earn work?"
+        }
+      },
+      {
+        "id": "e2c46167bb912eee30f21609f8999371994b2ad63d5ae1f5f8d444b8c84ead53",
+        "content_preview": "### Shopping portals\nShop and Earn is Chase\u2019s online shopping portal that allows cardmembers to earn points for purchases made at participating retailers. By logging into the Ultimate Rewards portal, navigating to the Shop and Earn portal and clicking through to eligible stores, you can earn bonus p",
+        "metadata": {
+          "file": "p_00203",
+          "stratum": "education_center",
+          "chunk_id": "c_00203_04",
+          "page_title": "Best Ways to Use Chase Points | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "What are the best ways to use Chase points? > How do I earn Chase credit card points? > Shopping portals"
+        }
+      }
+    ]
+  },
+  {
+    "index": 31,
+    "question": "How can I control employee card spending with a Chase Ink business credit card?",
+    "answer": "With a Chase Ink credit card, business owners can use the Chase Mobile\u00ae app to manage authorized users\u2019 spending limits. You can set a spending limit for authorized users on your business credit card by logging into your Chase account online or via the Chase Mobile\u00ae app.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "f272bdc1469b425d1d6f34cda18fb53418e05f8ad2e356935b3222031c494e78",
+        "content_preview": "## Other important business credit card features to consider\nBusiness expenses can quickly add up when employees are traveling. It may be wise to select a credit card that provides insights into spending over time. Chase for Business credit cards provide cardmembers with 24/7 access to view account ",
+        "metadata": {
+          "file": "p_00204",
+          "stratum": "education_center",
+          "chunk_id": "c_00204_08",
+          "page_title": "Business travel credit card benefits to look for | Chase",
+          "sub_stratum": "rewards_benefits",
+          "heading_path": "Business travel credit card benefits to look for > Other important business credit card features to consider"
+        }
+      },
+      {
+        "id": "91232db797d36c574fa5fe1d594e1b5ff0db203a2140c7e6e9d476c8c23f1f04",
+        "content_preview": "## How to set up a spending limit for the authorized user\nMany Chase credit cards allow you to add authorized users, including the Chase Freedom Rise\u00ae, Chase Freedom Unlimited\u00ae and Chase Sapphire Preferred cards.\nWhile you can\u2019t set up a specific spending limit for authorized users with most persona",
+        "metadata": {
+          "file": "p_00141",
+          "stratum": "education_center",
+          "chunk_id": "c_00141_01",
+          "page_title": "Setting a Spending Limit for Authorized Users | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Setting a spending limit for authorized users > How to set up a spending limit for the authorized user"
+        }
+      }
+    ]
+  },
+  {
+    "index": 32,
+    "question": "Why should I keep my credit card balance under $300 if my limit is $1,000?",
+    "answer": "Keep your credit utilization ratio to 30% or lower: Your credit utilization ratio is the amount of credit you use compared to your total available credit. Using less than 30% of your total credit limit (e.g., keep spending under $300 on a $1,000 limit) shows loan providers you\u2019re managing credit responsibly and could support a healthier credit score. It is generally a good idea to try to keep your credit utilization ratio below 30 percent. Keeping your ratio below 30 percent may positively impact your credit score.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "4ba945c79d9ad377793a9190dd3ce646e87e900ef1bb1b22ff8a745076fb68a3",
+        "content_preview": "## Smart spending habits to stay out of credit card debt\nBuilding healthy credit is about more than having a card; it\u2019s about how you use it. Small habits can make a big difference in the long run. To stay in control and avoid accumulating unnecessary debt, here are some helpful habits to consider:\n",
+        "metadata": {
+          "file": "p_00117",
+          "stratum": "education_center",
+          "chunk_id": "c_00117_02",
+          "page_title": "Gen Z: A Guide to Smart Credit Card Habits | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Gen Z: A Guide to smart credit card habits > Smart spending habits to stay out of credit card debt"
+        }
+      },
+      {
+        "id": "7681900da65fd542bf1770d1c5aae2dd1b284a2f412e3798ae3d80865145945b",
+        "content_preview": "## Budgeting to prevent high credit utilization\nYour credit limit is the amount of credit available for you to spend with your card. However, just because you have the credit, it may not be a good idea to use it all. Maintaining a healthy credit utilization ratio could potentially help you increase ",
+        "metadata": {
+          "file": "p_00126",
+          "stratum": "education_center",
+          "chunk_id": "c_00126_02",
+          "page_title": "How to Manage Your First Credit Card\u2019s Low Credit Limit | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "How to manage your first credit card\u2019s low limit > Budgeting to prevent high credit utilization"
+        }
+      }
+    ]
+  },
+  {
+    "index": 33,
+    "question": "How can a full-service bank\u2019s local community engagement help if I\u2019m struggling to pay bills?",
+    "answer": "With full-service banking, you get services to help handle your money today and for the long-term. From extensive networks to the local community engagement, the benefits of full-service banks are hard to replicate in a purely digital environment. Many community support networks and assistance programs exist to help families manage challenging financial circumstances. These include utility assistance programs for household bills, free or low-cost health-care services and educational support.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "ec8681d7c87a559d1648b58a55a486ecdd731b5eab7ee648004685aeb2ebcaa9",
+        "content_preview": "## In summary\nIn an era of niche solutions and ever-changing digital trends, there are a lot of ways to handle your money. The true value of full-service banking isn\u2019t in individual features, it\u2019s in the ability to have a comprehensive and enduring partnership with your bank. With full-service banki",
+        "metadata": {
+          "file": "p_00033",
+          "stratum": "education_center",
+          "chunk_id": "c_00033_09",
+          "page_title": "7 Benefits of a Full-Service Bank | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "7 benefits of a full-service bank > In summary"
+        }
+      },
+      {
+        "id": "9ee38bf00c32ce46f503c713fe915a148f3e2ea9e78c196585ec63faad84ecb9",
+        "content_preview": "## 9. Finding community support networks\nFor those wondering how to save money and pay bills, many community support networks and assistance programs exist to help families manage challenging financial circumstances. These include utility assistance programs for household bills, free or low-cost hea",
+        "metadata": {
+          "file": "p_00076",
+          "stratum": "education_center",
+          "chunk_id": "c_00076_09",
+          "page_title": "11 Ways to Save Money on a Tight Budget | Chase",
+          "sub_stratum": "budgeting_saving",
+          "heading_path": "11 Ways to save money on a tight budget > 9. Finding community support networks"
+        }
+      }
+    ]
+  },
+  {
+    "index": 34,
+    "question": "Does Chase offer student credit card rewards for getting good grades?",
+    "answer": "Some student credit card programs may provide incentives for good academic performance such as statement credits for achieving a certain grade point average (GPA). Please note that while Chase offers starter cards that could be a good fit for students, Chase credit cards do not currently offer academic achievement rewards.",
+    "qa_type": "multi_hop",
+    "min_hop_count": 2,
+    "reference_chunks": [
+      {
+        "id": "a67fd9f67df7fb38b2f83e925d263726ca2d7e586ddee1568c7ad8466ad99f5c",
+        "content_preview": "### Student credit card\nSome student credit cards may offer rewards and benefits tailored to the needs of college students. The most common perks are cash back rewards on purchases such as:\n- Textbooks\n- Dining\n- Groceries\nSome student credit card programs may provide incentives for good academic pe",
+        "metadata": {
+          "file": "p_00144",
+          "stratum": "education_center",
+          "chunk_id": "c_00144_07",
+          "page_title": "Student vs Starter Cards: What\u2019s the Difference | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Student vs starter credit cards: What\u2019s the difference? > Comparing rewards and benefits > Student credit card"
+        }
+      },
+      {
+        "id": "23d662f93e9e070a98ec326117dc74529c3ea94e74737d402415a62f172d9ddf",
+        "content_preview": "### Good grades rewards\nSome issuers offer student credit card benefits that reward academic achievement. For instance, a cardholder might receive a statement credit or bonus points for maintaining a certain GPA each year. This type of reward directly acknowledges the student status of the cardholde",
+        "metadata": {
+          "file": "p_00111",
+          "stratum": "education_center",
+          "chunk_id": "c_00111_06",
+          "page_title": "Do student credit cards offer rewards? | Chase",
+          "sub_stratum": "basics",
+          "heading_path": "Do student credit cards offer rewards? > What types of rewards do student credit cards offer? > Good grades rewards"
+        }
+      }
+    ]
+  }
+]

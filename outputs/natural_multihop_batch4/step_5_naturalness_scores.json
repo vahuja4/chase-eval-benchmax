@@ -1,0 +1,218 @@
+[
+  {
+    "question": "What kind of loan can help me improve my ability to qualify for borrowing by having my payments reported, and when do I get the money from it?",
+    "naturalness_overall": 0.5,
+    "naturalness_scores": {
+      "single_intent": 0.6,
+      "conciseness": 0.7,
+      "natural_phrasing": 0.5,
+      "plausible_intent": 0.6,
+      "overall": 0.5,
+      "reasoning": "This describes a credit-builder loan, so the two parts (payment reporting for credit improvement, timing of fund disbursement) are related to one product, giving some coherence. However, the phrasing is awkward and stitched together ('improve my ability to qualify for borrowing by having my payments reported' is overly formal/technical for a real user), and combining the credit-building question with a disbursement timing question feels like two distinct concerns bundled into one sentence rather than a natural single query. A real person would more likely ask 'What is a credit builder loan and how does it work?' separately from 'when do I get the money'."
+    }
+  },
+  {
+    "question": "I need a way to prevent a purchase or payment from triggering a penalty when my everyday spending account comes up short by using funds from another account I already have at the same bank. What are the setup requirements and are there any charges for moving the money?",
+    "naturalness_overall": 0.5,
+    "naturalness_scores": {
+      "single_intent": 0.7,
+      "conciseness": 0.5,
+      "natural_phrasing": 0.6,
+      "plausible_intent": 0.9,
+      "overall": 0.5,
+      "reasoning": "This is essentially one intent (setting up overdraft protection linked to another account) but bundles two sub-questions (setup requirements and fees), phrased in an overly formal, roundabout way ('prevent a purchase or payment from triggering a penalty') instead of naturally saying 'overdraft protection.' A real person would likely just ask 'How do I set up overdraft protection using another account, and are there fees?' The scenario is plausible and realistic, but the wordy, indirect phrasing makes it read slightly unnatural, like a paraphrased/generated question rather than a spontaneous one."
+    }
+  },
+  {
+    "question": "If I already have the lower-tier travel card and decide the more premium version fits me better, can I move over without being forced to close one because of an old rule against holding both at once?",
+    "naturalness_overall": 0.6,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.6,
+      "natural_phrasing": 0.7,
+      "plausible_intent": 0.9,
+      "overall": 0.6,
+      "reasoning": "This is a single coherent question about upgrading a travel card without being forced to close the old one due to a 'can't hold both' rule. It's a realistic concern someone might have. However, it's a bit long and wordy with embedded clauses ('an old rule against holding both at once'), making it less concise than a typical natural query, though phrasing is still plausible as something a person might type to a support agent."
+    }
+  },
+  {
+    "question": "credit utilization ratio 30% credit score",
+    "naturalness_overall": 0.6,
+    "naturalness_scores": {
+      "single_intent": 0.8,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.6,
+      "plausible_intent": 0.9,
+      "overall": 0.6,
+      "reasoning": "This is a keyword-style search query rather than a full natural question, but it reflects a coherent, plausible search intent (understanding how 30% credit utilization affects credit score). It's concise and single-topic, but phrased more like a Google search bar entry than a spoken/typed question, which slightly lowers natural phrasing."
+    }
+  },
+  {
+    "question": "How can I set up a plan to split a past card purchase into payments, and where can I check on it afterward?",
+    "naturalness_overall": 0.85,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.9,
+      "overall": 0.85,
+      "reasoning": "This reads as a single coherent goal (setting up a payment plan for a past purchase and later checking its status), phrased concisely and naturally, like something a person would ask a bank or credit card support agent. Both parts (setup and follow-up) are closely related aspects of the same task, not unrelated topics stitched together."
+    }
+  },
+  {
+    "question": "What would I typically get with a day-to-day money account if I want to spend from it, pay recurring expenses, get my paycheck sent there, pull out cash, and handle things from my phone\u2014and what are the usual limitations or extra charges to be aware of?",
+    "naturalness_overall": 0.3,
+    "naturalness_scores": {
+      "single_intent": 0.6,
+      "conciseness": 0.3,
+      "natural_phrasing": 0.5,
+      "plausible_intent": 0.7,
+      "overall": 0.3,
+      "reasoning": "The question is about a single coherent topic (checking/current account features), but it's overloaded with a laundry list of sub-requirements (spending, bills, direct deposit, ATM withdrawal, mobile access) plus a second question about fees/limitations, making it long and listy rather than something a person would naturally type. The phrasing is somewhat conversational ('day-to-day money account') but the sentence structure is clunky and enumerated like a checklist rather than natural speech. A real user might ask about a checking account's features more simply, or split this into separate queries."
+    }
+  },
+  {
+    "question": "credit card rewards grocery gas spending limits",
+    "naturalness_overall": 0.6,
+    "naturalness_scores": {
+      "single_intent": 0.7,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.6,
+      "plausible_intent": 0.8,
+      "overall": 0.6,
+      "reasoning": "Reads like a fragmentary search-bar query rather than a fully formed question, but it's plausible someone would type this while researching credit card rewards categories and spending caps. It's concise and single-topic (rewards limits on grocery/gas categories), though the lack of a verb makes it feel more like keyword search than natural spoken/written phrasing."
+    }
+  },
+  {
+    "question": "When evaluating promotions for opening a new everyday spending account, what are the main kinds of incentives banks typically use, and how are they usually delivered or applied?",
+    "naturalness_overall": 0.55,
+    "naturalness_scores": {
+      "single_intent": 0.8,
+      "conciseness": 0.6,
+      "natural_phrasing": 0.55,
+      "plausible_intent": 0.75,
+      "overall": 0.55,
+      "reasoning": "The question has a single overarching topic (bank account opening promotions) but bundles two sub-questions ('what kinds' and 'how delivered'), slightly reducing single-intent purity. It's longer than a typical natural query, with formal phrasing like 'When evaluating promotions for opening a new everyday spending account' that sounds more like a written report prompt than something a person would type into a search bar or ask a bank rep. 'Everyday spending account' is an oddly formal way to say 'checking account,' which hurts naturalness. The intent itself is plausible (someone comparing bank account bonuses), but the phrasing feels manufactured/academic rather than conversational."
+    }
+  },
+  {
+    "question": "What are the reporting rules if I\u2019m worried a bill from a doctor or hospital could still show up in the records lenders look at\u2014especially if the balance was small or I later paid it off\u2014and how long after I first fell behind could it appear?",
+    "naturalness_overall": 0.4,
+    "naturalness_scores": {
+      "single_intent": 0.7,
+      "conciseness": 0.4,
+      "natural_phrasing": 0.6,
+      "plausible_intent": 0.8,
+      "overall": 0.4,
+      "reasoning": "The question is about a single coherent topic (medical debt appearing on credit reports) but bundles multiple sub-questions (rules for reporting, effect of small balance, effect of paying it off, timing after delinquency) into one long, run-on sentence. It's plausible someone worried about credit would ask this, and the phrasing is conversational rather than robotic, but it's too long and clause-heavy to feel like a natural single query\u2014more like a written-out concern than a quick question."
+    }
+  },
+  {
+    "question": "When is a 5% cash back rewards card actually worth it for me?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about personal finance that a real person would naturally ask when evaluating credit card options. It's concise, phrased conversationally, and reflects a plausible real-world concern about whether a specific rewards card fits one's spending habits."
+    }
+  },
+  {
+    "question": "How can I use Chase Freedom Unlimited or Freedom Rise rewards to help pay for essentials like groceries or utility bills?",
+    "naturalness_overall": 0.85,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.85,
+      "overall": 0.85,
+      "reasoning": "The question asks one clear thing: how to use rewards from two specific Chase cards toward everyday expenses. It's concise and phrased naturally, like something a real cardholder would ask a bank rep or search online. Mentioning two card names together is slightly less typical (a person might hold only one), but it's plausible if someone is comparing or has both cards."
+    }
+  },
+  {
+    "question": "Is a money market account a good choice for everyday spending, or is another bank account better?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, concise, single-intent question about whether a money market account suits everyday spending needs versus another account type. It sounds like a natural query someone might type into a search engine or ask a bank representative when deciding where to keep their money."
+    }
+  },
+  {
+    "question": "Should I cash out my points now or save them for a trip if I might close my card soon?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This reads as a natural, single-intent question someone might ask a credit card rewards forum or support chat: whether to redeem points now versus save for a trip, given a planned card closure. It's concise, plausible, and phrased conversationally."
+    }
+  },
+  {
+    "question": "If I\u2019m turned down while trying to get a new card, how will I usually hear about it, and what can I do next to improve my chances?",
+    "naturalness_overall": 0.8,
+    "naturalness_scores": {
+      "single_intent": 0.85,
+      "conciseness": 0.8,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.9,
+      "overall": 0.8,
+      "reasoning": "This reads as a natural, coherent question someone denied a credit card might ask\u2014wanting to know both how they'll be notified and how to improve future chances. The two parts are closely related (same scenario, natural follow-up), phrasing is conversational and realistic for a forum or support chat, and it's reasonably concise without excessive hedging or scenario framing."
+    }
+  },
+  {
+    "question": "Chase spending rewards category limits rules",
+    "naturalness_overall": 0.85,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.9,
+      "overall": 0.85,
+      "reasoning": "This reads like a natural search-engine query someone might type to find out how Chase's rotating/fixed spending categories and quarterly caps work. It's short, focused on one topic (category limits/rules for Chase rewards cards), and plausible as a real search. Slightly terse phrasing typical of search queries rather than full sentences, which is normal and natural for this format."
+    }
+  },
+  {
+    "question": "What does a parent need to have to open the Chase account that lets teens get direct deposits?",
+    "naturalness_overall": 0.75,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.85,
+      "natural_phrasing": 0.75,
+      "plausible_intent": 0.9,
+      "overall": 0.75,
+      "reasoning": "This reads as a single, coherent question about requirements for a parent opening a Chase teen banking account with direct deposit capability. It's fairly concise and plausible - a parent researching teen banking options would ask this. The phrasing is slightly awkward ('that lets teens get direct deposits' is a bit clunky) but still sounds like a real search query or support question."
+    }
+  },
+  {
+    "question": "If I get an airline or hotel travel card for the extra brand rewards, will my bonus and points be tied to that brand or usable more broadly?",
+    "naturalness_overall": 0.85,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.85,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.9,
+      "overall": 0.85,
+      "reasoning": "This reads as a single, coherent question about whether co-branded travel card rewards are locked to that brand or transferable/usable elsewhere. It's concise, phrased naturally like something a real person comparing credit card options would ask, and has a clear plausible motivation (deciding whether to get a branded card)."
+    }
+  },
+  {
+    "question": "Can I transfer Chase Ultimate Rewards points to a travel partner with my card, and what are the transfer rules?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 0.95,
+      "overall": 0.9,
+      "reasoning": "This reads as a single coherent question about transferring Chase Ultimate Rewards points, with the second clause (transfer rules) being a natural elaboration of the same topic rather than an unrelated sub-question. It's concise, phrased like a typical customer query someone would type into a search engine or ask a bank rep, and plausible since many cardholders genuinely want to know both whether transfers are possible and the rules governing them."
+    }
+  }
+]
