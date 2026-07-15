@@ -822,12 +822,19 @@
       <summary>Search Agent internals</summary>
       <div class="detail-body">
         <p>
-          Every linking request starts with the <strong>metadata linker</strong> (zero-cost,
-          rule-based). That result carries a confidence score. The search agent linker then
-          decides whether to upgrade to an LLM-driven link based on two triggers:
+          Every linking request starts with a fast, non-LLM pass that builds search
+          queries from the primary chunk's own structure — its headings (h1, h2, h3),
+          named entities found in the text, and TF-IDF keyphrases — then runs those
+          queries against the corpus search index to find candidate secondaries. This
+          first pass is cheap (no LLM calls) and produces a confidence score based on
+          how many good candidates it found.
+        </p>
+        <p>
+          The search agent linker then decides whether to upgrade to the LLM-driven
+          approach based on two triggers:
         </p>
         <ul>
-          <li>The metadata linker's confidence is below 0.5 (weak structural match), <em>or</em></li>
+          <li>The fast pass found weak results (confidence below 0.5), <em>or</em></li>
           <li>The task is randomly selected by <code>search_agent_pct</code> (e.g. 1.0 = always use LLM)</li>
         </ul>
         <p>
