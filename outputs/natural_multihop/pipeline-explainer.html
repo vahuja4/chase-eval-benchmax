@@ -831,12 +831,12 @@
           <li>The task is randomly selected by <code>search_agent_pct</code> (e.g. 1.0 = always use LLM)</li>
         </ul>
         <p>
-          When the LLM path fires, the linker sends the primary chunk's content to a
-          <strong>rollout server</strong> — a remote execution environment running a
-          <code>LinkerEnv</code>. Inside this environment, an LLM agent has access to
-          corpus search tools (semantic, keyword, hybrid). The agent reads the primary
-          chunk, formulates search queries, inspects results, and iterates — typically
-          over 3–4 turns with configurable limits on turns and tool calls.
+          When the LLM path fires, an LLM is given the primary chunk's content and
+          asked to find related chunks that could support a multi-hop question. The LLM
+          can call corpus search tools (semantic, keyword, and hybrid) — it reads the
+          primary chunk, decides what to search for, reviews the results, and refines
+          its queries. This runs as an agentic loop, typically over 3–4 turns with
+          configurable limits on turns and tool calls.
         </p>
         <p>
           The rollout captures all of the agent's messages, tool calls, and reasoning.
