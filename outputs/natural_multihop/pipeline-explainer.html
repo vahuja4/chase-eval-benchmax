@@ -696,10 +696,11 @@
   <div class="stage-card" data-phase="prep">
     <h3>Corpus Loading</h3>
     <p>
-      The pipeline starts by loading document chunks from a corpus source — typically a
-      PostgreSQL-backed chunk store. Chunks are the atomic units of text: paragraphs or
-      sections of documents, each identified by a unique hash with associated metadata
-      (file path, headers, document ID).
+      The pipeline starts by loading document chunks from the corpus. Chunks are the
+      atomic units of text — paragraphs or sections of documents, each identified by a
+      unique hash with associated metadata (file path, headers, document ID). In our
+      case, the corpus is the Chase.com public help articles (credit cards, banking,
+      auto loans, mortgages), which were crawled and chunked in a prior step.
     </p>
     <p>
       A <strong>diverse profile sample</strong> is drawn from the full corpus. This sample
