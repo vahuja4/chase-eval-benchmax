@@ -626,7 +626,7 @@
       <div class="overview-item">
         <div class="oi-label">Output</div>
         <div class="oi-value">QA Pairs</div>
-        <div class="oi-note">Multi-hop &amp; lookup types, train/eval split</div>
+        <div class="oi-note">Multi-hop questions that resist simple retrieval</div>
       </div>
       <div class="overview-item">
         <div class="oi-label">Strategy</div>
@@ -677,7 +677,6 @@
 
       <div class="flow-box" data-phase="out" onclick="scrollToSection('sec-postprocess')">Post-Processing &amp; Dedup</div>
       <div class="flow-connector"></div>
-      <div class="flow-box" data-phase="out" onclick="scrollToSection('sec-format')">Train / Eval Split</div>
       <div class="flow-connector"></div>
       <div class="flow-box" data-phase="ext" onclick="scrollToSection('sec-naturalness')">Naturalness Judge (Claude Sonnet)</div>
     </div>
@@ -706,9 +705,38 @@
     <p>
       A <strong>diverse profile sample</strong> is drawn from the full corpus. This sample
       drives corpus profiling, entity extraction, and seed chunk selection for generation.
-      The sampling strategy prioritizes diversity across documents rather than random draws,
-      ensuring coverage of different topics and document types.
     </p>
+    <details>
+      <summary>Diversity sampling</summary>
+      <div class="detail-body">
+        <p>
+          Diversity is enforced in two layers. First, the pipeline draws a pool of roughly
+          5% of the corpus (clamped between 500 and 10,000 chunks). Half the pool is allocated
+          proportionally across documents — guaranteeing every document is represented — and the
+          other half is filled randomly for volume.
+        </p>
+        <p>
+          Second, when the pipeline selects the handful of chunks to send to the
+          single corpus-profiling call, a <strong>greedy max-diversity selector</strong>
+          picks chunks that maximize Jaccard distance from each other, rejecting any
+          candidate too textually similar to an already-selected chunk (threshold ≥ 0.3).
+          Together, these ensure both broad document coverage and maximal content variety
+          in the sample that shapes the corpus summary.
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary>Seed chunk suitability scoring</summary>
+      <div class="detail-body">
+        <p>
+          Before chunks from this pool are used as <strong>seed chunks</strong> (starting points
+          for QA generation), each is scored for <strong>suitability</strong> on six signals:
+          metadata richness, entity density, lexical diversity, content length, TF-IDF
+          distinctiveness, and answerability. Chunks below the 25th percentile suitability
+          score are excluded — seeds are sampled only from the eligible top 75%.
+        </p>
+      </div>
+    </details>
   </div>
 
   <div class="stage-card" data-phase="prep" id="sec-profiling">
@@ -725,22 +753,40 @@
       available. Without profiling, the generator would work blind.
     </p>
     <details>
-      <summary>Entity extraction</summary>
+      <summary>Keyphrase extraction (labeled "entity extraction" in code)</summary>
       <div class="detail-body">
         <p>
-          When enabled, the pipeline extracts named entities and key phrases from all
-          corpus chunks using KeyBERT combined with metadata analysis. This builds three
-          structures:
+          Despite the name, this is not Named Entity Recognition. The pipeline uses
+          <strong>KeyBERT</strong> to extract statistically salient 1–2 word phrases
+          from a sample of corpus chunks. KeyBERT works by embedding the full chunk
+          and every 1–2 word n-gram from it into vectors (using a sentence transformer),
+          then picking the n-grams whose embeddings are closest (by cosine similarity)
+          to the chunk's overall embedding. In other words, it finds the short phrases
+          that best capture what a chunk is about.
+        </p>
+        <p>
+          For the Chase corpus, this produces phrases like "balance transfer," "annual fee,"
+          and "credit limit" (labeled <code>domain_term</code>) alongside "Sapphire Reserve"
+          and "Freedom Unlimited" (labeled <code>entity</code> — simply because a word is
+          capitalized, not from an NER model). Phrases below a 0.4 similarity threshold
+          are dropped, and diversity filtering (MMR) prevents returning five keyphrases
+          that all mean the same thing.
+        </p>
+        <p>
+          Extracted keyphrases are then filtered and deduplicated — removing rare or
+          overly common terms and merging near-synonyms — to produce a clean set of
+          corpus-salient phrases. The result is a bipartite graph:
         </p>
         <ul>
-          <li><strong>Entity → Chunk index</strong> — which chunks mention each entity</li>
-          <li><strong>Chunk → Entity index</strong> — which entities appear in each chunk</li>
-          <li><strong>Entity co-occurrence matrix</strong> — which entities appear together,
+          <li><strong>Keyphrase → Chunk index</strong> — which chunks mention each keyphrase</li>
+          <li><strong>Chunk → Keyphrase index</strong> — which keyphrases appear in each chunk</li>
+          <li><strong>Co-occurrence matrix</strong> — which keyphrases appear together,
           enabling cross-document relationship discovery</li>
         </ul>
         <p>
-          These indices feed into the linker and the auto-tuner, helping the pipeline
-          understand which chunks can be meaningfully connected for multi-hop questions.
+          These indices feed into chunk suitability scoring (entity density is one of
+          the six signals) and auto-tuning (keyphrase density influences how many
+          multi-hop questions the pipeline attempts).
         </p>
       </div>
     </details>
@@ -789,80 +835,40 @@
       multi-hop question will be generated.
     </p>
     <p>
-      Three linking strategies are available, selectable via configuration:
+      The linker uses an <strong>LLM-powered search agent</strong> with access to a single
+      corpus search tool. It reads the primary chunk, formulates search queries, evaluates
+      results, and iteratively discovers connections — mimicking how a human researcher
+      would find related content. It uses rollout-based exploration with configurable turn
+      and tool-call limits.
     </p>
 
-    <table class="variant-table">
-      <thead>
-        <tr><th>Linker</th><th>How it works</th><th>Best for</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Metadata</strong></td>
-          <td>Finds secondary chunks by structural signals: same document, shared
-            headers, overlapping entities, metadata similarity. Fast and deterministic.</td>
-          <td>Corpora with rich metadata and clear document structure</td>
-        </tr>
-        <tr>
-          <td><strong>Search Agent</strong></td>
-          <td>An LLM-powered agent with access to corpus search tools. It reads the
-            primary chunk, formulates search queries, evaluates results, and iteratively
-            discovers connections — mimicking how a human researcher would find related content.
-            Uses rollout-based exploration with configurable turn and tool-call limits.</td>
-          <td>Finding deep semantic connections across documents</td>
-        </tr>
-        <tr>
-          <td><strong>Wiki</strong></td>
-          <td>Uses pre-built entity cluster wiki pages (generated from the entity
-            co-occurrence graph) to find chunks connected through shared topic clusters.</td>
-          <td>Entity-dense corpora with clear topic clusters</td>
-        </tr>
-      </tbody>
-    </table>
-
     <details>
-      <summary>Search Agent internals</summary>
+      <summary>How it works</summary>
       <div class="detail-body">
         <p>
-          Every linking request starts with a fast, non-LLM pass that builds search
-          queries from the primary chunk's own structure — its headings (h1, h2, h3),
-          named entities found in the text, and TF-IDF keyphrases — then runs those
-          queries against the corpus search index to find candidate secondaries. This
-          first pass is cheap (no LLM calls) and produces a confidence score based on
-          how many good candidates it found.
+          The process has two stages: <strong>search</strong> and <strong>select</strong>.
+        </p>
+
+        <p style="margin-top: 0.75rem; font-weight: 600; color: var(--ink);">1. Search — the LLM explores the corpus</p>
+        <p>
+          The LLM receives only the primary chunk's content and a single corpus search
+          tool. It doesn't know what the secondary chunk should be — it has to discover
+          it. The prompt asks it to identify what information is <em>missing</em> from
+          the primary that, if combined with it, would require multi-step reasoning
+          to answer a question. It then formulates a search query targeting that gap.
         </p>
         <p>
-          The search agent linker then decides whether to upgrade to the LLM-driven
-          approach based on two triggers:
+          When results come back, the LLM reads through them and either picks one that
+          creates a genuine logical dependency with the primary, or refines its query
+          and searches again. This runs as an agentic loop over 3–4 turns with
+          configurable limits on turns and tool calls. At the end, the LLM also
+          produces an <strong>evidence chain</strong> — its explanation of how the
+          chunks relate — which is passed to the generation prompt as context.
         </p>
-        <ul>
-          <li>The fast pass found weak results (confidence below 0.5), <em>or</em></li>
-          <li>The task is randomly selected by <code>search_agent_pct</code> (e.g. 1.0 = always use LLM)</li>
-        </ul>
+
+        <p style="margin-top: 0.75rem; font-weight: 600; color: var(--ink);">2. Select — filter and rank candidates</p>
         <p>
-          When the LLM path fires, an LLM is given the primary chunk's content and
-          asked to find related chunks that could support a multi-hop question. The LLM
-          can call corpus search tools (semantic, keyword, and hybrid) — it reads the
-          primary chunk, decides what to search for, reviews the results, and refines
-          its queries. This runs as an agentic loop, typically over 3–4 turns with
-          configurable limits on turns and tool calls.
-        </p>
-        <p>
-          The rollout captures all of the agent's messages, tool calls, and reasoning.
-          From these, the linker extracts two things:
-        </p>
-        <ul>
-          <li><strong>Search queries</strong> — parsed from the agent's tool calls
-            (supports Anthropic tool_use blocks, OpenAI-style function calls, and
-            XML <code>&lt;tool_call&gt;</code> tags)</li>
-          <li><strong>Evidence chain</strong> — the agent's explanation of how the
-            chunks connect, parsed from <code>&lt;evidence_chain&gt;</code> tags in
-            its final message</li>
-        </ul>
-        <p>
-          The extracted queries are then <strong>replayed</strong> against the actual
-          corpus search index to retrieve real Chunk objects. These candidates go through
-          a multi-step filter:
+          The search results go through a filtering pipeline:
         </p>
         <ul>
           <li>Chunks shorter than 400 characters are dropped</li>
@@ -872,14 +878,13 @@
             unrelated results</li>
         </ul>
         <p>
-          Surviving candidates are ranked by a composite score (60% search relevance,
-          40% coherence), then passed through a <strong>greedy diversity selector</strong>
-          that caps pairwise similarity at 0.8 to avoid near-duplicate secondaries.
-          The top <em>N</em> become the anchor bundle's secondary chunks.
-        </p>
-        <p>
-          If the LLM rollout fails for any reason, the linker falls back to the
-          metadata linker's result (flagged with <code>llm_fallback: true</code>).
+          Survivors are scored on two signals: <strong>search relevance (60%)</strong>
+          — how well the chunk matched the query (BM25, cosine similarity, or fused
+          RRF score depending on the backend) — and <strong>topical overlap (40%)</strong>
+          — Jaccard similarity between the candidate and the primary chunk, measuring
+          whether they're about related topics regardless of the query.
+          Candidates are picked one at a time, skipping any too similar to one already
+          selected. The best picks become the anchor bundle's secondary chunks.
         </p>
       </div>
     </details>
@@ -907,8 +912,11 @@
         </p>
         <ul>
           <li><strong>Question type</strong> — should this be a <em>lookup</em> question
-          (answerable from a single article) or a <em>multi-hop</em> question (requires
-          combining information from multiple articles)?</li>
+          (answerable from a single article) or a <em>multi-hop</em> question?
+          A multi-hop question requires combining information from multiple separate documents
+          — no single document contains the complete answer. For example, learning about
+          transfer partners from a Sapphire benefits page and combining that with Southwest's
+          Companion Pass rules from a different article.</li>
           <li><strong>Hop count</strong> — for multi-hop questions, how many articles should
           the reader need to consult? (e.g. 2-hop means combining two articles)</li>
           <li><strong>Starting article</strong> — which chunk to use as the seed; the linker
@@ -976,18 +984,19 @@
       <div class="filter-stage">
         <div class="filter-stage-num">2</div>
         <div class="filter-stage-name">Quality Gate</div>
-        <div class="filter-stage-desc">Basic quality checks: is it a well-formed question? Does the answer make sense? Rejects malformed or trivial outputs.</div>
+        <div class="filter-stage-desc">Rule-based checks (no LLM). Rejects fragments that aren't real questions (e.g. bare noun phrases with no verb), questions about page layout or headings rather than content, and "guide pointer" answers that just say "check the docs." Also flags answers that are too short relative to the question and sends them back for regeneration.</div>
       </div>
       <div class="filter-stage">
         <div class="filter-stage-num">3</div>
         <div class="filter-stage-name">Retrieval Too Easy</div>
-        <div class="filter-stage-desc">Checks whether a simple keyword search would already find the answer
+        <div class="filter-stage-desc">Checks whether a simple keyword search would already surface the answer
           — if so, the question doesn't actually require multi-hop reasoning.
           Works in two layers: first, it searches the corpus using the question text
           and checks how many of the returned results overlap with the question's
-          reference chunks. If the overlap is high, the question is immediately
-          flagged as too easy. If not, an LLM judge reviews the search results
-          and decides whether someone could answer the question from them alone.
+          reference chunks. High overlap means the question is immediately flagged
+          as too easy. Otherwise, an LLM judge is given only the question and
+          the search results, and asked: "can you answer this from what's here?"
+          If yes, the question is too easy for a multi-hop benchmark.
           In batch3, this filter rejected 10 out of 22 generated questions.</div>
       </div>
       <div class="filter-stage">
@@ -998,9 +1007,22 @@
       <div class="filter-stage">
         <div class="filter-stage-num">5</div>
         <div class="filter-stage-name">Hop Count Validity</div>
-        <div class="filter-stage-desc">An LLM judge verifies the question genuinely requires the claimed number of reasoning hops. Catches questions that look multi-hop but can be answered from a single chunk.</div>
+        <div class="filter-stage-desc">Uses <strong>leave-one-out testing</strong>: for each reference chunk, the filter
+          removes it and asks an LLM judge whether the question can still be fully answered from the
+          remaining chunks alone. If yes, that chunk was redundant and the question isn't truly multi-hop.
+          A word-overlap pre-gate catches obvious cases (one chunk dominates >60% of the answer while
+          another contributes <15%) without spending an LLM call.</div>
       </div>
     </div>
+
+    <p style="margin-top: 1rem; font-size: 0.92rem; color: var(--ink-muted);">
+      Filters 3 and 5 enforce the multi-hop requirement from opposite directions.
+      <strong>Retrieval Too Easy</strong> asks: is this question hard to <em>retrieve</em>?
+      (Can a simple search already surface the answer?)
+      <strong>Hop Count Validity</strong> asks: is this question hard to <em>answer</em> from a single source?
+      (Does it genuinely require combining information from multiple documents?)
+      A question must pass both — hard to find <em>and</em> hard to answer without cross-document reasoning.
+    </p>
 
   </div>
 
@@ -1101,20 +1123,6 @@
     </ul>
   </div>
 
-  <div class="stage-card" data-phase="out" id="sec-format">
-    <h3>Train / Eval Split</h3>
-    <p>
-      The final accepted items are split into training and evaluation sets. The split
-      is stratified by qa_type and style to ensure both sets have representative distributions.
-      The default split ratio is 80% train / 20% eval.
-    </p>
-    <p>
-      Each item in the output includes the question, answer, reference chunks, eval scores
-      (grounding, hop validity, composite), generation metadata, and the full journey event
-      log tracking every stage the item passed through.
-    </p>
-  </div>
-
   <!-- ═══════════════════════════════════════════ -->
   <!-- PHASE: EXTENSION                            -->
   <!-- ═══════════════════════════════════════════ -->
@@ -1192,9 +1200,7 @@
       <span class="key">targets.primary_type_distribution</span>: <span class="val">{lookup: 0.0, multi_hop: 1.0}</span><br>
       <span class="key">targets.hop_distribution</span>: <span class="val">{2: 1.0}</span> <span class="cmt"># all 2-hop questions</span><br>
       <br>
-      <span class="key">linker.type</span>: <span class="val">"search_agent"</span> <span class="cmt"># or "metadata", "wiki"</span><br>
-      <span class="key">linker.search_agent_pct</span>: <span class="val">1.0</span> <span class="cmt"># fraction using agent linker</span><br>
-      <span class="key">linker.search_agent.max_turns</span>: <span class="val">4</span><br>
+      <span class="key">linker.max_turns</span>: <span class="val">4</span> <span class="cmt"># max agent exploration turns per linking request</span><br>
       <br>
       <span class="key">filtering.filters</span>: <span class="val">["quality_gate", "retrieval_too_easy_llm", "grounding_llm", "hop_count_validity"]</span><br>
       <br>
@@ -1223,7 +1229,6 @@
       <li>The <strong>hop count judge</strong> confirms multi-hop reasoning is required</li>
       <li>If the item needs refinement, it loops back to step 4 with feedback</li>
       <li>Accepted items are <strong>deduplicated</strong> and <strong>type-balanced</strong></li>
-      <li>Final items are split into <strong>train and eval</strong> sets</li>
       <li>A <strong>naturalness judge</strong> (Claude Sonnet) scores each question on four dimensions and drops anything that sounds synthetic</li>
     </ol>
     <p>

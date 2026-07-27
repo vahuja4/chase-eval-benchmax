@@ -13,3 +13,7 @@ data/snapshots/chase_2026_05_27/entity_embeddings_cache.jsonl
 data/snapshots/chase_2026_05_27/entity_harvest_batch_input.jsonl
 data/snapshots/chase_2026_05_27/seed_chains_reservoir.jsonl
 data/snapshots/chase_2026_05_27/info_density_batch_input.jsonl
+
+# Transient run state (micro-batch resume checkpoints, debug run dirs)
+outputs/**/.checkpoints/
+outputs/debug_linking/

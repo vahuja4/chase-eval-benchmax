@@ -1,0 +1,556 @@
+<title>Pipeline Explainer — Q&A</title>
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --ink: #2a2d3a;
+    --ink-mid: #50536a;
+    --ink-faint: #93959f;
+    --accent: #1a6b5a;
+    --accent-light: #e6f2ef;
+    --rule: #d6d3ca;
+    --rule-fine: #e6e3dc;
+    --code-bg: #edebe5;
+
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121318;
+      --surface: #1a1c24;
+      --ink: #d4d2cc;
+      --ink-mid: #969aa8;
+      --ink-faint: #5c5f70;
+      --accent: #3db89a;
+      --accent-light: #162924;
+      --rule: #282b36;
+      --rule-fine: #21242e;
+      --code-bg: #1e2028;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121318;
+    --surface: #1a1c24;
+    --ink: #d4d2cc;
+    --ink-mid: #969aa8;
+    --ink-faint: #5c5f70;
+    --accent: #3db89a;
+    --accent-light: #162924;
+    --rule: #282b36;
+    --rule-fine: #21242e;
+    --code-bg: #1e2028;
+  }
+  :root[data-theme="light"] {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --ink: #2a2d3a;
+    --ink-mid: #50536a;
+    --ink-faint: #93959f;
+    --accent: #1a6b5a;
+    --accent-light: #e6f2ef;
+    --rule: #d6d3ca;
+    --rule-fine: #e6e3dc;
+    --code-bg: #edebe5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  header h1 {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin-bottom: 0.4rem;
+  }
+
+  header .subtitle {
+    font-size: 0.92rem;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  .qa-entry {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule-fine);
+  }
+  .qa-entry:last-of-type {
+    border-bottom: none;
+  }
+
+  .question {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+
+  .q-marker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+    line-height: 1;
+    position: relative;
+    top: -1px;
+  }
+
+  .q-text {
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .answer {
+    padding-left: 2.85rem;
+    color: var(--ink-mid);
+    font-size: 0.94rem;
+    line-height: 1.72;
+  }
+
+  .answer p {
+    margin-bottom: 0.85rem;
+  }
+  .answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .answer strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .answer ul, .answer ol {
+    padding-left: 1.25rem;
+    margin: 0.5rem 0 0.85rem;
+  }
+
+  .answer li {
+    margin-bottom: 0.4rem;
+  }
+
+  .answer code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--code-bg);
+    padding: 0.12em 0.35em;
+    border-radius: 3px;
+  }
+
+  .subsection {
+    margin-top: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--rule-fine);
+    border-radius: 6px;
+    border-left: 2.5px solid var(--accent);
+  }
+
+  .subsection-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.01em;
+  }
+
+  .subsection p, .subsection ul {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 2rem 1rem 3rem; }
+    header h1 { font-size: 1.5rem; }
+    .answer { padding-left: 0; margin-top: 0.75rem; }
+    .q-text { font-size: 1.05rem; }
+  }
+</style>
+
+<div class="page">
+
+  <header>
+    <h1>Pipeline Explainer — Q&A</h1>
+    <p class="subtitle">Questions and answers about the eval generation pipeline, covering execution model, corpus sampling, diversity mechanisms, and chunk linking.</p>
+  </header>
+
+  <!-- Q1 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q1</span>
+      <span class="q-text">What does "Micro-batch — Dynamic sizing, checkpointed, resumable" mean?</span>
+    </div>
+    <div class="answer">
+      <p><strong>Micro-batch</strong> means the pipeline doesn't generate all QA pairs in one shot. It works in small groups — say 5 at a time. Each batch goes through the full cycle (generate, filter, regenerate) before the next batch starts.</p>
+      <p>The three properties describe how those batches behave:</p>
+      <ul>
+        <li><strong>Dynamic sizing</strong> — before each batch, the pipeline checks how many questions of each type it still needs. If the target is 15 multi-hop pairs and 12 are already done, the next batch only generates 3, not another full 5. The batch size adapts to what's remaining.</li>
+        <li><strong>Checkpointed</strong> — progress is saved after each batch completes. If 3 batches have finished and produced 10 good QA pairs, that state is persisted to disk.</li>
+        <li><strong>Resumable</strong> — if the pipeline crashes, times out, or is stopped mid-run, it can be restarted and picks up from the last checkpoint instead of regenerating everything from scratch.</li>
+      </ul>
+      <p>The alternative would be generating all questions at once in a single large call, which is fragile (one failure loses everything), wasteful (might generate 30 questions when only 15 are needed after filtering), and non-adaptive (can't adjust the mix based on what's already passed).</p>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q2</span>
+      <span class="q-text">What is the purpose of drawing a diverse profile sample from the corpus?</span>
+    </div>
+    <div class="answer">
+      <p>The pipeline can't afford to process the entire corpus through an LLM — that would be slow and expensive. So it draws a representative sample up front and uses it for three things:</p>
+      <ol>
+        <li><strong>Corpus profiling</strong> — the sample is fed to an LLM that writes a structured summary of what the corpus is about (domain, vocabulary, document types). That summary is then injected into every generation prompt so the question-writing LLM has domain context.</li>
+        <li><strong>Entity extraction</strong> — KeyBERT runs over the sample to build entity indices (which chunks mention which entities, which entities co-occur). These indices help the linker find meaningful cross-document connections later.</li>
+        <li><strong>Seed chunk selection</strong> — the chunks in this sample become the pool from which the pipeline picks "primary chunks" (starting points) for QA generation. Since the sample was drawn to maximize diversity, the generated questions cover the breadth of the corpus rather than clustering around a few popular articles.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q3</span>
+      <span class="q-text">What exactly ensures diversity in the sampling?</span>
+    </div>
+    <div class="answer">
+      <p>Two mechanisms work together, at different stages:</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Mechanism 1 — Stratified document sampling</div>
+        <p>The function <code>diverse_profile_sample()</code> draws a pool of chunks (roughly 5% of the corpus, capped between 500–10,000). The budget is split in half:</p>
+        <ul>
+          <li><strong>First half — stratified by document.</strong> Chunks are grouped by document ID. Each document gets at least 1 chunk, with the rest distributed proportionally. This guarantees that even a small document gets representation alongside a large one.</li>
+          <li><strong>Second half — random fill.</strong> The remaining budget is filled randomly from chunks not already selected, adding volume without sacrificing the coverage guarantee.</li>
+        </ul>
+        <p>For example, with 50 Chase.com help articles and a budget of 500 chunks: roughly 250 are spread across all 50 articles (at least ~5 per article), and the other 250 are random.</p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Mechanism 2 — Greedy max-diversity selection</div>
+        <p>When the pipeline needs a <em>small</em> subset from that pool (e.g., 4–8 chunks to show the profiling LLM), the function <code>select_diverse()</code> uses a Jaccard distance algorithm:</p>
+        <ul>
+          <li>Each chunk is tokenized into a set of lowercased words.</li>
+          <li>The seed is the chunk with the largest vocabulary (most unique tokens).</li>
+          <li>Each subsequent pick maximizes the minimum Jaccard distance to all already-selected chunks.</li>
+          <li>Any candidate below 0.3 Jaccard distance from an existing pick is rejected as too similar.</li>
+        </ul>
+        <p>This ensures the few chunks the profiling LLM actually sees are as textually different from each other as possible — not just from different documents, but covering different vocabulary and topics.</p>
+      </div>
+
+      <p style="margin-top: 0.85rem;"><strong>In short:</strong> stratified sampling ensures every document is represented in the pool; Jaccard-based greedy selection ensures the chunks fed to the LLM are maximally diverse in content.</p>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q4</span>
+      <span class="q-text">How does the metadata linker find related chunks without any LLM calls?</span>
+    </div>
+    <div class="answer">
+      <p>It generates search queries from the primary chunk's own structure, runs those queries against the corpus search index, and then filters and ranks the results. No LLM is involved at any point — it's entirely deterministic.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Query generation (4 strategies, in priority order)</div>
+        <ul>
+          <li><strong>Header-context queries</strong> — extracts values from the chunk's metadata keys (<code>h1</code>, <code>h2</code>, <code>h3</code>, <code>section_header</code>, <code>title</code>). These are the most precise signal because they're structural labels the document already carries.</li>
+          <li><strong>Code-pattern regex matches</strong> — runs discriminative entity patterns (regexes identified during corpus profiling) against the chunk text. Matched tokens become search queries.</li>
+          <li><strong>Compound entity queries</strong> — takes up to 4 entities found in the chunk and generates pairwise combinations (e.g., "Chase Sapphire balance transfer"). This finds chunks that share multiple related concepts rather than just one keyword.</li>
+          <li><strong>TF-IDF keyphrases</strong> — corpus-informed keyword extraction. Because TF-IDF is computed against the corpus's document frequencies, it favours terms that are distinctive to this chunk rather than common across the corpus.</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Post-search filtering pipeline</div>
+        <p>Search results go through several filters before ranking:</p>
+        <ul>
+          <li>The primary chunk itself is excluded</li>
+          <li>Chunks shorter than 400 characters are dropped</li>
+          <li>Same-file chunks are excluded (unless in "sequential" reasoning mode)</li>
+          <li>Chunks already used by prior questions are skipped (cross-question dedup)</li>
+          <li>A <strong>coherence floor</strong> requires at least 15% Jaccard token overlap with the primary — removes completely unrelated results</li>
+          <li>A <strong>similarity ceiling</strong> of 55% Jaccard against the primary — removes near-duplicates that would make the question trivial</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Ranking and selection</div>
+        <p>Surviving candidates are scored with a composite: <strong>40% search relevance + 30% Jaccard coherence + 30% entity overlap</strong> (with an optional wiki co-occurrence boost). Candidates are then picked greedily, skipping any whose Jaccard similarity to an already-selected secondary exceeds 0.55. This prevents the anchor bundle from containing two chunks that say nearly the same thing.</p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Retry mechanism</div>
+        <p>If confidence after the first pass is below 0.5 (meaning not enough good secondaries were found), the linker generates a second round of queries from the chunk's body text — specifically the first sentence and the longest capitalized multi-word phrase (likely a product or feature name). These results are merged into the candidate pool and selection runs again.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q5</span>
+      <span class="q-text">How does the search agent linker work, and how does it relate to the metadata linker?</span>
+    </div>
+    <div class="answer">
+      <p>The search agent linker is a <strong>hybrid</strong> — it always runs the metadata linker first (which is free), then decides whether to also invoke an LLM for deeper exploration.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Decision to use the LLM</div>
+        <p>The LLM path fires if either condition is true:</p>
+        <ul>
+          <li>The metadata linker returned <strong>low confidence</strong> (below 0.5) — meaning it couldn't find enough good secondaries with heuristics alone</li>
+          <li>This item was <strong>randomly selected</strong> by <code>search_agent_pct</code> — e.g. at 1.0, every item goes through the LLM regardless of metadata confidence</li>
+        </ul>
+        <p>If neither condition is met, the metadata linker's result is returned as-is — the LLM is never called.</p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">LLM linking flow</div>
+        <p>When the LLM path fires:</p>
+        <ol>
+          <li>The primary chunk's content (up to 4,000 characters) is sent to an LLM via a rollout server</li>
+          <li>The LLM runs as an <strong>agent with corpus search tools</strong> — it can call semantic search, keyword search, and hybrid search against the actual corpus</li>
+          <li>It explores iteratively over multiple turns (configurable via <code>max_turns</code> and <code>max_tool_calls</code>), reading search results and refining its queries</li>
+          <li>After the rollout completes, two things are extracted from the conversation transcript:
+            <ul>
+              <li><strong>Search queries</strong> — parsed from the LLM's tool-call blocks (supports Anthropic <code>tool_use</code>, OpenAI function calls, and XML <code>&lt;tool_call&gt;</code> formats)</li>
+              <li><strong>Evidence chain</strong> — parsed from <code>&lt;evidence_chain&gt;</code> tags in the LLM's final message, explaining how the discovered chunks connect to each other and to the primary</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">The query replay indirection</div>
+        <p>The LLM runs in a separate environment (the rollout server), so the search results it sees come back as text — not as chunk objects the pipeline can use directly. To bridge this gap, the pipeline takes the query strings the LLM searched for and <strong>replays those same queries</strong> against the local corpus. The returned chunks are the actual objects that go into the anchor bundle.</p>
+        <p>This means the LLM's value isn't in the specific results it found — it's in the <strong>queries it formulated</strong> and the <strong>evidence chain</strong> it articulated. The pipeline trusts the LLM's search strategy but verifies the results locally.</p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Post-search filtering (differs from metadata linker)</div>
+        <p>The same basic rules apply (400 char min, same-file exclusion, cross-question dedup, coherence floor), but the parameters differ:</p>
+        <ul>
+          <li><strong>Composite ranking</strong>: 60% search relevance + 40% Jaccard (vs. metadata's 40/30/30 split). There's no separate entity-overlap term — the LLM's query quality already encodes that signal.</li>
+          <li><strong>Diversity cap</strong>: 0.8 Jaccard between secondaries (vs. metadata's 0.55). This is more relaxed because the LLM is trusted to have deliberately chosen different chunks.</li>
+          <li><strong>Confidence score</strong>: a composite of 40% fulfillment (did we find enough secondaries?) + 30% survival rate (what fraction of search results survived filtering?) + 30% evidence chain quality (did the LLM produce a structured explanation of the connection?).</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Fallback behaviour</div>
+        <p>If the LLM rollout fails for any reason (timeout, API error, no queries extracted), the search agent linker falls back to the metadata linker's result, flagged with <code>llm_fallback: true</code> in the structural hints. This ensures the pipeline never blocks on an LLM failure during linking.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q6</span>
+      <span class="q-text">Why does the search agent replay queries locally instead of using the LLM's search results directly?</span>
+    </div>
+    <div class="answer">
+      <p>The LLM runs on a <strong>rollout server</strong> — a separate environment that executes the agent loop. The search results the LLM sees during its rollout are rendered as text in its conversation (descriptions, snippets), not as the pipeline's internal <code>Chunk</code> objects with hashes, metadata, and content fields.</p>
+      <p>To get usable chunk objects for the anchor bundle, the pipeline needs to go through the local corpus source. The cheapest way to do that is to take the query strings the LLM used (which are already structured — they come from parsed tool-call blocks) and replay them against the same search index. The local search returns actual <code>Chunk</code> objects that carry the hash, metadata, and full content the pipeline needs downstream.</p>
+      <p>In practice this means the LLM's contribution is its <strong>search strategy</strong> — what to look for and why — not the raw results themselves. The evidence chain it produces also gets passed through to the QA generation prompt as a structural hint, giving the question-writing LLM context about how the chunks relate.</p>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q7</span>
+      <span class="q-text">Where does the primary chunk come from?</span>
+    </div>
+    <div class="answer">
+      <p>The primary chunk goes through a <strong>three-stage funnel</strong>:</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Stage 1 — The diverse profile pool</div>
+        <p>The starting pool is the 500–10,000 chunk sample built by <code>diverse_profile_sample()</code> (stratified by document + random fill, as described in Q3).</p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Stage 2 — Suitability scoring</div>
+        <p>Every chunk in the pool gets a 0–1 suitability score computed from six signals:</p>
+        <ul>
+          <li><strong>Metadata richness</strong> — does it have headers, doc IDs, dates?</li>
+          <li><strong>Entity density</strong> — quality-weighted entity count per 1,000 characters</li>
+          <li><strong>Lexical diversity</strong> — unique tokens / total tokens</li>
+          <li><strong>Content length</strong> — character count</li>
+          <li><strong>TF-IDF distinctiveness</strong> — how distinctive are its top keyphrases vs. the rest of the corpus?</li>
+          <li><strong>Answerability</strong> — sentence density, markup ratio, boilerplate penalty (can you actually ask a question about this chunk?)</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Stage 3 — Bottom-quartile filter + random sampling</div>
+        <p>Chunks below the 25th percentile suitability score are excluded. Seeds for each micro-batch are randomly sampled from the remaining top 75%. This avoids spending LLM calls on chunks that are too short, too boilerplate-heavy, or too entity-sparse to support a good question.</p>
+      </div>
+
+      <p style="margin-top: 0.85rem;">During <strong>regeneration</strong>, if a seed keeps failing, the pipeline can reanchor to a completely fresh chunk from the full corpus (not just the pool), so it's never stuck trying to make a bad seed work.</p>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q8</span>
+      <span class="q-text">How are the two candidate scoring signals — search relevance (60%) and topical overlap (40%) — measured?</span>
+    </div>
+    <div class="answer">
+      <div class="subsection">
+        <div class="subsection-title">Search relevance (60% weight)</div>
+        <p>This is the score the search backend returns for each result. What it actually measures depends on the backend:</p>
+        <ul>
+          <li><strong>BM25 / lexical mode</strong> — a term-frequency score weighted by how rare each matching word is across the corpus. Common words like "the" contribute little; distinctive terms like "Sapphire" contribute a lot.</li>
+          <li><strong>Vector mode</strong> — cosine similarity between the query embedding and the chunk embedding.</li>
+          <li><strong>Hybrid mode</strong> — a fused score from Reciprocal Rank Fusion. Each result gets <code>1/(k + rank)</code> from both the BM25 and vector rankings, and the scores are summed.</li>
+        </ul>
+        <p>In all cases, it answers: <strong>how well did this chunk match what was searched for?</strong></p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Topical overlap (40% weight)</div>
+        <p>This is the Jaccard similarity between the candidate chunk and the primary chunk — the same formula as the coherence floor, but used as a continuous score rather than a pass/fail threshold:</p>
+        <p><strong>Jaccard = (shared words) / (total unique words across both chunks)</strong></p>
+        <p>It answers: <strong>how much vocabulary does this candidate share with the primary chunk?</strong> This is independent of the search query — it's a direct chunk-to-chunk comparison. A higher overlap means they're talking about related topics.</p>
+      </div>
+
+      <p style="margin-top: 0.85rem;">The two signals complement each other: search relevance says "this chunk matched the query well" while topical overlap says "this chunk is actually about a related topic to the primary." A chunk could score high on search relevance (matched a specific keyword) but low on topical overlap (otherwise about a completely different subject), and the composite score would reflect that.</p>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q9</span>
+      <span class="q-text">How does the "Retrieval Too Easy" filter work, and what are "reference chunks"?</span>
+    </div>
+    <div class="answer">
+      <p>The <strong>reference chunks</strong> are the chunks that were used to generate the question — the anchor bundle (primary chunk + secondary chunks). They're stored alongside each QA pair as the ground-truth evidence.</p>
+      <p>The filter checks whether a naive search using just the question's own words already turns up the answer. It works in two layers:</p>
+      <ol>
+        <li><strong>Overlap check</strong> — the filter searches the corpus using the question text and checks how many of the returned results overlap with the reference chunks. If the overlap is high, the question is immediately flagged as too easy.</li>
+        <li><strong>LLM judge</strong> — if the overlap check passes, an LLM judge is given only the question and the search results (not the reference chunks), and asked: "can you answer this from what's here?" If yes, the question is too easy.</li>
+      </ol>
+      <p>The logic is: if a basic RAG system would retrieve the right information on the first try, the question doesn't actually test multi-hop reasoning. A good multi-hop question should require finding and combining specific chunks that a simple search wouldn't surface together.</p>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q10</span>
+      <span class="q-text">What exactly is a multi-hop question, and how does the pipeline enforce that requirement?</span>
+    </div>
+    <div class="answer">
+      <p>A <strong>multi-hop question</strong> is one where no single document contains the complete answer. You need information from multiple separate documents and have to combine them to reach the answer.</p>
+      <p>For example: "Can I use Chase Sapphire points to book a Southwest Companion Pass trip?" To answer this, you need the Sapphire benefits page (which lists Southwest as a transfer partner) <em>and</em> the Southwest Companion Pass page (which explains how the pass works and whether transferred points qualify). Neither page alone answers the question.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Two filters enforce the multi-hop requirement — from opposite directions</div>
+        <p>The pipeline uses two complementary filters to ensure generated questions are genuinely multi-hop:</p>
+        <ul>
+          <li><strong>Retrieval Too Easy</strong> (filter 3) — asks: is this question hard to <em>retrieve</em>? It runs a simple search using the question text and checks whether the right chunks show up. If a basic keyword search already surfaces the answer, the question doesn't test multi-hop reasoning — a naive RAG system would get it right on the first try.</li>
+          <li><strong>Hop Count Validity</strong> (filter 5) — asks: is this question hard to <em>answer from a single source</em>? An LLM judge examines whether the question genuinely requires combining information from multiple documents, or whether it just looks multi-hop but can actually be answered from one chunk.</li>
+        </ul>
+        <p>A question must pass <strong>both</strong> — hard to find (resists simple retrieval) <em>and</em> hard to answer without cross-document reasoning (genuinely requires multiple hops).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q11</span>
+      <span class="q-text">Does a 2-hop question always have exactly 2 golden chunks?</span>
+    </div>
+    <div class="answer">
+      <p><strong>Currently, yes.</strong> The linker uses <code>n_secondaries = hop_count - 1</code>, so a 2-hop question always gets 1 primary + 1 secondary = 2 chunks. The hop count validity filter also equates chunk count with hop count (<code>hop_count_claimed = len(reference_chunks)</code>).</p>
+      <p><strong>But this conflates two things that aren't the same.</strong> "Hop" should mean <em>distinct documents needed</em>, not <em>number of chunks</em>. A richer 2-hop question might need several pieces of evidence from each of the two articles — e.g. one chunk about eligibility rules and another about fees from the same article, combined with a chunk from a second article.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Design issue — three places where chunk count is used as hop count</div>
+        <ul>
+          <li><strong>Linker formula</strong> — <code>n_secondaries = hop_count - 1</code> caps to one chunk per hop. Should instead find chunks from <code>hop_count - 1</code> distinct documents, returning multiple per document if needed.</li>
+          <li><strong>Same-file exclusion</strong> — the linker's filter pipeline excludes all same-file chunks. This is correct for the primary's document (forces cross-document hops), but once a secondary document is chosen, other chunks from that same document should be allowed if they're relevant.</li>
+          <li><strong>Hop count validity filter</strong> — <code>hop_count_claimed = len(ref_chunks)</code> should count distinct document IDs, not chunk count.</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 0.85rem;">The correct behavior: a 2-hop question should be allowed to have more than 2 golden chunks, as long as they come from exactly 2 distinct articles.</p>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="qa-entry">
+    <div class="question">
+      <span class="q-marker">Q12</span>
+      <span class="q-text">What determines whether a failing question is rejected (permanently dropped) vs sent to regeneration?</span>
+    </div>
+    <div class="answer">
+      <p>Two levels work together:</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Level 1 — The filter decides if the failure is fixable</div>
+        <p>Some failures are fundamentally unsalvageable — the filter <strong>rejects outright</strong>, no second chance. For example: the "question" is a bare noun phrase with no verb, or it asks about page layout instead of content. No amount of rewriting will fix these.</p>
+        <p>Other failures are potentially fixable — a thin answer, too-easy retrieval, a redundant chunk. These get a verdict of <strong>needs_refinement</strong> instead.</p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Level 2 — A per-item budget caps how many chances it gets</div>
+        <p>Each item tracks how many times it's already been refined (<code>refinement_count</code>). If <code>refinement_count &lt; max_refinements_per_item</code> (default 2), the filter returns <strong>needs_refinement</strong>. If the budget is exhausted, it returns <strong>rejected</strong> — the item has had its chances.</p>
+        <p>On top of that, the pipeline loop itself has a <code>max_rounds</code> cap (default 4). Even if a filter says needs_refinement, once the loop has iterated that many times, all remaining unresolved items are force-rejected.</p>
+      </div>
+
+      <div class="subsection" style="margin-top: 0.6rem;">
+        <div class="subsection-title">Per-filter breakdown</div>
+        <ul>
+          <li><strong>Deterministic Guards</strong> — always rejects. Structural failures (too short, wrong language, chunk overlap) have no refinement path.</li>
+          <li><strong>Quality Gate</strong> — rejects fragments, meta-doc questions, and guide-pointer answers outright. But <em>thin answers</em> get sent to refinement ("provide a more detailed answer").</li>
+          <li><strong>Retrieval Too Easy</strong> — always refinable (budget permitting). The hint is to rewrite the question to reduce lexical overlap with the source chunks.</li>
+          <li><strong>Grounding LLM</strong> — always refinable (budget permitting). If the answer isn't supported by the chunks, the item is sent back with a reanchor flag and a hint to reground the answer in chunk evidence.</li>
+          <li><strong>Hop Count Validity</strong> — always refinable (budget permitting). Redundant or low-contribution chunks trigger a rewrite to make all chunks essential.</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 0.85rem;">The logic is: <em>can this plausibly be fixed by rewriting?</em> If yes, give it another shot (up to the budget). If no, drop it immediately.</p>
+    </div>
+  </div>
+
+</div>
