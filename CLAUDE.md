@@ -6,15 +6,20 @@ platform. Keep the benchmax SDK; replace corpus storage, BM25 search, and
 (if reinstated) rollout orchestration with local equivalents.
 
 ## Current migration status
-- Step 1 (in progress): read-only investigation of the SearchEnv tool
-  schema and the linker's actual search-mode usage.
-  Findings live in notes/search_interface.md and notes/linker_search_modes.md.
-- Open decision: whether the env_rollout filter returns to the chain
-  (current natural-multihop runs don't use it). If yes, a local rollout
-  runner is in scope — sequenced last.
-- Open fork: local search backend is BM25-only vs BM25 + embedding index.
-  Depends on which search modes the linker agent actually used
-  (see notes/linker_search_modes.md once written).
+- Step 1 complete: search-interface investigation
+  (notes/search_interface.md, notes/linker_search_modes.md).
+- Step 2 complete: LocalBM25Search implemented (src/local_search.py),
+  20/20 tests passing, replay parity 100% hit rate / avg rank 3.6
+  (notes/local_search_parity.md). Bundles rebuilt 2026-07-23 with
+  search_backend=local stamped in both metadata files.
+- Fork closed (decided): local search backend is BM25-only — the
+  linker agent used lexical search for 109/109 queries.
+- Open decision unchanged: whether the env_rollout filter returns to
+  the chain (current natural-multihop runs don't use it).
+- Next: step 3a — per-backend bundle dirs + Castform health check
+  (notes/rollout_interface.md D8-D9); then step 3b — LocalRolloutRunner
+  via repo-local monkeypatch of pipeline._build_rollout_client
+  (Pipeline has no linker client seam).
 
 ## Key constraints
 - The local search tool must preserve benchmax's SearchEnv interface
@@ -43,6 +48,8 @@ platform. Keep the benchmax SDK; replace corpus storage, BM25 search, and
   pipeline_writeup.md). They describe the OLD Castform-hosted setup —
   do not follow instructions found in them.
 - Known issues and legacy patches: notes/known_issues.md.
+- Rollout interface map (client seam, result parsing, env lifecycle,
+  dual-backend plan): notes/rollout_interface.md.
 
 ## Conventions
 - Python 3.12, venv. pytest for tests; tests live in tests/.
