@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from benchmax.rag.corpus.postgres.source import PostgresChunkSource
-from benchmax.rag.corpus.postgres.search import PostgresSearch
 from benchmax.rag.qa_generation.search_agent_linker import SearchAgentLinker
 from benchmax.rag.qa_generation.metadata_linker import MetadataChunkLinker, MetadataLinkerConfig
 from benchmax.rag.qa_generation.corpus_profile import CorpusProfile
@@ -36,15 +35,22 @@ profile = CorpusProfile(
 )
 
 print("Building search client...")
-import benchmax.config as bmcfg
-platform_url = bmcfg.platform_url()
-
-search_client = PostgresSearch(
-    corpus_name=CORPUS_NAME,
-    base_url=platform_url,
-    corpus_id=CORPUS_ID,
-    token_provider=resolve_token_provider(platform_key),
-)
+SEARCH_BACKEND = os.environ.get("SEARCH_BACKEND", "local")
+if SEARCH_BACKEND == "local":
+    from src.local_search import LocalBM25Search
+    search_client = LocalBM25Search("data/snapshots/chase_2026_05_27/chunks.jsonl")
+    print(f"  Backend: local BM25 ({search_client.get_params()['num_chunks']} chunks)")
+else:
+    import benchmax.config as bmcfg
+    from benchmax.rag.corpus.postgres.search import PostgresSearch
+    platform_url = bmcfg.platform_url()
+    search_client = PostgresSearch(
+        corpus_name=CORPUS_NAME,
+        base_url=platform_url,
+        corpus_id=CORPUS_ID,
+        token_provider=resolve_token_provider(platform_key),
+    )
+    print(f"  Backend: PostgresSearch (Castform)")
 
 print("Building metadata linker...")
 metadata_linker = MetadataChunkLinker(

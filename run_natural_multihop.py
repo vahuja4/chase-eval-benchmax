@@ -1,5 +1,9 @@
 """
 Generate 5 natural multi-hop QA pairs with improvements:
+
+NOTE: Search backend is baked into linker_env_cls.pkl / env_cls.pkl.
+To switch backends, set SEARCH_BACKEND=local|postgres and re-run
+build_env_bundle.py.
 1. Max 2 hops (not 3-4)
 2. Search-agent linker (LLM-assisted linking)
 3. Relaxed obfuscation in generation prompt

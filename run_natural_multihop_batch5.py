@@ -1,5 +1,9 @@
 """
 Generate 20 more natural multi-hop QA pairs (batch 5).
+
+NOTE: Search backend is baked into linker_env_cls.pkl / env_cls.pkl.
+To switch backends, set SEARCH_BACKEND=local|postgres and re-run
+build_env_bundle.py.
 Deduplicates against all 44 existing questions from prior batches.
 """
 
