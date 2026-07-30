@@ -1,0 +1,312 @@
+{
+  "run_name": "natural_multihop_batch6_run2",
+  "created_at": "2026-07-30T14:12:04.425814+00:00",
+  "git_sha": "7a7355749cf65c8a02b8d152bbca2c5e8d79f875",
+  "search_backend": "postgres",
+  "bundle_files": {
+    "linker_env_cls": "/Users/vishal/Desktop/chase_eval_benchmax/bundles/postgres/linker_env_cls.pkl",
+    "linker_env_metadata": "/Users/vishal/Desktop/chase_eval_benchmax/bundles/postgres/linker_env_metadata.json",
+    "metadata_stamp": {
+      "pip_dependencies": [
+        "benchmax==0.1.2.dev33"
+      ],
+      "python_version": "3.12",
+      "benchmax_version": "0.1.2.dev33",
+      "env_class_source": "class LinkerEnv(BaseEnv):\n    \"\"\"Search environment for LLM-driven chunk linking.\n\n    Exposes a single ``search`` tool backed by a :class:`SearchClient`.\n    The LLM generates queries to find related chunks.\n\n    Args:\n        search: A pickle-safe :class:`SearchClient` instance.\n        max_search_calls: Maximum number of search calls allowed.\n    \"\"\"\n\n    # Static prompt exposed as a class attribute (not assigned on the\n    # instance) so the ``dataset_preprocess`` classmethod can read it via\n    # ``cls.system_prompt``. Setting it only on ``self`` left\n    # ``cls.system_prompt`` resolving to BaseEnv's \"\" \u2014 dropping the prompt\n    # from training Examples. See BaseEnv.dataset_preprocess for the\n    # classmethod-vs-instance-method rationale.\n    system_prompt: str = _SYSTEM_PROMPT\n\n    def __init__(\n        self,\n        search: SearchClient,\n        *,\n        max_search_calls: int = 3,\n        **kwargs: Any,\n    ) -> None:\n        self._search = search\n        self._max_search_calls = max_search_calls\n\n        modes = sorted(search.available_modes)\n        if \"hybrid\" in modes:\n            self._default_mode = \"hybrid\"\n        elif \"lexical\" in modes:\n            self._default_mode = \"lexical\"\n        elif modes:\n            self._default_mode = modes[0]\n        else:\n            self._default_mode = \"lexical\"\n\n        search_tool = ToolDefinition(\n            name=\"search\",\n            description=\"Search the corpus for related content.\",\n            input_schema={\n                \"type\": \"object\",\n                \"properties\": {\n                    \"query\": {\n                        \"type\": \"string\",\n                        \"description\": \"Search query string.\",\n                    },\n                    \"limit\": {\n                        \"type\": \"integer\",\n                        \"description\": \"Max results to return (default 10).\",\n                    },\n                },\n                \"required\": [\"query\"],\n            },\n        )\n        self._tools: dict[str, tuple[ToolDefinition, Any]] = {\n            \"search\": (search_tool, self._search_tool),\n        }\n\n    # ------------------------------------------------------------------\n    # BaseEnv interface\n    # ------------------------------------------------------------------\n\n    async def list_tools(self) -> list[ToolDefinition]:\n        return [self._tools[k][0] for k in sorted(self._tools)]\n\n    async def run_tool(self, rollout_id: str, tool_name: str, **tool_args: Any) -> Any:\n        if tool_name not in self._tools:\n            return f\"Error: Unknown tool '{tool_name}'\"\n        _, tool_fn = self._tools[tool_name]\n        return await tool_fn(**tool_args)\n\n    @classmethod\n    def dataset_preprocess(cls, example: Any, **kwargs: Any) -> Example:\n        target_n = example.get(\"target_n\", 1)\n        reasoning_mode = example.get(\"reasoning_mode\", \"\")\n        mode_hint = _REASONING_MODE_HINTS.get(reasoning_mode, \"\")\n\n        prompt = (\n            f\"Find {target_n} secondary chunk(s) that form a logical \"\n            f\"evidence chain with the following primary chunk. Each \"\n            f\"secondary must contribute UNIQUE, NECESSARY information \"\n            f\"\u2014 not just topically related content.{mode_hint}\\n\\n\"\n            f\"Primary chunk:\\n{example.get('prompt', '')}\"\n        )\n        return make_example(\n            prompt_messages=[{\"role\": \"user\", \"content\": prompt}],\n            task={\"target_n\": target_n, \"reasoning_mode\": reasoning_mode},\n            system_prompt=cls.system_prompt,\n        )\n\n    async def compute_reward(\n        self,\n        rollout_id: str,\n        messages: Messages,\n        task: dict[str, Any] | None,\n        **kwargs: Any,\n    ) -> dict[str, float]:\n        return {\"linking\": 1.0}\n\n    # ------------------------------------------------------------------\n    # Search tool\n    # ------------------------------------------------------------------\n\n    async def _search_tool(\n        self,\n        query: str,\n        limit: int = 10,\n        **kwargs: Any,\n    ) -> str:\n        if not query:\n            return \"Error: Missing required parameter: 'query'\"\n        try:\n            results = self._search.search(\n                query=query, mode=self._default_mode, top_k=limit\n            )\n            return self._format_results(results)\n        except Exception:\n            return f\"Error:\\n{traceback.format_exc()}\"\n\n    def _format_results(self, results: list[dict[str, Any]]) -> str:\n        if not results:\n            return \"No results found.\"\n        lines: list[str] = []\n        for i, r in enumerate(results, 1):\n            source = r.get(\"source\", \"\")\n            score = r.get(\"score\", 0.0)\n            content = r.get(\"content\", \"\")\n            header = f\"{i}.\"\n            if source:\n                header += f\" [source: {source}]\"\n            if score:\n                header += f\" (score: {score:.2f})\"\n            lines.append(f\"{header}\\n   {content}\")\n        return _truncate(\"\\n\".join(lines))\n",
+      "search_backend": "postgres"
+    }
+  },
+  "pipeline_config": {
+    "platform": {
+      "api_key": "",
+      "base_url": "https://api.castform.com",
+      "llm_api_key": "<redacted>",
+      "llm_base_url": "https://api.openai.com/v1"
+    },
+    "corpus": {
+      "docs_path": "",
+      "corpus_id": "6558ec44-c948-4ed0-a099-63dd786078ad",
+      "corpus_name": "chase_help_2026_05_27",
+      "show_summary": true,
+      "min_chunk_chars": 400
+    },
+    "corpus_context": {
+      "enabled": true,
+      "description": "Chase.com public help and product articles covering credit cards, banking, auto loans, mortgages, and investments.",
+      "example_queries": [],
+      "model": "gpt-5.4",
+      "api_key": "<redacted>",
+      "base_url": "https://api.openai.com/v1",
+      "num_top_level_samples": 4,
+      "num_random_samples": 4,
+      "min_chunk_chars": 400,
+      "system_prompt": "You are a technical analyst specializing in document corpus analysis.\nYour goal is to understand the overall themes, content type, and typical query that a user might search for.\n\nBased on the context and thoughts, form an understanding of the corpus, and then provide a short summary and example search queries. Weigh the user's input if provided.\n\nGuideline:\n- Try to generalize and identify the overall theme of the corpus.\n- Use your context of the theme, domain, etc. to guess the persona and purpose of searching this corpus\n- i.e.\n    - student finding their learning notes\n    - developer looking up API documentation\n    - journalist researching a topic\n    - business analyst gathering market research\n- Use that persona to guess the types of queries they might perform.\n\nFor the summary:\n- First line - corpus themes (documentation, tutorials, reference, etc.)\n- Second line - content domain (technical, business, scientific, etc.)\n- Third line - user persona and purpose (likely developer looking up API documentation)\n- Do NOT cite specific chunk content in the summary.\n\nFor the example queries:\n- Provide 5-10 realistic example queries a user might search for in this corpus.\n- Use the inferred user persona and purpose to guide the query style.\n- Queries can have incomplete information, as often users do not remember full context.\n\nReturn JSON with:\n- thoughts: Your analysis and reasoning here\n- summary: our summary here (3 lines as described above)\n- example_queries: List of example queries in the form of [\"query1\", \"query2\", ...]",
+      "user_template": "Analyze the following document corpus:\n\n<user_context>\n{user_context}\n</user_context>\n\n<top_level_chunks>\n{top_level_content}\n</top_level_chunks>\n\n<random_sampled_chunks>\n{random_content}\n</random_sampled_chunks>\n\nReturn your analysis as JSON with keys: thoughts, summary, example_queries",
+      "generate_entity_patterns": true,
+      "entity_extraction": null,
+      "entity_extraction_llm": {
+        "model": "gpt-5.4",
+        "api_key": "<redacted>",
+        "base_url": "https://api.openai.com/v1"
+      },
+      "language": ""
+    },
+    "targets": {
+      "total_samples": 20,
+      "primary_type_distribution": {
+        "lookup": 0.0,
+        "multi_hop": 1.0
+      },
+      "reasoning_mode_distribution": {
+        "factual": 0.45,
+        "temporal": 0.15,
+        "inference": 0.3,
+        "sequential": 0.1
+      },
+      "hop_distribution": {
+        "1": 0.0,
+        "2": 1.0
+      }
+    },
+    "linker": {
+      "type": "search_agent",
+      "metadata": {
+        "max_candidates": 10,
+        "max_secondaries": 3,
+        "min_chunk_chars": 400,
+        "filter_same_file": true,
+        "min_coherence": 0.15,
+        "max_secondary_similarity": 0.55,
+        "max_primary_similarity": 0.55,
+        "retry_confidence": 0.5,
+        "header_keys": [
+          "h2",
+          "h3",
+          "section_header",
+          "title",
+          "h1"
+        ]
+      },
+      "search_agent": {
+        "max_turns": 4,
+        "max_tool_calls": 4,
+        "max_completion_tokens": "<redacted>",
+        "fallback_to_metadata": true,
+        "auto_scale_turns": true,
+        "env_bundle": {
+          "env_cls_path": "",
+          "env_metadata_path": "",
+          "env_cls_file": "/Users/vishal/Desktop/chase_eval_benchmax/bundles/postgres/linker_env_cls.pkl",
+          "env_metadata_file": "/Users/vishal/Desktop/chase_eval_benchmax/bundles/postgres/linker_env_metadata.json"
+        }
+      },
+      "search_agent_pct": 1.0
+    },
+    "generation": {
+      "mode": "llm_direct",
+      "llm_direct": {
+        "model": "gpt-5.4",
+        "api_key": "<redacted>",
+        "base_url": "https://api.openai.com/v1",
+        "max_completion_tokens": "<redacted>",
+        "timeout": 120.0,
+        "system_prompt": "You are an expert QA dataset author.",
+        "prompt_templates_by_qa_type": {
+          "multi_hop": "Your task is to generate a multi_hop question that requires {target_hop_count} search steps to answer by combining information from the provided chunks.\n\nYou must first reason inside <think> and </think>:\n1. Read the chunks and identify the NATURAL connection between them \u2014 what real-world user scenario would genuinely need both pieces of information?\n2. Draft a question that a real Chase customer would actually ask.\n3. Verify the question is one sentence of 20 words or fewer, has a single coherent intent, and sounds like something typed into a search bar or asked of a support agent.\n\nCorpus summary:\n{corpus_summary}\n\nPrimary chunk:\n{primary_chunk}\n\nSecondary chunks:\n{secondary_chunks}\n\n[[if evidence_chain]]How these chunks connect (from linking analysis):\n{evidence_chain}\n\n[[endif]][[if failed_question]]Failed question:\n{failed_question}\n\n[[endif]][[if failed_answer]]Failed answer:\n{failed_answer}\n\n[[endif]][[if regeneration_prompt]]Feedback:\n{regeneration_prompt}\n\nWhen rewriting to address this feedback, keep the question to one sentence of 20 words or fewer \u2014 do not add qualifiers or scenario setup to satisfy the feedback.\n\n[[endif]]Requirements:\n- NATURALNESS IS THE #1 PRIORITY. The question must sound like something a real person would ask.\n- Bad: 'If someone used the same account in two different ways during one statement period \u2014 first for everyday buying, and second to pull out borrowed cash...' (manufactured scenario, 60+ words)\n- Good: 'Does a cash advance on my credit card still get a grace period like regular purchases?' (natural, concise, real intent)\n- Bad: 'I'm advising a first-time borrower who wants to improve their chances before applying...' (role-playing, over-specified)\n- Good: 'What should I do to build credit before applying for my first Chase card?' (direct, natural)\n- The question MUST require information from multiple chunks to fully answer \u2014 not just one.\n- If the chunks don't have a natural connection that a real user would care about, return cannot_generate.\n- STYLE CONSTRAINT: one sentence, 20 words or fewer, phrased like a real customer's search query or support question. No sub-questions joined by 'and', no stacked qualifiers, no role-play setups (\"I'm advising...\", \"Suppose someone...\").\n- The answer must be grounded in the exact language of the source chunks. Do NOT paraphrase the answer.\n- Use only chunk evidence; do not use outside knowledge.\n- Output exactly one question and one answer.\n- In chunks_used, list the indices of chunks you referenced (0=primary, 1+=secondary).\n- CRITICAL: If the provided chunks cannot support a natural multi-hop question (e.g., they are completely unrelated or the connection is forced), return `{{\"status\": \"cannot_generate\", \"reason\": \"<brief explanation>\"}}` instead.\n\nFirst output your reasoning in <think>...</think>, then provide:\n```json\n{{\"question\": \"...\", \"answer\": \"...\", \"answering_steps\": \"...\", \"chunks_used\": [0, 1, ...]}}\n```"
+        },
+        "max_concurrent": 8,
+        "batch_enabled": true,
+        "show_batch_progress": true
+      }
+    },
+    "transformation": {},
+    "dedup": {
+      "enabled": true,
+      "similarity_threshold": 0.7,
+      "ngram_size": 2,
+      "stats_key": "dedup_stats"
+    },
+    "filtering": {
+      "deterministic_guards": {
+        "enabled": true,
+        "min_question_chars": 12,
+        "min_answer_chars": 50,
+        "min_answer_chars_multi_hop": 100,
+        "min_reference_chunks": 1,
+        "chunk_overlap_threshold": 0.75
+      },
+      "filters": [
+        "query_length_cap",
+        "quality_gate",
+        "retrieval_too_easy_llm",
+        "grounding_llm",
+        "hop_count_validity"
+      ],
+      "query_rewrite": {
+        "enabled": true,
+        "max_terms": 16,
+        "max_chars": 140,
+        "apply_to_all_rows": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "reject_fragments": true,
+        "reject_structural": true,
+        "reject_guide_pointers": true,
+        "refine_thin_answers": true
+      },
+      "retrieval_llm": {
+        "enabled": true,
+        "judge_model": "gpt-5.4",
+        "judge_api_key": "<redacted>",
+        "judge_base_url": "https://api.openai.com/v1",
+        "judge_system_prompt": "You are an expert judge evaluating retrieval difficulty. Given a question, its gold answer, and chunks retrieved via BM25 keyword search, determine whether the retrieval was trivially easy or required semantic understanding.\n\nRules:\n- Focus ONLY on retrieval difficulty, not on whether the answer is correct or grounded.\n- Do not use your own knowledge \u2014 only consider what is explicitly in the chunks.\n- Classify the result using reason_tag:\n  - \"too_easy_lexical\": the question shares obvious keywords/phrases with the retrieved chunks, so naive BM25 keyword search would trivially retrieve them.\n  - \"challenging_retrieval_pass\": retrieving the right chunks required semantic understanding beyond simple keyword matching.\n- If the retrieved chunks do not appear relevant to the question, that means retrieval was challenging \u2014 classify as \"challenging_retrieval_pass\".\n\nRespond with JSON only:\n{\"confidence\": <float 0-1>, \"reason_tag\": \"<too_easy_lexical|challenging_retrieval_pass>\", \"reasoning\": \"<brief explanation>\", \"lexical_anchor_evidence\": \"<when reason_tag is too_easy_lexical, list the specific keywords/phrases shared between question and chunks that make retrieval trivial; otherwise omit or set to null>\"}",
+        "judge_user_template": "Question: {question}\n\nGold answer: {answer}\n\nRetrieved chunks:\n{chunks_text}\n\nIs the retrieval trivially easy via keyword matching (too_easy_lexical) or does it require semantic understanding (challenging_retrieval_pass)?",
+        "top_k": 5,
+        "overlap_threshold": 0.5,
+        "too_easy_confidence_threshold": 0.85,
+        "too_easy_overlap_threshold": 0.65,
+        "stats_key": "retrieval_too_easy_filter_stats",
+        "max_concurrent": 8,
+        "batch_enabled": true,
+        "show_batch_progress": true
+      },
+      "grounding_llm": {
+        "enabled": true,
+        "judge_model": "gpt-5.4",
+        "judge_api_key": "<redacted>",
+        "judge_base_url": "https://api.openai.com/v1",
+        "judge_system_prompt": "You are an expert grounding judge evaluating whether a gold answer is fully supported by provided evidence chunks.\n\nRules:\n- Use only the provided evidence chunks.\n- The answer must be FULLY supported. Partial support is not enough.\n- For multi-hop answers, all intermediate facts must be present in the evidence.\n- Do not use external knowledge.\n- Identify which specific chunk IDs provide the supporting evidence.\n- CRITICAL: Reject meta-questions about the QA generation process itself. If the question asks about \"chunks\", \"multi-hop questions\", \"generation\", \"retrieval\", or why a question \"cannot be created/generated\", return answerable=false. These are invalid QA pairs that describe generation failures rather than real domain questions about the corpus content.\n\nRespond with JSON only:\n{\"answerable\": <bool>, \"confidence\": <float 0-1>, \"reasoning\": \"<brief explanation>\", \"supporting_chunk_ids\": [\"<id1>\", \"<id2>\", ...]}",
+        "judge_user_template": "Question: {question}\n\nGold answer: {answer}\n\nEvidence chunks:\n{chunks_text}\n\nCan the gold answer be fully grounded using ONLY the evidence chunks above?",
+        "top_k": 5,
+        "stats_key": "grounding_filter_stats",
+        "max_concurrent": 8,
+        "batch_enabled": true,
+        "show_batch_progress": true
+      },
+      "hop_count_validity": {
+        "enabled": true,
+        "mode": "leave_one_out",
+        "max_judge_calls": 3,
+        "judge_model": "gpt-5.4",
+        "judge_api_key": "<redacted>",
+        "judge_base_url": "https://api.openai.com/v1",
+        "max_concurrent": 8,
+        "batch_enabled": true,
+        "show_batch_progress": true,
+        "stats_key": "hop_count_validity_stats",
+        "lopsided_high_threshold": 0.6,
+        "lopsided_low_threshold": 0.15
+      },
+      "env_rollout": {
+        "enabled": true,
+        "model": "gpt-5.4",
+        "api_key": "<redacted>",
+        "base_url": "https://llm.castform.com/v1",
+        "judge_model": "gpt-5.4-mini",
+        "judge_api_key": "<redacted>",
+        "judge_base_url": "https://llm.castform.com/v1",
+        "env_bundle": {
+          "env_cls_path": "",
+          "env_metadata_path": "",
+          "env_cls_file": "",
+          "env_metadata_file": ""
+        },
+        "rollout_limits": {
+          "max_turns": 16,
+          "max_tool_calls": 24,
+          "max_completion_tokens": "<redacted>",
+          "timeout": 120.0
+        }
+      }
+    },
+    "refinement": {
+      "enabled": true,
+      "model": "gpt-5.4",
+      "api_key": "<redacted>",
+      "base_url": "https://api.openai.com/v1",
+      "max_refinements_per_item": 2,
+      "max_same_seed_attempts_before_reanchor": 2,
+      "max_rounds": 4,
+      "prompt_template": "Refine this QA pair while preserving answer correctness and anchor intent.\nqa_type={qa_type}\nfeedback={feedback}\n\nCurrent question: {question}\nCurrent answer: {answer}\n\nReturn JSON with keys question and answer."
+    },
+    "split": {
+      "train_ratio": 0.8,
+      "stratify_by": [
+        "qa_type",
+        "style"
+      ],
+      "seed": 42
+    },
+    "output": {
+      "dir": "outputs/natural_multihop_batch6_run2",
+      "train_jsonl": "train.jsonl",
+      "eval_jsonl": "eval.jsonl"
+    },
+    "scoring": {
+      "min_quality_score": 0.0,
+      "grounding_weight": 0.4,
+      "retrieval_difficulty_weight": 0.3,
+      "hop_validity_weight": 0.3
+    },
+    "wiki_preprocessing": {
+      "enabled": false,
+      "min_chunks_per_page": 3,
+      "max_chunks_per_page": 20,
+      "max_entity_chunks": 100,
+      "max_page_tokens": "<redacted>",
+      "max_context_tokens": "<redacted>",
+      "model": "gpt-5.4",
+      "api_key": "<redacted>",
+      "base_url": "https://api.openai.com/v1"
+    },
+    "micro_batch": {
+      "batch_size": 0,
+      "checkpoint_dir": "",
+      "resume": true,
+      "max_iterations": 50,
+      "max_parallel_batches": 1,
+      "keep_checkpoints": true
+    },
+    "random_seed": 42,
+    "verbose": true
+  },
+  "length_constraint": {
+    "prompt_target_words": 20,
+    "hard_cap_words": 25,
+    "filter_stage": "query_length_cap",
+    "refinement_feedback": "rewrite as one sentence of 20 words or fewer; keep the multi-hop requirement"
+  },
+  "judge": {
+    "model": "claude-sonnet-5",
+    "rubric_version": "naturalness_v2_banded_conciseness",
+    "threshold": 0.6,
+    "conciseness_bands": {
+      "bands_upper_bound_to_score": {
+        "15": 1.0,
+        "20": 0.9,
+        "25": 0.7,
+        "35": 0.4
+      },
+      "floor_above_35_words": 0.1
+    },
+    "conciseness_and_overall_enforced_in_code": true,
+    "prompt": "You are evaluating whether a question sounds natural \u2014 like something a real person would type or ask.\n\nQuestion: {question}\n\nScore this question on a 0.0\u20131.0 scale across these dimensions, then give an overall score:\n\n1. **Single intent** (0\u20131): Does this read as ONE coherent thing the person wants to know? Or does it stitch together multiple unrelated sub-questions?\n2. **Conciseness** (0\u20131): Score strictly by word count \u2014 this question is {word_count} words long: 15 words or fewer \u2192 1.0; 16\u201320 words \u2192 0.9; 21\u201325 words \u2192 0.7; 26\u201335 words \u2192 0.4; more than 35 words \u2192 0.1.\n3. **Natural phrasing** (0\u20131): Does it sound like something you'd type into a search bar or ask a support agent? Red flags: \"If someone used X in two different ways...\", role-playing scenarios (\"I'm advising a first-time borrower who...\"), excessive hedging.\n4. **Plausible intent** (0\u20131): Is there a realistic reason a single person would ask exactly this? Or was it manufactured to connect unrelated topics?\n\nRespond in JSON:\n```json\n{{\"single_intent\": 0.0, \"conciseness\": 0.0, \"natural_phrasing\": 0.0, \"plausible_intent\": 0.0, \"overall\": 0.0, \"reasoning\": \"...\"}}\n```\n\nThe overall score should be the minimum of the four dimension scores (one bad dimension fails the whole question)."
+  },
+  "generation_prompt_template": "Your task is to generate a multi_hop question that requires {target_hop_count} search steps to answer by combining information from the provided chunks.\n\nYou must first reason inside <think> and </think>:\n1. Read the chunks and identify the NATURAL connection between them \u2014 what real-world user scenario would genuinely need both pieces of information?\n2. Draft a question that a real Chase customer would actually ask.\n3. Verify the question is one sentence of 20 words or fewer, has a single coherent intent, and sounds like something typed into a search bar or asked of a support agent.\n\nCorpus summary:\n{corpus_summary}\n\nPrimary chunk:\n{primary_chunk}\n\nSecondary chunks:\n{secondary_chunks}\n\n[[if evidence_chain]]How these chunks connect (from linking analysis):\n{evidence_chain}\n\n[[endif]][[if failed_question]]Failed question:\n{failed_question}\n\n[[endif]][[if failed_answer]]Failed answer:\n{failed_answer}\n\n[[endif]][[if regeneration_prompt]]Feedback:\n{regeneration_prompt}\n\nWhen rewriting to address this feedback, keep the question to one sentence of 20 words or fewer \u2014 do not add qualifiers or scenario setup to satisfy the feedback.\n\n[[endif]]Requirements:\n- NATURALNESS IS THE #1 PRIORITY. The question must sound like something a real person would ask.\n- Bad: 'If someone used the same account in two different ways during one statement period \u2014 first for everyday buying, and second to pull out borrowed cash...' (manufactured scenario, 60+ words)\n- Good: 'Does a cash advance on my credit card still get a grace period like regular purchases?' (natural, concise, real intent)\n- Bad: 'I'm advising a first-time borrower who wants to improve their chances before applying...' (role-playing, over-specified)\n- Good: 'What should I do to build credit before applying for my first Chase card?' (direct, natural)\n- The question MUST require information from multiple chunks to fully answer \u2014 not just one.\n- If the chunks don't have a natural connection that a real user would care about, return cannot_generate.\n- STYLE CONSTRAINT: one sentence, 20 words or fewer, phrased like a real customer's search query or support question. No sub-questions joined by 'and', no stacked qualifiers, no role-play setups (\"I'm advising...\", \"Suppose someone...\").\n- The answer must be grounded in the exact language of the source chunks. Do NOT paraphrase the answer.\n- Use only chunk evidence; do not use outside knowledge.\n- Output exactly one question and one answer.\n- In chunks_used, list the indices of chunks you referenced (0=primary, 1+=secondary).\n- CRITICAL: If the provided chunks cannot support a natural multi-hop question (e.g., they are completely unrelated or the connection is forced), return `{{\"status\": \"cannot_generate\", \"reason\": \"<brief explanation>\"}}` instead.\n\nFirst output your reasoning in <think>...</think>, then provide:\n```json\n{{\"question\": \"...\", \"answer\": \"...\", \"answering_steps\": \"...\", \"chunks_used\": [0, 1, ...]}}\n```",
+  "dedup": {
+    "prior_files": {
+      "outputs/natural_multihop/all_scored.jsonl": 20,
+      "outputs/natural_multihop_batch4/all_scored.jsonl": 18,
+      "outputs/retrieval_filtered_batch3/all_scored.jsonl": 6,
+      "outputs/natural_multihop_batch5/.checkpoints/checkpoint_passed.jsonl": 8,
+      "outputs/natural_multihop_batch5/train.jsonl": 7,
+      "outputs/natural_multihop_batch5/eval.jsonl": 1,
+      "outputs/natural_multihop_batch6_pilot10/all_scored.jsonl": 10
+    },
+    "total_prior_questions": 70,
+    "similarity_threshold": 0.7,
+    "collision_log": "outputs/natural_multihop_batch6_run2/dedup_collisions.jsonl"
+  },
+  "judge_stage_note": "Judge loop crashed mid-run on a leading ThinkingBlock (known_issues #7); all 20 items re-judged out-of-band with src/naturalness.py on 2026-07-30T14:14:56.164350+00:00"
+}

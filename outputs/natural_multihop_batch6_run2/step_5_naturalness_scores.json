@@ -1,0 +1,242 @@
+[
+  {
+    "question": "How are Chase welcome bonus rewards earned and offered?",
+    "naturalness_overall": 0.7,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.7,
+      "plausible_intent": 0.9,
+      "overall": 0.7,
+      "reasoning": "The question has a single coherent focus on Chase welcome bonus rewards, is short and concise, and reflects a plausible consumer interest in credit card bonuses. The phrasing 'earned and offered' is slightly awkward/redundant, which is a minor natural-phrasing issue, but overall it reads like a real search-bar query."
+    }
+  },
+  {
+    "question": "Which Sapphire card makes more sense if I travel less and want a credit that resets yearly?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This is a clear, single-intent question about choosing between Sapphire card variants based on travel frequency and annual credit resets. It's phrased naturally, like something a real person comparing Chase Sapphire Preferred vs Reserve would ask. At 17 words, it falls in the 16-20 word range for conciseness (0.9). The intent is plausible and common among people researching credit cards."
+    }
+  },
+  {
+    "question": "When will a missed credit card payment show up, and what if it was reported by mistake?",
+    "naturalness_overall": 0.7,
+    "naturalness_scores": {
+      "single_intent": 0.7,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 0.9,
+      "overall": 0.7,
+      "reasoning": "The question combines two related but distinct sub-questions: when a missed payment appears on a credit report, and what to do if it was reported erroneously. Both relate to credit reporting of a missed payment, so it's plausible a real person facing this situation would ask both together, but it's not a single coherent intent - it's two questions joined by 'and'. Phrasing is natural, conversational, and sounds like a real consumer concern. Length is reasonable (17 words, minor deduction). Overall limited by the dual-intent structure."
+    }
+  },
+  {
+    "question": "Who benefits most from mixing travel rewards with everyday rewards cards?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-topic question about credit card strategy, phrased naturally as someone might type into a search engine or ask a financial advisor. It's concise (11 words) and has a plausible real-world intent\u2014people commonly research whether combining travel and cashback/everyday rewards cards makes sense for their spending habits."
+    }
+  },
+  {
+    "question": "Why do I need two different numbers to set up my paycheck deposit?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about why direct deposit setup requires both a routing number and account number. It's concise (13 words), phrased naturally as something someone would ask a bank or search online, and has an obvious realistic motivation\u2014someone setting up direct deposit and confused by the form."
+    }
+  },
+  {
+    "question": "Can Freedom Unlimited rewards earned on Chase Travel be redeemed for cash back or more travel?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This is a single, clear question about whether Freedom Unlimited rewards earned via Chase Travel can be redeemed for cash back or more travel. It's phrased naturally, like something a cardholder would ask customer support or search online, and it's a plausible real-world concern about redemption flexibility. At 16 words, it falls in the 0.9 conciseness bracket."
+    }
+  },
+  {
+    "question": "Will my credit score affect getting a card for home improvement purchases?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a single, clear question about whether credit score impacts approval for a home improvement card. It's concise (12 words), phrased naturally as someone might type into a search engine, and reflects a realistic concern for someone planning a purchase or renovation."
+    }
+  },
+  {
+    "question": "Could opening a new card now help my chances of getting better student loan terms later?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 0.9,
+      "overall": 0.9,
+      "reasoning": "This is a single coherent question about whether opening a new credit card could affect future student loan terms. It's 16 words, phrased naturally as something a person might ask a financial advisor or forum. The intent is plausible, though the connection between credit cards and student loan terms is somewhat unusual, it's a reasonable question someone managing their credit profile might ask."
+    }
+  },
+  {
+    "question": "Which card earns more on purchases outside bonus categories, Freedom Unlimited or Freedom Flex?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question comparing two specific credit cards' base earning rates on non-bonus purchases. It's concise (14 words), phrased naturally as one would type into a search engine or ask a support agent, and reflects a realistic comparison shoppers make when choosing between similar cards."
+    }
+  },
+  {
+    "question": "What helps first-time applicants get approved and earn more borrowing room later?",
+    "naturalness_overall": 0.85,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.85,
+      "overall": 0.85,
+      "reasoning": "This reads as a single coherent question about credit approval and building credit limits over time, likely in a credit card or loan context. It's concise, phrased naturally like something someone would search or ask a lender, and has a plausible real-world intent (a first-time applicant wanting approval tips and future growth in borrowing capacity)."
+    }
+  },
+  {
+    "question": "What kind of travel card makes more sense if I usually stay with the same hotel chain?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This is a clear, single-intent question about choosing a travel credit card based on hotel loyalty, phrased naturally as someone would ask in a support chat or forum. Word count (17) falls in the 16-20 range, giving 0.9 for conciseness. It reflects a realistic, common consumer question."
+    }
+  },
+  {
+    "question": "How could missed card payments ending up with a collector affect my chances of getting approved later?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This is a clear, single-intent question about how debt collections affect future credit approval. It's 17 words, phrased naturally as someone might ask a financial advisor or search online, and reflects a realistic concern for someone with a collections account on their credit history."
+    }
+  },
+  {
+    "question": "Why use the Chase shopping portal instead of shopping directly with a retailer?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about the benefit of using a shopping portal versus direct retailer purchase. It's concise (13 words), phrased exactly as someone would type into a search engine or ask a bank rep, and reflects a realistic, common consumer question about credit card rewards portals."
+    }
+  },
+  {
+    "question": "How soon do account credits show up after a return versus a Sapphire Preferred hotel portal booking?",
+    "naturalness_overall": 0.8,
+    "naturalness_scores": {
+      "single_intent": 0.8,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.8,
+      "plausible_intent": 0.8,
+      "overall": 0.8,
+      "reasoning": "The question has a single coherent intent (comparing how quickly credits post for two different transaction types) and is a realistic thing a Chase Sapphire Preferred cardholder might ask after both returning an item and booking travel through the portal. At 17 words it's reasonably concise, falling in the 16-20 word band. Phrasing is natural, resembling a forum or support question, though the specificity of comparing two distinct scenarios slightly reduces the single-intent purity."
+    }
+  },
+  {
+    "question": "Why move Chase points to an airline or hotel program instead of redeeming them directly?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a single, clear, concise question (11 words) that sounds exactly like something a credit card points enthusiast would ask a forum or support agent. It's a common, realistic question about Chase Ultimate Rewards transfer partners vs cash redemption."
+    }
+  },
+  {
+    "question": "Why didn\u2019t my Freedom Flex restaurant takeout purchase earn 3% cash back?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about a specific credit card rewards issue. It's concise (12 words), phrased naturally as someone would type into a search engine or ask customer support, and represents a very plausible real-world concern for a Chase Freedom Flex cardholder confused about bonus category earnings."
+    }
+  },
+  {
+    "question": "Can paying student loans with a student credit card help my credit but cost interest later?",
+    "naturalness_overall": 0.85,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.85,
+      "plausible_intent": 0.9,
+      "overall": 0.85,
+      "reasoning": "This reads as one coherent question about a specific financial tradeoff (credit benefit vs interest cost) that a real person could plausibly ask, e.g. considering using a credit card to pay off student loans. It's concise at 16 words and phrased naturally like a search query or forum question. Minor deduction for slight ambiguity in wording ('paying student loans with a student credit card' could be clearer), but overall natural and plausible."
+    }
+  },
+  {
+    "question": "Do I need to activate some cash back offers before earning the higher rate?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent, concise question about whether cash back offers need activation before earning a higher rate. It reads naturally, like a real question someone would ask a credit card company or search online, and has an obvious plausible motivation (understanding rewards program rules)."
+    }
+  },
+  {
+    "question": "How can I redeem cash back earned with Chase Freedom Unlimited?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "Clear single-intent, concise (11 words), natural phrasing typical of a search query or support question, and a realistic scenario for a Chase Freedom Unlimited cardholder."
+    }
+  },
+  {
+    "question": "If I use Chase Mobile or a wallet, how might Chase reach me about my account?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 0.9,
+      "overall": 0.9,
+      "reasoning": "This is a single coherent question about how Chase might contact a user given their use of Chase Mobile or a digital wallet. It's 16 words, fitting the 0.9 conciseness tier. It reads naturally, like something someone would type into a search bar or ask a support agent, with no awkward hedging or role-play framing. There's a plausible real-world reason to ask this, e.g., wanting to know what notifications or communications to expect."
+    }
+  }
+]

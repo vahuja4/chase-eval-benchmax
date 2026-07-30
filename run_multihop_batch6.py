@@ -113,6 +113,9 @@ PRIOR_FILES = [
     "outputs/natural_multihop_batch5/.checkpoints/checkpoint_passed.jsonl",
     "outputs/natural_multihop_batch5/train.jsonl",
     "outputs/natural_multihop_batch5/eval.jsonl",
+    # batch-6 increments: each completed run's pipeline-passed superset
+    # seeds the next, so successive runs never repeat questions.
+    "outputs/natural_multihop_batch6_pilot10/all_scored.jsonl",
 ]
 
 prior_entries: list[tuple[str, str]] = []  # (source_file, question)
@@ -178,52 +181,13 @@ NATURAL_MULTIHOP_TEMPLATE = (
     '```json\n{{"question": "...", "answer": "...", "answering_steps": "...", "chunks_used": [0, 1, ...]}}\n```'
 )
 
-# --- Naturalness judge, rubric v2 (banded conciseness) ---
-# Model string byte-identical to batch5: never change the judge model and
-# the rubric in the same run.
-JUDGE_MODEL = "claude-sonnet-5"
-
-NATURALNESS_JUDGE_PROMPT = """You are evaluating whether a question sounds natural — like something a real person would type or ask.
-
-Question: {question}
-
-Score this question on a 0.0–1.0 scale across these dimensions, then give an overall score:
-
-1. **Single intent** (0–1): Does this read as ONE coherent thing the person wants to know? Or does it stitch together multiple unrelated sub-questions?
-2. **Conciseness** (0–1): Score strictly by word count — this question is {word_count} words long: 15 words or fewer → 1.0; 16–20 words → 0.9; 21–25 words → 0.7; 26–35 words → 0.4; more than 35 words → 0.1.
-3. **Natural phrasing** (0–1): Does it sound like something you'd type into a search bar or ask a support agent? Red flags: "If someone used X in two different ways...", role-playing scenarios ("I'm advising a first-time borrower who..."), excessive hedging.
-4. **Plausible intent** (0–1): Is there a realistic reason a single person would ask exactly this? Or was it manufactured to connect unrelated topics?
-
-Respond in JSON:
-```json
-{{"single_intent": 0.0, "conciseness": 0.0, "natural_phrasing": 0.0, "plausible_intent": 0.0, "overall": 0.0, "reasoning": "..."}}
-```
-
-The overall score should be the minimum of the four dimension scores (one bad dimension fails the whole question)."""
-
-
-def judge_naturalness(client: Anthropic, question: str, model: str = JUDGE_MODEL) -> dict:
-    """Run the naturalness judge; band conciseness and overall are enforced in code."""
-    word_count = count_words(question)
-    response = client.messages.create(
-        model=model,
-        max_tokens=1024,
-        system="You are a question naturalness evaluator. Be strict. Respond with JSON only.",
-        messages=[
-            {"role": "user", "content": NATURALNESS_JUDGE_PROMPT.format(
-                question=question, word_count=word_count)},
-        ],
-    )
-    raw = response.content[0].text or "{}"
-    try:
-        scores = json.loads(raw)
-    except json.JSONDecodeError:
-        match = re.search(r'\{.*\}', raw, re.DOTALL)
-        if match:
-            scores = json.loads(match.group())
-        else:
-            scores = {"overall": 0.0, "reasoning": "Failed to parse judge response"}
-    return apply_banded_scores(scores, word_count)
+# --- Naturalness judge, rubric v2 — shared module (see known_issues #7) ---
+from src.naturalness import (
+    JUDGE_MODEL,
+    NATURALNESS_JUDGE_PROMPT,
+    NATURALNESS_THRESHOLD,
+    judge_naturalness,
+)
 
 
 def verify_judge_model(client: Anthropic, model_id: str) -> None:
@@ -289,13 +253,19 @@ parser.add_argument("--dry-run", action="store_true",
                          "write run_config.json; exit before the pipeline.")
 parser.add_argument("--total", type=int, default=50,
                     help="Number of accepted items to target (default 50). "
-                         "Non-default totals get their own _pilotN output dir. "
+                         "Non-default totals get their own suffixed output dir. "
                          "NOTE: benchmax keys checkpoint-resume on a config hash "
                          "that includes total_samples — a later run with a "
                          "different --total starts fresh, it does not resume.")
+parser.add_argument("--name", default="",
+                    help="Output-dir suffix override: outputs/natural_multihop_"
+                         "batch6_<name>. Default: none for --total 50, "
+                         "pilot<N> otherwise. Use e.g. --name run2 for "
+                         "incremental production runs.")
 args = parser.parse_args()
 
-RUN_NAME = "natural_multihop_batch6" + ("" if args.total == 50 else f"_pilot{args.total}")
+_suffix = args.name or ("" if args.total == 50 else f"pilot{args.total}")
+RUN_NAME = "natural_multihop_batch6" + (f"_{_suffix}" if _suffix else "")
 
 install_query_length_filter()
 
@@ -424,7 +394,6 @@ cfg = PipelineConfig(
 
 cfg.resolve_api_keys()
 
-NATURALNESS_THRESHOLD = 0.6
 
 
 def _rollout_factory(cfg):

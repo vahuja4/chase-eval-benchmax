@@ -1,0 +1,3506 @@
+{
+  "passed": [
+    {
+      "index": 0,
+      "question": "How are Chase welcome bonus rewards earned and offered?",
+      "answer": "These bonuses are designed to offer value in the form of points, miles or cash back when new cardmembers meet specific spending requirements within a designated period, typically a few months after account opening. Keep in mind that welcome bonus offers are not guaranteed. They require the new cardmember to meet spending requirements within a specific time period. You can only earn the rewards if you meet the requirements.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.77,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_0_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_0_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_0_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 19
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "question": "Which Sapphire card makes more sense if I travel less and want a credit that resets yearly?",
+      "answer": "For those who don't travel as much or want a card with a lower annual fee, the Sapphire Preferred Card also offers several perks and rewards earning categories. Chase Sapphire Preferred cardmembers who book a hotel stay through the Chase TravelSM portal can earn up to $50 in hotel statement credits. This is an annual credit that is renewed on your account anniversary. The $300 travel credit is one of many travel rewards that come with the Chase Sapphire Reserve credit card. Cardmembers will automatically receive up to $300 in statement credits when they make eligible travel purchases. The credit renews on the account anniversary date each year. On one hand, the Sapphire Reserve Card can be perfect for frequent travelers who would take advantage of the travel-related perks, statement credits and rewards earning potential offered to offset the annual fee.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.878,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00001",
+            "seed_chunk_id": "d7769dfd703d5bed8406d86069e1259ad7f95095c092e3dda6ea8df2c86f3862",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00001__regen_01",
+            "seed_chunk_id": "d7769dfd703d5bed8406d86069e1259ad7f95095c092e3dda6ea8df2c86f3862",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_0_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_0_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_0_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 18
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "question": "When will a missed credit card payment show up, and what if it was reported by mistake?",
+      "answer": "The late payment could end up on your credit report approximately 30 days after it\u2019s missed when the bureaus update the information that's been reported by your issuer. Still, late payments sometimes get reported erroneously to the credit bureaus and can be disputed. Contact your card issuer or the credit bureaus to dispute any erroneously reported late payments.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.785,
+        "composite": 0.996,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_1_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_1_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_1_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 17
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "question": "Who benefits most from mixing travel rewards with everyday rewards cards?",
+      "answer": "Assess your lifestyle and spending habits to determine if travel or everyday purchases would provide the greater rewards benefit. Frequent travelers might benefit more from travel cards, which can offer such perks as added rewards for travel purchases, no foreign transaction fee, airport lounge access and more. Some everyday spenders might prefer cash back cards that offer a flat earning rate, while others might benefit more from rotating category rewards credit cards. Consumers may be able to increase their rewards earning potential by carrying more than one credit card and applying for cards that complement each other's strengths. You may want to consider potential annual fees and overlapping benefits when pairing credit cards.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.788,
+        "composite": 0.996,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00001",
+            "seed_chunk_id": "f8e715e2e437df834937e87d46b72c6e9387c571e3453fa5727f9ccda2e86448",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_1_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_1_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_1_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 16
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "question": "Why do I need two different numbers to set up my paycheck deposit?",
+      "answer": "A routing number is comprised of nine digits which identify a specific U.S. bank or credit union in a financial transaction. It comes into play when you\u2019re doing things like scheduling electronic payments, setting up direct deposits or sending and receiving electronic payments through mobile apps. Your bank routing number and account number are both essential to ensure that the money is deposited to or withdrawn from the correct account. In simplest terms, routing numbers indicate what bank your account is held at, whereas account numbers are your unique identifier at that bank. A bank account number is a unique set of digits assigned to the account when you open a bank account.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.874,
+        "composite": 0.996,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_2_00003",
+            "seed_chunk_id": "30486aec250247b3bba195d9deb4c4ce9dbf78d9267fc07cc78741977b5ee989",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_2_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_2_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_2_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 15
+          }
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "question": "Can Freedom Unlimited rewards earned on Chase Travel be redeemed for cash back or more travel?",
+      "answer": "The Freedom Unlimited card also earns 5% on travel purchased through Chase Travel\u2120. One popular redemption option is cash back. You can redeem points for a statement credit to your credit card or a direct deposit to a bank account. Use points to book travel through Chase Travel.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.788,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00004"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_2_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_2_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_2_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 14
+          }
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "question": "Will my credit score affect getting a card for home improvement purchases?",
+      "answer": "Understanding and choosing the right credit card based on your credit profile can enhance your financial flexibility and help manage renovation costs. Your credit score is an essential factor in determining credit card approval.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.773,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_2_00002",
+            "seed_chunk_id": "0534939a9f0dfbc34d0689c26d39d762e6209f726857096cc96a7e327f999a5c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_2_00002__regen_01",
+            "seed_chunk_id": "0534939a9f0dfbc34d0689c26d39d762e6209f726857096cc96a7e327f999a5c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_2_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_2_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_2_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 13
+          }
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "question": "Could opening a new card now help my chances of getting better student loan terms later?",
+      "answer": "When you apply for a new credit card, the issuer will likely run a hard inquiry on your credit. This inquiry can cause a temporary dip in your score. But there are also potential advantages of opening a new line of credit, including: Improved credit utilization: Opening a new card increases your total available credit. If you maintain low balances, your credit utilization ratio may improve, which can positively affect your score. Credit variety: Having a variety of credit types (credit cards, loans, etc.) can benefit your credit score. Opening a new credit card, when managed responsibly, can contribute to a healthier credit mix over time. Improved credit history: One significant factor in your credit score is your payment history. If you use the new credit card responsibly and make timely payments, it may have a positive long-term effect on your score. Credit scores can play a role in determining your eligibility for a student loan from a private lender because they help measure your creditworthiness, or your ability to repay your debts on time. If you have a bad credit score, your potential lender may limit the amount you can borrow or establish a higher annual percentage rate (APR) on your loan. Please note that the potential lender will also consider other factors when setting the terms of the loan. If you have a low credit score, you may be eligible for some credit cards, but these cards may not come with the most favorable terms.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 0.5,
+        "hop_difficulty": 0.692,
+        "composite": 0.846,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_2_00001",
+            "seed_chunk_id": "d1a37fb9d2a48bf624a2c0bf59e2cf255fe50ceb8a11e582639f11c3d62054de",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_2_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "redundant_chunk_found",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_2_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_2_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 12
+          }
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "question": "Which card earns more on purchases outside bonus categories, Freedom Unlimited or Freedom Flex?",
+      "answer": "Freedom Unlimited earns 1.5% on all other purchases, while Chase Freedom Flex earns 1% on all other purchases.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.791,
+        "composite": 0.996,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_3_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_3_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_3_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 11
+          }
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "question": "What helps first-time applicants get approved and earn more borrowing room later?",
+      "answer": "You may be able to increase your chances of approval when you have a Chase checking account with a balance of $250 or more. The money has to be deposited into the account within 96 hours of applying for the card, according to the disclosure. Cardmembers may also be eligible for a credit limit increase with on-time payments and responsible use. Plus, you may have the opportunity to earn a one-time $25 statement credit after signing up for automatic payments within the first three months.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.788,
+        "composite": 0.996,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00002",
+            "seed_chunk_id": "8ac1bfe2e92279ba501259c5e05e44f58e4b740f6d1328cb656b99cf5d8a7d12",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_3_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_3_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_3_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 10
+          }
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "question": "What kind of travel card makes more sense if I usually stay with the same hotel chain?",
+      "answer": "General travel credit cards are not tied to any specific airline or hotel brand, so they offer flexibility when earning points and redeeming rewards. If you travel regularly without an airline or hotel preference, consider general travel credit cards. However, Chase also offers co-branded cards with hotel partners. These cards don't earn Ultimate Rewards points but do offer alternative opportunities for redeeming rewards. This means a co-branded hotel rewards credit card could be a good option if you're a traveler who prefers to frequent a specific hotel chain.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.779,
+        "composite": 0.996,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00000",
+            "seed_chunk_id": "0bc1a4e0b46a152f42d8e40214377647ca3a2bda8e1febb63c136752701dfb86",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00000__regen_01",
+            "seed_chunk_id": "0bc1a4e0b46a152f42d8e40214377647ca3a2bda8e1febb63c136752701dfb86",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_3_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_3_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_3_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 9
+          }
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "question": "How could missed card payments ending up with a collector affect my chances of getting approved later?",
+      "answer": "Credit card delinquency happens when you fail to make a credit card payment after a certain period of time (for example, 30 days). The longer the duration goes, the more at risk you are for defaulting on your credit card account. This alone may hurt your credit score significantly, as late payments can negatively impact your payment history, which is a major factor in calculating your credit score. At this point, your issuer may have possibly sent your debt to a collections agency in an attempt to get you to repay your debts. Collections can remain on your credit report as a derogatory mark, similar to repossessions and foreclosures. This could further hurt your score and make it more difficult to get approved for the credit card accounts of your choosing. When you have collections (or any other derogatory mark, like a charge-off) on your credit report, you'll face another dip in your credit score. It could also be a barrier when it comes to applying for new credit cards or other lending products. Lenders may not want to take on the additional risk of someone undergoing the collections process. You might also have a harder time getting good interest rates on auto loans, mortgages and more.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.77,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00004"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00004",
+            "seed_chunk_id": "0bc575ee96dfa4acb8121aa6260208268b303a82f61ce1984eac754f2e41d1f9",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_3_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_3_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_3_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 8
+          }
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "question": "Why use the Chase shopping portal instead of shopping directly with a retailer?",
+      "answer": "Shop and Earn is Chase\u2019s online shopping portal where some cardmembers can earn bonus Chase Ultimate Rewards\u00ae points on eligible purchases. Shop and Earn may display sales and deals currently offered through participating retailers.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.788,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_4_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_4_00004"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_4_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_4_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_4_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 7
+          }
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "question": "How soon do account credits show up after a return versus a Sapphire Preferred hotel portal booking?",
+      "answer": "Once you have returned the item to the retailer, you will receive a statement credit on your credit card account. This statement credit may show up on your online account within a few days, although the exact time frame will vary depending on both your credit card issuer and the merchant. It should also appear on your monthly statement within one or two billing cycles. After you complete your hotel booking, the credit will be automatically applied to your account. A $50 statement credit should appear on your account within 1-2 billing cycles.",
+      "eval_scores": {
+        "grounding": 0.99,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.791,
+        "composite": 0.996,
+        "query_style_observed": "expert"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_5_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_5_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_5_00003",
+            "seed_chunk_id": "d54de3f0b5652b500a7d01357d243cdfea8fa8449773bf09d4c01ca884747666",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_5_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_5_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_5_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 6
+          }
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "question": "Why move Chase points to an airline or hotel program instead of redeeming them directly?",
+      "answer": "How much your points are worth can vary based on how you redeem the points. Transferring points to travel partners could be a good option if you\u2019re looking to help maximize their value. Some credit cards let you transfer points or miles to select travel partners, then you can redeem rewards through that company's loyalty program. Travel partners often include airlines and hotels. The Chase Ultimate Rewards program is also known for its point transfer feature. Points can usually be transferred at a 1:1 ratio to several leading airline and hotel loyalty programs, often enhancing the value of each point when used for booking international flights or luxury hotel stays. Chase credit cards occasionally offer transfer bonuses that allow cardmembers to receive more than the standard 1:1 ratio on points transfers.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.874,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_5_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_5_00004"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_5_00004",
+            "seed_chunk_id": "5dbc9c191661ac4294fd12c101aa845625eb35ff94410b1af28cf802532ff0b9",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_5_00004__regen_01",
+            "seed_chunk_id": "5dbc9c191661ac4294fd12c101aa845625eb35ff94410b1af28cf802532ff0b9",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_5_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_5_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_5_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 5
+          }
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "question": "Why didn\u2019t my Freedom Flex restaurant takeout purchase earn 3% cash back?",
+      "answer": "Restaurant takeout and eligible delivery services qualify for 3% cash back if they classify as a restaurant merchant. An eligible transaction refers to a purchase that qualifies for earning rewards points, miles or cash back according to the terms of the credit card's rewards program, and credit card merchant categories are classifications assigned to businesses that define the type of goods or services they provide, such as groceries, dining or travel.",
+      "eval_scores": {
+        "grounding": 0.96,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.788,
+        "composite": 0.984,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_5_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_5_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_5_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_5_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_5_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 4
+          }
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "question": "Can paying student loans with a student credit card help my credit but cost interest later?",
+      "answer": "When you make student loan payments with a credit card, you may: Enhance your payment history. If you make timely student loan payments with a credit card then pay off the card balance on time, you can get more positive payments on your credit history. Diversify your credit mix. A mix of loan types and credit is better for your credit score than a more homogenous borrowing portfolio. Potentially gain rewards through your credit card. If you have a rewards credit card, you may accrue rewards by adding student loan payments to your card balance. A student credit card may have higher interest rates than regular credit cards but you may benefit from a lengthy 0% APR introductory offer. During this 0% APR introductory period, interest is not applied on purchases made until your regular interest periods begins. Be sure to read your cardmember agreement and monthly statements so you can keep track of when your zero or low-interest period ends as you'll start paying interest on your credit card balance once this promotion ends.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.788,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_7_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_7_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_7_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_7_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_7_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 3
+          }
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "question": "Do I need to activate some cash back offers before earning the higher rate?",
+      "answer": "User-selected cash back offers are generally limited-time promotions that you must manually activate via your issuer\u2019s offers portal, and you might get an alert to activate your cash back redemption cycle for 5% of cash on groceries or department store purchases, which were previously only 3%.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.776,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_7_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_7_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_7_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_7_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_7_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 2
+          }
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "question": "How can I redeem cash back earned with Chase Freedom Unlimited?",
+      "answer": "Chase Freedom Unlimited\u00ae offers cash back rewards through various spending categories, and Chase credit cardmembers can redeem their cash back for rewards through the Chase Ultimate Rewards\u00ae online portal. Generally, Chase cash back rewards can be redeemed for the following categories: cash back through either a statement credit or via direct deposit into most U.S. checking and savings accounts, gift cards, Amazon, or travel through Chase Travel.",
+      "eval_scores": {
+        "grounding": 0.98,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.782,
+        "composite": 0.992,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_7_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_7_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_7_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_7_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_7_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 1
+          }
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "question": "If I use Chase Mobile or a wallet, how might Chase reach me about my account?",
+      "answer": "Enroll in Chase OnlineSM or on the Chase Mobile app. You consent to receive electronic communications and disclosures from us in connection with your Chase Card and a Wallet. You agree that we can contact you by email at any email address you provide to us in connection with any Chase product, service or account, or through the mobile device on which you have downloaded the Chase Mobile app. You agree to update your contact information with us when it changes.",
+      "eval_scores": {
+        "grounding": 0.97,
+        "retrieval_difficulty": 1.0,
+        "hop_validity": 1.0,
+        "hop_difficulty": 0.785,
+        "composite": 0.988,
+        "query_style_observed": "natural"
+      },
+      "filter_status": "passed",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_9_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_9_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_9_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_9_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_9_00000",
+            "seed_chunk_id": "7254b1fbd7a5ef9edcba41d2d960872703d03aef778a8e7ce9e925d090530206",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_9_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_9_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_9_00000__regen_01",
+            "seed_chunk_id": "7254b1fbd7a5ef9edcba41d2d960872703d03aef778a8e7ce9e925d090530206",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_9_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_9_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "accepted",
+          "task_id": "iter_9_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "requested_qa_type": "multi_hop",
+            "remaining_quota_after_accept": 0
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "index": 0,
+      "question": "How can I use my first credit card to build credit and avoid late fees?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "hop_count_valid",
+          "details": {
+            "filter_reason": "hop_count_validity_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unknown",
+          "details": {
+            "source_task_id": "iter_0_00000",
+            "seed_chunk_id": "c49b10b75ae7ab78714e9d8f28680b4105dc1014b8bb917ea0beb102d6b1abdb",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "redundant_chunk_found",
+          "details": {
+            "filter_reason": "hop_count_validity_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "redundant_chunk",
+          "details": {
+            "source_task_id": "iter_0_00000__regen_01",
+            "seed_chunk_id": "c49b10b75ae7ab78714e9d8f28680b4105dc1014b8bb917ea0beb102d6b1abdb",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_0_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "question": "Will joining an airline program help me get more value from miles earned on an airline credit card?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00003",
+            "seed_chunk_id": "e1e5178264b7d1995c6295e114ce2a2fd32541177d8a00e92a2d08e2f8ddaf40",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00003__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00003__regen_01",
+            "seed_chunk_id": "e1e5178264b7d1995c6295e114ce2a2fd32541177d8a00e92a2d08e2f8ddaf40",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_0_00003__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "question": "If I buy through Chase for extra points, where will my order be shipped?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_0_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_0_00004"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00004",
+            "seed_chunk_id": "ba3cc5203055a5e717805334453485475408f03f665c9ac8e5bfc2a632980b77",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_0_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_0_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_0_00004__regen_01",
+            "seed_chunk_id": "ba3cc5203055a5e717805334453485475408f03f665c9ac8e5bfc2a632980b77",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_0_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "question": "When my child turns 18, do they take over a custodial account and qualify for their own credit card?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00000",
+            "seed_chunk_id": "30ca049cea12acc1cc4edc59fa9c3c28eb57ce6158e6d2deeba46674f6690321",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00000__regen_01",
+            "seed_chunk_id": "30ca049cea12acc1cc4edc59fa9c3c28eb57ce6158e6d2deeba46674f6690321",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_1_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "question": "What should I consider before opening a checking account for a bonus and long-term use?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00002",
+            "seed_chunk_id": "04534ce994c63d67d1412a214f0d2fc996910f59c23e2df9da4f58ee8b7fe52c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00002__regen_01",
+            "seed_chunk_id": "04534ce994c63d67d1412a214f0d2fc996910f59c23e2df9da4f58ee8b7fe52c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_1_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "question": "Can direct deposit help me avoid Chase Secure Banking fees and qualify for a new checking bonus?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_1_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_1_00004"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00004",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00004",
+            "seed_chunk_id": "400caf606b675ba08d4bdf18541bde566bda904095bd8c90e74e394e56035710",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_1_00004__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_1_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_1_00004__regen_01",
+            "seed_chunk_id": "400caf606b675ba08d4bdf18541bde566bda904095bd8c90e74e394e56035710",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_1_00004__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "question": "Can I move my Ultimate Rewards points first and still use Chase rental car coverage?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_2_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_2_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_2_00000",
+            "seed_chunk_id": "1e6737cc723f526e607d199d803f0b88e281dca55a63c4c271bbb3b7793fe5d8",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_2_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_2_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_2_00000__regen_01",
+            "seed_chunk_id": "1e6737cc723f526e607d199d803f0b88e281dca55a63c4c271bbb3b7793fe5d8",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_2_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "question": "Should I switch from Sapphire Preferred before moving my points to book a trip?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_3_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_3_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00001",
+            "seed_chunk_id": "1c934a3d1f19af0368b08b73008fb9f39b7846081c9abf604386d4f2b69a9bcd",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_3_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_3_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_3_00001__regen_01",
+            "seed_chunk_id": "1c934a3d1f19af0368b08b73008fb9f39b7846081c9abf604386d4f2b69a9bcd",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_3_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "question": "Where can rewards from gas, grocery, or restaurant purchases be redeemed with Chase?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_4_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_4_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00003",
+            "seed_chunk_id": "096eaf1e039fcaca39c813376c8a480851fdad802993ce36e6d186ef8e2df16c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00003__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00003__regen_01",
+            "seed_chunk_id": "096eaf1e039fcaca39c813376c8a480851fdad802993ce36e6d186ef8e2df16c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_4_00003__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "question": "If Chase mailed me an offer, am I guaranteed a quick approval?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_4_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_4_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00001",
+            "seed_chunk_id": "11f4dd030b55a29d45fa597a9fe23611dab0d1c2f551d9ad68fb748d26582bcf",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00001__regen_01",
+            "seed_chunk_id": "11f4dd030b55a29d45fa597a9fe23611dab0d1c2f551d9ad68fb748d26582bcf",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_4_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "question": "What future travel value would I get from points earned on a $500 portal flight with Sapphire Reserve?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_4_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_4_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00002",
+            "seed_chunk_id": "b70db7ba7b64a8214e5d9c41b03b2b721e841f8316d721400858ee84c1bee139",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00002__regen_01",
+            "seed_chunk_id": "b70db7ba7b64a8214e5d9c41b03b2b721e841f8316d721400858ee84c1bee139",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_4_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "question": "If my split purchase posts for a different amount and I later get money back, what happens to the plan?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_4_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_4_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00000",
+            "seed_chunk_id": "addb8fdc79a3f521d1be639ce7e65e593d7b61abecdb8e2ccf0a708b17f45ae1",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_4_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_4_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_4_00000__regen_01",
+            "seed_chunk_id": "addb8fdc79a3f521d1be639ce7e65e593d7b61abecdb8e2ccf0a708b17f45ae1",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_4_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "question": "When should I redeem my sign-up bonus miles for the most value?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_5_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_5_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_5_00002",
+            "seed_chunk_id": "2cb1fd8499cb27e22c2c8f2163ad119392a1f016c87d39739f0a796c7709b871",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unsupported_or_unanswerable",
+          "details": {
+            "filter_reason": "grounding_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unsupported",
+          "details": {
+            "source_task_id": "iter_5_00002__regen_01",
+            "seed_chunk_id": "cc9b9550119d5dbbf6c7ae46bac78fd910fdb0f8f9f3da0c8508124a3e7d3f80",
+            "reanchored": true
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_5_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "question": "Should I redeem Ultimate Rewards now for a gift card or wait?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_5_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_5_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_5_00001",
+            "seed_chunk_id": "3f163b46ede0cd4ac415a54214ad8e5b9d073a028f765348cbc14c5474df60e1",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_5_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_5_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_5_00001__regen_01",
+            "seed_chunk_id": "3f163b46ede0cd4ac415a54214ad8e5b9d073a028f765348cbc14c5474df60e1",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_5_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "question": "Before opening an account with a fee break, what requirements and ongoing costs should I compare?",
+      "filter_status": "rejected",
+      "filter_reason": "grounding_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=unsupported (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_6_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_6_00001"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00001",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00001",
+            "seed_chunk_id": "7567c2da01519560c9c01c2546e0af92b870603800a33512c68ff35144a55f79",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00001__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00001__regen_01",
+            "seed_chunk_id": "7567c2da01519560c9c01c2546e0af92b870603800a33512c68ff35144a55f79",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_6_00001__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unsupported_or_unanswerable",
+          "details": {
+            "filter_reason": "grounding_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "question": "How can a college budget and savings plan help me reduce student loans?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_6_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_6_00003"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00003",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00003",
+            "seed_chunk_id": "c58e16e808491b8d5a3e448145511d57bcffbfeec43eb48c59f0be0e35130c32",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00003__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00003__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00003__regen_01",
+            "seed_chunk_id": "c58e16e808491b8d5a3e448145511d57bcffbfeec43eb48c59f0be0e35130c32",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_6_00003__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "question": "Should I refinance multiple government student loans or use avalanche repayment instead?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_6_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_6_00002"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00002",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00002",
+            "seed_chunk_id": "3f163b46ede0cd4ac415a54214ad8e5b9d073a028f765348cbc14c5474df60e1",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00002__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00002__regen_01",
+            "seed_chunk_id": "3f163b46ede0cd4ac415a54214ad8e5b9d073a028f765348cbc14c5474df60e1",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_6_00002__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "question": "For living abroad, is online banking enough or should I look for broader digital banking features?",
+      "filter_status": "rejected",
+      "filter_reason": "retrieval_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=too_easy (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_6_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_6_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00000",
+            "seed_chunk_id": "137fbceefceaf61c4dfa6e9c911ed7f7d3f90e623f45550b52b30749199ca82c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_6_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_6_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_6_00000__regen_01",
+            "seed_chunk_id": "137fbceefceaf61c4dfa6e9c911ed7f7d3f90e623f45550b52b30749199ca82c",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_6_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "question": "What purchases count toward this intro offer, and what could the bonus be worth in gift cards?",
+      "filter_status": "rejected",
+      "filter_reason": "grounding_filter_rejected",
+      "filter_reasoning": "Refinement budget exhausted for failure_type=unsupported (2/2).",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_7_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_7_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_7_00000",
+          "refinement_count": 0,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_7_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_7_00000",
+            "seed_chunk_id": "9046d84b6e056eeca4f7435273c3bb6125d7d956f2807c274ac42c3b8d177eb9",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_7_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "naive_retrieval_sufficient",
+          "details": {
+            "filter_reason": "retrieval_filter_needs_refinement"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_7_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "too_easy",
+          "details": {
+            "source_task_id": "iter_7_00000__regen_01",
+            "seed_chunk_id": "9046d84b6e056eeca4f7435273c3bb6125d7d956f2807c274ac42c3b8d177eb9",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_rejected",
+          "task_id": "iter_7_00000__regen_01__regen_02",
+          "refinement_count": 2,
+          "qa_type_before": "multi_hop",
+          "qa_type_after": "multi_hop",
+          "reason_code": "unsupported_or_unanswerable",
+          "details": {
+            "filter_reason": "grounding_filter_rejected"
+          }
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "question": "How can the money I get back vary by what I buy or by time of year?",
+      "filter_status": "rejected",
+      "filter_reason": "type_quota_exceeded",
+      "filter_reasoning": "type_quota_exceeded",
+      "journey_events": [
+        {
+          "stage": "generator",
+          "event_type": "generated",
+          "task_id": "iter_8_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "generation_mode": "llm_direct",
+            "source_task_id": "iter_8_00000"
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_needs_refinement",
+          "task_id": "iter_8_00000",
+          "refinement_count": 0,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "query_too_long",
+          "details": {
+            "filter_reason": "query_too_long"
+          }
+        },
+        {
+          "stage": "regeneration",
+          "event_type": "regenerated",
+          "task_id": "iter_8_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "unknown",
+          "details": {
+            "source_task_id": "iter_8_00000",
+            "seed_chunk_id": "6648b6431039275643ee792aac919a420cb1133e575357a284f7cf6412a663e7",
+            "reanchored": false
+          }
+        },
+        {
+          "stage": "filter",
+          "event_type": "filter_passed",
+          "task_id": "iter_8_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "grounding_supported",
+          "details": {
+            "filter_reason": "grounding_filter_passed"
+          }
+        },
+        {
+          "stage": "transform",
+          "event_type": "transformed",
+          "task_id": "iter_8_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "",
+          "details": {
+            "changed": false,
+            "validation_reason": "",
+            "target_style": ""
+          }
+        },
+        {
+          "stage": "type_balancer",
+          "event_type": "quota_rejected",
+          "task_id": "iter_8_00000__regen_01",
+          "refinement_count": 1,
+          "qa_type_before": "lookup",
+          "qa_type_after": "lookup",
+          "reason_code": "type_quota_exceeded",
+          "details": {
+            "requested_qa_type": "lookup",
+            "effective_qa_type": "lookup",
+            "was_relabelled": false,
+            "relabel_direction": "",
+            "quota_remaining_at_rejection": 0
+          }
+        }
+      ]
+    }
+  ]
+}

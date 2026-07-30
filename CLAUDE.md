@@ -25,11 +25,12 @@ platform. Keep the benchmax SDK; replace corpus storage, BM25 search, and
 - Batch 6 (run_multihop_batch6.py → outputs/natural_multihop_batch6_pilot10/): Castform path,
   NEW length regime — ≤20-word prompt target, deterministic 25-word cap
   filter (query_length_cap, src/query_length.py), banded conciseness
-  rubric v2 — results not comparable to prior batches. 10-item pilot run
-  2026-07-30: 9 accepted (9–20 words, median 14). Full 50 not yet run —
-  re-running overwrites the pilot's output files. Requires the fixes in
-  notes/known_issues.md #5–6 (bundle version pin, OpenAI tool-call
-  compat), which run_multihop_batch6.py installs.
+  rubric v2 — results not comparable to prior batches. Increments so far
+  (2026-07-30): _pilot10 → 9 accepted; _run2 (20 items) → 20/20 accepted,
+  9–17 words. 29 total; runs are named via --name and dedup-seed each
+  other through PRIOR_FILES. Requires the fixes in notes/known_issues.md
+  #5–7 (bundle version pin, OpenAI tool-call compat, judge ThinkingBlock
+  parse), which run_multihop_batch6.py + src/naturalness.py install.
 - Next: step 3b — LocalRolloutRunner via repo-local monkeypatch of
   pipeline._build_rollout_client (Pipeline has no linker client seam).
 

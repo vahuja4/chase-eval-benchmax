@@ -46,3 +46,9 @@ After fixing #5, rollouts succeeded but every anchor bundle still came back empt
 **Twist that hid the bug:** this machine has TWO benchmax installs both reporting 0.1.2.dev33 — miniconda's (the one `python` actually runs, missing the OpenAI branch) and `.venv`'s (which already contains it, suggesting upstream fixed this in a same-versioned rebuild). Any "does benchmax handle X?" check must be run against the interpreter that executes the pipeline, i.e. `python -c "import benchmax; ..."`, not against whichever site-packages a file search happens to find.
 
 **Why batch5 (2026-07-17) worked:** before the PyPI yank (#5), unpinned bundles installed a stable 0.2.x benchmax on the worker, whose env emitted Hermes `<tool_call>` XML that the local dev33 linker could parse. The yank forced the pin to dev33 on the worker, whose tool-calling is OpenAI-native — exposing this local parsing gap.
+
+## 7. Naturalness judge crashed on a leading ThinkingBlock (discovered 2026-07-30)
+
+The batch-5-era judge parser read `response.content[0].text`. During batch-6 run2, claude-sonnet-5 emitted a thinking block before the text block on item 14/20, and the script died mid-judge (`AttributeError: 'ThinkingBlock' object has no attribute 'text'`) — after the full pipeline had completed. Batches 1–5 and the batch-6 pilot only worked because no response happened to lead with a non-text block.
+
+**Fix:** judge extracted to `src/naturalness.py`; `_response_text` takes the first block that has text (tests: `tests/test_naturalness.py`). run2's 20 items were re-judged out-of-band with the fixed judge (noted in that run's `run_config.json`); only ~20 cheap judge calls were repeated, no pipeline work lost (checkpoints held everything). The old scripts (`run_natural_multihop*.py`) still carry the fragile inline copy — historical record, don't reuse their judge.
