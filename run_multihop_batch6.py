@@ -116,6 +116,7 @@ PRIOR_FILES = [
     # batch-6 increments: each completed run's pipeline-passed superset
     # seeds the next, so successive runs never repeat questions.
     "outputs/natural_multihop_batch6_pilot10/all_scored.jsonl",
+    "outputs/natural_multihop_batch6_run2/all_scored.jsonl",
 ]
 
 prior_entries: list[tuple[str, str]] = []  # (source_file, question)
