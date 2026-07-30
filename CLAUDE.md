@@ -16,10 +16,18 @@ platform. Keep the benchmax SDK; replace corpus storage, BM25 search, and
   linker agent used lexical search for 109/109 queries.
 - Open decision unchanged: whether the env_rollout filter returns to
   the chain (current natural-multihop runs don't use it).
-- Next: step 3a — per-backend bundle dirs + Castform health check
-  (notes/rollout_interface.md D8-D9); then step 3b — LocalRolloutRunner
-  via repo-local monkeypatch of pipeline._build_rollout_client
-  (Pipeline has no linker client seam).
+- Step 3a complete: per-backend bundle dirs (bundles/{local,postgres}/,
+  resolved via src/bundles.require_bundle with backend-stamp
+  verification; both sets built and coexisting) + Castform health check
+  (tests/test_castform_health.py, pytest -m castform; verified alive
+  2026-07-30). Note: chunk source + retrieval filter still hit Castform
+  unconditionally — Pipeline._load_source hard-codes PostgresChunkSource.
+- Batch 6 configured, not launched (run_multihop_50.py → outputs/multihop_50/):
+  50 items, Castform path. NEW length regime — ≤20-word prompt target,
+  deterministic 25-word cap filter (query_length_cap, src/query_length.py),
+  banded conciseness rubric v2 — results not comparable to prior batches.
+- Next: step 3b — LocalRolloutRunner via repo-local monkeypatch of
+  pipeline._build_rollout_client (Pipeline has no linker client seam).
 
 ## Key constraints
 - The local search tool must preserve benchmax's SearchEnv interface

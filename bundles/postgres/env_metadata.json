@@ -1,0 +1,9 @@
+{
+  "pip_dependencies": [
+    "benchmax==0.1.2.dev33"
+  ],
+  "python_version": "3.12",
+  "benchmax_version": "0.1.2.dev33",
+  "env_class_source": "class MyChaseSearchEnv(SearchEnv):\n    system_prompt = SearchEnv.render_system_prompt(\n        corpus_description=CORPUS_DESCRIPTION,\n        max_search_calls=MAX_SEARCH_CALLS,\n    )\n\n    @classmethod\n    def dataset_preprocess(cls, example: Any, **kwargs) -> Example:\n        question = example.get(\"question\") or example.get(\"prompt\") or \"\"\n        return make_example(\n            prompt_messages=[{\"role\": \"user\", \"content\": question}],\n            task={\n                \"question\": question,\n                \"ground_truth\": example.get(\"answer\"),\n                \"reference_chunks\": example.get(\"reference_chunks\", []),\n            },\n            system_prompt=cls.system_prompt,\n        )\n",
+  "search_backend": "postgres"
+}
