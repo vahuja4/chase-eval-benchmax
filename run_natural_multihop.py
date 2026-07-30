@@ -50,6 +50,9 @@ from benchmax.platform.client import RolloutClient
 
 PROJECT_DIR = Path(__file__).parent
 
+from src.bundles import require_bundle
+LINKER_PKL, LINKER_META = require_bundle("linker_env")
+
 llm_key = os.environ["LLM_API_KEY"]
 llm_url = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
 anthropic_key = os.environ["ANTHROPIC_API_KEY"]
@@ -207,8 +210,8 @@ cfg = PipelineConfig(
             fallback_to_metadata=True,
             auto_scale_turns=True,
             env_bundle=EnvBundleConfig(
-                env_cls_file=str(PROJECT_DIR / "linker_env_cls.pkl"),
-                env_metadata_file=str(PROJECT_DIR / "linker_env_metadata.json"),
+                env_cls_file=str(LINKER_PKL),
+                env_metadata_file=str(LINKER_META),
             ),
         ),
     ),

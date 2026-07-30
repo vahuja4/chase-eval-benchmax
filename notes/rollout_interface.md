@@ -573,7 +573,10 @@ Metadata sidecars written at lines 103 and 128, same directory.
 | `dump_corpus_profile.py` | 87 | `PROJECT_DIR / "env_cls.pkl"` | SearchEnv |
 | `dump_corpus_profile.py` | 88 | `PROJECT_DIR / "env_metadata.json"` | SearchEnv meta |
 
-#### Proposed per-backend layout
+#### Per-backend layout (implemented 2026-07-30)
+
+Directory names match the `SEARCH_BACKEND` values 1:1 (`postgres`, not
+`castform`, for the hosted backend):
 
 ```
 chase_eval_benchmax/
@@ -583,12 +586,18 @@ chase_eval_benchmax/
       env_metadata.json
       linker_env_cls.pkl
       linker_env_metadata.json
-    castform/
+    postgres/
       env_cls.pkl
       env_metadata.json
       linker_env_cls.pkl
       linker_env_metadata.json
 ```
+
+Resolution lives in `src/bundles.py`: `require_bundle(stem, backend)`
+returns verified `(pkl, metadata)` paths, checking existence and that
+the metadata's `search_backend` stamp matches the requested backend
+(fails loudly with a rebuild hint otherwise). All builder/reader sites
+in the table above now resolve through it.
 
 Note: `build_env_bundle.py` **already** selects the backend via the
 `SEARCH_BACKEND` env var (l.47: `local` → `src.local_search.LocalBM25Search`,
@@ -607,6 +616,12 @@ Changes required:
 All changes are mechanical path-prefix swaps.
 
 ### D9. Minimal Castform health-check test
+
+Implemented 2026-07-30 as `tests/test_castform_health.py` (marker
+`castform`, deselected by default via pytest.ini; run with
+`pytest -m castform`). Verified alive 2026-07-30 (1.3s). It uses the
+explicit `corpus_id` and the default credential seam, per the caveats
+below.
 
 The cheapest way to verify the Castform path is alive:
 

@@ -35,7 +35,9 @@ profile = CorpusProfile(
 )
 
 print("Building search client...")
-SEARCH_BACKEND = os.environ.get("SEARCH_BACKEND", "local")
+from src.bundles import require_bundle, search_backend
+SEARCH_BACKEND = search_backend()
+LINKER_PKL, LINKER_META = require_bundle("linker_env", SEARCH_BACKEND)
 if SEARCH_BACKEND == "local":
     from src.local_search import LocalBM25Search
     search_client = LocalBM25Search("data/snapshots/chase_2026_05_27/chunks.jsonl")
@@ -70,8 +72,8 @@ linker = SearchAgentLinker(
         fallback_to_metadata=True,
         auto_scale_turns=True,
         env_bundle=EnvBundleConfig(
-            env_cls_file=str(Path(__file__).parent / "linker_env_cls.pkl"),
-            env_metadata_file=str(Path(__file__).parent / "linker_env_metadata.json"),
+            env_cls_file=str(LINKER_PKL),
+            env_metadata_file=str(LINKER_META),
         ),
     ),
     search_agent_pct=1.0,

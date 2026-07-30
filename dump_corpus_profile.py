@@ -32,6 +32,9 @@ from benchmax.platform.client import RolloutClient
 
 PROJECT_DIR = Path(__file__).parent
 
+from src.bundles import require_bundle
+ENV_PKL, ENV_META = require_bundle("env")
+
 llm_key = os.environ["LLM_API_KEY"]
 llm_url = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
 anthropic_key = os.environ["ANTHROPIC_API_KEY"]
@@ -84,8 +87,8 @@ cfg = PipelineConfig(
             judge_api_key=llm_key,
             judge_base_url=llm_url,
             env_bundle=EnvBundleConfig(
-                env_cls_file=str(PROJECT_DIR / "env_cls.pkl"),
-                env_metadata_file=str(PROJECT_DIR / "env_metadata.json"),
+                env_cls_file=str(ENV_PKL),
+                env_metadata_file=str(ENV_META),
             ),
             rollout_limits=RolloutLimits(
                 max_turns=6,

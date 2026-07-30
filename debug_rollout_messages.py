@@ -10,6 +10,8 @@ from benchmax.platform.client import RolloutClient
 
 PROJECT_DIR = Path(__file__).parent
 
+from src.bundles import require_bundle
+
 client = RolloutClient(api_key=os.environ.get("PLATFORM_API_KEY", ""))
 
 raw_example = {
@@ -18,8 +20,7 @@ raw_example = {
     "reasoning_mode": "",
 }
 
-env_cls_file = PROJECT_DIR / "linker_env_cls.pkl"
-env_metadata_file = PROJECT_DIR / "linker_env_metadata.json"
+env_cls_file, env_metadata_file = require_bundle("linker_env")
 
 env_cls_bytes = env_cls_file.read_bytes()
 env_metadata_bytes = env_metadata_file.read_bytes()
