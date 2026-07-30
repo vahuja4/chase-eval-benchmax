@@ -1,0 +1,1876 @@
+Only 0% of chunks have date metadata — temporal reasoning mode reduced to 0%.
+Corpus has low linkability (suitability p50=0.58) — multi-hop ratio reduced to 45%.
+Loaded 60 prior questions for dedup (6 files)
+============================================================
+NATURAL MULTI-HOP BATCH 6 — 50 items, Castform path
+============================================================
+  Backend: postgres (bundles: /Users/vishal/Desktop/chase_eval_benchmax/bundles/postgres)
+  Target: 10 samples, 100% multi_hop, 2-hop
+  Filters: query_length_cap → quality_gate → retrieval_too_easy_llm → grounding_llm → hop_count_validity
+  Length regime: prompt <= 20 words, hard cap 25
+  Judge: claude-sonnet-5, rubric naturalness_v2_banded_conciseness, threshold 0.6
+  Prior questions for dedup: 60
+  Checkpoints: outputs/multihop_50/.checkpoints/ (resume=True)
+  Cost note: ~1 Castform rollout credit + OpenAI calls per item
+============================================================
+  -> Saved outputs/multihop_50/run_config.json
+Loading chunks from corpus: chase_help_2026_05_27 (ID: 6558ec44-c948-4ed0-a099-63dd786078ad)
+ChunkCollection Summary
+Total chunks: 3089
+Total files: 289
+
+Chunk Size Statistics:
+  Min: 54 chars (p_00007, chunk ?)
+  Max: 2177 chars (p_00256, chunk ?)
+  Mean: 505 chars
+
+File Structure:
+├── p_00124 (15 chunks)
+├── p_00086 (4 chunks)
+├── p_00001 (16 chunks)
+├── p_00238 (7 chunks)
+    ... 285 more files
+
+Loaded 3089 chunks from existing corpus.
+[1/6] Loading chunks from corpus...
+[1/6] Loaded 500 profile chunks from corpus
+[2/6] Building corpus profile...
+[2/6] Built corpus profile
+[3/6] Extracting entity patterns...
+[4/6] Preparing generation...
+[5/6] Starting work queue (batch_size=auto)...
+  [dedup] Pre-seeded with 60 prior questions (collision log: outputs/multihop_50/dedup_collisions.jsonl)
+[5/6] Work queue:   0%|          | 0/10 [00:00<?, ?samples/s]
+Linking chunks:   0%|          | 0/5 [00:00<?, ?it/s][A
+Linking chunks:  20%|██        | 1/5 [00:25<01:40, 25.01s/it][A
+Linking chunks:  40%|████      | 2/5 [00:37<00:52, 17.63s/it][A
+Linking chunks:  60%|██████    | 3/5 [00:48<00:29, 14.68s/it][A
+Linking chunks:  80%|████████  | 4/5 [01:02<00:14, 14.53s/it][A
+Linking chunks: 100%|██████████| 5/5 [01:19<00:00, 15.08s/it][ALinking chunks: 100%|██████████| 5/5 [01:19<00:00, 15.80s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=751): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3325): 1. [source: p_00204] (score: 28.71) ### Expense management features Companies whose employees travel often may benefit…
+  [ex 0] → message [assistant] (chars=1037): <evidence_chain> <chunk role="primary">Business credit cards can issue no-cost employee cards linked to the company…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=890): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4360): 1. [source: p_00013] (score: 60.58) 15 Domestic and international incoming wires have a $15 fee per transfer. Financial…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7034): 1. [source: p_00013] (score: 60.03) Available Paper checks Paper checks Not Available Available Incoming wire…
+  [ex 0] → message [assistant] (chars=1133): <evidence_chain> <chunk role="primary">States that domestic and international incoming wires cost $15 per transfer, and…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1608): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5700): 1. [source: p_00191] (score: 38.12) ## What types of loans can you defer? The way a deferred payment works depends on…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4654): 1. [source: p_00163] (score: 30.83) ## How student loans can hurt your credit history Student loans can negatively…
+  [ex 0] → message [assistant] (chars=994): <evidence_chain> <chunk role="primary">Approved deferred payments do not directly hurt your credit score and can help…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=705): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2619): 1. [source: p_00111] (score: 71.41) ### Good grades rewards Some issuers offer student credit card benefits that reward…
+  [ex 0] → message [assistant] (chars=1103): <evidence_chain> <chunk role="primary">Explains that some student credit cards reward academic achievement with a…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=975): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3536): 1. [source: p_00134] (score: 70.50) ## In summary Opening a new credit card often includes a new cardmembers welcome…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00213] (score: 34.51) ## Cash back vs. points When choosing between cash back or points/miles, it can be…
+  [ex 0] → message [assistant] (chars=1463): <evidence_chain> <chunk role="primary">Welcome bonus rewards on a new credit card are conditional: the bonus is not…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=730): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4496): 1. [source: p_00223] (score: 37.80) # Chase Sapphire Preferred® vs. Sapphire Reserve® ## Quick insights - The Chase…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4523): 1. [source: p_00005] (score: 19.67) ### $550+ in value when you stay with The Edit Book your stay through The Edit by…
+  [ex 0] → message [assistant] (chars=2195): <evidence_chain> <chunk role="primary">Provides that the Chase Sapphire Reserve offers an automatic annual $300 travel…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/5 [00:00<?, ?it/s][A
+Generating QA candidates:  20%|██        | 1/5 [00:04<00:16,  4.00s/it][A
+Generating QA candidates:  60%|██████    | 3/5 [00:04<00:02,  1.17s/it][A
+Generating QA candidates:  80%|████████  | 4/5 [00:04<00:00,  1.18it/s][AGenerating QA candidates: 100%|██████████| 5/5 [00:04<00:00,  1.08it/s]
+
+Retrieval filter:   0%|          | 0/3 [00:00<?, ?it/s][A
+Retrieval filter:  33%|███▎      | 1/3 [00:02<00:05,  2.55s/it][A
+Retrieval filter:  67%|██████▋   | 2/3 [00:02<00:01,  1.15s/it][ARetrieval filter: 100%|██████████| 3/3 [00:02<00:00,  1.07it/s]
+
+Grounding filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Grounding filter: 100%|██████████| 1/1 [00:03<00:00,  3.77s/it][AGrounding filter: 100%|██████████| 1/1 [00:03<00:00,  3.77s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.31s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.10s/it][AHop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.28s/it]
+
+Linking chunks:   0%|          | 0/4 [00:00<?, ?it/s][A
+Linking chunks:  25%|██▌       | 1/4 [00:18<00:54, 18.01s/it][A
+Linking chunks:  50%|█████     | 2/4 [00:34<00:33, 16.99s/it][A
+Linking chunks:  75%|███████▌  | 3/4 [00:47<00:15, 15.25s/it][ASearchAgentLinker LLM linking failed
+Traceback (most recent call last):
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 127, in __iter__
+    for part in self._httpcore_stream:
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 407, in __iter__
+    raise exc from None
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 403, in __iter__
+    for part in self._stream:
+                ^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 342, in __iter__
+    raise exc
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 334, in __iter__
+    for chunk in self._connection._receive_response_body(**kwargs):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 203, in _receive_response_body
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_backends/sync.py", line 126, in read
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/platform/client.py", line 957, in stream_rollout
+    for event in _iter_sse(response):
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/platform/client.py", line 541, in _iter_sse
+    for line in response.iter_lines():
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_models.py", line 929, in iter_lines
+    for text in self.iter_text():
+                ^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_models.py", line 916, in iter_text
+    for byte_content in self.iter_bytes():
+                        ^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_models.py", line 897, in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_models.py", line 951, in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 153, in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 126, in __iter__
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/rag/qa_generation/search_agent_linker.py", line 172, in link
+    return self._link_with_llm(primary_chunk, hop_count, n_secondaries, reasoning_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/rag/qa_generation/search_agent_linker.py", line 201, in _link_with_llm
+    result = self._run_rollout(raw_example, hop_count=hop_count)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/rag/qa_generation/search_agent_linker.py", line 315, in _run_rollout
+    return self._rollout_client.stream_rollout(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/platform/client.py", line 982, in stream_rollout
+    raise RolloutStreamError(
+benchmax.platform.exceptions.RolloutStreamError: Rollout stream timed out or disconnected after 300.0s of inactivity: The read operation timed out
+
+Linking chunks: 100%|██████████| 4/4 [1:04:47<00:00, 1525.22s/it][ALinking chunks: 100%|██████████| 4/4 [1:04:47<00:00, 971.87s/it] 
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=740): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3195): 1. [source: p_00250] (score: 48.56) ## In summary There are several ways to maximize rewards points on retail purchases…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4304): 1. [source: p_00140] (score: 61.83) ### Take advantage of online shopping portals Many credit card issuers offer online…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6642): 1. [source: p_00202] (score: 49.07) # Benefits of using the Chase shopping portal ## Quick insights - Chase cardmembers…
+  [ex 0] → message [assistant] (chars=1522): <evidence_chain> <chunk role="primary">Explains two reward-earning mechanisms for retail purchases: rotating bonus…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=641): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5062): 1. [source: p_00231] (score: 47.78) ## In conclusion Flying tends to be one of the most expensive parts of traveling.…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00231] (score: 37.98) Join an airline loyalty program ### Join an airline loyalty program​ To complement…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6834): 1. [source: p_00121] (score: 39.69) ### Chase Sapphire Preferred® - Earn a welcome bonus offer after you spend a…
+  [ex 0] → message [assistant] (chars=1619): <evidence_chain> <chunk role="primary">Explains the overall strategy for getting complimentary flights: choose a credit…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=611): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4350): 1. [source: p_00052] (score: 53.17) ## How much money can you deposit at an ATM? Banks sometimes limit how much money…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6979): 1. [source: p_00011] (score: 28.06) ### Does Chase First Banking allow deposits? Funds can only be transferred into the…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7374): 1. [source: p_00092] (score: 54.92) Qualifying Electronic Deposits: - Qualifying Electronic Deposits, such as payments…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4682): 1. [source: p_00306] (score: 55.02) ### Make Deposits 24/7 access to deposit funds - Chase QuickDeposit℠ — Securely…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1235): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4167): 1. [source: p_00030] (score: 29.64) ## What to store in a safe deposit box The features of safe deposit boxes may make…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7249): 1. [source: p_00030] (score: 26.75) ## How safe deposit boxes work You can rent safe deposit boxes from banks or credit…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5793): 1. [source: p_00030] (score: 24.53) ## What to store in a safe deposit box The features of safe deposit boxes may make…
+  [ex 0] → message [assistant] (chars=3427): <evidence_chain> <chunk role="primary">The primary chunk says safe deposit boxes are best for valuable items that do…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/4 [00:00<?, ?it/s][A
+Generating QA candidates:  25%|██▌       | 1/4 [00:06<00:19,  6.36s/it][A
+Generating QA candidates:  50%|█████     | 2/4 [00:06<00:05,  2.74s/it][A
+Generating QA candidates:  75%|███████▌  | 3/4 [00:07<00:01,  1.80s/it][A
+Generating QA candidates: 100%|██████████| 4/4 [00:08<00:00,  1.69s/it][AGenerating QA candidates: 100%|██████████| 4/4 [00:08<00:00,  2.19s/it]
+
+Retrieval filter:   0%|          | 0/3 [00:00<?, ?it/s][A
+Retrieval filter:  33%|███▎      | 1/3 [00:02<00:05,  2.52s/it][A
+Retrieval filter:  67%|██████▋   | 2/3 [00:03<00:01,  1.40s/it][A
+Retrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.14it/s][ARetrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.13s/it]
+
+Grounding filter:   0%|          | 0/2 [00:00<?, ?it/s][A
+Grounding filter:  50%|█████     | 1/2 [00:02<00:02,  2.73s/it][A
+Grounding filter: 100%|██████████| 2/2 [00:04<00:00,  1.97s/it][AGrounding filter: 100%|██████████| 2/2 [00:04<00:00,  2.08s/it]
+
+Hop-count validity:   0%|          | 0/3 [00:00<?, ?it/s][A
+Hop-count validity:  33%|███▎      | 1/3 [00:02<00:04,  2.33s/it][A
+Hop-count validity:  67%|██████▋   | 2/3 [00:03<00:01,  1.58s/it][A
+Hop-count validity: 100%|██████████| 3/3 [00:04<00:00,  1.49s/it][AHop-count validity: 100%|██████████| 3/3 [00:04<00:00,  1.59s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.58s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.17s/it][AHop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.38s/it]
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:20<00:20, 20.71s/it][A
+Linking chunks: 100%|██████████| 2/2 [00:37<00:00, 18.65s/it][ALinking chunks: 100%|██████████| 2/2 [00:37<00:00, 18.96s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1298): Find 3 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6282): 1. [source: p_00126] (score: 37.46) ## Benefits of paying your balance in full There are a few reasons why you may want…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4322): 1. [source: p_00176] (score: 45.51) ## How late payments affect credit score A major factor that goes into calculating…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3556): 1. [source: p_00126] (score: 30.36) ### Making only the minimum payment Your credit card will have a minimum payment.…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2820): 1. [source: p_00149] (score: 26.20) ## Potential benefits of having multiple starter credit cards Having multiple…
+  [ex 0] → message [assistant] (chars=2331): <evidence_chain> <chunk role="primary"> The primary chunk gives Gen Z first-time cardholders the behavioral advice: use…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=630): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2511): 1. [source: p_00211] (score: 37.20) ### Theft and damage Some credit cards offer certain purchase protection in the…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6654): 1. [source: p_00006] (score: 45.51) Travel and Emergency Assistance Δ Same page link to disclaimer reference ΔTravel…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5623): 1. [source: p_00211] (score: 56.63) ### Theft and damage Some credit cards offer certain purchase protection in the…
+  [ex 0] → message [assistant] (chars=2009): <evidence_chain> <chunk role="primary"> The primary chunk establishes the general benefit: some credit cards offer…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:03<00:03,  3.94s/it][A
+Generating QA candidates: 100%|██████████| 2/2 [00:05<00:00,  2.38s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:05<00:00,  2.61s/it]
+
+Retrieval filter:   0%|          | 0/2 [00:00<?, ?it/s][A
+Retrieval filter:  50%|█████     | 1/2 [00:02<00:02,  2.98s/it][A
+Retrieval filter: 100%|██████████| 2/2 [00:03<00:00,  1.38s/it][ARetrieval filter: 100%|██████████| 2/2 [00:03<00:00,  1.62s/it]
+[5/6] Work queue:  30%|███       | 3/10 [1:07:35<2:37:43, 1351.88s/samples]                                                                           [5/6] Work queue:  30%|███       | 3/10 [1:07:35<2:37:43, 1351.88s/samples]  Batch 1: 5 generated → 3 accepted, 2 rejected, 6 regenerated
+
+Linking chunks:   0%|          | 0/5 [00:00<?, ?it/s][A
+Linking chunks:  20%|██        | 1/5 [00:12<00:49, 12.49s/it][A
+Linking chunks:  40%|████      | 2/5 [00:37<00:59, 19.93s/it][A
+Linking chunks:  60%|██████    | 3/5 [00:50<00:33, 16.62s/it][A
+Linking chunks:  80%|████████  | 4/5 [01:03<00:15, 15.44s/it][A
+Linking chunks: 100%|██████████| 5/5 [01:16<00:00, 14.55s/it][ALinking chunks: 100%|██████████| 5/5 [01:16<00:00, 15.38s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1245): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4313): 1. [source: p_00112] (score: 40.45) ## Which Chase credit cards are best for paying utility bills? While Chase doesn’t…
+  [ex 0] → message [assistant] (chars=1305): <evidence_chain> <chunk role="primary">Establishes that Chase Freedom Flex and Freedom Unlimited differ in how they…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=653): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3804): 1. [source: p_00247] (score: 70.15) ## In summary When planning your purchases, looking for related card linked offers…
+  [ex 0] → message [assistant] (chars=1059): <evidence_chain> <chunk role="primary">Advises that card linked offers can save money if activated in your credit card…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=996): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3045): 1. [source: p_00069] (score: 54.33) # How to create a budget spreadsheet When it comes to managing your finances…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00069] (score: 49.43) ## 4. Input your numbers and use formulas Once your spreadsheet is set up the way…
+  [ex 0] → message [assistant] (chars=1044): <evidence_chain> <chunk role="primary">Explains the general process of building a budget spreadsheet, including…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=886): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2989): 1. [source: p_00109] (score: 29.76) ### Think about rewards Credit card rewards may seem like one of the more exciting…
+  [ex 0] → message [assistant] (chars=1071): <evidence_chain> <chunk role="primary">Says a person may be able to upgrade to a rewards card once they have built up…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1579): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5530): 1. [source: p_00126] (score: 32.81) ## Budgeting to prevent high credit utilization Your credit limit is the amount of…
+  [ex 0] → message [assistant] (chars=206): The primary already states the 30% recommendation, so I need a complementary chunk that adds something necessary, like…
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00149] (score: 32.60) ## Potential benefits of having multiple starter credit cards Having multiple…
+  [ex 0] → message [assistant] (chars=986): <evidence_chain> <chunk role="primary">Explains that paying utility bills with a credit card can raise your credit…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1066): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2503): 1. [source: p_00121] (score: 45.69) ## Do Chase Ultimate Rewards points expire? Chase Ultimate Rewards points do not…
+  [ex 0] → message [assistant] (chars=1223): <evidence_chain> <chunk role="primary">Establishes the initial state over time: Chase Ultimate Rewards points stay…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/5 [00:00<?, ?it/s][A
+Generating QA candidates:  20%|██        | 1/5 [00:03<00:13,  3.32s/it][A
+Generating QA candidates:  40%|████      | 2/5 [00:03<00:04,  1.47s/it][A
+Generating QA candidates:  60%|██████    | 3/5 [00:03<00:01,  1.17it/s][A
+Generating QA candidates:  80%|████████  | 4/5 [00:04<00:00,  1.24it/s][A
+Generating QA candidates: 100%|██████████| 5/5 [00:04<00:00,  1.60it/s][AGenerating QA candidates: 100%|██████████| 5/5 [00:04<00:00,  1.07it/s]
+
+Retrieval filter:   0%|          | 0/3 [00:00<?, ?it/s][A
+Retrieval filter:  33%|███▎      | 1/3 [00:02<00:04,  2.35s/it][A
+Retrieval filter:  67%|██████▋   | 2/3 [00:03<00:01,  1.42s/it][A
+Retrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.13it/s][ARetrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.12s/it]
+
+Grounding filter:   0%|          | 0/2 [00:00<?, ?it/s][A
+Grounding filter:  50%|█████     | 1/2 [00:02<00:02,  2.56s/it][A
+Grounding filter: 100%|██████████| 2/2 [00:03<00:00,  1.36s/it][AGrounding filter: 100%|██████████| 2/2 [00:03<00:00,  1.54s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.18s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:03<00:00,  1.42s/it][AHop-count validity: 100%|██████████| 2/2 [00:03<00:00,  1.53s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.33s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.15s/it][AHop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.33s/it]
+
+Linking chunks:   0%|          | 0/4 [00:00<?, ?it/s][A
+Linking chunks:  25%|██▌       | 1/4 [00:13<00:39, 13.05s/it][A
+Linking chunks:  50%|█████     | 2/4 [00:30<00:31, 15.59s/it][A
+Linking chunks:  75%|███████▌  | 3/4 [00:47<00:16, 16.42s/it][A
+Linking chunks: 100%|██████████| 4/4 [01:04<00:00, 16.56s/it][ALinking chunks: 100%|██████████| 4/4 [01:04<00:00, 16.15s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1188): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3614): 1. [source: p_00260] (score: 39.07) ## How to redeem cash back Chase credit cardmembers can redeem their cash back for…
+  [ex 0] → message [assistant] (chars=1297): <evidence_chain> <chunk role="primary">The primary chunk states that Chase cash back can be redeemed in several ways…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=819): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3209): 1. [source: p_00199] (score: 40.66) ### Airline and hotel partner cards These are a subset of travel credit cards in…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4042): 1. [source: p_00121] (score: 43.17) ## How much are Chase Ultimate Rewards points worth? The value of your Chase…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5042): 1. [source: p_00225] (score: 36.42) ### Airline travel benefits Airline credit may offer additional perks for…
+  [ex 0] → message [assistant] (chars=1932): <evidence_chain> <chunk role="primary">This chunk explains the core function of travel rewards cards: they let…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1579): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4227): 1. [source: p_00112] (score: 25.48) ### Cons - Potential fees: Some utility companies charge convenience fees for…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6307): 1. [source: p_00116] (score: 27.31) ## When to request a credit limit increase A credit limit increase can be a…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5791): 1. [source: p_00112] (score: 23.00) # Earning cash back on utilities ## Quick insights - Many credit cards offer cash…
+  [ex 0] → message [assistant] (chars=1787): <evidence_chain> <chunk role="primary">Defines the key credit-card concepts relevant to paying utility bills,…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=687): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3675): 1. [source: p_00059] (score: 43.20) ## In summary A blemished banking history can make it difficult to get approved for…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5987): 1. [source: p_00163] (score: 15.51) ## How student loans can hurt your credit history Student loans can negatively…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2989): 1. [source: p_00059] (score: 34.38) ## How does second chance banking work? When evaluating second chance bank account…
+  [ex 0] → message [assistant] (chars=2023): <evidence_chain> <chunk role="primary">The primary chunk establishes that someone with a blemished banking history may…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/4 [00:00<?, ?it/s][A
+Generating QA candidates:  25%|██▌       | 1/4 [00:03<00:11,  3.90s/it][A
+Generating QA candidates:  50%|█████     | 2/4 [00:04<00:04,  2.16s/it][A
+Generating QA candidates:  75%|███████▌  | 3/4 [00:05<00:01,  1.32s/it][AGenerating QA candidates: 100%|██████████| 4/4 [00:05<00:00,  1.29s/it]
+
+Retrieval filter:   0%|          | 0/4 [00:00<?, ?it/s][A
+Retrieval filter:  25%|██▌       | 1/4 [00:03<00:09,  3.18s/it][A
+Retrieval filter:  75%|███████▌  | 3/4 [00:03<00:00,  1.15it/s][ARetrieval filter: 100%|██████████| 4/4 [00:03<00:00,  1.20it/s]
+
+Grounding filter:   0%|          | 0/3 [00:00<?, ?it/s][A
+Grounding filter:  33%|███▎      | 1/3 [00:02<00:04,  2.49s/it][A
+Grounding filter: 100%|██████████| 3/3 [00:03<00:00,  1.11it/s][AGrounding filter: 100%|██████████| 3/3 [00:03<00:00,  1.06s/it]
+
+Hop-count validity:   0%|          | 0/3 [00:00<?, ?it/s][A
+Hop-count validity:  33%|███▎      | 1/3 [00:02<00:04,  2.24s/it][A
+Hop-count validity: 100%|██████████| 3/3 [00:02<00:00,  1.52it/s][AHop-count validity: 100%|██████████| 3/3 [00:02<00:00,  1.22it/s]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.40s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.24s/it][AHop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.42s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.44s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.26s/it][AHop-count validity: 100%|██████████| 2/2 [00:02<00:00,  1.43s/it]
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:14<00:14, 14.00s/it][A
+Linking chunks: 100%|██████████| 2/2 [00:30<00:00, 15.46s/it][ALinking chunks: 100%|██████████| 2/2 [00:30<00:00, 15.25s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=727): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3812): 1. [source: p_00191] (score: 40.24) ### Student loans If you're currently a student, most lenders allow you to defer…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00191] (score: 33.57) ### Student loans If you're currently a student, most lenders allow you to defer…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00073] (score: 43.73) ### Make interest-only payments during school Private student loans offered by…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7339): 1. [source: p_00173] (score: 42.05) ### Federal student loans Federal student loans are designed with students in mind,…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=955): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3119): 1. [source: p_00123] (score: 38.85) ## How does a refund show up on a credit card? If you were carrying a balance on…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7025): 1. [source: p_00122] (score: 25.42) ## How long does it take to receive a new credit card? Most credit card issuers…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2978): 1. [source: p_00123] (score: 39.64) ## How do returns work on a credit card? When returning a product to a store using…
+  [ex 0] → message [assistant] (chars=1813): <evidence_chain> <chunk role="primary">Explains that if a cardholder already paid off the card before a return, the…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:03<00:03,  3.68s/it][A
+Generating QA candidates: 100%|██████████| 2/2 [00:05<00:00,  2.66s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:05<00:00,  2.81s/it]
+Skipping task iter_1_00001__regen_01__regen_02: failed to parse QA response (output_tokens=154, first 300 chars): <think>
+The natural connection is between refunds creating a negative balance if the card was already paid off, and both refunds and cash back rewards offering a check or statement credit as ways to receive value. A real customer might want to know whether money from a return works similarly to cash
+Generation: 1/2 parsed OK | 0 API failures | 0 empty responses | 1 parse failures
+                                                                           [5/6] Work queue:  30%|███       | 3/10 [1:11:13<2:37:43, 1351.88s/samples]  ⚠ Generation: 1/2 parsed OK | 0 API failures | 0 empty responses | 1 parse failures
+
+Retrieval filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Retrieval filter: 100%|██████████| 1/1 [00:02<00:00,  2.87s/it][ARetrieval filter: 100%|██████████| 1/1 [00:02<00:00,  2.87s/it]
+[5/6] Work queue:  60%|██████    | 6/10 [1:11:16<39:59, 599.97s/samples]                                                                           [5/6] Work queue:  60%|██████    | 6/10 [1:11:16<39:59, 599.97s/samples]  Batch 2: 5 generated → 3 accepted, 2 rejected, 6 regenerated
+
+Linking chunks:   0%|          | 0/4 [00:00<?, ?it/s][ASearchAgentLinker LLM linking failed
+Traceback (most recent call last):
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 136, in handle_request
+    raise exc
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_backends/sync.py", line 126, in read
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/rag/qa_generation/search_agent_linker.py", line 172, in link
+    return self._link_with_llm(primary_chunk, hop_count, n_secondaries, reasoning_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/rag/qa_generation/search_agent_linker.py", line 201, in _link_with_llm
+    result = self._run_rollout(raw_example, hop_count=hop_count)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/rag/qa_generation/search_agent_linker.py", line 315, in _run_rollout
+    return self._rollout_client.stream_rollout(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/benchmax/platform/client.py", line 932, in stream_rollout
+    with httpx.stream(
+         ^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_api.py", line 159, in stream
+    with client.stream(
+         ^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 868, in stream
+    response = self.send(
+               ^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vishal/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/vishal/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout: The read operation timed out
+
+Linking chunks:  25%|██▌       | 1/4 [05:03<15:11, 303.91s/it][A
+Linking chunks:  50%|█████     | 2/4 [05:19<04:29, 134.57s/it][A
+Linking chunks:  75%|███████▌  | 3/4 [05:31<01:18, 78.41s/it] [A
+Linking chunks: 100%|██████████| 4/4 [05:45<00:00, 53.11s/it][ALinking chunks: 100%|██████████| 4/4 [05:45<00:00, 86.46s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=820): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5391): 1. [source: p_00095] (score: 55.07) ### What is Chase Pay Over Time® after purchase? Chase Pay Over Time (formerly My…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00035] (score: 45.71) ### Reasons to choose Chase Pay Over Time Chase Pay Over Time includes the…
+  [ex 0] → message [assistant] (chars=1401): <evidence_chain> <chunk role="primary">Current state: the product is now called “Chase Pay Over Time after purchase,”…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1538): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6081): 1. [source: p_00189] (score: 48.94) ## Help improve your score before applying Your credit score is generated with…
+  [ex 0] → message [assistant] (chars=957): <evidence_chain> <chunk role="primary">Explains specific behaviors that can improve a credit score before applying,…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=630): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5664): 1. [source: p_00237] (score: 59.84) ## How many credit card miles do you need before you redeem? While the shortest…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3611): 1. [source: p_00104] (score: 53.18) ## Chase credit cards that allow you to transfer to travel partners Sapphire…
+  [ex 0] → message [assistant] (chars=1042): <evidence_chain> <chunk role="primary">Explains that you can redeem any amount of miles for reduced fares, and if your…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/4 [00:00<?, ?it/s][A
+Generating QA candidates:  25%|██▌       | 1/4 [00:04<00:12,  4.11s/it][A
+Generating QA candidates:  50%|█████     | 2/4 [00:05<00:05,  2.60s/it][A
+Generating QA candidates:  75%|███████▌  | 3/4 [00:06<00:01,  1.82s/it][AGenerating QA candidates: 100%|██████████| 4/4 [00:06<00:00,  1.66s/it]
+
+Retrieval filter:   0%|          | 0/3 [00:00<?, ?it/s][A
+Retrieval filter:  33%|███▎      | 1/3 [00:03<00:06,  3.38s/it][A
+Retrieval filter:  67%|██████▋   | 2/3 [00:03<00:01,  1.62s/it][A
+Retrieval filter: 100%|██████████| 3/3 [00:05<00:00,  1.86s/it][ARetrieval filter: 100%|██████████| 3/3 [00:05<00:00,  1.97s/it]
+
+Linking chunks:   0%|          | 0/4 [00:00<?, ?it/s][A
+Linking chunks:  25%|██▌       | 1/4 [00:18<00:54, 18.26s/it][A
+Linking chunks:  50%|█████     | 2/4 [00:33<00:33, 16.59s/it][A
+Linking chunks:  75%|███████▌  | 3/4 [00:52<00:17, 17.54s/it][A
+Linking chunks: 100%|██████████| 4/4 [01:11<00:00, 18.18s/it][ALinking chunks: 100%|██████████| 4/4 [01:11<00:00, 17.88s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1482): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3353): 1. [source: p_00272] (score: 29.95) ### Improving Credit A higher credit score lets banks know you're financially…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7999): 1. [source: p_00272] (score: 37.08) ### Improving Credit A higher credit score lets banks know you're financially…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5446): 1. [source: p_00124] (score: 41.87) ### You can focus on your credit You can learn more about credit, get your credit…
+  [ex 0] → message [assistant] (chars=2221): <evidence_chain> <chunk role="primary">Explains that improving your credit score helps you get approved for new credit…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=658): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5892): 1. [source: p_00095] (score: 43.72) ### What is Chase Pay Over Time® after purchase? Chase Pay Over Time (formerly My…
+  [ex 0] → message [assistant] (chars=101): Need 2 secondaries. Search specific gaps: purchase threshold and eligibility factors/card list maybe.
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00095] (score: 61.15) ### Who is eligible to use Chase Pay Over Time after a purchase is made? ### Which…
+  [ex 0] → message [assistant] (chars=1767): Need 2 unique. We have threshold/details in p00093 or p00003 and eligibility/cards in p00095. <evidence_chain> <chunk…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=885): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3994): 1. [source: p_00227] (score: 55.90) ## In summary You can transfer and combine Chase Ultimate Rewards points between…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7768): 1. [source: p_00104] (score: 49.40) ## Chase credit cards that allow you to transfer to travel partners Sapphire…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00203] (score: 42.96) ## Pooling and transferring Chase Ultimate Rewards points One useful feature of the…
+  [ex 0] → message [assistant] (chars=1840): <evidence_chain> <chunk role="primary"> The primary chunk establishes the rule that Chase Ultimate Rewards points can…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=630): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4523): 1. [source: p_00237] (score: 82.78) ## How many credit card miles do you need before you redeem? While the shortest…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00246] (score: 49.84) ## How do I redeem my miles? You can log into your credit card company's reward…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00224] (score: 49.90) Common non-travel-related redemptions are: - Merchandise with specific retailers:…
+  [ex 0] → message [assistant] (chars=2200): <evidence_chain> <chunk role="primary">The primary chunk provides the baseline redemption rule: a very short flight may…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/4 [00:00<?, ?it/s][A
+Generating QA candidates:  25%|██▌       | 1/4 [00:04<00:14,  4.73s/it][A
+Generating QA candidates:  50%|█████     | 2/4 [00:05<00:04,  2.12s/it][A
+Generating QA candidates:  75%|███████▌  | 3/4 [00:06<00:01,  1.80s/it][AGenerating QA candidates: 100%|██████████| 4/4 [00:06<00:00,  1.62s/it]
+
+Retrieval filter:   0%|          | 0/4 [00:00<?, ?it/s][A
+Retrieval filter:  25%|██▌       | 1/4 [00:02<00:07,  2.60s/it][A
+Retrieval filter:  50%|█████     | 2/4 [00:03<00:02,  1.31s/it][A
+Retrieval filter:  75%|███████▌  | 3/4 [00:03<00:00,  1.05it/s][A
+Retrieval filter: 100%|██████████| 4/4 [00:03<00:00,  1.55it/s][ARetrieval filter: 100%|██████████| 4/4 [00:03<00:00,  1.08it/s]
+
+Grounding filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Grounding filter: 100%|██████████| 1/1 [00:04<00:00,  4.84s/it][AGrounding filter: 100%|██████████| 1/1 [00:04<00:00,  4.84s/it]
+
+Hop-count validity:   0%|          | 0/3 [00:00<?, ?it/s][A
+Hop-count validity:  33%|███▎      | 1/3 [00:03<00:06,  3.20s/it][A
+Hop-count validity:  67%|██████▋   | 2/3 [00:03<00:01,  1.72s/it][A
+Hop-count validity: 100%|██████████| 3/3 [00:04<00:00,  1.17s/it][AHop-count validity: 100%|██████████| 3/3 [00:04<00:00,  1.47s/it]
+
+Linking chunks:   0%|          | 0/3 [00:00<?, ?it/s][A
+Linking chunks:  33%|███▎      | 1/3 [00:18<00:36, 18.02s/it][A
+Linking chunks:  67%|██████▋   | 2/3 [00:41<00:21, 21.45s/it][A
+Linking chunks: 100%|██████████| 3/3 [01:03<00:00, 21.38s/it][ALinking chunks: 100%|██████████| 3/3 [01:03<00:00, 21.06s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=658): Find 3 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5435): 1. [source: p_00095] (score: 59.98) ### What is Chase Pay Over Time® after purchase? Chase Pay Over Time (formerly My…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00006] (score: 54.19) Keep tabs on your credit score for free ### Credit Journey Get your credit score,…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00095] (score: 71.22) ### Who is eligible to use Chase Pay Over Time after a purchase is made? ### Which…
+  [ex 0] → message [assistant] (chars=1990): <evidence_chain> <chunk role="primary">Defines the core product behavior for Chase Pay Over Time after purchase: it…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1857): Find 3 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3146): 1. [source: p_00091] (score: 43.37) ### Manage your money on the Chase Mobile® app Zelle® and Chase QuickDeposit℠ make…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00010] (score: 44.42) Same page link returns to footnote reference 9For parents/guardians interested in…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7225): 1. [source: p_00044] (score: 26.61) ### Device compatibility Thinking ahead about devices you use may help prevent…
+  [ex 0] → message [assistant] (chars=4048): <evidence_chain> <chunk role="primary">The primary chunk establishes that Chase offers a “Card lock” feature for a…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=630): Find 3 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5926): 1. [source: p_00237] (score: 70.97) ## How many credit card miles do you need before you redeem? While the shortest…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00104] (score: 50.92) ## Chase credit cards that allow you to transfer to travel partners Sapphire…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7999): 1. [source: p_00237] (score: 78.58) ## Other ways to redeem your miles If a discounted flight isn't enticing enough,…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00246] (score: 72.01) ## How do I redeem my miles? You can log into your credit card company's reward…
+  [ex 0] → message [assistant] (chars=2605): <evidence_chain> <chunk role="primary">The primary chunk provides the baseline redemption rule: short flights may…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/3 [00:00<?, ?it/s][A
+Generating QA candidates:  33%|███▎      | 1/3 [00:05<00:10,  5.01s/it][A
+Generating QA candidates:  67%|██████▋   | 2/3 [00:05<00:02,  2.45s/it][A
+Generating QA candidates: 100%|██████████| 3/3 [00:06<00:00,  1.65s/it][AGenerating QA candidates: 100%|██████████| 3/3 [00:06<00:00,  2.13s/it]
+
+Retrieval filter:   0%|          | 0/3 [00:00<?, ?it/s][A
+Retrieval filter:  33%|███▎      | 1/3 [00:03<00:06,  3.00s/it][A
+Retrieval filter:  67%|██████▋   | 2/3 [00:03<00:01,  1.30s/it][A
+Retrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.18it/s][ARetrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.14s/it]
+
+Grounding filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Grounding filter: 100%|██████████| 1/1 [00:03<00:00,  3.78s/it][AGrounding filter: 100%|██████████| 1/1 [00:03<00:00,  3.78s/it]
+
+Hop-count validity:   0%|          | 0/3 [00:00<?, ?it/s][A
+Hop-count validity:  33%|███▎      | 1/3 [00:02<00:04,  2.42s/it][A
+Hop-count validity:  67%|██████▋   | 2/3 [00:02<00:01,  1.24s/it][A
+Hop-count validity: 100%|██████████| 3/3 [00:03<00:00,  1.11s/it][AHop-count validity: 100%|██████████| 3/3 [00:03<00:00,  1.26s/it]
+[5/6] Work queue:  70%|███████   | 7/10 [1:20:10<29:16, 585.52s/samples]                                                                        [5/6] Work queue:  70%|███████   | 7/10 [1:20:10<29:16, 585.52s/samples]  Batch 3: 4 generated → 1 accepted, 3 rejected, 7 regenerated
+
+Linking chunks:   0%|          | 0/3 [00:00<?, ?it/s][A
+Linking chunks:  33%|███▎      | 1/3 [00:54<01:48, 54.07s/it][A
+Linking chunks:  67%|██████▋   | 2/3 [01:06<00:29, 29.33s/it][A
+Linking chunks: 100%|██████████| 3/3 [01:21<00:00, 22.94s/it][ALinking chunks: 100%|██████████| 3/3 [01:21<00:00, 27.14s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=880): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2010): 1. [source: p_00021] (score: 50.06) ## Frequently asked questions ### What is Paze℠? Paze is an online checkout…
+  [ex 0] → message [assistant] (chars=1001): <evidence_chain> <chunk role="primary">Defines which cards are eligible for Paze: eligible consumer cards from…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=901): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5604): 1. [source: p_00015] (score: 73.38) ### 3. Applicable Fees Any applicable interest, fees, and charges that apply to…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00015] (score: 45.79) ### 3. Applicable Fees Any applicable interest, fees, and charges that apply to…
+  [ex 0] → message [assistant] (chars=1187): <evidence_chain> <chunk role="primary">Explains the fee and tax allocation for wallet use: Chase adds no extra wallet…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1579): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5104): 1. [source: p_00112] (score: 29.19) ## Understanding credit card terms related to utility payments There are some key…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5458): 1. [source: p_00112] (score: 44.77) ## Additional tips for managing utility expenses with credit cards You may be able…
+  [ex 0] → message [assistant] (chars=1198): <evidence_chain> <chunk role="primary">The primary chunk explains the key credit-card terms that determine whether…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=634): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3773): 1. [source: p_00213] (score: 40.97) ## The bottom line Welcome bonuses may offer initial value and encourage long-term…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00213] (score: 54.46) # A quick guide to credit card welcome bonuses ## Quick insights - Welcome bonuses,…
+  [ex 0] → message [assistant] (chars=1034): <evidence_chain> <chunk role="primary">Says that choosing the right welcome bonus depends on understanding the bonus’s…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=874): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3401): 1. [source: p_00184] (score: 27.30) ### Annual fees and benefits The Sapphire Reserve has a higher annual fee than the…
+  [ex 0] → message [assistant] (chars=1245): <evidence_chain> <chunk role="primary">The primary chunk states that Chase Sapphire Reserve cardmembers can get a $250…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=861): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3895): 1. [source: p_00159] (score: 52.21) ### You need to stay flexible One benefit of booking your flight using miles is the…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00159] (score: 48.37) ### You need to stay flexible One benefit of booking your flight using miles is the…
+  [ex 0] → message [assistant] (chars=1234): <evidence_chain> <chunk role="primary">Describes the later event in the timeline: if travel plans change after booking,…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/3 [00:00<?, ?it/s][A
+Generating QA candidates:  33%|███▎      | 1/3 [00:03<00:07,  3.91s/it][A
+Generating QA candidates:  67%|██████▋   | 2/3 [00:04<00:01,  1.75s/it][A
+Generating QA candidates: 100%|██████████| 3/3 [00:08<00:00,  2.75s/it][AGenerating QA candidates: 100%|██████████| 3/3 [00:08<00:00,  2.70s/it]
+
+Retrieval filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Retrieval filter: 100%|██████████| 1/1 [00:03<00:00,  3.04s/it][ARetrieval filter: 100%|██████████| 1/1 [00:03<00:00,  3.04s/it]
+
+Linking chunks:   0%|          | 0/3 [00:00<?, ?it/s][A
+Linking chunks:  33%|███▎      | 1/3 [00:05<00:11,  5.93s/it][A
+Linking chunks:  67%|██████▋   | 2/3 [00:24<00:13, 13.61s/it][A
+Linking chunks: 100%|██████████| 3/3 [00:42<00:00, 15.62s/it][ALinking chunks: 100%|██████████| 3/3 [00:42<00:00, 14.31s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=880): Find 0 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=541): <evidence_chain> <chunk role="primary">Provides the eligibility rules for which credit and debit cards can be used with…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=648): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4007): 1. [source: p_00126] (score: 50.47) ## In summary If you’re looking to apply for your first credit card, you may find…
+  [ex 0] → message [assistant] (chars=258): Primary says low initial limit; on-time/full payments may raise score and improve chances of future limit increase.…
+  [ex 0] → message [tool] (chars=4964): 1. [source: p_00137] (score: 35.73) ### Low credit utilization A higher credit limit may result in a lower, more…
+  [ex 0] → message [assistant] (chars=79): Need second chunk on automatic evaluation after six months / request mechanism.
+  [ex 0] → message [tool] (chars=3066): 1. [source: p_00116] (score: 46.07) ## How Freedom Rise credit limit increases work A credit limit is the maximum…
+  [ex 0] → message [assistant] (chars=1812): <evidence_chain> <chunk role="primary">Explains that first-time cardholders often start with a low credit limit, but…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1068): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4869): 1. [source: p_00045] (score: 41.70) ### Saving accounts A savings account is designed for longer-term storage of funds…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00045] (score: 30.70) ### Saving accounts A savings account is designed for longer-term storage of funds…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6748): 1. [source: p_00045] (score: 40.40) ### Saving accounts A savings account is designed for longer-term storage of funds…
+  [ex 0] → message [assistant] (chars=2024): <evidence_chain> <chunk role="primary">The primary chunk says multiple savings accounts can be useful because each…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/3 [00:00<?, ?it/s][A
+Generating QA candidates:  33%|███▎      | 1/3 [00:03<00:06,  3.32s/it][A
+Generating QA candidates:  67%|██████▋   | 2/3 [00:05<00:02,  2.49s/it][A
+Generating QA candidates: 100%|██████████| 3/3 [00:07<00:00,  2.33s/it][AGenerating QA candidates: 100%|██████████| 3/3 [00:07<00:00,  2.46s/it]
+
+Retrieval filter:   0%|          | 0/3 [00:00<?, ?it/s][A
+Retrieval filter:  33%|███▎      | 1/3 [00:03<00:07,  3.77s/it][A
+Retrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.04s/it][ARetrieval filter: 100%|██████████| 3/3 [00:03<00:00,  1.31s/it]
+
+Grounding filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Grounding filter: 100%|██████████| 1/1 [00:02<00:00,  2.72s/it][AGrounding filter: 100%|██████████| 1/1 [00:02<00:00,  2.72s/it]
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:18<00:18, 18.50s/it][A
+Linking chunks: 100%|██████████| 2/2 [00:38<00:00, 19.38s/it][ALinking chunks: 100%|██████████| 2/2 [00:38<00:00, 19.25s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=946): Find 3 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3207): 1. [source: p_00139] (score: 56.68) ## Why choose the Chase Freedom Rise card as a starter card? The Chase Freedom Rise…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6456): 1. [source: p_00222] (score: 27.44) ## In summary The Chase Freedom Rise and Freedom Unlimited cards are both cash back…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6288): 1. [source: p_00185] (score: 38.15) # Is Chase Freedom Unlimited® a good first credit card? ## Quick Insights - While…
+  [ex 0] → message [assistant] (chars=2662): <evidence_chain> <chunk role="primary"> The primary chunk establishes that Chase Freedom Rise is designed for first-…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1520): Find 3 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2845): 1. [source: p_00234] (score: 37.49) ### Cons - Some travel credit cards have high annual fees. The cards with no annual…
+  [ex 0] → message [assistant] (chars=249): Primary gives only pros. Need complementary cons plus maybe what APR/annual fee imply or foreign transaction fees…
+  [ex 0] → message [tool] (chars=3205): 1. [source: p_00234] (score: 30.69) ### Cons - Some travel credit cards have high annual fees. The cards with no annual…
+  [ex 0] → message [tool] (chars=3031): 1. [source: p_00115] (score: 27.89) # What you should know about foreign transaction fees Foreign transaction fees,…
+  [ex 0] → message [tool] (chars=3329): 1. [source: p_00234] (score: 26.60) ### Cons - Some travel credit cards have high annual fees. The cards with no annual…
+  [ex 0] → message [assistant] (chars=2513): Need 3 secondaries. Use p_00234 cons, p_00102 cost/benefit, p_00115 foreign transaction fee definition? Ensure unique…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:05<00:05,  5.53s/it][A
+Generating QA candidates: 100%|██████████| 2/2 [00:08<00:00,  3.78s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:08<00:00,  4.04s/it]
+
+Retrieval filter:   0%|          | 0/2 [00:00<?, ?it/s][A
+Retrieval filter:  50%|█████     | 1/2 [00:02<00:02,  2.93s/it][ARetrieval filter: 100%|██████████| 2/2 [00:02<00:00,  1.47s/it]
+                                                                        [5/6] Work queue:  70%|███████   | 7/10 [1:23:32<29:16, 585.52s/samples]  Batch 4: 3 generated → 0 accepted, 3 rejected, 5 regenerated
+
+Linking chunks:   0%|          | 0/3 [00:00<?, ?it/s][A
+Linking chunks:  33%|███▎      | 1/3 [00:40<01:21, 40.99s/it][A
+Linking chunks:  67%|██████▋   | 2/3 [01:29<00:45, 45.68s/it][A[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=902): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3300): 1. [source: p_00067] (score: 35.05) ## Why should I send money with Zelle®? - Convenient: More than 2,000 banking apps…
+  [ex 0] → message [assistant] (chars=1067): <evidence_chain> <chunk role="primary">Current-state claim about speed: with Zelle® in Chase, money is received…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=834): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4023): 1. [source: p_00100] (score: 79.72) ### Virtual gift cards You might also call these “eGift Cards" because they're…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5557): 1. [source: p_00100] (score: 54.47) ### Virtual gift cards You might also call these “eGift Cards" because they're…
+  [ex 0] → message [assistant] (chars=1061): <evidence_chain> <chunk role="primary">Describes the present-day state of virtual gift cards: they are purchased and…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1108): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3903): 1. [source: p_00116] (score: 21.03) ## Understanding the Chase Freedom Rise credit card The Freedom Rise Credit Card is…
+  [ex 0] → message [assistant] (chars=1177): <evidence_chain> <chunk role="primary">The primary chunk establishes the earlier state in time: Chase Freedom Rise is…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=956): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3044): 1. [source: p_00285] (score: 54.24) ### Benefits - Easy to set up and maintain. - Investments grow tax-deferred. -…
+  [ex 0] → message [assistant] (chars=1091): <evidence_chain> <chunk role="primary">This chunk states a disadvantage of 529 funding: using annual exclusion gifts to…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=662): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=1562): 1. [source: p_00021] (score: 58.45) ### Am I liable for unauthorized charges made with Paze? Purchases made with your…
+  [ex 0] → message [assistant] (chars=1214): <evidence_chain> <chunk role="primary">The primary chunk states that unauthorized charges made with Paze using Chase…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=971): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3684): 1. [source: p_00105] (score: 55.17) ## Explore the benefits of a starter credit card A starter credit card typically…
+  [ex 0] → message [assistant] (chars=1410): <evidence_chain> <chunk role="primary">The primary chunk identifies specific starter-card benefits of the Chase Freedom…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=719): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3542): 1. [source: p_00253] (score: 26.33) ### Chase Freedom Rise The Freedom Rise card can be a great option for those new to…
+  [ex 0] → message [assistant] (chars=1015): <evidence_chain> <chunk role="primary">Identifies the target population: people with no credit history who are trying…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=661): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3047): 1. [source: p_00007] (score: 65.11) ### At A Glance Dream bigger with the Disney Premier Visa Card from Chase.Earn 5%…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6729): 1. [source: p_00007] (score: 65.26) ### At A Glance Dream bigger with the Disney Premier Visa Card from Chase.Earn 5%…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6381): 1. [source: p_00007] (score: 47.27) ### At A Glance Dream bigger with the Disney Premier Visa Card from Chase.Earn 5%…
+  [ex 0] → message [assistant] (chars=981): <evidence_chain> <chunk role="primary">The Disney Premier Visa Card earns 5% in Disney Rewards Dollars on purchases…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1224): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4757): 1. [source: p_00098] (score: 47.37) ## How payments work for Pay Over Time on Amazon Once a Pay Over Time plan is…
+  [ex 0] → message [assistant] (chars=1220): <evidence_chain> <chunk role="primary">Explains that Chase Pay Over Time plan payments are automatically included in…
+Linking chunks: 100%|██████████| 3/3 [01:55<00:00, 36.70s/it][ALinking chunks: 100%|██████████| 3/3 [01:55<00:00, 38.66s/it]
+
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/3 [00:00<?, ?it/s][A
+Generating QA candidates:  33%|███▎      | 1/3 [00:03<00:07,  3.79s/it][A
+Generating QA candidates:  67%|██████▋   | 2/3 [00:04<00:01,  1.71s/it][A
+Generating QA candidates: 100%|██████████| 3/3 [00:04<00:00,  1.00it/s][AGenerating QA candidates: 100%|██████████| 3/3 [00:04<00:00,  1.40s/it]
+
+Retrieval filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Retrieval filter: 100%|██████████| 1/1 [00:03<00:00,  3.27s/it][ARetrieval filter: 100%|██████████| 1/1 [00:03<00:00,  3.27s/it]
+
+Grounding filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Grounding filter: 100%|██████████| 1/1 [00:04<00:00,  4.39s/it][AGrounding filter: 100%|██████████| 1/1 [00:04<00:00,  4.39s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.77s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:03<00:00,  1.74s/it][AHop-count validity: 100%|██████████| 2/2 [00:03<00:00,  1.90s/it]
+[5/6] Work queue:  80%|████████  | 8/10 [1:25:44<17:31, 525.67s/samples]                                                                        [5/6] Work queue:  80%|████████  | 8/10 [1:25:44<17:31, 525.67s/samples]  Batch 5: 3 generated → 1 accepted, 2 rejected, 0 regenerated
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:39<00:39, 39.67s/it][A
+Linking chunks: 100%|██████████| 2/2 [01:06<00:00, 32.05s/it][ALinking chunks: 100%|██████████| 2/2 [01:06<00:00, 33.20s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=635): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3026): 1. [source: p_00041] (score: 32.80) ### Near field communication Near field communication (NFC) allows your mobile…
+  [ex 0] → message [assistant] (chars=999): <evidence_chain> <chunk role="primary">Introduces what a digital wallet is and says the article explains how to use…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1068): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3599): 1. [source: p_00071] (score: 21.89) ## How much money should you have in an emergency fund? Now that you know what an…
+  [ex 0] → message [assistant] (chars=1210): <evidence_chain> <chunk role="primary">The primary chunk says it can be useful to keep multiple savings accounts for…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=763): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5122): 1. [source: p_00038] (score: 68.30) ### Traditional checking account - Common type of checking account in which you use…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00286] (score: 35.96) # Money market accounts vs. savings accounts: What’s the difference? Editorial…
+  [ex 0] → message [assistant] (chars=1088): <evidence_chain> <chunk role="primary">Defines a traditional checking account and states that it may include overdraft…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=670): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4468): 1. [source: p_00111] (score: 43.30) ## The bottom line Student credit cards offer an opportunity for young adults to…
+  [ex 0] → message [assistant] (chars=2018): <evidence_chain> <chunk role="primary">Student credit cards help young adults build credit while earning modest…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1857): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4034): 1. [source: p_00010] (score: 44.92) Same page link returns to footnote reference 7Chase Premier Plus CheckingSM: $0…
+  [ex 0] → message [assistant] (chars=2151): <evidence_chain> <chunk role="primary">Lists the fee-waiver conditions for Chase Total Checking®, including that the…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:04<00:04,  4.29s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:04<00:00,  2.17s/it]
+
+Retrieval filter:   0%|          | 0/2 [00:00<?, ?it/s][A
+Retrieval filter:  50%|█████     | 1/2 [00:02<00:02,  2.76s/it][A
+Retrieval filter: 100%|██████████| 2/2 [00:03<00:00,  1.60s/it][ARetrieval filter: 100%|██████████| 2/2 [00:03<00:00,  1.77s/it]
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:17<00:17, 17.55s/it][A
+Linking chunks: 100%|██████████| 2/2 [00:35<00:00, 17.65s/it][ALinking chunks: 100%|██████████| 2/2 [00:35<00:00, 17.63s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=808): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3324): 1. [source: p_00164] (score: 42.21) # Understanding good debt vs. bad debt ## Quick insights - Good debt can be seen as…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4036): 1. [source: p_00163] (score: 33.61) ### Student loans allow you to make positive payments Payments against open loans…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4325): 1. [source: p_00164] (score: 26.88) ## Types of debt Let’s break down some types of debt in detail below: - Mortgages.…
+  [ex 0] → message [assistant] (chars=1744): <evidence_chain> <chunk role="primary">Defines the key distinction: good debt can help grow net worth or income, while…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=670): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4876): 1. [source: p_00111] (score: 38.81) ## The bottom line Student credit cards offer an opportunity for young adults to…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00198] (score: 31.75) ### Cash back With cash back rewards, you can earn back a small percentage of…
+  [ex 0] → message [assistant] (chars=1407): <evidence_chain> <chunk role="primary">Student credit cards can help young adults build credit while earning modest…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:04<00:04,  4.61s/it][A
+Generating QA candidates: 100%|██████████| 2/2 [00:05<00:00,  2.14s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:05<00:00,  2.51s/it]
+
+Retrieval filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Retrieval filter: 100%|██████████| 1/1 [00:02<00:00,  2.64s/it][ARetrieval filter: 100%|██████████| 1/1 [00:02<00:00,  2.64s/it]
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:17<00:17, 17.38s/it][A
+Linking chunks: 100%|██████████| 2/2 [00:35<00:00, 18.09s/it][ALinking chunks: 100%|██████████| 2/2 [00:35<00:00, 17.99s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=1856): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4415): 1. [source: p_00112] (score: 33.29) ## Understanding credit card terms related to utility payments There are some key…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3982): 1. [source: p_00176] (score: 41.05) ## How late payments affect credit score A major factor that goes into calculating…
+  [ex 0] → message [assistant] (chars=2093): <evidence_chain> <chunk role="primary">Explains first-credit-card setup and management best practices: understand your…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=670): Find 3 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4539): 1. [source: p_00111] (score: 69.81) ## The bottom line Student credit cards offer an opportunity for young adults to…
+  [ex 0] → message [assistant] (chars=406): Primary gives: student cards can build credit and offer modest rewards if used responsibly. Need 3 secondary chunks…
+  [ex 0] → message [tool] (chars=4228): 1. [source: p_00177] (score: 34.60) ### You want to start building credit Using a credit card responsibly is an…
+  [ex 0] → message [assistant] (chars=73): Need next gap: why strong financial foundation matters / future outcomes.
+  [ex 0] → message [tool] (chars=3390): 1. [source: p_00111] (score: 48.46) ## What is a student credit card? Beyond the allure of credit card rewards, student…
+  [ex 0] → message [assistant] (chars=208): Need third unique chunk maybe about why rewards are modest compared to regular cards; necessary if question asks…
+  [ex 0] → message [tool] (chars=4174): 1. [source: p_00111] (score: 57.05) ## How do student card rewards compare to regular credit cards? The rewards offered…
+  [ex 0] → message [assistant] (chars=148): Need 3 chunks. Could use lower credit limits/approval criteria as the mechanism that explains why modest rewards are…
+  [ex 0] → message [tool] (chars=3873): 1. [source: p_00111] (score: 41.50) ## What is a student credit card? Beyond the allure of credit card rewards, student…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:07<00:07,  7.05s/it][A
+Generating QA candidates: 100%|██████████| 2/2 [00:07<00:00,  2.99s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:07<00:00,  3.60s/it]
+
+Retrieval filter:   0%|          | 0/2 [00:00<?, ?it/s][A
+Retrieval filter:  50%|█████     | 1/2 [00:02<00:02,  2.89s/it][A
+Retrieval filter: 100%|██████████| 2/2 [00:02<00:00,  1.25s/it][ARetrieval filter: 100%|██████████| 2/2 [00:02<00:00,  1.50s/it]
+                                                                        [5/6] Work queue:  80%|████████  | 8/10 [1:28:30<17:31, 525.67s/samples]  Batch 6: 2 generated → 0 accepted, 2 rejected, 4 regenerated
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:16<00:16, 16.43s/it][A
+Linking chunks: 100%|██████████| 2/2 [00:28<00:00, 13.84s/it][ALinking chunks: 100%|██████████| 2/2 [00:28<00:00, 14.23s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=726): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3327): 1. [source: p_00210] (score: 105.79) ### Lost luggage reimbursement and baggage delay insurance Sometimes bags are…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5524): 1. [source: p_00008] (score: 63.17) Baggage Delay Insurance Reimburses you up to $100 a day for up to 5 days for…
+  [ex 0] → message [assistant] (chars=1146): <evidence_chain> <chunk role="primary">Explains that some credit cards include lost luggage reimbursement or baggage…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=850): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2742): 1. [source: p_00074] (score: 45.01) ## 2. Using a budget Learning how to stop impulse spending may sometimes feel like…
+  [ex 0] → message [assistant] (chars=1061): <evidence_chain> <chunk role="primary">The primary chunk explains that using a budget can reduce impulse spending by…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:04<00:04,  4.34s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:04<00:00,  2.20s/it]
+
+Linking chunks:   0%|          | 0/2 [00:00<?, ?it/s][A
+Linking chunks:  50%|█████     | 1/2 [00:50<00:50, 50.39s/it][A
+Linking chunks: 100%|██████████| 2/2 [01:26<00:00, 42.05s/it][ALinking chunks: 100%|██████████| 2/2 [01:26<00:00, 43.30s/it]
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=726): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2327): 1. [source: p_00210] (score: 66.40) ### Lost luggage reimbursement and baggage delay insurance Sometimes bags are…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=2200): 1. [source: p_00005] (score: 56.75) Lost Luggage Reimbursement Provides reimbursement up to $3,000 per covered traveler…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4856): 1. [source: p_00008] (score: 69.11) Baggage Delay Insurance Reimburses you up to $100 a day for up to 5 days for…
+  [ex 0] → message [assistant] (chars=1925): <evidence_chain> <chunk role="primary">Introduces the general concept that some credit cards provide lost-luggage and…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=687): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3555): 1. [source: p_00059] (score: 43.59) ## How does second chance banking work? When evaluating second chance bank account…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00059] (score: 25.95) ## How does second chance banking work? When evaluating second chance bank account…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00163] (score: 19.22) ## How student loans can hurt your credit history Student loans can negatively…
+  [ex 0] → message [assistant] (chars=1705): <evidence_chain> <chunk role="primary">Second chance bank accounts let people with a blemished banking history keep…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=839): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3152): 1. [source: p_00244] (score: 46.30) ## What to know about the Sapphire Preferred hotel credit This $50 credit is an…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5557): 1. [source: p_00009] (score: 56.61) ### $250 credit for select Chase Travel Hotels Get up to $250 in statement credits…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5351): 1. [source: p_00244] (score: 35.24) ## Other perks with the Sapphire Preferred card In addition to the hotel credit,…
+  [ex 0] → message [assistant] (chars=1586): <evidence_chain> <chunk role="primary">Establishes the core benefit: Sapphire Preferred cardmembers get up to $50 in…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=688): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5014): 1. [source: p_00013] (score: 34.74) # Chase Secure BankingSMA simple checking account with no overdraft fees2 $4.95 or…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4490): 1. [source: p_00013] (score: 58.97) ## How does early direct deposit work with Chase Secure Banking? Expand content -…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7195): 1. [source: p_00012] (score: 60.00) Same page link returns to footnote reference6There is no Chase fee at non-Chase…
+  [ex 0] → message [assistant] (chars=1628): <evidence_chain> <chunk role="primary">The primary chunk identifies Chase Secure Banking as a checking account with no…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=718): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=3555): 1. [source: p_00071] (score: 37.19) ### Step 3: Set up automatic transfers Setting up automatic transfers can help take…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=6258): 1. [source: p_00072] (score: 34.02) ### Build your emergency fund It’s always good to have extra money saved up in case…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=7999): 1. [source: p_00072] (score: 40.05) ## Your monthly budget can help you save money Building a realistic budget that…
+  [ex 0] → message [assistant] (chars=1787): <evidence_chain> <chunk role="primary">The primary chunk explains the method: use automatic transfers from checking to…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Generating QA candidates:   0%|          | 0/2 [00:00<?, ?it/s][A
+Generating QA candidates:  50%|█████     | 1/2 [00:05<00:05,  5.20s/it][A
+Generating QA candidates: 100%|██████████| 2/2 [00:08<00:00,  4.23s/it][AGenerating QA candidates: 100%|██████████| 2/2 [00:08<00:00,  4.37s/it]
+
+Retrieval filter:   0%|          | 0/2 [00:00<?, ?it/s][A
+Retrieval filter:  50%|█████     | 1/2 [00:02<00:02,  2.92s/it][A
+Retrieval filter: 100%|██████████| 2/2 [00:03<00:00,  1.53s/it][ARetrieval filter: 100%|██████████| 2/2 [00:03<00:00,  1.74s/it]
+
+Grounding filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Grounding filter: 100%|██████████| 1/1 [00:02<00:00,  2.56s/it][AGrounding filter: 100%|██████████| 1/1 [00:02<00:00,  2.56s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:03<00:03,  3.05s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:05<00:00,  2.41s/it][AHop-count validity: 100%|██████████| 2/2 [00:05<00:00,  2.51s/it]
+[5/6] Work queue:  90%|█████████ | 9/10 [1:31:14<07:56, 476.07s/samples]                                                                        [5/6] Work queue:  90%|█████████ | 9/10 [1:31:14<07:56, 476.07s/samples][36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=744): Find 2 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=4298): 1. [source: p_00146] (score: 39.35) ## Do cash advances affect your credit score? Cash advances don't directly affect…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=8000): 1. [source: p_00126] (score: 42.61) ## Understanding when balances are reported to credit bureaus Credit card balances…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5720): 1. [source: p_00146] (score: 41.09) ## What to consider before getting a cash advance Before you commit to taking out a…
+  [ex 0] → message [assistant] (chars=2061): <evidence_chain> <chunk role="primary"> The primary chunk establishes that a cash advance itself does not directly…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+  Batch 7: 2 generated → 1 accepted, 1 rejected, 3 regenerated
+[36m  [ex 0] → rollout_started[0m
+  [ex 0] → message [system] (chars=1840): You are building an evidence chain for multi-hop question generation. Given a primary document chunk, find secondary…
+  [ex 0] → message [user] (chars=792): Find 1 secondary chunk(s) that form a logical evidence chain with the following primary chunk. Each secondary must…
+  [ex 0] → message [assistant] (chars=0): 
+  [ex 0] → message [tool] (chars=5340): 1. [source: p_00117] (score: 75.15) ## Must-know money tips when using a credit card If you’re using a credit card for…
+  [ex 0] → message [assistant] (chars=1042): <evidence_chain> <chunk role="primary">Advises first-time credit card users not to apply for multiple cards at once and…
+  [ex 0] → reward: {'linking': 1.0}
+  [ex 0] → rollout_completed  [32m✔  success[0m  rewards={'linking': 1.0}  error=None
+
+Retrieval filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Retrieval filter: 100%|██████████| 1/1 [00:02<00:00,  2.76s/it][ARetrieval filter: 100%|██████████| 1/1 [00:02<00:00,  2.76s/it]
+
+Grounding filter:   0%|          | 0/1 [00:00<?, ?it/s][A
+Grounding filter: 100%|██████████| 1/1 [00:02<00:00,  2.77s/it][AGrounding filter: 100%|██████████| 1/1 [00:02<00:00,  2.77s/it]
+
+Hop-count validity:   0%|          | 0/2 [00:00<?, ?it/s][A
+Hop-count validity:  50%|█████     | 1/2 [00:02<00:02,  2.76s/it][A
+Hop-count validity: 100%|██████████| 2/2 [00:03<00:00,  1.61s/it][AHop-count validity: 100%|██████████| 2/2 [00:03<00:00,  1.79s/it]
+[5/6] Work queue: 100%|██████████| 10/10 [1:31:41<00:00, 356.31s/samples]                                                                         [5/6] Work queue: 100%|██████████| 10/10 [1:31:41<00:00, 356.31s/samples][5/6] Work queue: 100%|██████████| 10/10 [1:31:41<00:00, 550.10s/samples]
+  Batch 8: 1 generated → 1 accepted, 0 rejected, 0 regenerated
+[6/6] Formatting output...
+[6/6] Formatted output: 8 train, 2 eval
+
+Pipeline complete: 10 passed, 15 rejected (31 regenerations)
+
+============================================================
+STEP 1: RAW CANDIDATES — 25 generated
+============================================================
+
+  [1] Q: What wire transfers are available with Chase Secure Banking?
+      A: Domestic and international incoming wires have a $15 fee per transfer. Outgoing wire transfers are not available for Cha...
+      Chunks: 2
+
+  [2] Q: Why can deferring a payment help protect my credit score?
+      A: Requesting and being approved for a deferral can be a proactive way to avoid hurting your score. For example, rather tha...
+      Chunks: 2
+
+  [3] Q: Do Chase student credit cards offer rewards for getting good grades?
+      A: Some student credit card programs may provide incentives for good academic performance such as statement credits for ach...
+      Chunks: 2
+
+  [4] Q: When is a credit card welcome bonus worth pursuing?
+      A: Welcome bonus offers are not guaranteed. They require the new cardmember to meet spending requirements within a specific...
+      Chunks: 2
+
+  [5] Q: Does the Sapphire Reserve’s $300 travel credit help offset its higher annual fee?
+      A: The Sapphire Reserve has more travel perks, partner benefits and statement credits than the Preferred card. Cardmembers ...
+      Chunks: 2
+
+  [6] Q: Which Freedom card is better for predictable cash back on every purchase?
+      A: Chase Freedom Unlimited®: This Chase card provides a flat 1.5% cash back on all purchases, making it a straightforward o...
+      Chunks: 2
+
+  [7] Q: How can I create a budget spreadsheet for my household budget?
+      A: Choose a spreadsheet program or template. Create categories for income and expense items. Set your budget period (weekly...
+      Chunks: 2
+
+  [8] Q: Can paying utilities with my credit card help me build credit for a rewards card upgrade?
+      A: Automating utilities payments with your credit card could prevent you from missing payments and establish a good payment...
+      Chunks: 2
+
+  [9] Q: Will getting multiple starter credit cards help if utility bills are pushing my credit utilization o
+      A: High utility bills can affect your credit score if they lead to high credit utilization ratios, and it is generally reco...
+      Chunks: 2
+
+  [10] Q: What happens to my Chase Ultimate Rewards points if I close my credit card account?
+      A: Chase Ultimate Rewards points do not expire as long as your credit card account remains open and in good standing. If yo...
+      Chunks: 2
+
+  [11] Q: How much is the VA funding fee on a second VA loan?
+      A: Whether you’re obtaining your first or second VA loan, you’ll need to pay a VA funding fee. According to the U.S. Depart...
+      Chunks: 2
+
+  [12] Q: Is My Chase Plan now Chase Pay Over Time after purchase with equal monthly payments and no interest?
+      A: Yes. Chase Pay Over Time (formerly My Chase Plan®) lets Chase customers break up eligible credit card purchases into bud...
+      Chunks: 2
+
+  [13] Q: Should I avoid new credit applications before applying for a jumbo loan?
+      A: Avoid applying for too many lines of credit at once. As mentioned before, applying for a line of credit can result in a ...
+      Chunks: 2
+
+  [14] Q: Can I transfer Chase points to book a flight if my card isn't tied to one airline?
+      A: If your credit card is not partnered with a specific airline, you can shop around to find a flight that meets your needs...
+      Chunks: 2
+
+  [15] Q: I'm comparing payment cards that offer an upfront incentive for new users. How can choosing the righ
+      A: Choosing the right card with the right bonus offer can help cardholders receive the best possible returns on their purch...
+      Chunks: 1
+
+  [16] Q: What Sapphire Reserve spending unlocks the $250 Shops at Chase credit?
+      A: Cardmembers who spend $75,000 each calendar year can unlock additional benefits. To qualify for the credit, Sapphire Res...
+      Chunks: 2
+
+  [17] Q: Should I use miles for a flight if I might cancel later?
+      A: One benefit of booking your flight using miles is the flexibility it could offer if your plans change. In the event that...
+      Chunks: 2
+
+  [18] Q: Why is Chase Freedom Rise a good first credit card, and what beginner benefits does it offer?
+      A: The Freedom Rise Credit Card is considered a starter credit card. That means it’s designed to be a first credit card to ...
+      Chunks: 2
+
+  [19] Q: How much cash back does the Freedom Rise card for people new to credit earn?
+      A: Freedom Rise® offers cash back on each purchase. Cardmembers earn 1.5% cash back on every purchase....
+      Chunks: 2
+
+  [20] Q: Why did my automatic payment change to “Interest saving balance” after I set up Chase Pay Over Time?
+      A: After setting up a plan, if your automatic payments setting is “Statement balance,” we'll update your payment option to ...
+      Chunks: 2
+
+  [21] Q: How does overdraft protection work with a traditional checking account?
+      A: Traditional checking accounts may offer overdraft protection. By linking your Chase savings account to your checking acc...
+      Chunks: 2
+
+  [22] Q: How can I avoid the $15 monthly service fee on Chase Total Checking?
+      A: Chase Total Checking®: $0 Monthly Service Fee when you have any ONE of the following during each statement period: Optio...
+      Chunks: 2
+
+  [23] Q: Do business travel credit cards offer baggage delay or lost luggage coverage for essential purchases
+      A: Many business travel credit cards provide benefits that could be useful while employees are traveling. This might includ...
+      Chunks: 2
+
+  [24] Q: Can a credit card be part of my budget to help curb impulse spending?
+      A: Creating a solid budget may help you persevere when you’re getting the urge to spend. Budgeting is about creating awaren...
+      Chunks: 2
+
+  [25] Q: Why should a first-time card user avoid applying for multiple credit cards at once?
+      A: starting with one or two could help you stay organized while you’re learning the ropes. New credit card applications typ...
+      Chunks: 2
+  -> Saved outputs/multihop_50/step_1_raw_candidates.json
+
+============================================================
+STEP 2: LINKING DETAILS (anchor bundles)
+============================================================
+
+  [1] task=iter_0_00002
+      seed=07f97de1ff3a4696b8401f81a0cec4e66533ab87
+      secondary_chunks=1
+      evidence_chain: These chunks support a multi-hop inference such as: “When is pursuing a welcome bonus most worthwhile?” The primary provides the prerequisite conditio...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.775, "confidence_fulfillment": 1.0, "confidence_survival": 0.25, "confidence_chain": 1.0, "queries_used"
+
+  [2] task=iter_0_00001__regen_01
+      seed=e56e4e91124d6251862e680bd55bba5609b970b1
+      secondary_chunks=2
+      evidence_chain: These chunks form a multi-hop chain about how to actually turn the primary’s advice into a free flight. The primary gives the high-level plan, the fir...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7545454545454546, "confidence_fulfillment": 1.0, "confidence_survival": 0.18181818181818182, "confidence
+
+  [3] task=iter_0_00004__regen_01
+      seed=c770e3809ae3cdedc1181135e20a4ea1c7584389
+      secondary_chunks=2
+      linking_hints: {"linker": "metadata", "confidence": 1.0, "search_mode": "lexical", "queries_used": ["credit cards credit", "credit cards card", "credit cards earn po
+
+  [4] task=iter_1_00003__regen_01
+      seed=46754ad696dc2b9242a751daf459b31c28bc1f95
+      secondary_chunks=2
+      evidence_chain: These chunks combine into a multi-hop reasoning chain: the primary says utility bills charged to a card can increase utilization and affect credit sco...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.76, "confidence_fulfillment": 1.0, "confidence_survival": 0.2, "confidence_chain": 1.0, "queries_used": 
+
+  [5] task=iter_1_00002__regen_01
+      seed=2c582457466bd1cbb42439839b54eedb8a39363d
+      secondary_chunks=1
+      evidence_chain: The chain requires combining all chunks to answer a multi-hop question such as: “Why might using a second chance bank account help someone with a poor...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.5333333333333333, "confidence_fulfillment": 0.5, "confidence_survival": 0.1111111111111111, "confidence_
+
+  [6] task=iter_1_00004
+      seed=ebf513139c26ff1639e7ae406d42128575bef52c
+      secondary_chunks=1
+      evidence_chain: The primary says you may upgrade to a rewards card after building credit history but does not explain how the advised behaviors help get there. The se...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.8500000000000001, "confidence_fulfillment": 1.0, "confidence_survival": 0.5, "confidence_chain": 1.0, "q
+
+  [7] task=iter_2_00002__regen_01
+      seed=20ccfeeffacd5f12f46a6d3c852844ba15e7e5b9
+      secondary_chunks=2
+      evidence_chain: The chain supports a multi-hop question such as: “How can a new Freedom Rise cardholder use card features to improve approval odds or future borrowing...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.74, "confidence_fulfillment": 1.0, "confidence_survival": 0.13333333333333333, "confidence_chain": 1.0, 
+
+  [8] task=iter_4_00000
+      seed=a30906542f778f27ed1ed7ad7ba8cc3f3f0106fa
+      secondary_chunks=1
+      evidence_chain: Together, the chunks create a temporal sequence: first, a person begins with Freedom Rise as an entry-level credit card; later, after 12 months of res...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.8, "confidence_fulfillment": 1.0, "confidence_survival": 0.3333333333333333, "confidence_chain": 1.0, "q
+
+  [9] task=iter_6_00000__regen_01
+      seed=bcfd0f410f78b5bae25b7d6ffa9847cf27f78f53
+      secondary_chunks=2
+      evidence_chain: These chunks combine to support a multi-hop question about when a Sapphire Preferred cardholder must use the Chase Travel hotel credit and what happen...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.8, "confidence_fulfillment": 1.0, "confidence_survival": 0.3333333333333333, "confidence_chain": 1.0, "q
+
+  [10] task=iter_7_00000
+      seed=e51a46a434713c13e0968973af3a2b185d38f00e
+      secondary_chunks=1
+      evidence_chain: To answer a multi-hop question like “Why might a first-time card user be advised to start with only one or two cards instead of applying for many at o...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.8500000000000001, "confidence_fulfillment": 1.0, "confidence_survival": 0.5, "confidence_chain": 1.0, "q
+
+  [11] task=iter_0_00000__regen_01__regen_02
+      seed=d03563bb345d7d3e9c1854694f129de7ad004616
+      secondary_chunks=3
+      evidence_chain: Together, the chunks support a multi-hop question like: “Why would a Gen Z first-time credit card user be advised to set up autopay, keep balances und...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.73, "confidence_fulfillment": 1.0, "confidence_survival": 0.1, "confidence_chain": 1.0, "queries_used": 
+
+  [12] task=iter_0_00003__regen_01__regen_02
+      seed=ebf513139c26ff1639e7ae406d42128575bef52c
+      secondary_chunks=1
+      evidence_chain: Together, the chunks support a multi-hop question such as: “If a laptop bought with a credit card is damaged, under what time window could purchase pr...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.5272727272727273, "confidence_fulfillment": 0.5, "confidence_survival": 0.09090909090909091, "confidence
+
+  [13] task=iter_1_00001__regen_01
+      seed=04209373516ed0e03d287d89eeed7fb9782bce5c
+      secondary_chunks=2
+      evidence_chain: These chunks form a multi-hop chain: the primary establishes that travel rewards cards earn points for future travel; the first secondary provides the...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7375, "confidence_fulfillment": 1.0, "confidence_survival": 0.125, "confidence_chain": 1.0, "queries_use
+
+  [14] task=iter_1_00000__regen_01__regen_02
+      seed=342c8c24d866e38ea3f68c719b116f939746fb73
+      secondary_chunks=2
+      evidence_chain: How the chunks connect to require multi-step reasoning...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7545454545454546, "confidence_fulfillment": 1.0, "confidence_survival": 0.18181818181818182, "confidence
+
+  [15] task=iter_2_00001__regen_01__regen_02
+      seed=08a3a7c59927283ea9b2869fe38f886a5f58740b
+      secondary_chunks=3
+      evidence_chain: Answering a question like “Can a Chase customer put a past purchase into a no-interest fixed-fee payment plan?” requires combining all chunks: the pri...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.775, "confidence_fulfillment": 1.0, "confidence_survival": 0.25, "confidence_chain": 1.0, "queries_used"
+
+  [16] task=iter_2_00003__regen_01__regen_02
+      seed=df30f7200ca80c0d32afee40fd6cf5c7c10631cf
+      secondary_chunks=1
+      evidence_chain: Together, the chunks support a multi-hop question such as: “If a Chase Total Checking customer misplaces a debit card and expects to find it soon, wha...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.4476190476190476, "confidence_fulfillment": 0.3333333333333333, "confidence_survival": 0.047619047619047
+
+  [17] task=iter_2_00000__regen_01__regen_02
+      seed=9f5ba827a683874b4378e56725a6f2c5fc1f970f
+      secondary_chunks=3
+      evidence_chain: Together, the chunks support a multi-hop question such as: “If your card is not directly partnered with an airline and you want to use a small balance...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7473684210526316, "confidence_fulfillment": 1.0, "confidence_survival": 0.15789473684210525, "confidence
+
+  [18] task=iter_3_00002__regen_01__regen_02
+      seed=f68099165f094d40f897d315ac50cf7e0ddda64f
+      secondary_chunks=3
+      evidence_chain: These chunks form a multi-hop chain about why Freedom Rise is a strong starter card over time: the primary says it is beginner-friendly; the first sec...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7391304347826086, "confidence_fulfillment": 1.0, "confidence_survival": 0.13043478260869565, "confidence
+
+  [19] task=iter_3_00000__regen_01__regen_02
+      seed=ecf6c5972aa40cba1c1639e42d7071e38f58fca3
+      secondary_chunks=3
+      evidence_chain: These chunks form a multi-hop chain about evaluating whether a travel credit card is actually worth getting for a given traveler. The primary establis...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7321428571428572, "confidence_fulfillment": 1.0, "confidence_survival": 0.10714285714285714, "confidence
+
+  [20] task=iter_3_00001__regen_01
+      seed=44950535eaa1c37689b9313d45b67a8cc30e2304
+      secondary_chunks=0
+      linking_hints: {"linker": "search_agent", "confidence": 0.0, "reason": "no_queries", "requested_hop_count": 1}
+
+  [21] task=iter_4_00002
+      seed=ebdb5dc8f474910266aeec33c222e7a9c370d06c
+      secondary_chunks=1
+      evidence_chain: To answer a multi-hop question like “Which card mentioned for someone with no credit history offers cash back on every purchase, and how much?” you mu...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.8, "confidence_fulfillment": 1.0, "confidence_survival": 0.3333333333333333, "confidence_chain": 1.0, "q
+
+  [22] task=iter_4_00001
+      seed=7511a71141fb95a324a5dddac1de12318050256c
+      secondary_chunks=1
+      evidence_chain: To answer a multi-hop question like “Why does choosing ‘Interest saving balance’ let a Chase Pay Over Time customer avoid interest on new purchases wi...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.8, "confidence_fulfillment": 1.0, "confidence_survival": 0.3333333333333333, "confidence_chain": 1.0, "q
+
+  [23] task=iter_5_00000__regen_01__regen_02
+      seed=ff8612954a57f15c97008020dfe1b51162d3a4dd
+      secondary_chunks=2
+      evidence_chain: These chunks create a two-part reasoning chain about why the primary’s recommended habits matter for a first-time cardholder: from the primary, you kn...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.75, "confidence_fulfillment": 1.0, "confidence_survival": 0.16666666666666666, "confidence_chain": 1.0, 
+
+  [24] task=iter_5_00001__regen_01__regen_02
+      seed=f4fe8599153e8d5cdcfe63ad18888821de549ea9
+      secondary_chunks=3
+      evidence_chain: How the chunks connect to require multi-step reasoning...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7321428571428572, "confidence_fulfillment": 1.0, "confidence_survival": 0.10714285714285714, "confidence
+
+  [25] task=iter_6_00001__regen_01__regen_02
+      seed=30ee8c0e779f7b60a68566591137b5bd9031ac3a
+      secondary_chunks=2
+      evidence_chain: These chunks support a multi-hop question such as: “Why should someone repay a cash advance before the end of the billing cycle, and what cost can sti...
+      linking_hints: {"linker": "search_agent_v2", "confidence": 0.7461538461538462, "confidence_fulfillment": 1.0, "confidence_survival": 0.15384615384615385, "confidence
+  -> Saved outputs/multihop_50/step_2_linking_details.json
+
+============================================================
+STEP 3: FILTER RESULTS — 10 passed, 15 rejected
+============================================================
+
+  PASS [1] Q: When is a credit card welcome bonus worth pursuing?
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  PASS [2] Q: How can I make my rewards go furthest toward a free flight?
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  PASS [3] Q: Should I spend more on travel just to earn more credit card points?
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  PASS [4] Q: Should I ask for a higher limit if putting utility bills on my cash back card is hurting m
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  PASS [5] Q: Can a second chance checking account help my chances for a Freedom Rise card?
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  PASS [6] Q: Can paying utilities with my credit card help me build credit for a rewards card upgrade?
+       grounding=0.98 hop_validity=1.0 composite=0.992
+
+  PASS [7] Q: What helps my credit most before applying for a Chase card?
+       grounding=0.98 hop_validity=1.0 composite=0.992
+
+  PASS [8] Q: Why is Chase Freedom Rise a good first credit card, and what beginner benefits does it off
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  PASS [9] Q: Which Sapphire travel credit requires Chase Travel booking and skips points, unlike the on
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  PASS [10] Q: Why should a first-time card user avoid applying for multiple credit cards at once?
+       grounding=0.99 hop_validity=1.0 composite=0.996
+
+  REJECT [1] Q: Why are autopay and paying in full so important when you're just starting to bui
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [2] Q: How much cell phone theft or damage coverage does Freedom Flex offer if I pay my
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [3] Q: What’s the best way to redeem points from a travel rewards card for travel?
+       reason: generator_regeneration_failed
+       detail: generator_regeneration_failed
+
+  REJECT [4] Q: Should I refinance loans I can postpone while I'm in school?
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [5] Q: Why don’t I see the option to turn a card charge into installments?
+       reason: hop_count_validity_rejected
+       detail: Chunk 08a3a7c59927283ea9b2869fe38f886a5f58740b1b6b3b2f4b13c0f02bddc77e is redundant — the answer can be derived without 
+
+  REJECT [6] Q: Does the no-overdraft checking account let me lock a misplaced debit card and av
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [7] Q: What should I check before transferring Chase points to book an airline award?
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [8] Q: Why start with Freedom Rise before trying for Freedom Unlimited?
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [9] Q: What should I check before using a travel rewards card abroad for points and per
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [10] Q: Why might my personal payment card not show up in the online checkout wallet?
+       reason: type_quota_exceeded
+       detail: type_quota_exceeded
+
+  REJECT [11] Q: How much cash back does the Freedom Rise card for people new to credit earn?
+       reason: deterministic_rejected
+       detail: answer_too_short
+
+  REJECT [12] Q: Why did my automatic payment change to “Interest saving balance” after I set up 
+       reason: deterministic_rejected
+       detail: multi_hop_high_chunk_overlap
+
+  REJECT [13] Q: Should I set up automatic payments right away on my first credit card?
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [14] Q: Are college first-time cards worth it if the perks are small and spending limits
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+
+  REJECT [15] Q: Should I pay off a cash advance before my billing cycle ends?
+       reason: retrieval_filter_rejected
+       detail: Refinement budget exhausted for failure_type=too_easy (2/2).
+  -> Saved outputs/multihop_50/step_3_filter_results.json
+
+============================================================
+STEP 4: PIPELINE STATS
+============================================================
+  total: 10
+  train: 8
+  eval: 2
+  train_ratio: 0.8
+  stratify_by: ['qa_type', 'style']
+  raw_candidates_total: 25
+  passed_total: 10
+  rejected_total: 15
+  regenerated_total: 31
+  round_limit: 4
+  filter_chain: ['query_length_cap', 'quality_gate', 'retrieval_too_easy_llm', 'grounding_llm', 'hop_count_validity']
+  deterministic_guards:
+    passed: 53
+    rejected: 2
+  retrieval_too_easy_filter:
+    passed: 14
+    needs_refinement: 28
+    rejected: 10
+    errors: 0
+    judge_calls: 41
+    judge_answerable_true: 0
+    judge_answerable_false: 41
+    judge_reason_tags: {'too_easy_lexical': 39, 'challenging_retrieval_pass': 2, 'unknown': 0}
+    too_easy_total: 38
+    too_easy_due_to_overlap_pre_gate: 11
+    too_easy_due_to_judge: 27
+    overlap_threshold_triggered: 26
+    too_easy_overlap_threshold_triggered: 11
+  grounding_filter:
+    passed: 14
+    needs_refinement: 0
+    rejected: 0
+    errors: 0
+    judge_answerable_true: 14
+    judge_answerable_false: 0
+    unsupported_total: 0
+  transformation:
+    base: {'processed': 11, 'mutated': 0, 'unchanged': 11, 'errors': 0}
+  dedup:
+    duplicates_removed: 0
+    total_evaluated: 20
+  hop_count_validity:
+    passed: 10
+    needs_refinement: 2
+    rejected: 1
+    errors: 0
+    skipped_single_hop: 1
+    judge_calls: 30
+    redundant_chunks_found: 5
+  journey:
+    event_counts: {'generated': 25, 'filter_passed': 11, 'transformed': 11, 'accepted': 10, 'filter_needs_refinement': 31, 'regenerated': 30, 'filter_rejected': 14, 'quota_rejected': 1}
+    relabeled: {}
+    quota_rejected_by_effective_type: {'lookup': 1}
+    accepted_by_requested_type: {'multi_hop': 10}
+    accepted_by_effective_type: {'multi_hop': 10}
+    accepted_requested_to_effective: {'multi_hop->multi_hop': 10}
+  pipeline_metrics:
+    stages: {'generation': {'stage_name': 'generation', 'wall_time_seconds': 847.3074057080084, 'items_in': 25, 'items_out_passed': 0, 'items_out_rejected': 0, 'items_out_needs_refinement': 0, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}, 'deterministic_guards': {'stage_name': 'deterministic_guards', 'wall_time_seconds': 0.021498959162272513, 'items_in': 55, 'items_out_passed': 53, 'items_out_rejected': 2, 'items_out_needs_refinement': 0, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}, 'query_length_cap': {'stage_name': 'query_length_cap', 'wall_time_seconds': 0.0006125421496108174, 'items_in': 55, 'items_out_passed': 52, 'items_out_rejected': 2, 'items_out_needs_refinement': 1, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}, 'quality_gate': {'stage_name': 'quality_gate', 'wall_time_seconds': 0.00027782958932220936, 'items_in': 55, 'items_out_passed': 52, 'items_out_rejected': 2, 'items_out_needs_refinement': 1, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}, 'retrieval_too_easy_llm': {'stage_name': 'retrieval_too_easy_llm', 'wall_time_seconds': 80.02977416838985, 'items_in': 55, 'items_out_passed': 14, 'items_out_rejected': 12, 'items_out_needs_refinement': 29, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}, 'grounding_llm': {'stage_name': 'grounding_llm', 'wall_time_seconds': 35.28340029204264, 'items_in': 55, 'items_out_passed': 14, 'items_out_rejected': 12, 'items_out_needs_refinement': 29, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}, 'hop_count_validity': {'stage_name': 'hop_count_validity', 'wall_time_seconds': 44.5805595011916, 'items_in': 55, 'items_out_passed': 11, 'items_out_rejected': 13, 'items_out_needs_refinement': 31, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}, 'regeneration': {'stage_name': 'regeneration', 'wall_time_seconds': 973.5046088339295, 'items_in': 31, 'items_out_passed': 0, 'items_out_rejected': 0, 'items_out_needs_refinement': 0, 'llm_calls': 0, 'llm_input_tokens': 0, 'llm_output_tokens': 0, 'estimated_cost_usd': 0.0, 'errors': 0}}
+    batch_history: [{'batch_index': 0, 'generated_count': 5, 'accepted_count': 3, 'rejected_count': 2, 'regeneration_count': 6, 'acceptance_rate': 0.6, 'cumulative_acceptance_rate': 0.6, 'cumulative_fill_rate': 0.3, 'stage_metrics': []}, {'batch_index': 1, 'generated_count': 5, 'accepted_count': 3, 'rejected_count': 2, 'regeneration_count': 6, 'acceptance_rate': 0.6, 'cumulative_acceptance_rate': 0.6, 'cumulative_fill_rate': 0.6, 'stage_metrics': []}, {'batch_index': 2, 'generated_count': 4, 'accepted_count': 1, 'rejected_count': 3, 'regeneration_count': 7, 'acceptance_rate': 0.25, 'cumulative_acceptance_rate': 0.5, 'cumulative_fill_rate': 0.7, 'stage_metrics': []}, {'batch_index': 3, 'generated_count': 3, 'accepted_count': 0, 'rejected_count': 3, 'regeneration_count': 5, 'acceptance_rate': 0.0, 'cumulative_acceptance_rate': 0.4117647058823529, 'cumulative_fill_rate': 0.7, 'stage_metrics': []}, {'batch_index': 4, 'generated_count': 3, 'accepted_count': 1, 'rejected_count': 2, 'regeneration_count': 0, 'acceptance_rate': 0.3333333333333333, 'cumulative_acceptance_rate': 0.4, 'cumulative_fill_rate': 0.8, 'stage_metrics': []}, {'batch_index': 5, 'generated_count': 2, 'accepted_count': 0, 'rejected_count': 2, 'regeneration_count': 4, 'acceptance_rate': 0.0, 'cumulative_acceptance_rate': 0.36363636363636365, 'cumulative_fill_rate': 0.8, 'stage_metrics': []}, {'batch_index': 6, 'generated_count': 2, 'accepted_count': 1, 'rejected_count': 1, 'regeneration_count': 3, 'acceptance_rate': 0.5, 'cumulative_acceptance_rate': 0.375, 'cumulative_fill_rate': 0.9, 'stage_metrics': []}, {'batch_index': 7, 'generated_count': 1, 'accepted_count': 1, 'rejected_count': 0, 'regeneration_count': 0, 'acceptance_rate': 1.0, 'cumulative_acceptance_rate': 0.4, 'cumulative_fill_rate': 1.0, 'stage_metrics': []}]
+    rejection_by_stage: {}
+    rejection_by_reason_code: {}
+    wasted_llm_calls: 0
+    wasted_cost_usd: 0.0
+    total_generated: 25
+    total_accepted: 10
+    total_rejected: 15
+    total_regenerations: 31
+    overall_acceptance_rate: 0.4
+    target_samples: 10
+    fill_rate: 1.0
+    wall_time_seconds: 1982.9131718330318
+  prepare_context_seconds: 79.70147245808039
+  -> Saved outputs/multihop_50/step_4_pipeline_stats.json
+
+============================================================
+STEP 5: NATURALNESS JUDGE (claude-sonnet-5, rubric v2) — 10 items
+============================================================
+
+  [1] overall=1.00 (9 words) | When is a credit card welcome bonus worth pursuing?
+       single_intent=1.0  conciseness=1.0  phrasing=1.0  plausible=1.0
+       reasoning: This is a clear, single-intent question about when pursuing a credit card welcome bonus makes sense. It's concise (9 words), phrased naturally as some
+
+  [2] overall=1.00 (12 words) | How can I make my rewards go furthest toward a free flight?
+       single_intent=1.0  conciseness=1.0  phrasing=1.0  plausible=1.0
+       reasoning: This is a single, clear intent about maximizing reward points/miles for a free flight. It's concise (12 words), phrased naturally like a real search q
+
+  [3] overall=1.00 (13 words) | Should I spend more on travel just to earn more credit card points?
+       single_intent=1.0  conciseness=1.0  phrasing=1.0  plausible=1.0
+       reasoning: A single, clear question about a common personal finance dilemma, phrased naturally and concisely as one would type into a search bar or ask a friend.
+
+  [4] overall=0.90 (20 words) | Should I ask for a higher limit if putting utility bills on my cash back card is
+       single_intent=1.0  conciseness=0.9  phrasing=1.0  plausible=1.0
+       reasoning: This reads as one coherent question with a clear real-world scenario: someone worried about credit utilization from putting bills on a card is asking 
+
+  [5] overall=0.90 (14 words) | Can a second chance checking account help my chances for a Freedom Rise card?
+       single_intent=1.0  conciseness=1.0  phrasing=0.9  plausible=0.9
+       reasoning: This is a single, clear question about whether having a second chance checking account could improve approval odds for a Freedom Rise credit card. It'
+
+  [6] overall=0.90 (16 words) | Can paying utilities with my credit card help me build credit for a rewards card
+       single_intent=1.0  conciseness=0.9  phrasing=1.0  plausible=1.0
+       reasoning: This is a single, coherent question about whether paying utilities with a credit card can help build credit toward a rewards card upgrade. It's 16 wor
+
+  [7] overall=1.00 (11 words) | What helps my credit most before applying for a Chase card?
+       single_intent=1.0  conciseness=1.0  phrasing=1.0  plausible=1.0
+       reasoning: This is a clear, single-intent question about improving credit before applying for a Chase card. It's short (11 words), phrased naturally like a real 
+
+  [8] overall=0.90 (17 words) | Why is Chase Freedom Rise a good first credit card, and what beginner benefits d
+       single_intent=0.9  conciseness=0.9  phrasing=0.9  plausible=1.0
+       reasoning: This reads as one coherent question about why a specific credit card suits beginners, with two closely related clauses (why it's good + what benefits)
+
+  [9] overall=0.40 (19 words) | Which Sapphire travel credit requires Chase Travel booking and skips points, unl
+       single_intent=0.7  conciseness=0.9  phrasing=0.4  plausible=0.5
+       reasoning: The question asks about a single topic (Sapphire travel credit redemption differences) but phrases it in a convoluted, quiz-like way with embedded com
+
+  [10] overall=1.00 (14 words) | Why should a first-time card user avoid applying for multiple credit cards at on
+       single_intent=1.0  conciseness=1.0  phrasing=1.0  plausible=1.0
+       reasoning: This is a clear, single-topic question about credit card advice, phrased naturally as one might ask a financial advisor or search online. It's concise
+  -> Saved outputs/multihop_50/step_5_naturalness_scores.json
+
+============================================================
+STEP 6: FINAL OUTPUT — 9 natural multi-hop questions
+  (from 10 pipeline-passed, 9 passed naturalness >= 0.6)
+============================================================
+
+--- Question 1 (naturalness=1.00) ---
+Q: When is a credit card welcome bonus worth pursuing?
+A: Welcome bonus offers are not guaranteed. They require the new cardmember to meet spending requirements within a specific time period. You can only earn the rewards if you meet the requirements. Your f...
+Chunks: 2
+  chunk[0]: ## In summary
+Opening a new credit card often includes a new cardmembers welcome bonus offer. These offers are usually i...
+  chunk[1]: ## Understanding credit card welcome bonuses
+Credit card welcome bonus offers are introductory incentives offered by iss...
+Scores: grounding=0.99, hop_validity=1.0, naturalness=1.00
+
+--- Question 2 (naturalness=1.00) ---
+Q: How can I make my rewards go furthest toward a free flight?
+A: Consider finding a credit card that offers a welcome bonus and the ability to earn miles on your most common purchase categories. You could join an airline loyalty program and redeem your rewards stra...
+Chunks: 3
+  chunk[0]: ## In conclusion
+Flying tends to be one of the most expensive parts of traveling. However, it's possible to get a compli...
+  chunk[1]: ## How do I get credit card airline miles?
+Credit cards offering airline miles may provide mileage rewards when you:
+- S...
+  chunk[2]: Common non-travel-related redemptions are:
+- Merchandise with specific retailers: If your travel credit card partners wi...
+Scores: grounding=0.99, hop_validity=1.0, naturalness=1.00
+
+--- Question 3 (naturalness=1.00) ---
+Q: Should I spend more on travel just to earn more credit card points?
+A: Rewards can be satisfying but try not to overspend just to earn points. Whether you're awarded points or miles with a travel card, you might earn rewards for every dollar spent. The rate usually depen...
+Chunks: 2
+  chunk[0]: ## Must-know money tips when using a credit card
+If you’re using a credit card for the first time, you might want to hav...
+  chunk[1]: ## How do you earn points with a travel credit card?
+You may earn points, as opposed to miles, with certain travel credi...
+Scores: grounding=0.99, hop_validity=1.0, naturalness=1.00
+
+--- Question 4 (naturalness=1.00) ---
+Q: What helps my credit most before applying for a Chase card?
+A: Always pay your bills on time. Your payment history is one of the most important factors in your credit score, so consider setting up automatic payments so you don't forget. Watch your credit utilizat...
+Chunks: 3
+  chunk[0]: ### Improving Credit
+A higher credit score lets banks know you're financially responsible. This makes it easier to get a...
+  chunk[1]: ### You can focus on your credit
+You can learn more about credit, get your credit score for free and learn how to make h...
+  chunk[2]: ## How does it affect your credit score?
+Having multiple credit cards can have both positive and negative effects on you...
+Scores: grounding=0.98, hop_validity=1.0, naturalness=1.00
+
+--- Question 5 (naturalness=1.00) ---
+Q: Why should a first-time card user avoid applying for multiple credit cards at once?
+A: starting with one or two could help you stay organized while you’re learning the ropes. New credit card applications typically result in a hard inquiry on your credit report, which can temporarily aff...
+Chunks: 2
+  chunk[0]: ## Must-know money tips when using a credit card
+If you’re using a credit card for the first time, you might want to hav...
+  chunk[1]: ## Considerations of having multiple credit cards
+While a multi-card strategy may increase your ability to earn rewards,...
+Scores: grounding=0.99, hop_validity=1.0, naturalness=1.00
+
+--- Question 6 (naturalness=0.90) ---
+Q: Should I ask for a higher limit if putting utility bills on my cash back card is hurting my score?
+A: High utility bills can affect your credit score if they lead to high credit utilization ratios. Your credit utilization ratio is the percentage of your total credit limit that is currently occupied by...
+Chunks: 2
+  chunk[0]: ## Understanding credit card terms related to utility payments
+There are some key terms that can help make credit cards ...
+  chunk[1]: ## When to request a credit limit increase
+A credit limit increase can be a strategic financial move. Here are some scen...
+Scores: grounding=0.99, hop_validity=1.0, naturalness=0.90
+
+--- Question 7 (naturalness=0.90) ---
+Q: Can a second chance checking account help my chances for a Freedom Rise card?
+A: People who find themselves in this situation may be eligible for a second chance bank account as an alternative. As you use the account, you’ll build up your positive history with ChexSystems. Chase d...
+Chunks: 2
+  chunk[0]: ## In summary
+A blemished banking history can make it difficult to get approved for a new account. People who find thems...
+  chunk[1]: ## Begin your credit story with Chase: No prior credit history is required to qualify
+Chase does not require a prior cre...
+Scores: grounding=0.99, hop_validity=1.0, naturalness=0.90
+
+--- Question 8 (naturalness=0.90) ---
+Q: Can paying utilities with my credit card help me build credit for a rewards card upgrade?
+A: Automating utilities payments with your credit card could prevent you from missing payments and establish a good payment history, which can potentially help improve your credit score. If your current ...
+Chunks: 2
+  chunk[0]: ### Think about rewards
+Credit card rewards may seem like one of the more exciting parts of opening a credit card. If yo...
+  chunk[1]: ### Pros
+- Reward accumulation: Credit card payments can allow you to earn points, miles or cash back that can be used t...
+Scores: grounding=0.98, hop_validity=1.0, naturalness=0.90
+
+--- Question 9 (naturalness=0.90) ---
+Q: Why is Chase Freedom Rise a good first credit card, and what beginner benefits does it offer?
+A: The Freedom Rise Credit Card is considered a starter credit card. That means it’s designed to be a first credit card to help people get on a path to building credit. The Chase Freedom Rise card can be...
+Chunks: 2
+  chunk[0]: ## Why choose the Chase Freedom Rise card as a starter card?
+The Chase Freedom Rise card can be appealing to first-time ...
+  chunk[1]: ## Understanding the Chase Freedom Rise credit card
+The Freedom Rise Credit Card is considered a starter credit card. Th...
+Scores: grounding=0.99, hop_validity=1.0, naturalness=0.90
+
+Saved 9 final items to outputs/multihop_50/natural_multihop.jsonl
+  Train: 7 | Eval: 2
+Saved 10 scored items to outputs/multihop_50/all_scored.jsonl
+Saved 15 rejected items to outputs/multihop_50/rejected.jsonl
+Dedup collisions (if any) logged to outputs/multihop_50/dedup_collisions.jsonl
+
+Step-by-step dumps in outputs/multihop_50/step_*.json

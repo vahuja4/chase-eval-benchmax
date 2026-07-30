@@ -1,0 +1,122 @@
+[
+  {
+    "question": "When is a credit card welcome bonus worth pursuing?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about when pursuing a credit card welcome bonus makes sense. It's concise (9 words), phrased naturally as something someone would type into a search engine or ask a financial advisor, and reflects a realistic personal finance concern many people have."
+    }
+  },
+  {
+    "question": "How can I make my rewards go furthest toward a free flight?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a single, clear intent about maximizing reward points/miles for a free flight. It's concise (12 words), phrased naturally like a real search query or forum question, and reflects a common, plausible concern for someone with a rewards/points program."
+    }
+  },
+  {
+    "question": "Should I spend more on travel just to earn more credit card points?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "A single, clear question about a common personal finance dilemma, phrased naturally and concisely as one would type into a search bar or ask a friend."
+    }
+  },
+  {
+    "question": "Should I ask for a higher limit if putting utility bills on my cash back card is hurting my score?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This reads as one coherent question with a clear real-world scenario: someone worried about credit utilization from putting bills on a card is asking whether requesting a credit limit increase would help. It's phrased naturally, as one might ask on a personal finance forum. At 20 words, it falls in the 16-20 word bracket for conciseness (0.9). No red flags of artificial construction."
+    }
+  },
+  {
+    "question": "Can a second chance checking account help my chances for a Freedom Rise card?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 0.9,
+      "overall": 0.9,
+      "reasoning": "This is a single, clear question about whether having a second chance checking account could improve approval odds for a Freedom Rise credit card. It's concise (14 words), reads naturally like something a real person would ask a bank or search online, and represents a plausible real-world concern for someone rebuilding credit."
+    }
+  },
+  {
+    "question": "Can paying utilities with my credit card help me build credit for a rewards card upgrade?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 0.9,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This is a single, coherent question about whether paying utilities with a credit card can help build credit toward a rewards card upgrade. It's 16 words, phrased naturally as something a person would ask a financial forum or support agent, and reflects a realistic personal finance concern."
+    }
+  },
+  {
+    "question": "What helps my credit most before applying for a Chase card?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-intent question about improving credit before applying for a Chase card. It's short (11 words), phrased naturally like a real search query or forum question, and reflects a plausible, common concern for someone planning a credit card application."
+    }
+  },
+  {
+    "question": "Why is Chase Freedom Rise a good first credit card, and what beginner benefits does it offer?",
+    "naturalness_overall": 0.9,
+    "naturalness_scores": {
+      "single_intent": 0.9,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.9,
+      "plausible_intent": 1.0,
+      "overall": 0.9,
+      "reasoning": "This reads as one coherent question about why a specific credit card suits beginners, with two closely related clauses (why it's good + what benefits) that naturally belong together. At 17 words it's concise. Phrasing is natural, like something typed into a search engine or asked a bank rep. Plausible intent since people researching first credit cards commonly ask this."
+    }
+  },
+  {
+    "question": "Which Sapphire travel credit requires Chase Travel booking and skips points, unlike the one that works automatically across purchases?",
+    "naturalness_overall": 0.4,
+    "naturalness_scores": {
+      "single_intent": 0.7,
+      "conciseness": 0.9,
+      "natural_phrasing": 0.4,
+      "plausible_intent": 0.5,
+      "overall": 0.4,
+      "reasoning": "The question asks about a single topic (Sapphire travel credit redemption differences) but phrases it in a convoluted, quiz-like way with embedded comparison clauses ('unlike the one that works automatically') rather than how a person would naturally ask. It reads more like a test question than an organic query someone would type, though the underlying intent (comparing Sapphire card travel credit redemption rules) is plausible for someone confused about their card benefits."
+    }
+  },
+  {
+    "question": "Why should a first-time card user avoid applying for multiple credit cards at once?",
+    "naturalness_overall": 1.0,
+    "naturalness_scores": {
+      "single_intent": 1.0,
+      "conciseness": 1.0,
+      "natural_phrasing": 1.0,
+      "plausible_intent": 1.0,
+      "overall": 1.0,
+      "reasoning": "This is a clear, single-topic question about credit card advice, phrased naturally as one might ask a financial advisor or search online. It's concise (14 words) and reflects a common, realistic concern for someone new to credit cards."
+    }
+  }
+]
