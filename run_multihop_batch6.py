@@ -1,5 +1,9 @@
 """
-Batch 6: 50 natural multi-hop QA pairs on the Castform (postgres) path.
+Batch 6: natural multi-hop QA pairs on the Castform (postgres) path.
+
+Default 50 items -> outputs/natural_multihop_batch6/. A non-default
+--total N writes to outputs/natural_multihop_batch6_pilotN/ so pilots
+never clobber the full run (10-item pilot: _pilot10, 2026-07-30).
 
 NEW length regime vs batches 1-5 (results NOT comparable to prior batches):
 - generation prompt targets one sentence, <=20 words (template v2)
@@ -9,13 +13,13 @@ NEW length regime vs batches 1-5 (results NOT comparable to prior batches):
 
 Dedup: pre-seeds against the pipeline-passed superset of ALL prior
 batches; every collision is logged with its originating seed file to
-outputs/multihop_50/dedup_collisions.jsonl.
+the run dir dedup_collisions.jsonl.
 
 Configure-and-verify (no Castform credits, no generation spend):
-    python run_multihop_50.py --dry-run
+    python run_multihop_batch6.py --dry-run
 Launch (per notes/castform_runbook.md; ~1 rollout credit + OpenAI calls
 per item; stop after the first batch to review cost, resume=True):
-    python run_multihop_50.py
+    python run_multihop_batch6.py
 """
 
 import argparse
@@ -80,7 +84,7 @@ SEARCH_BACKEND = "postgres"
 _ambient = os.environ.get("SEARCH_BACKEND")
 if _ambient and _ambient != SEARCH_BACKEND:
     raise SystemExit(
-        f"run_multihop_50.py is a Castform-path run (backend={SEARCH_BACKEND!r}) "
+        f"run_multihop_batch6.py is a Castform-path run (backend={SEARCH_BACKEND!r}) "
         f"but SEARCH_BACKEND={_ambient!r} is set. Unset it or set it to "
         f"{SEARCH_BACKEND!r}."
     )
@@ -279,6 +283,20 @@ def dump_step(out_dir: Path, step_name: str, data, *, indent=2):
 # Monkey-patches: custom filter registration + dedup pre-seed w/ attribution
 # ---------------------------------------------------------------------------
 
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--dry-run", action="store_true",
+                    help="Verify config, bundles, judge model, and dedup seed; "
+                         "write run_config.json; exit before the pipeline.")
+parser.add_argument("--total", type=int, default=50,
+                    help="Number of accepted items to target (default 50). "
+                         "Non-default totals get their own _pilotN output dir. "
+                         "NOTE: benchmax keys checkpoint-resume on a config hash "
+                         "that includes total_samples — a later run with a "
+                         "different --total starts fresh, it does not resume.")
+args = parser.parse_args()
+
+RUN_NAME = "natural_multihop_batch6" + ("" if args.total == 50 else f"_pilot{args.total}")
+
 install_query_length_filter()
 
 # Castform workers return OpenAI-format tool calls, which the installed
@@ -288,7 +306,7 @@ install_query_length_filter()
 from src.rollout_compat import install_openai_toolcall_extraction
 install_openai_toolcall_extraction()
 
-out_dir = Path("outputs/multihop_50")
+out_dir = Path("outputs") / RUN_NAME
 out_dir.mkdir(parents=True, exist_ok=True)
 COLLISION_LOG = out_dir / "dedup_collisions.jsonl"
 
@@ -335,7 +353,7 @@ cfg = PipelineConfig(
         description="Chase.com public help and product articles covering credit cards, banking, auto loans, mortgages, and investments.",
     ),
     targets=TargetsConfig(
-        total_samples=50,
+        total_samples=args.total,
         primary_type_distribution={"lookup": 0.0, "multi_hop": 1.0},
         hop_distribution={1: 0.0, 2: 1.0},
     ),
@@ -396,7 +414,7 @@ cfg = PipelineConfig(
     output=OutputConfig(dir=str(out_dir)),
     micro_batch=MicroBatchConfig(
         # Checkpointing ON: serial batches, resumable, checkpoints kept in
-        # outputs/multihop_50/.checkpoints/ — stop after the first batch to
+        # {out_dir}/.checkpoints/ — stop after the first batch to
         # review cost, then re-run to resume.
         resume=True,
         keep_checkpoints=True,
@@ -443,7 +461,7 @@ def _git_sha() -> str:
 
 def write_run_config() -> Path:
     run_config = {
-        "run_name": "multihop_50",
+        "run_name": RUN_NAME,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "git_sha": _git_sha(),
         "search_backend": SEARCH_BACKEND,
@@ -489,18 +507,6 @@ def write_run_config() -> Path:
 # Main
 # ---------------------------------------------------------------------------
 
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--dry-run", action="store_true",
-                    help="Verify config, bundles, judge model, and dedup seed; "
-                         "write run_config.json; exit before the pipeline.")
-parser.add_argument("--total", type=int, default=50,
-                    help="Number of accepted items to target (default 50). "
-                         "NOTE: benchmax keys checkpoint-resume on a config hash "
-                         "that includes total_samples — a later run with a "
-                         "different --total starts fresh, it does not resume.")
-args = parser.parse_args()
-
-cfg.targets.total_samples = args.total
 
 print("=" * 60)
 print("NATURAL MULTI-HOP BATCH 6 — 50 items, Castform path")
@@ -527,7 +533,7 @@ if args.dry_run:
     names, chain = _pipeline_mod._build_filter_chain(cfg, source=None)
     print(f"  Filter chain resolves: {names}")
     assert names[0] == STAGE_NAME, "length cap must be the first filter stage"
-    print("  Dry run OK. Launch with: python run_multihop_50.py")
+    print("  Dry run OK. Launch with: python run_multihop_batch6.py")
     sys.exit(0)
 
 # ===== Run the pipeline =====

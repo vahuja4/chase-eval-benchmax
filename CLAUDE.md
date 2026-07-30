@@ -22,10 +22,14 @@ platform. Keep the benchmax SDK; replace corpus storage, BM25 search, and
   (tests/test_castform_health.py, pytest -m castform; verified alive
   2026-07-30). Note: chunk source + retrieval filter still hit Castform
   unconditionally — Pipeline._load_source hard-codes PostgresChunkSource.
-- Batch 6 configured, not launched (run_multihop_50.py → outputs/multihop_50/):
-  50 items, Castform path. NEW length regime — ≤20-word prompt target,
-  deterministic 25-word cap filter (query_length_cap, src/query_length.py),
-  banded conciseness rubric v2 — results not comparable to prior batches.
+- Batch 6 (run_multihop_batch6.py → outputs/natural_multihop_batch6_pilot10/): Castform path,
+  NEW length regime — ≤20-word prompt target, deterministic 25-word cap
+  filter (query_length_cap, src/query_length.py), banded conciseness
+  rubric v2 — results not comparable to prior batches. 10-item pilot run
+  2026-07-30: 9 accepted (9–20 words, median 14). Full 50 not yet run —
+  re-running overwrites the pilot's output files. Requires the fixes in
+  notes/known_issues.md #5–6 (bundle version pin, OpenAI tool-call
+  compat), which run_multihop_batch6.py installs.
 - Next: step 3b — LocalRolloutRunner via repo-local monkeypatch of
   pipeline._build_rollout_client (Pipeline has no linker client seam).
 
